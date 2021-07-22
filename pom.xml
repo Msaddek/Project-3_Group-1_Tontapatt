@@ -71,5 +71,6 @@
 		<module>TontapattEAR</module>
 		<module>TontapattEntity</module>
 		<module>TontapattIBusiness</module>
+		<module>TontapattIDAO</module>
 	</modules>
 </project>
