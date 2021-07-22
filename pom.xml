@@ -69,5 +69,6 @@
 		<module>TontapattBusiness</module>
 		<module>TontapattDAO</module>
 		<module>TontapattEAR</module>
+		<module>TontapattEntity</module>
 	</modules>
 </project>
