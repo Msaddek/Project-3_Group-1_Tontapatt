@@ -67,5 +67,6 @@
 	</build>
 	<modules>
 		<module>TontapattBusiness</module>
+		<module>TontapattDAO</module>
 	</modules>
 </project>
