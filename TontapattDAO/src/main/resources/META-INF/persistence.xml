@@ -10,9 +10,31 @@
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
 		<jta-data-source>java:jboss/datasources/tontapatt_db</jta-data-source>
-		<class>fr.eql.ai109.tontapatt.entity.User</class>
+		
+		<class>fr.eql.ai109.tontapatt.entity.Anomaly</class>
+		<class>fr.eql.ai109.tontapatt.entity.AnomalyType</class>
+		<class>fr.eql.ai109.tontapatt.entity.CancellationReason</class>
+		<class>fr.eql.ai109.tontapatt.entity.FenceHeight</class>
 		<class>fr.eql.ai109.tontapatt.entity.Field</class>
+		<class>fr.eql.ai109.tontapatt.entity.FieldPhoto</class>
+		<class>fr.eql.ai109.tontapatt.entity.FieldWithdrawalReason</class>
+		<class>fr.eql.ai109.tontapatt.entity.FlatnessPercentage</class>
+		<class>fr.eql.ai109.tontapatt.entity.GrassHeight</class>
+		<class>fr.eql.ai109.tontapatt.entity.OfferWithdrawalReason</class>
+		<class>fr.eql.ai109.tontapatt.entity.PaymentMethod</class>
+		<class>fr.eql.ai109.tontapatt.entity.PrematureCancellationReason</class>
+		<class>fr.eql.ai109.tontapatt.entity.Race</class>
+		<class>fr.eql.ai109.tontapatt.entity.Rating</class>
+		<class>fr.eql.ai109.tontapatt.entity.RefusalReason</class>
+		<class>fr.eql.ai109.tontapatt.entity.Service</class>
+		<class>fr.eql.ai109.tontapatt.entity.ShearingOffer</class>
+		<class>fr.eql.ai109.tontapatt.entity.ShearingOfferPhoto</class>
+		<class>fr.eql.ai109.tontapatt.entity.Species</class>
+		<class>fr.eql.ai109.tontapatt.entity.UnsubscriptionReason</class>
+		<class>fr.eql.ai109.tontapatt.entity.User</class>
+		<class>fr.eql.ai109.tontapatt.entity.UserCategory</class>
 		<class>fr.eql.ai109.tontapatt.entity.VegetationType</class>
+		<class>fr.eql.ai109.tontapatt.entity.ZipCodeCity</class>
 		<properties>
 			<property
 				name="javax.persistence.schema-generation.database.action"

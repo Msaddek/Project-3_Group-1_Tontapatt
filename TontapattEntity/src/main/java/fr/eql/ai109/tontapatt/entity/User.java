@@ -54,21 +54,23 @@ public class User implements Serializable {
 	private LocalDateTime unsubscriptionDate;
 	@Column(name = "photo", nullable = true)
 	private String photo;
+	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Set<Field> fields;
+	@OneToMany(mappedBy = "breeder", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Set<ShearingOffer> shearingOffers;
+	@OneToMany(mappedBy = "evaluator", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Set<Rating> ratings;
+	@OneToMany(mappedBy = "declarer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Set<Anomaly> Anomalies;
 	@ManyToOne
-	@JoinColumn(referencedColumnName = "id")
+	@JoinColumn(referencedColumnName = "id", nullable = false)
 	private ZipCodeCity zipCodeCity;
 	@ManyToOne
-	@JoinColumn(referencedColumnName = "id")
+	@JoinColumn(referencedColumnName = "id", nullable = false)
 	private UserCategory userCategory;
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id")
 	private UnsubscriptionReason unsubscriptionReason;
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private Set<Field> fields;
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private Set<ShearingOffer> shearingOffers;
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private Set<Rating> ratings;
 
 	public User() {
 		super();
@@ -225,6 +227,14 @@ public class User implements Serializable {
 
 	public void setRatings(Set<Rating> ratings) {
 		this.ratings = ratings;
+	}
+
+	public Set<Anomaly> getAnomalies() {
+		return Anomalies;
+	}
+
+	public void setAnomalies(Set<Anomaly> anomalies) {
+		Anomalies = anomalies;
 	}
 
 }

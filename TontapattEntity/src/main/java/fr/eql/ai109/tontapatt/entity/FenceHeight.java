@@ -31,11 +31,11 @@ public class FenceHeight implements Serializable {
 	private Integer id;
 	@Column(name = "height", nullable = false)
 	private String height;
+	@OneToMany(mappedBy = "fenceHeight", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Set<Field> fields;
 	@ManyToMany
 	@JoinTable(name = "favorite_fence_height", joinColumns = @JoinColumn(name = "fence_id"), inverseJoinColumns = @JoinColumn(name = "species_id"))
 	private Set<Species> species;
-	@OneToMany(mappedBy = "fence_height", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private Set<Field> fields;
 
 	public FenceHeight() {
 		super();

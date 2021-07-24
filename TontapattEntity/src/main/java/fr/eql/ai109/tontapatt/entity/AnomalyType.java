@@ -14,8 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "field_withdrawal_reason")
-public class FieldWithdrawalReason implements Serializable {
+@Table(name = "anomaly_type")
+public class AnomalyType implements Serializable {
 
 	/**
 	 * 
@@ -26,12 +26,12 @@ public class FieldWithdrawalReason implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
-	@Column(name = "withdrawal_reason", nullable = false)
-	private String withdrawalReason;
-	@OneToMany(mappedBy = "fieldWithdrawalReason", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private Set<Field> fields;
+	@Column(name = "type", nullable = false)
+	private String type;
+	@OneToMany(mappedBy = "anomalyType", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Set<Anomaly> anomalies;
 
-	public FieldWithdrawalReason() {
+	public AnomalyType() {
 		super();
 	}
 
@@ -43,20 +43,20 @@ public class FieldWithdrawalReason implements Serializable {
 		this.id = id;
 	}
 
-	public String getWithdrawalReason() {
-		return withdrawalReason;
+	public String getType() {
+		return type;
 	}
 
-	public void setWithdrawalReason(String withdrawalReason) {
-		this.withdrawalReason = withdrawalReason;
+	public void setType(String type) {
+		this.type = type;
 	}
 
-	public Set<Field> getFields() {
-		return fields;
+	public Set<Anomaly> getAnomalies() {
+		return anomalies;
 	}
 
-	public void setFields(Set<Field> fields) {
-		this.fields = fields;
+	public void setAnomalies(Set<Anomaly> anomalies) {
+		this.anomalies = anomalies;
 	}
 
 }

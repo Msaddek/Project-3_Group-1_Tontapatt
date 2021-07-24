@@ -14,8 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "field_withdrawal_reason")
-public class FieldWithdrawalReason implements Serializable {
+@Table(name = "payment_method")
+public class PaymentMethod implements Serializable {
 
 	/**
 	 * 
@@ -26,12 +26,12 @@ public class FieldWithdrawalReason implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
-	@Column(name = "withdrawal_reason", nullable = false)
-	private String withdrawalReason;
-	@OneToMany(mappedBy = "fieldWithdrawalReason", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private Set<Field> fields;
+	@Column(name = "payment", nullable = false)
+	private String payment;
+	@OneToMany(mappedBy = "paymentMethod", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Set<Service> services;
 
-	public FieldWithdrawalReason() {
+	public PaymentMethod() {
 		super();
 	}
 
@@ -43,20 +43,20 @@ public class FieldWithdrawalReason implements Serializable {
 		this.id = id;
 	}
 
-	public String getWithdrawalReason() {
-		return withdrawalReason;
+	public String getPayment() {
+		return payment;
 	}
 
-	public void setWithdrawalReason(String withdrawalReason) {
-		this.withdrawalReason = withdrawalReason;
+	public void setPayment(String payment) {
+		this.payment = payment;
 	}
 
-	public Set<Field> getFields() {
-		return fields;
+	public Set<Service> getServices() {
+		return services;
 	}
 
-	public void setFields(Set<Field> fields) {
-		this.fields = fields;
+	public void setServices(Set<Service> services) {
+		this.services = services;
 	}
 
 }

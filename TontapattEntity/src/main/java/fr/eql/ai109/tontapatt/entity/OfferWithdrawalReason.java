@@ -14,8 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "field_withdrawal_reason")
-public class FieldWithdrawalReason implements Serializable {
+@Table(name = "offer_withdrawal_reason")
+public class OfferWithdrawalReason implements Serializable {
 
 	/**
 	 * 
@@ -26,12 +26,12 @@ public class FieldWithdrawalReason implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
-	@Column(name = "withdrawal_reason", nullable = false)
-	private String withdrawalReason;
-	@OneToMany(mappedBy = "fieldWithdrawalReason", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private Set<Field> fields;
+	@Column(name = "reason", nullable = false)
+	private String reason;
+	@OneToMany(mappedBy = "offerWithdrawalReason", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Set<ShearingOffer> shearingOffers;
 
-	public FieldWithdrawalReason() {
+	public OfferWithdrawalReason() {
 		super();
 	}
 
@@ -43,20 +43,20 @@ public class FieldWithdrawalReason implements Serializable {
 		this.id = id;
 	}
 
-	public String getWithdrawalReason() {
-		return withdrawalReason;
+	public String getReason() {
+		return reason;
 	}
 
-	public void setWithdrawalReason(String withdrawalReason) {
-		this.withdrawalReason = withdrawalReason;
+	public void setReason(String reason) {
+		this.reason = reason;
 	}
 
-	public Set<Field> getFields() {
-		return fields;
+	public Set<ShearingOffer> getShearingOffers() {
+		return shearingOffers;
 	}
 
-	public void setFields(Set<Field> fields) {
-		this.fields = fields;
+	public void setShearingOffers(Set<ShearingOffer> shearingOffers) {
+		this.shearingOffers = shearingOffers;
 	}
 
 }

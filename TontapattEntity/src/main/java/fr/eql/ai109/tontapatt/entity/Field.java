@@ -43,31 +43,31 @@ public class Field implements Serializable {
 	private LocalDateTime additionDate;
 	@Column(name = "withdrawal_date", nullable = true)
 	private LocalDateTime withdrawalDate;
+	@OneToMany(mappedBy = "field", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Set<Service> services;
+	@OneToMany(mappedBy = "field", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Set<FieldPhoto> photos;
 	@ManyToOne
-	@JoinColumn(referencedColumnName = "id")
+	@JoinColumn(referencedColumnName = "id", nullable = false)
 	private GrassHeight grassHeight;
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id")
 	private FieldWithdrawalReason fieldWithdrawalReason;
 	@ManyToOne
-	@JoinColumn(referencedColumnName = "id")
+	@JoinColumn(referencedColumnName = "id", nullable = false)
 	private FenceHeight fenceHeight;
 	@ManyToOne
-	@JoinColumn(referencedColumnName = "id")
-	private User user;
+	@JoinColumn(referencedColumnName = "id", nullable = false)
+	private User owner;
 	@ManyToOne
-	@JoinColumn(referencedColumnName = "id")
+	@JoinColumn(referencedColumnName = "id", nullable = false)
 	private ZipCodeCity zipCodeCity;
 	@ManyToOne
-	@JoinColumn(referencedColumnName = "id")
+	@JoinColumn(referencedColumnName = "id", nullable = false)
 	private FlatnessPercentage flatnessPercentage;
 	@ManyToMany
 	@JoinTable(name = "vegetation_composition", joinColumns = @JoinColumn(name = "field_id"), inverseJoinColumns = @JoinColumn(name = "vegetation_type_id"))
 	private Set<VegetationType> vegetationTypes;
-	@OneToMany(mappedBy = "field", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private Set<Service> services;
-	@OneToMany(mappedBy = "field", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private Set<Photo> photos;
 
 	public Field() {
 		super();
@@ -154,12 +154,12 @@ public class Field implements Serializable {
 		this.fenceHeight = fenceHeight;
 	}
 
-	public User getUser() {
-		return user;
+	public User getOwner() {
+		return owner;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setOwner(User owner) {
+		this.owner = owner;
 	}
 
 	public ZipCodeCity getZipCodeCity() {
@@ -194,11 +194,11 @@ public class Field implements Serializable {
 		this.services = services;
 	}
 
-	public Set<Photo> getPhotos() {
+	public Set<FieldPhoto> getPhotos() {
 		return photos;
 	}
 
-	public void setPhotos(Set<Photo> photos) {
+	public void setPhotos(Set<FieldPhoto> photos) {
 		this.photos = photos;
 	}
 
