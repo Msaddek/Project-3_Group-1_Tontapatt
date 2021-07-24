@@ -12,6 +12,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -52,21 +54,21 @@ public class User implements Serializable {
 	private LocalDateTime unsubscriptionDate;
 	@Column(name = "photo", nullable = true)
 	private String photo;
-//	@ManyToOne
-//	@JoinColumn(referencedColumnName = "id")
-//	private ZipCodeCity zipCodeCity;
-//	@ManyToOne
-//	@JoinColumn(referencedColumnName = "id")
-//	private UserCategory userCategory;
-//	@ManyToOne
-//	@JoinColumn(referencedColumnName = "id")
-//	private UnsubscriptionReason unsubscriptionReason;
+	@ManyToOne
+	@JoinColumn(referencedColumnName = "id")
+	private ZipCodeCity zipCodeCity;
+	@ManyToOne
+	@JoinColumn(referencedColumnName = "id")
+	private UserCategory userCategory;
+	@ManyToOne
+	@JoinColumn(referencedColumnName = "id")
+	private UnsubscriptionReason unsubscriptionReason;
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<Field> fields;
-//	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//	private Set<ShearingOffer> shearingOffers;
-//	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//	private Set<Rating> ratings;
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Set<ShearingOffer> shearingOffers;
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Set<Rating> ratings;
 
 	public User() {
 		super();
@@ -191,30 +193,30 @@ public class User implements Serializable {
 		this.photo = photo;
 	}
 
-//	public ZipCodeCity getZipCodeCity() {
-//		return zipCodeCity;
-//	}
-//
-//	public void setZipCodeCity(ZipCodeCity zipCodeCity) {
-//		this.zipCodeCity = zipCodeCity;
-//	}
-//
-//	public UserCategory getUserCategory() {
-//		return userCategory;
-//	}
-//
-//	public void setUserCategory(UserCategory userCategory) {
-//		this.userCategory = userCategory;
-//	}
-//
-//	public UnsubscriptionReason getUnsubscriptionReason() {
-//		return unsubscriptionReason;
-//	}
-//
-//	public void setUnsubscriptionReason(
-//			UnsubscriptionReason unsubscriptionReason) {
-//		this.unsubscriptionReason = unsubscriptionReason;
-//	}
+	public ZipCodeCity getZipCodeCity() {
+		return zipCodeCity;
+	}
+
+	public void setZipCodeCity(ZipCodeCity zipCodeCity) {
+		this.zipCodeCity = zipCodeCity;
+	}
+
+	public UserCategory getUserCategory() {
+		return userCategory;
+	}
+
+	public void setUserCategory(UserCategory userCategory) {
+		this.userCategory = userCategory;
+	}
+
+	public UnsubscriptionReason getUnsubscriptionReason() {
+		return unsubscriptionReason;
+	}
+
+	public void setUnsubscriptionReason(
+			UnsubscriptionReason unsubscriptionReason) {
+		this.unsubscriptionReason = unsubscriptionReason;
+	}
 
 	public Set<Field> getFields() {
 		return fields;
@@ -224,20 +226,20 @@ public class User implements Serializable {
 		this.fields = fields;
 	}
 
-//	public Set<ShearingOffer> getShearingOffers() {
-//		return shearingOffers;
-//	}
-//
-//	public void setShearingOffers(Set<ShearingOffer> shearingOffers) {
-//		this.shearingOffers = shearingOffers;
-//	}
-//
-//	public Set<Rating> getRatings() {
-//		return ratings;
-//	}
-//
-//	public void setRatings(Set<Rating> ratings) {
-//		this.ratings = ratings;
-//	}
+	public Set<ShearingOffer> getShearingOffers() {
+		return shearingOffers;
+	}
+
+	public void setShearingOffers(Set<ShearingOffer> shearingOffers) {
+		this.shearingOffers = shearingOffers;
+	}
+
+	public Set<Rating> getRatings() {
+		return ratings;
+	}
+
+	public void setRatings(Set<Rating> ratings) {
+		this.ratings = ratings;
+	}
 
 }
