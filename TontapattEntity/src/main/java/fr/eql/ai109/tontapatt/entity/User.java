@@ -74,21 +74,6 @@ public class User implements Serializable {
 		super();
 	}
 
-	public User(Integer id, String firstName, String lastName,
-			LocalDate birthDate, String email, String password, String address,
-			LocalDateTime signupDate, String phoneNumber) {
-		super();
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.birthDate = birthDate;
-		this.email = email;
-		this.password = password;
-		this.address = address;
-		this.signupDate = signupDate;
-		this.phoneNumber = phoneNumber;
-	}
-
 	public Integer getId() {
 		return id;
 	}
