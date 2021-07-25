@@ -29,39 +29,57 @@ public class ShearingOffer implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
+	
 	@Column(name = "name", nullable = false)
 	private String name;
+	
 	@Column(name = "address", nullable = false)
 	private String address;
+	
 	@Column(name = "creation_date", nullable = false)
 	private LocalDateTime creationDate;
+	
 	@Column(name = "start_date", nullable = false)
 	private LocalDateTime startDate;
+	
 	@Column(name = "end_date", nullable = false)
 	private LocalDateTime endDate;
+	
 	@Column(name = "description", nullable = false)
 	private String description;
+	
 	@Column(name = "animal_count", nullable = false)
 	private Integer animalCount;
+	
 	@Column(name = "max_travel_dist", nullable = false)
 	private Integer maxTravelDist;
+	
 	@Column(name = "animal_daily_price", nullable = false)
 	private Double animalDailyPrice;
+	
 	@Column(name = "withdrawal_date", nullable = true)
 	private LocalDateTime withdrawalDate;
+	
+	private Double distance;
+	
 	@OneToMany(mappedBy = "shearingOffer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<ShearingOfferPhoto> photos;
+	
 	@OneToMany(mappedBy = "shearingOffer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<Service> services;
+	
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id", nullable = false)
 	private Race race;
+	
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id")
 	private OfferWithdrawalReason offerWithdrawalReason;
+	
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id", nullable = false)
 	private ZipCodeCity zipCodeCity;
+	
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id", nullable = false)
 	private User breeder;
@@ -156,6 +174,14 @@ public class ShearingOffer implements Serializable {
 
 	public void setWithdrawalDate(LocalDateTime withdrawalDate) {
 		this.withdrawalDate = withdrawalDate;
+	}
+
+	public Double getDistance() {
+		return distance;
+	}
+
+	public void setDistance(Double distance) {
+		this.distance = distance;
 	}
 
 	public Set<ShearingOfferPhoto> getPhotos() {
