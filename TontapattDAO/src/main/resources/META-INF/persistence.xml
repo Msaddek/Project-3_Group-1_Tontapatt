@@ -43,7 +43,7 @@
 			<property name="hibernate.dialect"
 				value="org.hibernate.dialect.MySQL8Dialect" />
 			<property name="javax.persistence.sql-load-script-source"
-				value="zip_code_city.sql" />
+				value="data.sql" />
 		</properties>
 	</persistence-unit>
 
