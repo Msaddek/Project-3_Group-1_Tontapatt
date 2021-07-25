@@ -26,18 +26,25 @@ public class ZipCodeCity implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
+	
 	@Column(name = "name", nullable = false)
 	private String name;
+	
 	@Column(name = "zip_code", nullable = false)
 	private String zipCode;
+	
 	@Column(name = "longitude", nullable = false)
 	private Double longitude;
+	
 	@Column(name = "latitude", nullable = false)
 	private Double latitude;
+	
 	@OneToMany(mappedBy = "zipCodeCity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<User> users;
+	
 	@OneToMany(mappedBy = "zipCodeCity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<Field> fields;
+	
 	@OneToMany(mappedBy = "zipCodeCity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<ShearingOffer> shearingOffers;
 
