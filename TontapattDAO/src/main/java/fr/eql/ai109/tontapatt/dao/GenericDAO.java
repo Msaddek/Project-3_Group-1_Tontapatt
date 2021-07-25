@@ -11,11 +11,11 @@ import fr.eql.ai109.tontapatt.idao.GenericIDAO;
 public abstract class GenericDAO<T> implements GenericIDAO<T> {
 
 	@PersistenceContext(unitName = "Persistence")
-	protected EntityManager entityManager;
+	protected EntityManager em;
 
 	public T add(T t) {
 		try {
-			entityManager.persist(t);
+			em.persist(t);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -24,7 +24,7 @@ public abstract class GenericDAO<T> implements GenericIDAO<T> {
 
 	public void delete(T t) {
 		try {
-			entityManager.remove(t);
+			em.remove(t);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -32,7 +32,7 @@ public abstract class GenericDAO<T> implements GenericIDAO<T> {
 
 	public T update(T t) {
 		try {
-			entityManager.merge(t);
+			em.merge(t);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -48,7 +48,7 @@ public abstract class GenericDAO<T> implements GenericIDAO<T> {
 							.getTypeName();
 			Class<?> clazz;
 			clazz = Class.forName(className);
-			t = (T) entityManager.find(clazz, i);
+			t = (T) em.find(clazz, i);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -65,7 +65,7 @@ public abstract class GenericDAO<T> implements GenericIDAO<T> {
 			Class<?> clazz;
 			clazz = Class.forName(className);
 
-			objects = (List<T>) entityManager.createQuery("FROM " + clazz.getName())
+			objects = (List<T>) em.createQuery("FROM " + clazz.getName())
 					.getResultList();
 		} catch (Exception e) {
 			e.printStackTrace();
