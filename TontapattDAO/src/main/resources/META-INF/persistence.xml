@@ -38,16 +38,12 @@
 		<properties>
 			<property
 				name="javax.persistence.schema-generation.database.action"
-				value="drop-and-create" />
+				value="update" />
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.dialect"
 				value="org.hibernate.dialect.MySQL8Dialect" />
 			<property name="javax.persistence.sql-load-script-source"
 				value="zip_code_city.sql" />
-			<!-- <property name="javax.persistence.schema-generation.create-script-source" 
-				value="calculate_distance_function.sql" /> -->
-			<!-- <property name="javax.persistence.sql-load-script-source" value="calculate_distance_function.sql" 
-				/> -->
 		</properties>
 	</persistence-unit>
 
