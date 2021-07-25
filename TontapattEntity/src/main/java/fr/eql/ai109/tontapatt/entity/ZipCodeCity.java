@@ -115,5 +115,6 @@ public class ZipCodeCity implements Serializable {
 	public void setShearingOffers(Set<ShearingOffer> shearingOffers) {
 		this.shearingOffers = shearingOffers;
 	}
+	
 
 }
