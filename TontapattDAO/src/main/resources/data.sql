@@ -20,6 +20,9 @@ LOCK TABLES `race` WRITE;
 INSERT INTO `race` VALUES (1,'Mouton de Ouessant',1),(2,'Solognot',1),(3,'Landes de Bretagne',1),(4,'Chèvre des Fossés',2),(5,'Poitevine',2),(6,'Chèvre de Lorraine',2),(7,'Chèvre naine',2),(8,'Bretonne Pie Noir',3),(9,'Nantaise',3),(10,'Highland Cattle',3),(11,'Âne du Cotentin',4),(12,'Grand Noir du Berry',4),(13,'Camargue',4),(14,'Landais',4),(15,'Trait Poitevin',4);
 /*!40000 ALTER TABLE `race` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!40000 ALTER TABLE `user_category` DISABLE KEYS */;
+INSERT INTO `user_category` VALUES (1,'Particulier'),(2,'Entreprise'),(3,'Collectivité locale'),(4,'Association');
+/*!40000 ALTER TABLE `user_category` ENABLE KEYS */;
 
 SET GLOBAL log_bin_trust_function_creators = 1;
 USE `tontapatt_db`;
