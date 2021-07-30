@@ -12,8 +12,7 @@ import fr.eql.ai109.tontapatt.idao.ZipCodeCityIDAO;
 
 @Remote(ZipCodeCityIBusiness.class)
 @Stateless
-public class ZipCodeCityBusiness extends GenericBusiness<ZipCodeCity>
-		implements ZipCodeCityIBusiness {
+public class ZipCodeCityBusiness implements ZipCodeCityIBusiness {
 
 	@EJB
 	private ZipCodeCityIDAO zipCodeCityIDAO;
@@ -21,6 +20,36 @@ public class ZipCodeCityBusiness extends GenericBusiness<ZipCodeCity>
 	@Override
 	public List<ZipCodeCity> getAllByZipCode(String zipCode) {
 		return zipCodeCityIDAO.getAllByZipCode(zipCode);
+	}
+
+	@Override
+	public ZipCodeCity add(ZipCodeCity t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void delete(ZipCodeCity t) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public ZipCodeCity update(ZipCodeCity t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ZipCodeCity getById(int i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ZipCodeCity> getAll() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	/*
