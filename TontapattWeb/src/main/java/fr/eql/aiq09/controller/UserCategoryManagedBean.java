@@ -1,6 +1,7 @@
 package fr.eql.aiq09.controller;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -21,6 +22,10 @@ public class UserCategoryManagedBean implements Serializable {
 	@EJB
 	UserCategoryIBusiness business;
 	private UserCategory userCategory;
+
+	public List<UserCategory> allCategories() {
+		return business.getAll();
+	}
 
 	public UserCategory getUserCategory() {
 		return userCategory;

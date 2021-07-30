@@ -1,5 +1,8 @@
 package fr.eql.ai109.ibusiness;
 
-public interface OfferWithdrawalReasonIBusiness {
+import fr.eql.ai109.tontapatt.entity.OfferWithdrawalReason;
+
+public interface OfferWithdrawalReasonIBusiness
+		extends GenericIBusiness<OfferWithdrawalReason> {
 
 }
