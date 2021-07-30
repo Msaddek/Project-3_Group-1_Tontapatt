@@ -1,5 +1,8 @@
 package fr.eql.ai109.ibusiness;
 
-public interface VegetationTypeIBusiness {
+import fr.eql.ai109.tontapatt.entity.VegetationType;
+
+public interface VegetationTypeIBusiness
+		extends GenericIBusiness<VegetationType> {
 
 }

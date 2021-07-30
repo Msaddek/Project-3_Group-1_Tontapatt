@@ -1,5 +1,8 @@
 package fr.eql.ai109.ibusiness;
 
-public interface RefusalReasonIBusiness {
+import fr.eql.ai109.tontapatt.entity.RefusalReason;
+
+public interface RefusalReasonIBusiness
+		extends GenericIBusiness<RefusalReason> {
 
 }

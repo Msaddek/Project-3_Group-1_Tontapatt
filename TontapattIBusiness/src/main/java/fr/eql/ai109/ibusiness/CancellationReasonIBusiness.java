@@ -1,5 +1,8 @@
 package fr.eql.ai109.ibusiness;
 
-public interface CancellationReasonIBusiness {
+import fr.eql.ai109.tontapatt.entity.CancellationReason;
+
+public interface CancellationReasonIBusiness
+		extends GenericIBusiness<CancellationReason> {
 
 }
