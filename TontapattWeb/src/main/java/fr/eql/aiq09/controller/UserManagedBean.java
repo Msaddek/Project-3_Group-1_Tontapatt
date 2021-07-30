@@ -21,6 +21,11 @@ public class UserManagedBean implements Serializable {
 	@EJB
 	UserIBusiness business;
 	private User user;
+	
+	public User addUser(User newUser) {
+		this.user = business.add(newUser);
+		return this.user;
+	}
 
 	public User getUser() {
 		return user;
