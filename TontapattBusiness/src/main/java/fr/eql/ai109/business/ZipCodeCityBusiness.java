@@ -1,5 +1,7 @@
 package fr.eql.ai109.business;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
@@ -15,6 +17,11 @@ public class ZipCodeCityBusiness extends GenericBusiness<ZipCodeCity>
 
 	@EJB
 	private ZipCodeCityIDAO zipCodeCityIDAO;
+
+	@Override
+	public List<ZipCodeCity> getAllByZipCode(String zipCode) {
+		return zipCodeCityIDAO.getAllByZipCode(zipCode);
+	}
 
 	/*
 	 * public ZipCodeCity calculateDistance() { return
