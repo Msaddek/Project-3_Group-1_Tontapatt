@@ -4,11 +4,11 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
 import fr.eql.ai109.tontapatt.entity.UnsubscriptionReason;
-import fr.eql.ai109.tontapatt.idao.UnsubsriptionReasonIDAO;
+import fr.eql.ai109.tontapatt.idao.UnsubscriptionReasonIDAO;
 
-@Remote(UnsubsriptionReasonIDAO.class)
+@Remote(UnsubscriptionReasonIDAO.class)
 @Stateless
 public class UnsubscriptionReasonDAO extends GenericDAO<UnsubscriptionReason>
-		implements UnsubsriptionReasonIDAO {
+		implements UnsubscriptionReasonIDAO {
 
 }
