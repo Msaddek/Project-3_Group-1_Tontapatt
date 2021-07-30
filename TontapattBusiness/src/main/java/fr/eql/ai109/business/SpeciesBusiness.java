@@ -5,14 +5,14 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
 import fr.eql.ai109.ibusiness.SpeciesIBusiness;
+import fr.eql.ai109.tontapatt.entity.Species;
 import fr.eql.ai109.tontapatt.idao.SpeciesIDAO;
-
 
 @Remote(SpeciesIBusiness.class)
 @Stateless
-public class SpeciesBusiness implements SpeciesIBusiness{
+public class SpeciesBusiness extends GenericBusiness<Species>
+		implements SpeciesIBusiness {
 
-	
 	@EJB
 	private SpeciesIDAO speciesIDAO;
 }

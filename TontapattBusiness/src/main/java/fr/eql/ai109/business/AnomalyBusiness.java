@@ -5,13 +5,13 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
 import fr.eql.ai109.ibusiness.AnomalyIBusiness;
+import fr.eql.ai109.tontapatt.entity.Anomaly;
 import fr.eql.ai109.tontapatt.idao.AnomalyIDAO;
-
-
 
 @Remote(AnomalyIBusiness.class)
 @Stateless
-public class AnomalyBusiness implements AnomalyIBusiness{
+public class AnomalyBusiness extends GenericBusiness<Anomaly>
+		implements AnomalyIBusiness {
 
 	@EJB
 	private AnomalyIDAO anomalyIDAO;
