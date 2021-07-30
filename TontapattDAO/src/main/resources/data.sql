@@ -21,6 +21,54 @@ INSERT INTO `race` VALUES (1,'Mouton de Ouessant',1),(2,'Solognot',1),(3,'Landes
 /*!40000 ALTER TABLE `race` ENABLE KEYS */;
 UNLOCK TABLES;
 
+LOCK TABLES `fence_height` WRITE;
+/*!40000 ALTER TABLE `fence_height` DISABLE KEYS */;
+INSERT INTO `fence_height` VALUES (1,'1'),(2,'2'),(3,'3');
+/*!40000 ALTER TABLE `fence_height` ENABLE KEYS */;
+UNLOCK TABLES;
+
+LOCK TABLES `flatness_percentage` WRITE;
+/*!40000 ALTER TABLE `flatness_percentage` DISABLE KEYS */;
+INSERT INTO `flatness_percentage` VALUES (1,10),(2,20),(3,30),(4,40),(5,50),(6,60),(7,70),(8,80),(9,90),(10,100);
+/*!40000 ALTER TABLE `flatness_percentage` ENABLE KEYS */;
+UNLOCK TABLES;
+
+LOCK TABLES `grass_height` WRITE;
+/*!40000 ALTER TABLE `grass_height` DISABLE KEYS */;
+INSERT INTO `grass_height` VALUES (1,'10'),(2,'20'),(3,'30'),(4,'40'),(5,'50'),(6,'60'),(7,'70'),(8,'80'),(9,'90'),(10,'100');
+/*!40000 ALTER TABLE `grass_height` ENABLE KEYS */;
+UNLOCK TABLES;
+
+LOCK TABLES `user_category` WRITE;
+/*!40000 ALTER TABLE `user_category` DISABLE KEYS */;
+INSERT INTO `user_category` VALUES (1,'Particulier'),(2,'Professionnel'),(3,'Collectivité locale'),(4,'Association');
+/*!40000 ALTER TABLE `user_category` ENABLE KEYS */;
+UNLOCK TABLES;
+
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (19,'9 Route des Plaines','1959-04-15','L\'éco-pâturage et moi faisons bon ménage','jlriviere@caramail.fr','Jean-Luc','Rivière','00000000','0123456789',NULL,'2021-07-05 00:00:00.000000',NULL,NULL,NULL,1,1520),(20,'15 Avenue Dubourg',NULL,'Association pro-écolo','mboisier@latonte.com','Marie','Boisier','11111111','0223456789',NULL,'2021-07-01 00:00:00.000000','12345678912345',NULL,NULL,4,9095),(21,'45 Rue des Moineaux','1954-02-23','Les chèvres, j\'adore','hdubois@live.fr','Hervé','Dubois','22222222','0323456789',NULL,'2021-07-15 00:00:00.000000',NULL,NULL,NULL,1,9200),(22,'23 Place des Fêtes',NULL,'Mairie d\'Annecy','jbonvent@mairie-annecy.fr','Josiane','Bonvent','33333333','0423456789',NULL,'2021-07-16 00:00:00.000000','32165498754321',NULL,NULL,3,29625),(23,'23 Rue des Bois',NULL,'Atelier de fabrication de bouteilles','jacques-lebeau@labibine.fr','Jacques','Lebeau','44444444','0523456789',NULL,'2021-07-20 00:00:00.000000','78945612312345',NULL,NULL,2,29860),(24,'1 Rue des Framboisiers','1965-01-15','Proprio de plusieurs terrains','p-antoine@wanadude.fr','Pierre','Antoine','55555555','0723456789',NULL,'2021-07-14 00:00:00.000000',NULL,NULL,NULL,1,7832),(25,'78 Rue des Noisettes','1962-02-17','','anne-beausejour@mymail.fr','Anne','Beauséjour','66666666','0823456789',NULL,'2021-07-26 00:00:00.000000',NULL,NULL,NULL,1,2520);
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+LOCK TABLES `field` WRITE;
+/*!40000 ALTER TABLE `field` DISABLE KEYS */;
+INSERT INTO `field` VALUES (1,'2021-07-21 00:00:00.000000','10 Route des Plaines',20000,'Vaste terrain','Terrain des plaines',NULL,2,NULL,10,5,19,1520),(2,'2021-07-22 00:00:00.000000','15 Avenue Dubourg',1000,'Grand jardin','Jardin de l\'association',NULL,2,NULL,9,10,20,9095),(3,'2021-07-23 00:00:00.000000','60 Rue des Moineaux',15000,'Grand terrain','Terrain de Dubois',NULL,1,NULL,5,8,21,9200),(4,'2021-07-20 00:00:00.000000','23 Place des Fêtes',500,'Jardin de la mairie d\'Annecy','Jardin d\'Annecy',NULL,1,NULL,10,7,22,29625),(5,'2021-07-20 00:00:00.000000','23 Rue des Bois',700,'Terrain derrière les locaux','Terrain de la Bibine',NULL,3,NULL,9,4,23,29860),(6,'2021-07-23 00:00:00.000000','40 Route des Fraisiers',1200,'Terrain de taille moyenne','Terrain des Fraisiers',NULL,1,NULL,3,3,24,29860),(7,'2021-07-25 00:00:00.000000','85 Rue des Tournesols',2400,'Terrain','Parc des Tournesols',NULL,2,NULL,2,1,24,29860),(8,'2021-07-23 00:00:00.000000','123 Route du Soleil',500,'Petit jardin','Jardin du Soleil',NULL,1,NULL,9,2,24,29860);
+/*!40000 ALTER TABLE `field` ENABLE KEYS */;
+UNLOCK TABLES;
+
+LOCK TABLES `vegetation_type` WRITE;
+/*!40000 ALTER TABLE `vegetation_type` DISABLE KEYS */;
+INSERT INTO `vegetation_type` VALUES (1,'Ronce'),(2,'Aubépines'),(3,'Jeunes Pins');
+/*!40000 ALTER TABLE `vegetation_type` ENABLE KEYS */;
+UNLOCK TABLES;
+
+LOCK TABLES `vegetation_composition` WRITE;
+/*!40000 ALTER TABLE `vegetation_composition` DISABLE KEYS */;
+INSERT INTO `vegetation_composition` VALUES (1,1),(4,1),(8,1),(1,2),(2,2),(5,2),(6,2),(1,3),(2,3),(3,3),(5,3),(7,3);
+/*!40000 ALTER TABLE `vegetation_composition` ENABLE KEYS */;
+UNLOCK TABLES;
+
 SET GLOBAL log_bin_trust_function_creators = 1;
 USE `tontapatt_db`;
 DROP function IF EXISTS `CalcDistance`;
