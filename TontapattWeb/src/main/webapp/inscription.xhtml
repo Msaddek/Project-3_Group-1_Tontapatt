@@ -18,19 +18,32 @@
 			<div class="subscription">
 				<h:form>
 					<h:panelGrid columns="2">
+						<h:outputText for="inpUserCategory" value="Type d'utilisateur" />
+						<p:selectOneMenu id="inpUserCategory"
+							value="#{mbUserCategory.allCategories()}">
+							<f:selectItem itemLabel="Choisissez un type" itemValue="" />
+							<f:selectItems value="#{mbUserCategory.allCategories()}"
+								var="category" itemLabel="#{category.category}"
+								itemValue="#{category.id}" />
+						</p:selectOneMenu>
+						<h:inputText value="#{mbUser.user.firstName}" />
+					</h:panelGrid>
+
+					<h:panelGrid columns="2">
 						<h:outputText value="Nom" />
 						<h:inputText value="#{mbUser.user.firstName}" />
 					</h:panelGrid>
 
 					<p:outputLabel for="inpZipCode" value="Code postale :" />
-					<p:inputText id="counter" value="#{mbZipCodeCity.zipCode}">
+					<p:inputText id="inpZipCode" value="#{mbZipCodeCity.zipCode}">
 						<p:ajax listener="#{mbZipCodeCity.onZipCodeChange()}"
 							update="inpCity" />
 					</p:inputText>
 					<p:outputLabel for="inpCity" value="Ville" />
 					<p:selectOneMenu id="inpCity" value="#{mbZipCodeCity.cities}">
 						<f:selectItem itemLabel="Choisissez une ville" itemValue="" />
-						<f:selectItems value="#{mbCountries.cities}" />
+						<f:selectItems value="#{mbZipCodeCity.cities}" var="city"
+							itemLabel="#{city.name}" itemValue="#{category.id}" />
 					</p:selectOneMenu>
 
 				</h:form>

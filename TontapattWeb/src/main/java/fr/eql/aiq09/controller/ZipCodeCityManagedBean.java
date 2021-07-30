@@ -34,6 +34,9 @@ public class ZipCodeCityManagedBean implements Serializable {
 		} else {
 			cities = new ArrayList<>();
 		}
+		for (ZipCodeCity zipCodeCity : cities) {
+			System.out.println(zipCodeCity.getName());
+		}
 	}
 
 	/*
