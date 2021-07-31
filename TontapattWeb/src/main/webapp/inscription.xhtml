@@ -125,16 +125,19 @@
 						<h:outputText id="display" class="p-d-block" />
 					</div>
 
-					<p:fileUpload url="#{mbUser.photo}" value="#{mbUser.photo}"
-						allowTypes="/(\.|\/)(gif|jpe?g|png)$/">
+					<p:fileUpload label="Ajouter une photo" url="#{mbUser.photo}"
+						value="#{mbUser.photo}" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+						fileLimit="1" fileLimitMessage="Vous avez droit à 1 seul photo"
+						uploadLabel="Télécharger" cancelLabel="Annuler"
+						invalidFileMessage="Le fichier doit être de type gif, jpe, jpeg ou png"
+						oncomplete="Téléchargement terminé">
 					</p:fileUpload>
 					<!-- <p:outputLabel for="outpPhoto" value="#{mbUser.photo}" /> -->
 					<!-- <p:fileUpload dragDropSupport="true"></p:fileUpload>
 					<p:graphicImage value="#{mbUser.photo}" /> -->
 
 
-					<h:commandButton value="Valider"
-						action="#{mbUser.addUser()}" />
+					<h:commandButton value="Valider" action="#{mbUser.addUser()}" />
 
 
 
