@@ -37,8 +37,7 @@ public class UserCategoryBusiness implements UserCategoryIBusiness {
 
 	@Override
 	public UserCategory getById(int i) {
-		// TODO Auto-generated method stub
-		return null;
+		return userCategoryIDAO.getById(i);
 	}
 
 	@Override
