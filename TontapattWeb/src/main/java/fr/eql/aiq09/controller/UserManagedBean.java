@@ -30,7 +30,6 @@ public class UserManagedBean implements Serializable {
 
 
 	public String connect() {
-		System.out.println("hello world");
 		String forward = null;
 		user = userIBusiness.connection(email, password);
 		if (user != null) {
