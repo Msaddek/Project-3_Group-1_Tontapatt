@@ -46,4 +46,9 @@ public class UserBusiness implements UserIBusiness {
 		return null;
 	}
 
+	@Override
+	public User connection(String email, String password) {
+		return userIDAO.authenticate(email, password);
+	}
+
 }

@@ -782,3 +782,17 @@ section {
  font-size: 1rem;
  font: 400 13.3333px Arial;
 }
+
+.modal-header{
+	padding: none !important;
+	display: none !important;
+    flex-shrink: none !important;
+    align-items:  none;
+   justify-content:  none !important;
+    padding: 1rem 1rem !important;
+    border-bottom: none !important;
+   border-top-left-radius:  none !important;
+   border-top-right-radius:  none !important;
+   padding: none !important;
+   border-bottom: none !important;
+}

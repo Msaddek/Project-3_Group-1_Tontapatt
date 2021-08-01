@@ -3,8 +3,17 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:b="http://bootsfaces.net/ui">
+
+<ui:define name="title">
+<title>Tontapatt</title>
+		<f:metadata>
+			<f:event listener="#{mbUser.disconnect()}" type="preRenderView"></f:event>
+		</f:metadata> 
+</ui:define>
+
 
 <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
@@ -26,9 +35,40 @@
         
       </nav><!-- .navbar -->
 
-      <button type="button" class="get-started-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Identification</button>
+    <button type="button" class="get-started-btn" data-toggle="modal" data-target="#amodal">Identification</button>
       
-            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <b:modal id="amodal">
+      
+            <div class="modal-body">
+              <div class="form-title text-center">
+                <h4>Connectez-vous</h4><br />
+              </div>
+              <div class="d-flex flex-column text-center">
+                <b:form id="loginForm">
+                  <div class="form-group">
+                    <b:inputText type="email" class="form-control" id="email1" placeholder="Adresse mail..." value="#{mbUser.email}" />
+                  </div>
+                  <div class="form-group">
+                    <b:inputText type="password" class="form-control" id="password1" placeholder="Mot de passe..." value="#{mbUser.password}" />
+                  </div>
+                  <br />
+                  <b:commandButton type="button" class="btnLogin" value="Connexion" action="#{mbUser.connect()}" />
+                </b:form>
+              </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+              <div class="signup-section">Vous n'êtes pas inscrit? <a href="/TontapattWeb/inscription.xhtml" class="text-info">  Inscrivez-vous</a>.</div>
+            </div>
+            
+  <f:facet name="footer">
+    <b:button value="Close" dismiss="modal" />
+    <b:button value="Ok" look="primary" dismiss="modal" />
+  </f:facet>
+</b:modal> 
+
+      
+      
+<!--             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
 
@@ -40,15 +80,15 @@
                 <h4>Connectez-vous</h4><br />
               </div>
               <div class="d-flex flex-column text-center">
-                <form>
+                <form id="loginForm">
                   <div class="form-group">
-                    <input type="email" class="form-control" id="email1" placeholder="Adresse mail..." /><br />
+                    <input type="email" class="form-control" id="email1" placeholder="Adresse mail..." value="#{mbUser.email}" /><br />
                   </div>
                   <div class="form-group">
-                    <input type="password" class="form-control" id="password1" placeholder="Mot de passe..." />
+                    <input type="password" class="form-control" id="password1" placeholder="Mot de passe..." value="#{mbUser.password}" />
                   </div>
                   <br />
-                  <button type="button" class="btnLogin">Connexion</button>
+                  <h:commandButton type="button" class="btnLogin" value="Connexion" action="#{mbAccount.connect()}" />
                 </form>
               </div>
             </div>
@@ -57,7 +97,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
       
  	</div>
   </header><!-- End Header -->
