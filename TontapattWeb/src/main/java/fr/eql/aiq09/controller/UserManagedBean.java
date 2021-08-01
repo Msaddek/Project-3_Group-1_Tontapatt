@@ -5,14 +5,16 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
-import fr.eql.ai109.ibusiness.UnsubscriptionReasonIBusiness;
-import fr.eql.ai109.ibusiness.UserCategoryIBusiness;
 import fr.eql.ai109.ibusiness.UserIBusiness;
-import fr.eql.ai109.ibusiness.ZipCodeCityIBusiness;
+import fr.eql.ai109.tontapatt.entity.UnsubscriptionReason;
 import fr.eql.ai109.tontapatt.entity.User;
+import fr.eql.ai109.tontapatt.entity.UserCategory;
+import fr.eql.ai109.tontapatt.entity.ZipCodeCity;
 
 @ManagedBean(name = "mbUser")
 @SessionScoped
@@ -25,12 +27,6 @@ public class UserManagedBean implements Serializable {
 
 	@EJB
 	UserIBusiness business;
-	@EJB
-	UserCategoryIBusiness userCategoryIBusiness;
-	@EJB
-	ZipCodeCityIBusiness zipCodeCityIBusiness;
-	@EJB
-	UnsubscriptionReasonIBusiness unsubscriptionReasonIBusiness;
 
 	private User user;
 
@@ -58,13 +54,14 @@ public class UserManagedBean implements Serializable {
 
 	private String photo;
 
-	private Integer userCategoryId;
+	private ZipCodeCity city;
 
-	private Integer zipCodeCityId;
+	private UnsubscriptionReason unsubscriptionReason;
 
-	private Integer unsubscriptionReasonId;
+	private UserCategory category;
 
-	public User addUser() {
+	public String createUser() {
+		String forward = null;
 		User newUser = new User();
 		newUser.setFirstName(firstName);
 		newUser.setLastName(lastName);
@@ -77,12 +74,58 @@ public class UserManagedBean implements Serializable {
 		newUser.setSiret(siret);
 		newUser.setPhoneNumber(phoneNumber);
 		newUser.setPhoto(photo);
-		newUser.setUserCategory(userCategoryIBusiness.getById(userCategoryId));
-		newUser.setZipCodeCity(zipCodeCityIBusiness.getById(zipCodeCityId));
+		newUser.setUserCategory(category);
+		newUser.setZipCodeCity(city);
 
-		business.add(newUser);
-		return newUser;
+		forward = verifyIfUserExists(newUser);
+
+		return forward;
 	}
+
+	private String verifyIfUserExists(User newUser) {
+		String forward;
+		boolean userExists = business.verifyIfUserExists(email);
+		if (!userExists) {
+			user = business.add(newUser);
+			forward = "/subscriptionDone.xhtml?faces-redirection=false";
+		} else {
+			String message = "Adresse mail déjà existante, veuillez vous connecter";
+			FacesMessage facesMessage = new FacesMessage(
+					FacesMessage.SEVERITY_FATAL,
+					message,
+					message);
+			FacesContext.getCurrentInstance()
+					.addMessage("subscriptionForm:inpEmail", facesMessage);
+			forward = "/subscription.xhtml?faces-redirection=false";
+		}
+		return forward;
+	}
+
+	public void verifyIfUserExists() {
+		boolean userExists = business.verifyIfUserExists(email);
+		System.out.println(userExists);
+		if (userExists) {
+			String message = "Adresse mail déjà existante, veuillez vous connecter";
+			FacesMessage facesMessage = new FacesMessage(
+					FacesMessage.SEVERITY_FATAL,
+					message,
+					message);
+			FacesContext.getCurrentInstance()
+					.addMessage("subscriptionForm:inpEmail", facesMessage);
+		}
+	}
+
+	/*
+	 * public void verifyBirthDate() { System.out.println(birthDate); if
+	 * (Period.between(birthDate, LocalDate.now()).getYears() < 18) {
+	 * FacesMessage facesMessage = new FacesMessage( FacesMessage.SEVERITY_WARN,
+	 * "Vous devez avoir 18ans ou plus", "Vous devez avoir 18ans ou plus");
+	 * FacesContext.getCurrentInstance()
+	 * .addMessage("subscriptionForm:inpBirthDate", facesMessage); birthDate =
+	 * null; System.out.println(birthDate); }
+	 * 
+	 * }
+	 */
 
 	public User getUser() {
 		return user;
@@ -188,28 +231,29 @@ public class UserManagedBean implements Serializable {
 		this.photo = photo;
 	}
 
-	public Integer getUserCategoryId() {
-		return userCategoryId;
+	public ZipCodeCity getCity() {
+		return city;
 	}
 
-	public void setUserCategoryId(Integer userCategoryId) {
-		this.userCategoryId = userCategoryId;
+	public void setCity(ZipCodeCity city) {
+		this.city = city;
 	}
 
-	public Integer getZipCodeCityId() {
-		return zipCodeCityId;
+	public UnsubscriptionReason getUnsubscriptionReason() {
+		return unsubscriptionReason;
 	}
 
-	public void setZipCodeCityId(Integer zipCodeCityId) {
-		this.zipCodeCityId = zipCodeCityId;
+	public void setUnsubscriptionReason(
+			UnsubscriptionReason unsubscriptionReason) {
+		this.unsubscriptionReason = unsubscriptionReason;
 	}
 
-	public Integer getUnsubscriptionReasonId() {
-		return unsubscriptionReasonId;
+	public UserCategory getCategory() {
+		return category;
 	}
 
-	public void setUnsubscriptionReasonId(Integer unsubscriptionReasonId) {
-		this.unsubscriptionReasonId = unsubscriptionReasonId;
+	public void setCategory(UserCategory category) {
+		this.category = category;
 	}
 
 }
