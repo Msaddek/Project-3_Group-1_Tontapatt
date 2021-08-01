@@ -1,5 +1,8 @@
 package fr.eql.ai109.ibusiness;
 
-public interface FieldWithdrawalReasonIBusiness {
+import fr.eql.ai109.tontapatt.entity.FieldWithdrawalReason;
+
+public interface FieldWithdrawalReasonIBusiness
+		extends GenericIBusiness<FieldWithdrawalReason> {
 
 }

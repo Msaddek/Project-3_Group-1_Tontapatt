@@ -1,5 +1,8 @@
 package fr.eql.ai109.ibusiness;
 
-public interface ShearingOfferPhotoIBusiness {
+import fr.eql.ai109.tontapatt.entity.ShearingOfferPhoto;
+
+public interface ShearingOfferPhotoIBusiness
+		extends GenericIBusiness<ShearingOfferPhoto> {
 
 }

@@ -1,5 +1,7 @@
 package fr.eql.ai109.ibusiness;
 
-public interface AnomalyIBusiness {
+import fr.eql.ai109.tontapatt.entity.Anomaly;
+
+public interface AnomalyIBusiness extends GenericIBusiness<Anomaly> {
 
 }

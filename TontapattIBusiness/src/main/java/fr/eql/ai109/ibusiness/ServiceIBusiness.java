@@ -1,5 +1,7 @@
 package fr.eql.ai109.ibusiness;
 
-public interface ServiceIBusiness {
+import fr.eql.ai109.tontapatt.entity.Service;
+
+public interface ServiceIBusiness extends GenericIBusiness<Service> {
 
 }

@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui"
+	template="WEB-INF/template/template.xhtml">
+
+	<ui:define name="title">
+		<title>Tontapatt</title>
+	</ui:define>
+
+	<ui:define name="content">
+		<body>
+			<h1>Inscription</h1>
+			<div class="subscription">
+				<h:form>
+					<h:panelGrid columns="2">
+						<h:outputText for="inpUserCategory" value="Type d'utilisateur" />
+						<p:selectOneMenu id="inpUserCategory"
+							value="#{mbUserCategory.allCategories()}">
+							<f:selectItem itemLabel="Choisissez un type" itemValue="" />
+							<f:selectItems value="#{mbUserCategory.allCategories()}"
+								var="category" itemLabel="#{category.category}"
+								itemValue="#{category.id}" />
+						</p:selectOneMenu>
+						<h:inputText value="#{mbUser.user.firstName}" />
+					</h:panelGrid>
+
+					<h:panelGrid columns="2">
+						<h:outputText value="Nom" />
+						<h:inputText value="#{mbUser.user.firstName}" />
+					</h:panelGrid>
+
+					<p:outputLabel for="inpZipCode" value="Code postale :" />
+					<p:inputText id="inpZipCode" value="#{mbZipCodeCity.zipCode}">
+						<p:ajax listener="#{mbZipCodeCity.onZipCodeChange()}"
+							update="inpCity" />
+					</p:inputText>
+					<p:outputLabel for="inpCity" value="Ville" />
+					<p:selectOneMenu id="inpCity" value="#{mbZipCodeCity.cities}">
+						<f:selectItem itemLabel="Choisissez une ville" itemValue="" />
+						<f:selectItems value="#{mbZipCodeCity.cities}" var="city"
+							itemLabel="#{city.name}" itemValue="#{category.id}" />
+					</p:selectOneMenu>
+
+				</h:form>
+			</div>
+			<!-- Script -->
+			<script src="resources/assets/js/purecounter.js"></script>
+			<script src="resources/assets/js/main.js"></script>
+
+		</body>
+	</ui:define>
+
+</ui:composition>

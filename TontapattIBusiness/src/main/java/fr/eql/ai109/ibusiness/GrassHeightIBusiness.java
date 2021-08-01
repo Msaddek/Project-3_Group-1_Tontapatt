@@ -1,5 +1,7 @@
 package fr.eql.ai109.ibusiness;
 
-public interface GrassHeightIBusiness {
+import fr.eql.ai109.tontapatt.entity.GrassHeight;
+
+public interface GrassHeightIBusiness extends GenericIBusiness<GrassHeight> {
 
 }
