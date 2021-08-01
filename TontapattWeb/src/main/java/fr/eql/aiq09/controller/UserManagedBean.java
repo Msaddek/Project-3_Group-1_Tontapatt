@@ -3,6 +3,7 @@ package fr.eql.aiq09.controller;
 import java.io.Serializable;
 
 import javax.ejb.EJB;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -23,7 +24,7 @@ public class UserManagedBean implements Serializable {
 	private String password;
 	
 	@EJB
-	UserIBusiness userIBusiness;
+	private UserIBusiness userIBusiness;
 
 	
 
@@ -33,7 +34,7 @@ public class UserManagedBean implements Serializable {
 		String forward = null;
 		user = userIBusiness.connection(email, password);
 		if (user != null) {
-			forward = "/TontapattWeb/inscription.xhtml?faces-redirection=true";
+			forward = "/inscription.xhtml?faces-redirection=true";
 		} else {
 			FacesMessage facesMessage = new FacesMessage(
 					FacesMessage.SEVERITY_WARN,
@@ -42,7 +43,7 @@ public class UserManagedBean implements Serializable {
 					);
 			FacesContext.getCurrentInstance().addMessage("loginForm:inpEmail", facesMessage);
 			FacesContext.getCurrentInstance().addMessage("loginForm:inpPassword", facesMessage);
-			forward = "/TontapattWeb/home.xhtml?faces-redirection=false";
+			forward = "/home.xhtml?faces-redirection=false";
 		}
 		
 		return forward;
@@ -57,7 +58,7 @@ public class UserManagedBean implements Serializable {
 		email = "";
 		password = "";
 		user = new User();
-		return "/TontapattWeb/home.xhtml?faces-redirection=true";
+		return "/home.xhtml?faces-redirection=true";
 	}
 	
 	public User addUser(User newUser) {

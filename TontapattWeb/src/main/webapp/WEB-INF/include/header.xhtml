@@ -1,11 +1,12 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:b="http://bootsfaces.net/ui">
+
 
 <ui:define name="title">
 <title>Tontapatt</title>
@@ -52,7 +53,7 @@
                     <b:inputText type="password" class="form-control" id="password1" placeholder="Mot de passe..." value="#{mbUser.password}" />
                   </div>
                   <br />
-                  <b:commandButton type="button" class="btnLogin" value="Connexion" action="#{mbUser.connect()}" />
+                  <b:commandButton  class="btnLogin" value="Connexion" action="#{mbUser.connect()}" />
                 </b:form>
               </div>
             </div>
@@ -102,4 +103,5 @@
  	</div>
   </header><!-- End Header -->
 
- </ui:composition>
+
+</html>
