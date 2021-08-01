@@ -9,9 +9,9 @@
 
 	<ui:define name="head">
 		<title>Identification</title>
-		<f:metadata>
+		 <f:metadata>
 			<f:event listener="#{mbUser.disconnect()}" type="preRenderView"></f:event>
-		</f:metadata>
+		</f:metadata> 
 	</ui:define>
 
 
@@ -19,12 +19,6 @@
 <h:head>
 	<ui:insert name="head"></ui:insert>
 	 <meta charset="utf-8" />
-  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-
-  
-  <meta content="" name="description" />
-  <meta content="" name="keywords" />
-
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet" />
@@ -36,33 +30,29 @@
 
 	<h:body>
 	
-
-      
-      
-
-              <div class="form-title text-center">
+	
+	
                 <h4>Connectez-vous</h4><br />
-              </div>
+           
               <div class="d-flex flex-column text-center">
+              
                 <b:form id="loginForm">
                   <div class="form-group">
-                    <b:inputText type="email" class="form-control" id="email1" placeholder="Adresse mail..." value="#{mbUser.email}" />
+                    <b:inputText type="email" class="form-control" id="inpEmail" placeholder="Adresse mail..." value="#{mbUser.email}" />
                   </div>
                   <div class="form-group">
-                    <b:inputText type="password" class="form-control" id="password1" placeholder="Mot de passe..." value="#{mbUser.password}" />
+                    <b:inputText type="password" class="form-control" id="inpPassword" placeholder="Mot de passe..." value="#{mbUser.password}" />
                   </div>
                   <br />
-                  <b:commandButton type="button" class="btnLogin" value="Connexion" action="#{mbUser.connect()}" />
+                  <b:commandButton class="btnLogin" value="Connexion" action="#{mbUser.connect()}" />
+                
+                <b:message for="inpPassword" />
                 </b:form>
               </div>
             <div class="modal-footer d-flex justify-content-center">
               <div class="signup-section">Vous n'êtes pas inscrit? <a href="/TontapattWeb/inscription.xhtml" class="text-info">  Inscrivez-vous</a>.</div>
-            </div>
-            
-  <f:facet name="footer">
-    <b:button value="Close" dismiss="modal" />
-    <b:button value="Ok" look="primary" dismiss="modal" />
-  </f:facet>
+            </div> 
+           
 
 
 </h:body>

@@ -1,4 +1,4 @@
-package fr.eql.aiq09.controller;
+package fr.eql.ai109.controller;
 
 import java.io.Serializable;
 
@@ -23,18 +23,19 @@ public class UserManagedBean implements Serializable {
 	private String password;
 	
 	@EJB
-	UserIBusiness userIBusiness;
+	private UserIBusiness userIBusiness;
 
 	
-
-
 	public String connect() {
-		System.out.println("hello world");
+		
 		String forward = null;
 		user = userIBusiness.connection(email, password);
 		if (user != null) {
-			forward = "/TontapattWeb/inscription.xhtml?faces-redirection=true";
+			System.out.println(user.getFirstName());
+			forward = "/TontapattWeb/inscription.xhtml?faces-redirect=true";
+			System.out.println("url doit être " + forward);
 		} else {
+			System.out.println("e");
 			FacesMessage facesMessage = new FacesMessage(
 					FacesMessage.SEVERITY_WARN,
 					"Identifiant et/ou mot de passe incorrect(s)",
@@ -42,7 +43,7 @@ public class UserManagedBean implements Serializable {
 					);
 			FacesContext.getCurrentInstance().addMessage("loginForm:inpEmail", facesMessage);
 			FacesContext.getCurrentInstance().addMessage("loginForm:inpPassword", facesMessage);
-			forward = "/TontapattWeb/home.xhtml?faces-redirection=false";
+			forward = "/TontapattWeb/home.xhtml?faces-redirection=true";
 		}
 		
 		return forward;
