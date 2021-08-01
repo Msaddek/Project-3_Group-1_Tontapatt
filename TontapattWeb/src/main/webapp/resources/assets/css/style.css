@@ -794,4 +794,14 @@ section {
 
 .modal-footer {
 	border-top: none;
+	font-size: 13px !important;
+}
+
+.modal-header {
+ border-bottom: none !important;
+}
+
+#j_idt13:hover {
+	background-color: white !important;
+	color: black important;
 }
