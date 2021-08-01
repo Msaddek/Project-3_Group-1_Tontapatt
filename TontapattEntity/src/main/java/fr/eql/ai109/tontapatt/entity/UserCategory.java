@@ -1,6 +1,7 @@
 package fr.eql.ai109.tontapatt.entity;
 
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -33,6 +34,28 @@ public class UserCategory implements Serializable {
 
 	public UserCategory() {
 		super();
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(category);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UserCategory other = (UserCategory) obj;
+		return Objects.equals(category, other.category);
+	}
+
+	@Override
+	public String toString() {
+		return "UserCategory [id=" + id + ", category=" + category + "]";
 	}
 
 	public Integer getId() {
