@@ -1,6 +1,7 @@
 package fr.eql.ai109.tontapatt.entity;
 
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -39,6 +40,28 @@ public class FenceHeight implements Serializable {
 
 	public FenceHeight() {
 		super();
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(height);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		FenceHeight other = (FenceHeight) obj;
+		return Objects.equals(height, other.height);
+	}
+
+	@Override
+	public String toString() {
+		return "FenceHeight [height=" + height + "]";
 	}
 
 	public Integer getId() {

@@ -1,6 +1,7 @@
 package fr.eql.ai109.tontapatt.entity;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,6 +33,28 @@ public class FieldPhoto implements Serializable {
 
 	public FieldPhoto() {
 		super();
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(link);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		FieldPhoto other = (FieldPhoto) obj;
+		return Objects.equals(link, other.link);
+	}
+
+	@Override
+	public String toString() {
+		return "FieldPhoto [id=" + id + ", link=" + link + "]";
 	}
 
 	public Integer getId() {

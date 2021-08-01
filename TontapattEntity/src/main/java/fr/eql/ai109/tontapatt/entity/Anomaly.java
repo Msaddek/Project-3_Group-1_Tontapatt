@@ -2,6 +2,7 @@ package fr.eql.ai109.tontapatt.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -43,6 +44,38 @@ public class Anomaly implements Serializable {
 
 	public Anomaly() {
 		super();
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(anomalyType, creationDate, description, endDate);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Anomaly other = (Anomaly) obj;
+		return Objects.equals(anomalyType, other.anomalyType)
+				&& Objects.equals(creationDate, other.creationDate)
+				&& Objects.equals(description, other.description)
+				&& Objects.equals(endDate, other.endDate);
+	}
+
+	@Override
+	public String toString() {
+		return "Anomaly [id=" + id
+				+ ", creationDate="
+				+ creationDate
+				+ ", description="
+				+ description
+				+ ", endDate="
+				+ endDate
+				+ "]";
 	}
 
 	public Integer getId() {
