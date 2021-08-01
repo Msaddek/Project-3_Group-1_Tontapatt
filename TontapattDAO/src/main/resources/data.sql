@@ -35,7 +35,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `grass_height` WRITE;
 /*!40000 ALTER TABLE `grass_height` DISABLE KEYS */;
-INSERT INTO `grass_height` VALUES (1,'10'),(2,'20'),(3,'30'),(4,'40'),(5,'50'),(6,'60'),(7,'70'),(8,'80'),(9,'90'),(10,'100');
+INSERT INTO `grass_height` VALUES (1,'10cm'),(2,'20cm'),(3,'30cm'),(4,'40cm'),(5,'50cm'),(6,'60cm'),(7,'70cm'),(8,'80cm'),(9,'90cm'),(10,'100cm');
 /*!40000 ALTER TABLE `grass_height` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -43,6 +43,42 @@ LOCK TABLES `user_category` WRITE;
 /*!40000 ALTER TABLE `user_category` DISABLE KEYS */;
 INSERT INTO `user_category` VALUES (1,'Particulier'),(2,'Professionnel'),(3,'Collectivité locale'),(4,'Association');
 /*!40000 ALTER TABLE `user_category` ENABLE KEYS */;
+UNLOCK TABLES;
+
+LOCK TABLES `field_withdrawal_reason` WRITE;
+/*!40000 ALTER TABLE `field_withdrawal_reason` DISABLE KEYS */;
+INSERT INTO `field_withdrawal_reason` VALUES (1,'Je ne suis plus propriétaire de ce terrain'),(2,'Je ne souhaite plus entretenir ce terrain via l\'éco-pâturage'),(3,'Ce terrain est dangereux pour tout type d\'animaux'),(4,'Autre');
+/*!40000 ALTER TABLE `field_withdrawal_reason` ENABLE KEYS */;
+UNLOCK TABLES;
+
+LOCK TABLES `refusal_reason` WRITE;
+/*!40000 ALTER TABLE `refusal_reason` DISABLE KEYS */;
+INSERT INTO `refusal_reason` VALUES (1,'Le terrain est dangereux pour mon bétail'),(2,'Je ne souhaite pas gérer les installations sur ce terrain'),(3,'Je ne souhaite pas coopérer avec ce client'),(4,'Autre');
+/*!40000 ALTER TABLE `refusal_reason` ENABLE KEYS */;
+UNLOCK TABLES;
+
+LOCK TABLES `premature_cancellation_reason` WRITE;
+/*!40000 ALTER TABLE `premature_cancellation_reason` DISABLE KEYS */;
+INSERT INTO `premature_cancellation_reason` VALUES (1,'Mauvaise entente avec le client'),(2,'Désaccord sur le contrat'),(3,'Le terrain est dangereux pour mon bétail'),(4,'Je ne souhaite pas gérer les installations sur ce terrain'),(5,'Autre');
+/*!40000 ALTER TABLE `premature_cancellation_reason` ENABLE KEYS */;
+UNLOCK TABLES;
+
+LOCK TABLES `unsubscription_reason` WRITE;
+/*!40000 ALTER TABLE `unsubscription_reason` DISABLE KEYS */;
+INSERT INTO `unsubscription_reason` VALUES (1,'Je ne souhaite plus être impliqué avec Tontapatt'),(2,'Je suis client d\'une autre entreprise d\'éco-pâturage'),(3,'Autre');
+/*!40000 ALTER TABLE `unsubscription_reason` ENABLE KEYS */;
+UNLOCK TABLES;
+
+LOCK TABLES `anomaly_type` WRITE;
+/*!40000 ALTER TABLE `anomaly_type` DISABLE KEYS */;
+INSERT INTO `anomaly_type` VALUES (1,'Intempéries'),(2,'Clôture cassée'),(3,'Point d\'eau hors service'),(4,'Abri endommagé'),(5,'Animal blessé');
+/*!40000 ALTER TABLE `anomaly_type` ENABLE KEYS */;
+UNLOCK TABLES;
+
+LOCK TABLES `payment_method` WRITE;
+/*!40000 ALTER TABLE `payment_method` DISABLE KEYS */;
+INSERT INTO `payment_method` VALUES (1,'Visa'),(2,'Mastercard');
+/*!40000 ALTER TABLE `payment_method` ENABLE KEYS */;
 UNLOCK TABLES;
 
 LOCK TABLES `user` WRITE;
@@ -67,6 +103,18 @@ LOCK TABLES `vegetation_composition` WRITE;
 /*!40000 ALTER TABLE `vegetation_composition` DISABLE KEYS */;
 INSERT INTO `vegetation_composition` VALUES (1,1),(4,1),(8,1),(1,2),(2,2),(5,2),(6,2),(1,3),(2,3),(3,3),(5,3),(7,3);
 /*!40000 ALTER TABLE `vegetation_composition` ENABLE KEYS */;
+UNLOCK TABLES;
+
+LOCK TABLES `shearing_offer` WRITE;
+/*!40000 ALTER TABLE `shearing_offer` DISABLE KEYS */;
+INSERT INTO `shearing_offer` VALUES (1,'9 Route des Plaines',50,15,'2021-07-22 00:00:00.000000','Je propose des moutons',20,'2021-09-30 00:00:00.000000',100,'Offre de M Rivière','2021-09-01 00:00:00.000000',NULL,19,NULL,1,1520),(2,'45 Rue de Moineaux',30,20,'2021-07-23 00:00:00.000000','J\'adore mes chèvres',50,'2021-10-31 00:00:00.000000',80,'Offre de M Dubois','2021-10-01 00:00:00.000000',NULL,21,NULL,6,9200),(3,'78 Rue des Noisettes',20,25,'2021-07-24 00:00:00.000000','Anne propose des ânes',20,'2021-11-30 00:00:00.000000',20,'Les âneries d\'Anne','2021-11-01 00:00:00.000000',NULL,25,NULL,11,2520);
+/*!40000 ALTER TABLE `shearing_offer` ENABLE KEYS */;
+UNLOCK TABLES;
+
+LOCK TABLES `service` WRITE;
+/*!40000 ALTER TABLE `service` DISABLE KEYS */;
+INSERT INTO `service` VALUES (1,NULL,'2021-09-30 00:00:00.000000','2021-08-30 00:00:00.000000','2021-09-30 00:00:00.000000','2021-08-31 00:00:00.000000','2021-09-30 00:00:00.000000',NULL,1500,NULL,'2021-09-01 00:00:00.000000','2021-09-01 00:00:00.000000','2021-08-01 00:00:00.000000',NULL,1,1,NULL,NULL,1),(2,NULL,'2021-10-31 00:00:00.000000','2021-09-29 00:00:00.000000','2021-10-31 00:00:00.000000','2021-09-30 00:00:00.000000','2021-10-31 00:00:00.000000',NULL,2000,NULL,'2021-09-15 00:00:00.000000','2021-10-01 00:00:00.000000','2021-08-15 00:00:00.000000',NULL,2,2,NULL,NULL,2);
+/*!40000 ALTER TABLE `service` ENABLE KEYS */;
 UNLOCK TABLES;
 
 SET GLOBAL log_bin_trust_function_creators = 1;
