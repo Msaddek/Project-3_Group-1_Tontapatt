@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 
-package fr.eql.aiq09.controller;
+package fr.eql.ai109.controller;
 
 import java.util.Map;
 import java.util.Map.Entry;

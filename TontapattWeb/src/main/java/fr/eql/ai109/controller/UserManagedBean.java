@@ -1,4 +1,4 @@
-package fr.eql.aiq09.controller;
+package fr.eql.ai109.controller;
 
 import java.io.Serializable;
 
@@ -25,9 +25,6 @@ public class UserManagedBean implements Serializable {
 	
 	@EJB
 	private UserIBusiness userIBusiness;
-
-	
-
 
 	public String connect() {
 		String forward = null;
