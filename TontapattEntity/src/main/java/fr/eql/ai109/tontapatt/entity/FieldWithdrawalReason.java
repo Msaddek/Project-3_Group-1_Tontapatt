@@ -1,6 +1,7 @@
 package fr.eql.ai109.tontapatt.entity;
 
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -33,6 +34,31 @@ public class FieldWithdrawalReason implements Serializable {
 
 	public FieldWithdrawalReason() {
 		super();
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(withdrawalReason);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		FieldWithdrawalReason other = (FieldWithdrawalReason) obj;
+		return Objects.equals(withdrawalReason, other.withdrawalReason);
+	}
+
+	@Override
+	public String toString() {
+		return "FieldWithdrawalReason [id=" + id
+				+ ", withdrawalReason="
+				+ withdrawalReason
+				+ "]";
 	}
 
 	public Integer getId() {

@@ -2,6 +2,7 @@ package fr.eql.ai109.tontapatt.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -40,6 +41,37 @@ public class Rating implements Serializable {
 
 	public Rating() {
 		super();
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(feedback, ratingDate, ratingLevel);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Rating other = (Rating) obj;
+		return Objects.equals(feedback, other.feedback)
+				&& Objects.equals(ratingDate, other.ratingDate)
+				&& Objects.equals(ratingLevel, other.ratingLevel);
+	}
+
+	@Override
+	public String toString() {
+		return "Rating [id=" + id
+				+ ", ratingLevel="
+				+ ratingLevel
+				+ ", feedback="
+				+ feedback
+				+ ", ratingDate="
+				+ ratingDate
+				+ "]";
 	}
 
 	public Integer getId() {

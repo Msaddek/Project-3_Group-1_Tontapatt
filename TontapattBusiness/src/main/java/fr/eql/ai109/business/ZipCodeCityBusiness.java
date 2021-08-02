@@ -42,8 +42,7 @@ public class ZipCodeCityBusiness implements ZipCodeCityIBusiness {
 
 	@Override
 	public ZipCodeCity getById(int i) {
-		// TODO Auto-generated method stub
-		return null;
+		return zipCodeCityIDAO.getById(i);
 	}
 
 	@Override
