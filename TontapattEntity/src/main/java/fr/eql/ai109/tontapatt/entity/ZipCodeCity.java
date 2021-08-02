@@ -1,6 +1,7 @@
 package fr.eql.ai109.tontapatt.entity;
 
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -26,30 +27,64 @@ public class ZipCodeCity implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
-	
+
 	@Column(name = "name", nullable = false)
 	private String name;
-	
+
 	@Column(name = "zip_code", nullable = false)
 	private String zipCode;
-	
+
 	@Column(name = "longitude", nullable = false)
 	private Double longitude;
-	
+
 	@Column(name = "latitude", nullable = false)
 	private Double latitude;
-	
+
 	@OneToMany(mappedBy = "zipCodeCity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<User> users;
-	
+
 	@OneToMany(mappedBy = "zipCodeCity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<Field> fields;
-	
+
 	@OneToMany(mappedBy = "zipCodeCity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<ShearingOffer> shearingOffers;
 
 	public ZipCodeCity() {
 		super();
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(latitude, longitude, name, zipCode);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ZipCodeCity other = (ZipCodeCity) obj;
+		return Objects.equals(latitude, other.latitude)
+				&& Objects.equals(longitude, other.longitude)
+				&& Objects.equals(name, other.name)
+				&& Objects.equals(zipCode, other.zipCode);
+	}
+
+	@Override
+	public String toString() {
+		return "ZipCodeCity [id=" + id
+				+ ", name="
+				+ name
+				+ ", zipCode="
+				+ zipCode
+				+ ", longitude="
+				+ longitude
+				+ ", latitude="
+				+ latitude
+				+ "]";
 	}
 
 	public Integer getId() {
@@ -115,6 +150,5 @@ public class ZipCodeCity implements Serializable {
 	public void setShearingOffers(Set<ShearingOffer> shearingOffers) {
 		this.shearingOffers = shearingOffers;
 	}
-	
 
 }

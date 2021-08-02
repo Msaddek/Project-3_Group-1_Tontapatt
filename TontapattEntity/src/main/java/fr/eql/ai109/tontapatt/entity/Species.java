@@ -1,6 +1,7 @@
 package fr.eql.ai109.tontapatt.entity;
 
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -40,6 +41,28 @@ public class Species implements Serializable {
 
 	public Species() {
 		super();
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(species);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Species other = (Species) obj;
+		return Objects.equals(species, other.species);
+	}
+
+	@Override
+	public String toString() {
+		return "Species [id=" + id + ", species=" + species + "]";
 	}
 
 	public Integer getId() {

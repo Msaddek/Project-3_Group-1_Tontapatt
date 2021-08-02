@@ -2,6 +2,7 @@ package fr.eql.ai109.tontapatt.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -29,63 +30,120 @@ public class ShearingOffer implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
-	
+
 	@Column(name = "name", nullable = false)
 	private String name;
-	
+
 	@Column(name = "address", nullable = false)
 	private String address;
-	
+
 	@Column(name = "creation_date", nullable = false)
 	private LocalDateTime creationDate;
-	
+
 	@Column(name = "start_date", nullable = false)
 	private LocalDateTime startDate;
-	
+
 	@Column(name = "end_date", nullable = false)
 	private LocalDateTime endDate;
-	
+
 	@Column(name = "description", nullable = false)
 	private String description;
-	
+
 	@Column(name = "animal_count", nullable = false)
 	private Integer animalCount;
-	
+
 	@Column(name = "max_travel_dist", nullable = false)
 	private Integer maxTravelDist;
-	
+
 	@Column(name = "animal_daily_price", nullable = false)
 	private Double animalDailyPrice;
-	
+
 	@Column(name = "withdrawal_date", nullable = true)
 	private LocalDateTime withdrawalDate;
-	
+
 	private Double distance;
-	
+
 	@OneToMany(mappedBy = "shearingOffer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<ShearingOfferPhoto> photos;
-	
+
 	@OneToMany(mappedBy = "shearingOffer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<Service> services;
-	
+
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id", nullable = false)
 	private Race race;
-	
+
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id")
 	private OfferWithdrawalReason offerWithdrawalReason;
-	
+
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id", nullable = false)
 	private ZipCodeCity zipCodeCity;
-	
+
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id", nullable = false)
 	private User breeder;
 
 	public ShearingOffer() {
 		super();
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(address, animalCount, animalDailyPrice,
+				creationDate, description, distance, endDate, maxTravelDist,
+				name, startDate, withdrawalDate);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ShearingOffer other = (ShearingOffer) obj;
+		return Objects.equals(address, other.address)
+				&& Objects.equals(animalCount, other.animalCount)
+				&& Objects.equals(animalDailyPrice, other.animalDailyPrice)
+				&& Objects.equals(creationDate, other.creationDate)
+				&& Objects.equals(description, other.description)
+				&& Objects.equals(distance, other.distance)
+				&& Objects.equals(endDate, other.endDate)
+				&& Objects.equals(maxTravelDist, other.maxTravelDist)
+				&& Objects.equals(name, other.name)
+				&& Objects.equals(startDate, other.startDate)
+				&& Objects.equals(withdrawalDate, other.withdrawalDate);
+	}
+
+	@Override
+	public String toString() {
+		return "ShearingOffer [id=" + id
+				+ ", name="
+				+ name
+				+ ", address="
+				+ address
+				+ ", creationDate="
+				+ creationDate
+				+ ", startDate="
+				+ startDate
+				+ ", endDate="
+				+ endDate
+				+ ", description="
+				+ description
+				+ ", animalCount="
+				+ animalCount
+				+ ", maxTravelDist="
+				+ maxTravelDist
+				+ ", animalDailyPrice="
+				+ animalDailyPrice
+				+ ", withdrawalDate="
+				+ withdrawalDate
+				+ ", distance="
+				+ distance
+				+ "]";
 	}
 
 	public Integer getId() {

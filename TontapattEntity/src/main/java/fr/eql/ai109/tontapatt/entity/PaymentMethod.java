@@ -1,6 +1,7 @@
 package fr.eql.ai109.tontapatt.entity;
 
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -34,6 +35,29 @@ public class PaymentMethod implements Serializable {
 	public PaymentMethod() {
 		super();
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(payment);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PaymentMethod other = (PaymentMethod) obj;
+		return Objects.equals(payment, other.payment);
+	}
+
+	@Override
+	public String toString() {
+		return "PaymentMethod [id=" + id + ", payment=" + payment + "]";
+	}
+
 
 	public Integer getId() {
 		return id;

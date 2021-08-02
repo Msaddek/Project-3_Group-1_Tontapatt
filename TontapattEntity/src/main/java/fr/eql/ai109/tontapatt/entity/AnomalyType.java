@@ -1,6 +1,7 @@
 package fr.eql.ai109.tontapatt.entity;
 
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -33,6 +34,28 @@ public class AnomalyType implements Serializable {
 
 	public AnomalyType() {
 		super();
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(type);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AnomalyType other = (AnomalyType) obj;
+		return Objects.equals(type, other.type);
+	}
+
+	@Override
+	public String toString() {
+		return "AnomalyType [id=" + id + ", type=" + type + "]";
 	}
 
 	public Integer getId() {
