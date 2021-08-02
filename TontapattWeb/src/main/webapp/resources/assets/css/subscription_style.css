@@ -459,3 +459,16 @@ input {
     padding-bottom: 40px;
   }
 }
+
+.codeCity {
+	margin-left: -20px;
+}
+
+#subscriptionForm .uputfieldi-in {
+	font-size: 15px;
+}
+
+#subscriptionForm #inpPassword {
+	width: 150px;
+}
+

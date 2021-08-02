@@ -71,6 +71,7 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 1060;
   padding: 15px 0;
   box-shadow: 0px 0 18px rgba(55, 66, 59, 0.08);
+  height: 80px;
 }
 
 #header .logo {
@@ -106,6 +107,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 14px;
   display: inline-block;
   border: none;
+  margin-bottom: 20px
 }
 
 .get-started-btn:hover {
@@ -804,4 +806,13 @@ section {
 #j_idt13:hover {
 	background-color: white !important;
 	color: black important;
+}
+
+.btnSubscription {
+	background-color: #5fcf80 !important;
+ 	color: white !important;
+}
+
+.titleT {
+ vertical-align: 20px;
 }

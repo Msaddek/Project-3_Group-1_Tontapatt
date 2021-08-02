@@ -25,10 +25,6 @@
 		<welcome-file>home.xhtml</welcome-file>
 	</welcome-file-list>
 	<context-param>
-		<param-name>BootsFaces_THEME</param-name>
-		<param-value>slate</param-value>
-	</context-param>
-	<context-param>
 		<param-name>net.bootsfaces.blockUI</param-name>
 		<param-value>true</param-value>
 	</context-param>
