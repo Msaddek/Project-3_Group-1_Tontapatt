@@ -51,4 +51,9 @@ public class UserBusiness implements UserIBusiness {
 		return userIDAO.verifyIfUserExists(email);
 	}
 
+	@Override
+	public User connection(String email, String password) {
+		return userIDAO.authenticate(email, password);
+	}
+
 }

@@ -6,19 +6,20 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 
 <ui:composition template="/arch.xhtml">
-
+	
 	<ui:define name="head">
 		<title>Identification</title>
 	</ui:define>
 
 	<ui:define name="content">
 		<h4>
-			Utilisateur en session : <br />
-			<h:outputLabel value="#{mbCity.calculateDistance().distance}" />
-			<h:outputLabel value="#{mbCity.calculateDistance().name}" />
+		<br />
+		Utilisateur en session : 
+		<h:outputLabel value="#{mbUser.user.email}" />
 		</h4>
+		
 	</ui:define>
-
+	
 </ui:composition>
 
 </html>
