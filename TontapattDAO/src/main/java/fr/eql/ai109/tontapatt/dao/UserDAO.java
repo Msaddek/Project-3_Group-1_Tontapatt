@@ -32,8 +32,8 @@ public class UserDAO extends GenericDAO<User> implements UserIDAO {
 		
 		List<User> users = null;
 		
-		Query query = em.createQuery("SELECT u FROM User u WHERE u.login=:loginParam");
-		query.setParameter("loginParam", user.getEmail());
+		Query query = em.createQuery("SELECT u FROM User u WHERE u.email=:emailParam");
+		query.setParameter("emailParam", user.getEmail());
 		users = query.getResultList();
 		
 	return users.size() > 0;

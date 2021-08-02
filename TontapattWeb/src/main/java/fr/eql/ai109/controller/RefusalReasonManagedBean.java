@@ -1,4 +1,4 @@
-package fr.eql.aiq09.controller;
+package fr.eql.ai109.controller;
 
 import java.io.Serializable;
 

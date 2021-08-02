@@ -71,6 +71,7 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 1060;
   padding: 15px 0;
   box-shadow: 0px 0 18px rgba(55, 66, 59, 0.08);
+  height: 80px;
 }
 
 #header .logo {
@@ -106,6 +107,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 14px;
   display: inline-block;
   border: none;
+  margin-bottom: 20px
 }
 
 .get-started-btn:hover {
@@ -783,16 +785,34 @@ section {
  font: 400 13.3333px Arial;
 }
 
-.modal-header{
-	padding: none !important;
-	display: none !important;
-    flex-shrink: none !important;
-    align-items:  none;
-   justify-content:  none !important;
-    padding: 1rem 1rem !important;
-    border-bottom: none !important;
-   border-top-left-radius:  none !important;
-   border-top-right-radius:  none !important;
-   padding: none !important;
-   border-bottom: none !important;
+.btnLogin:hover {
+ background-color: green;
+ color: white;
+}
+
+.form-control {
+	font-size: 14px !important;
+}
+
+.modal-footer {
+	border-top: none;
+	font-size: 13px !important;
+}
+
+.modal-header {
+ border-bottom: none !important;
+}
+
+#j_idt13:hover {
+	background-color: white !important;
+	color: black important;
+}
+
+.btnSubscription {
+	background-color: #5fcf80 !important;
+ 	color: white !important;
+}
+
+.titleT {
+ vertical-align: 20px;
 }
