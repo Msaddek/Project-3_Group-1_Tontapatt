@@ -69,7 +69,8 @@
 								placeholder="example@domaine.com">
 								<f:validateRegex
 									pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-								<p:ajax event="blur" listener="#{mbUser.verifyIfUserExists()}" update="emailMessage" />
+								<p:ajax event="blur" listener="#{mbUser.verifyIfUserExists()}"
+									update="emailMessage" />
 								<p:ajax update="inpEmail" />
 							</p:inputText>
 							<p:message id="emailMessage" for="inpEmail" />
@@ -142,7 +143,10 @@
 						<p:outputLabel for="inpAdresse" value="Adresse:" />
 						<h:panelGrid columns="2">
 							<h:inputText id="inpAdresse" value="#{mbUser.address}"
-								required="true" requiredMessage="Vous devez entrer une adresse" />
+								required="true" requiredMessage="Vous devez entrer une adresse">
+								<p:ajax update="inpAdresse" />
+								<p:ajax update="adresseMessage" />
+								</h:inputText>
 							<p:message id="adresseMessage" for="inpAdresse" />
 						</h:panelGrid>
 					</div>
@@ -181,10 +185,11 @@
 					</div>
 
 					<div class="p-field p-col-12 p-md-4">
+						<h:outputText value="Siret:" />
 						<h:panelGrid columns="1">
-							<h:outputText value="Siret:" />
 							<h:inputText id="inpSiret" value="#{mbUser.siret}"
 								required="false" />
+							<p:message id="siretMessage" for="inpSiret" />
 						</h:panelGrid>
 					</div>
 
@@ -220,6 +225,7 @@
 			<!-- Script -->
 			<script src="resources/assets/js/purecounter.js"></script>
 			<script src="resources/assets/js/main.js"></script>
+			<script src="resources/assets/js/subscription.js"></script>
 
 		</body>
 	</ui:define>
