@@ -1,6 +1,7 @@
 package fr.eql.ai109.tontapatt.entity;
 
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -39,6 +40,33 @@ public class FlatnessPercentage implements Serializable {
 
 	public FlatnessPercentage() {
 		super();
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(percentage);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		FlatnessPercentage other = (FlatnessPercentage) obj;
+		return Objects.equals(percentage, other.percentage);
+	}
+
+	@Override
+	public String toString() {
+		return "FlatnessPercentage [id=" + id
+				+ ", percentage="
+				+ percentage
+				+ ", species="
+				+ species
+				+ "]";
 	}
 
 	public Integer getId() {

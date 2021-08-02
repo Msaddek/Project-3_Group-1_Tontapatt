@@ -2,6 +2,7 @@ package fr.eql.ai109.tontapatt.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -71,6 +72,47 @@ public class Field implements Serializable {
 
 	public Field() {
 		super();
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(additionDate, address, area, description, name,
+				withdrawalDate);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Field other = (Field) obj;
+		return Objects.equals(additionDate, other.additionDate)
+				&& Objects.equals(address, other.address)
+				&& Objects.equals(area, other.area)
+				&& Objects.equals(description, other.description)
+				&& Objects.equals(name, other.name)
+				&& Objects.equals(withdrawalDate, other.withdrawalDate);
+	}
+
+	@Override
+	public String toString() {
+		return "Field [id=" + id
+				+ ", name="
+				+ name
+				+ ", address="
+				+ address
+				+ ", area="
+				+ area
+				+ ", description="
+				+ description
+				+ ", additionDate="
+				+ additionDate
+				+ ", withdrawalDate="
+				+ withdrawalDate
+				+ "]";
 	}
 
 	public Integer getId() {

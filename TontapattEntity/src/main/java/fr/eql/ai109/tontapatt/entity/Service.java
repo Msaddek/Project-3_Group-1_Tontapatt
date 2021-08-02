@@ -2,6 +2,7 @@ package fr.eql.ai109.tontapatt.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -78,6 +79,69 @@ public class Service implements Serializable {
 
 	public Service() {
 		super();
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(cancellationDate, endDate, equipmentSetupDate,
+				equipmentUninstallDate, herdSetupDate, herdUninstallDate,
+				prematureCancellationDate, price, refusalDate, requestDate,
+				startDate, validationDate);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Service other = (Service) obj;
+		return Objects.equals(cancellationDate, other.cancellationDate)
+				&& Objects.equals(endDate, other.endDate)
+				&& Objects.equals(equipmentSetupDate, other.equipmentSetupDate)
+				&& Objects.equals(equipmentUninstallDate,
+						other.equipmentUninstallDate)
+				&& Objects.equals(herdSetupDate, other.herdSetupDate)
+				&& Objects.equals(herdUninstallDate, other.herdUninstallDate)
+				&& Objects.equals(prematureCancellationDate,
+						other.prematureCancellationDate)
+				&& Objects.equals(price, other.price)
+				&& Objects.equals(refusalDate, other.refusalDate)
+				&& Objects.equals(requestDate, other.requestDate)
+				&& Objects.equals(startDate, other.startDate)
+				&& Objects.equals(validationDate, other.validationDate);
+	}
+
+	@Override
+	public String toString() {
+		return "Service [id=" + id
+				+ ", requestDate="
+				+ requestDate
+				+ ", startDate="
+				+ startDate
+				+ ", endDate="
+				+ endDate
+				+ ", validationDate="
+				+ validationDate
+				+ ", herdSetupDate="
+				+ herdSetupDate
+				+ ", equipmentSetupDate="
+				+ equipmentSetupDate
+				+ ", herdUninstallDate="
+				+ herdUninstallDate
+				+ ", equipmentUninstallDate="
+				+ equipmentUninstallDate
+				+ ", refusalDate="
+				+ refusalDate
+				+ ", cancellationDate="
+				+ cancellationDate
+				+ ", prematureCancellationDate="
+				+ prematureCancellationDate
+				+ ", price="
+				+ price
+				+ "]";
 	}
 
 	public Integer getId() {

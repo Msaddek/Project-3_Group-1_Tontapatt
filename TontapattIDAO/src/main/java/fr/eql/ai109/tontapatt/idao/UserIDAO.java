@@ -6,5 +6,5 @@ public interface UserIDAO extends GenericIDAO<User> {
 	
 	Boolean exists(User user);
 	User authenticate(String login, String password);
-	
+	Boolean verifyIfUserExists(String email);
 }

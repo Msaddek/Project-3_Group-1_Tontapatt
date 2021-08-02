@@ -3,6 +3,7 @@ package fr.eql.ai109.tontapatt.entity;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -61,7 +62,7 @@ public class User implements Serializable {
 	@OneToMany(mappedBy = "evaluator", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<Rating> ratings;
 	@OneToMany(mappedBy = "declarer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private Set<Anomaly> Anomalies;
+	private Set<Anomaly> anomalies;
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id", nullable = false)
 	private ZipCodeCity zipCodeCity;
@@ -74,6 +75,66 @@ public class User implements Serializable {
 
 	public User() {
 		super();
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(address, birthDate, description, email, firstName,
+				lastName, password, phoneNumber, photo, signupDate, siret,
+				unsubscriptionDate);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		return Objects.equals(address, other.address)
+				&& Objects.equals(birthDate, other.birthDate)
+				&& Objects.equals(description, other.description)
+				&& Objects.equals(email, other.email)
+				&& Objects.equals(firstName, other.firstName)
+				&& Objects.equals(lastName, other.lastName)
+				&& Objects.equals(password, other.password)
+				&& Objects.equals(phoneNumber, other.phoneNumber)
+				&& Objects.equals(photo, other.photo)
+				&& Objects.equals(signupDate, other.signupDate)
+				&& Objects.equals(siret, other.siret)
+				&& Objects.equals(unsubscriptionDate, other.unsubscriptionDate);
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id
+				+ ", firstName="
+				+ firstName
+				+ ", lastName="
+				+ lastName
+				+ ", birthDate="
+				+ birthDate
+				+ ", email="
+				+ email
+				+ ", password="
+				+ password
+				+ ", address="
+				+ address
+				+ ", signupDate="
+				+ signupDate
+				+ ", description="
+				+ description
+				+ ", siret="
+				+ siret
+				+ ", phoneNumber="
+				+ phoneNumber
+				+ ", unsubscriptionDate="
+				+ unsubscriptionDate
+				+ ", photo="
+				+ photo
+				+ "]";
 	}
 
 	public Integer getId() {
@@ -230,11 +291,11 @@ public class User implements Serializable {
 	}
 
 	public Set<Anomaly> getAnomalies() {
-		return Anomalies;
+		return anomalies;
 	}
 
 	public void setAnomalies(Set<Anomaly> anomalies) {
-		Anomalies = anomalies;
+		this.anomalies = anomalies;
 	}
 
 }

@@ -1,0 +1,233 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui"
+	template="WEB-INF/template/template.xhtml">
+
+	<ui:define name="title">
+		<title>Inscription</title>
+	</ui:define>
+
+	<ui:define name="content">
+		<body>
+			<h1>Inscription</h1>
+			<div class="subscription">
+				<h:form id="subscriptionForm">
+
+					<div class="p-field p-col-12 p-md-4">
+						<p:outputLabel for="inpUserCategory" value="Type d'utilisateur:" />
+						<h:panelGrid columns="2">
+							<p:selectOneMenu id="inpUserCategory" value="#{mbUser.category}"
+								required="true" converter="entityConverter"
+								requiredMessage="Vous devez choisir une catégorie">
+								<f:selectItem itemLabel="Choisissez votre category" itemValue="" />
+								<f:selectItems value="#{mbUserCategory.allCategories()}"
+									var="category" itemLabel="#{category.category}"
+									itemValue="#{category}" />
+								<p:ajax update="userCategoryMessage" />
+							</p:selectOneMenu>
+							<p:message id="userCategoryMessage" for="inpUserCategory" />
+						</h:panelGrid>
+					</div>
+
+					<div class="p-field p-col-12 p-md-4">
+						<p:outputLabel for="inpLastName" value="Nom:" />
+						<h:panelGrid columns="2">
+							<p:inputText id="inpLastName" value="#{mbUser.lastName}"
+								placeholder="Nom" required="true"
+								requiredMessage="Vous devez entrer votre nom">
+								<p:ajax update="inpLastName" />
+								<p:ajax update="lastNameMessage" />
+							</p:inputText>
+							<p:message id="lastNameMessage" for="inpLastName" />
+						</h:panelGrid>
+					</div>
+
+					<div class="p-field p-col-12 p-md-4">
+						<p:outputLabel for="inpFirstName" value="Prénom:" />
+						<h:panelGrid columns="2">
+							<p:inputText id="inpFirstName" value="#{mbUser.firstName}"
+								placeholder="Prénom" required="true"
+								requiredMessage="Vous devez entrer votre prénom">
+								<p:ajax update="inpFirstName" />
+								<p:ajax update="firstNameMessage" />
+							</p:inputText>
+							<p:message id="firstNameMessage" for="inpFirstName" />
+						</h:panelGrid>
+					</div>
+
+					<div class="p-field p-col-12 p-md-4">
+						<p:outputLabel for="inpEmail" value="Adresse mail:" />
+						<h:panelGrid columns="2">
+							<p:inputText id="inpEmail" value="#{mbUser.email}"
+								required="true" requiredMessage="L'adresse mail est requise"
+								validatorMessage="Le format de l'adresse mail doit similaire à 'example@domaine.com'"
+								placeholder="example@domaine.com">
+								<f:validateRegex
+									pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+								<p:ajax event="blur" listener="#{mbUser.verifyIfUserExists()}"
+									update="emailMessage" />
+								<p:ajax update="inpEmail" />
+							</p:inputText>
+							<p:message id="emailMessage" for="inpEmail" />
+						</h:panelGrid>
+					</div>
+
+					<div class="p-field p-col-12 p-md-4">
+						<p:outputLabel for="inpPassword" value="Mot de Passe:" />
+						<h:panelGrid columns="2">
+							<p:password id="inpPassword" value="#{mbUser.password}"
+								placeholder="Mot de passe" required="true"
+								requiredMessage="Le mot de passe est requis" toggleMask="true"
+								redisplay="true" match="inpPassword2"
+								validatorMessage="Les mots de passe ne sont pas identiques">
+								<p:ajax update="inpPassword" />
+								<p:ajax update="passwordMessage" />
+							</p:password>
+							<p:message id="passwordMessage" for="inpPassword" />
+						</h:panelGrid>
+					</div>
+
+					<div class="p-field p-col-12 p-md-4">
+						<p:outputLabel for="inpPassword2"
+							value="Confirmation de mot de Passe:" />
+						<h:panelGrid columns="3">
+							<p:password id="inpPassword2" value="#{mbUser.password}"
+								placeholder="Mot de passe" required="true"
+								requiredMessage="Le mot de passe est requis" toggleMask="true"
+								redisplay="true">
+								<p:ajax update="inpPassword" />
+								<p:ajax update="passwordMessage" />
+								<p:ajax update="inpPassword2" />
+								<p:ajax update="password2Message" />
+							</p:password>
+							<p:message id="password2Message" for="inpPassword2" />
+						</h:panelGrid>
+					</div>
+
+					<div class="p-field p-col-12 p-md-4">
+						<p:outputLabel for="inpPhoneNumber" value="Numéro mobile:" />
+						<h:panelGrid columns="2">
+							<p:inputText id="inpPhoneNumber" value="#{mbUser.phoneNumber}"
+								required="true" requiredMessage="Le numéro est requis"
+								validatorMessage="Le numéro n'est pas valide">
+								<f:validateRegex pattern="^(\+33|0033|0)(6|7)[0-9]{8}$" />
+								<p:ajax update="inpPhoneNumber" />
+								<p:ajax update="phoneNumberMessage" />
+							</p:inputText>
+							<p:message id="phoneNumberMessage" for="inpPhoneNumber" />
+						</h:panelGrid>
+					</div>
+
+					<div class="p-field p-col-12 p-md-4">
+						<p:outputLabel for="inpBirthDate" value="Date de naissance:" />
+						<h:panelGrid columns="2">
+							<p:calendar id="inpBirthDate" value="#{mbUser.birthDate}"
+								showIcon="true" required="true"
+								requiredMessage="La date de naissance est requise"
+								monthNavigator="true" yearNavigator="true" navigator="true"
+								pattern="dd/MM/yyy" mindate="#{mbDate.minimumDate}"
+								maxdate="#{mbDate.maximumDate}">
+								<p:ajax event="dateSelect" update="inpBirthDate" />
+								<p:ajax event="dateSelect" update="birthDateMessage" />
+							</p:calendar>
+							<p:message id="birthDateMessage" for="inpBirthDate" />
+						</h:panelGrid>
+					</div>
+
+					<div class="p-field p-col-12 p-md-4">
+						<p:outputLabel for="inpAdresse" value="Adresse:" />
+						<h:panelGrid columns="2">
+							<h:inputText id="inpAdresse" value="#{mbUser.address}"
+								required="true" requiredMessage="Vous devez entrer une adresse">
+								<p:ajax update="inpAdresse" />
+								<p:ajax update="adresseMessage" />
+								</h:inputText>
+							<p:message id="adresseMessage" for="inpAdresse" />
+						</h:panelGrid>
+					</div>
+
+					<div class="p-field p-col-12 p-md-4">
+						<p:outputLabel for="inpZipCode" value="Code postale :" />
+						<h:panelGrid columns="2">
+							<p:inputText id="inpZipCode" value="#{mbZipCodeCity.zipCode}"
+								required="true" requiredMessage="Le code postal est requis"
+								validatorMessage="Le code postale n'est pas valide">
+								<f:validateRegex
+									pattern="^((0[1-9])|([1-8][0-9])|(9[0-8])|(2A)|(2B))[0-9]{3}$" />
+								<p:ajax listener="#{mbZipCodeCity.onZipCodeChange()}"
+									update="inpCity" />
+								<p:ajax update="inpZipCode" />
+								<p:ajax update="zipCodeMessage" />
+							</p:inputText>
+							<p:message id="zipCodeMessage" for="inpZipCode" />
+						</h:panelGrid>
+					</div>
+
+					<div class="p-field p-col-12 p-md-4">
+						<p:outputLabel for="inpCity" value="Ville:" />
+						<h:panelGrid columns="2">
+							<p:selectOneMenu id="inpCity" value="#{mbUser.city}"
+								required="true" requiredMessage="Vous devez choisir une ville"
+								converter="entityConverter">
+								<f:selectItem itemLabel="Choisissez une ville" itemValue="" />
+								<f:selectItems value="#{mbZipCodeCity.cities}" var="city"
+									itemLabel="#{city.name}" itemValue="#{city}" />
+								<p:ajax update="inpCity" />
+								<p:ajax update="cityMessage" />
+							</p:selectOneMenu>
+							<p:message id="cityMessage" for="inpCity" />
+						</h:panelGrid>
+					</div>
+
+					<div class="p-field p-col-12 p-md-4">
+						<h:outputText value="Siret:" />
+						<h:panelGrid columns="1">
+							<h:inputText id="inpSiret" value="#{mbUser.siret}"
+								required="false" />
+							<p:message id="siretMessage" for="inpSiret" />
+						</h:panelGrid>
+					</div>
+
+					<div class="p-field p-col-12 p-md-4">
+						<h:panelGrid columns="1">
+							<p:outputLabel for="inpDescription" value="Description:" />
+							<p:inputTextarea id="inpDescription"
+								value="#{mbUser.description}" rows="5" cols="30"
+								counter="display" maxlength="255"
+								counterTemplate="{0} caractères restants." autoResize="false" />
+							<h:outputText id="display" class="p-d-block" />
+						</h:panelGrid>
+					</div>
+
+					<p:fileUpload label="Ajouter une photo" url="#{mbUser.photo}"
+						value="#{mbUser.photo}" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+						fileLimit="1" fileLimitMessage="Vous avez droit à 1 seul photo"
+						uploadLabel="Télécharger" cancelLabel="Annuler"
+						invalidFileMessage="Le fichier doit être de type gif, jpe, jpeg ou png"
+						oncomplete="Téléchargement terminé">
+					</p:fileUpload>
+					<!-- <p:outputLabel for="outpPhoto" value="#{mbUser.photo}" /> -->
+					<!-- <p:fileUpload dragDropSupport="true"></p:fileUpload>
+					<p:graphicImage value="#{mbUser.photo}" /> -->
+
+
+					<h:commandButton value="Valider" action="#{mbUser.createUser()}" />
+
+
+
+				</h:form>
+			</div>
+			<!-- Script -->
+			<script src="resources/assets/js/purecounter.js"></script>
+			<script src="resources/assets/js/main.js"></script>
+			<script src="resources/assets/js/subscription.js"></script>
+
+		</body>
+	</ui:define>
+
+</ui:composition>

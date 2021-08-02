@@ -52,3 +52,10 @@ public class UserBusiness implements UserIBusiness {
 	}
 
 }
+
+	@Override
+	public Boolean verifyIfUserExists(String email) {
+		return userIDAO.verifyIfUserExists(email);
+	}
+
+}

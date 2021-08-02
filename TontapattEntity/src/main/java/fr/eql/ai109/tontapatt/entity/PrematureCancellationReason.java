@@ -1,6 +1,7 @@
 package fr.eql.ai109.tontapatt.entity;
 
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -33,6 +34,31 @@ public class PrematureCancellationReason implements Serializable {
 
 	public PrematureCancellationReason() {
 		super();
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(reason);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PrematureCancellationReason other = (PrematureCancellationReason) obj;
+		return Objects.equals(reason, other.reason);
+	}
+
+	@Override
+	public String toString() {
+		return "PrematureCancellationReason [id=" + id
+				+ ", reason="
+				+ reason
+				+ "]";
 	}
 
 	public Integer getId() {

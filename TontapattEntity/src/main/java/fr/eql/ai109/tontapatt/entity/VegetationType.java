@@ -1,6 +1,7 @@
 package fr.eql.ai109.tontapatt.entity;
 
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -36,6 +37,28 @@ public class VegetationType implements Serializable {
 
 	public VegetationType() {
 		super();
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(vegetation);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		VegetationType other = (VegetationType) obj;
+		return Objects.equals(vegetation, other.vegetation);
+	}
+
+	@Override
+	public String toString() {
+		return "VegetationType [id=" + id + ", vegetation=" + vegetation + "]";
 	}
 
 	public Integer getId() {
