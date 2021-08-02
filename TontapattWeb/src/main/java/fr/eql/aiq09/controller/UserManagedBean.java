@@ -9,6 +9,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import fr.eql.ai109.ibusiness.UserIBusiness;
 import fr.eql.ai109.tontapatt.entity.UnsubscriptionReason;
@@ -59,6 +60,38 @@ public class UserManagedBean implements Serializable {
 	private UnsubscriptionReason unsubscriptionReason;
 
 	private UserCategory category;
+	
+	public String connect() {
+		System.out.println("hello world");
+		String forward = null;
+		user = business.connection(email, password);
+		if (user != null) {
+			forward = "/inscription.xhtml?faces-redirection=true";
+		} else {
+			FacesMessage facesMessage = new FacesMessage(
+					FacesMessage.SEVERITY_WARN,
+					"Identifiant et/ou mot de passe incorrect(s)",
+					"Identifiant et/ou mot de passe incorrect(s)"
+					);
+			FacesContext.getCurrentInstance().addMessage("loginForm:inpEmail", facesMessage);
+			FacesContext.getCurrentInstance().addMessage("loginForm:inpPassword", facesMessage);
+			forward = "/home.xhtml?faces-redirection=false";
+		}
+		
+		return forward;
+	}
+	
+	public String disconnect() {
+		HttpSession session = (HttpSession) FacesContext
+				.getCurrentInstance()
+				.getExternalContext()
+				.getSession(true);
+		session.invalidate();
+		email = "";
+		password = "";
+		user = new User();
+		return "/home.xhtml?faces-redirection=true";
+	}
 
 	public String createUser() {
 		String forward = null;

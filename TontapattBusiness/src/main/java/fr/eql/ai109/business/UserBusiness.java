@@ -47,15 +47,13 @@ public class UserBusiness implements UserIBusiness {
 	}
 
 	@Override
-	public User connection(String email, String password) {
-		return userIDAO.authenticate(email, password);
-	}
-
-}
-
-	@Override
 	public Boolean verifyIfUserExists(String email) {
 		return userIDAO.verifyIfUserExists(email);
+	}
+
+	@Override
+	public User connection(String email, String password) {
+		return userIDAO.authenticate(email, password);
 	}
 
 }
