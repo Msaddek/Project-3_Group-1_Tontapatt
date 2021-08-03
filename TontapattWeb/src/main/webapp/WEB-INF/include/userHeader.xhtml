@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<ui:define name="title">
+		<f:metadata>
+			<f:event listener="#{mbUser.disconnect()}" type="preRenderView"></f:event>
+		</f:metadata> 
+</ui:define>
+
+
+<header id="headerU" class="fixed-top">
+
+    <div class="container d-flex align-items-center">
+
+      <h1 class="logo me-auto"><a class="titleT" href="home.xhtml">Tontapatt</a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+     <nav id="navbar" class="navbar order-last order-lg-0">
+     	<ul>
+        
+        	<li><a class="active" href="home.xhtml">Hey, #{mbUser.user.firstName} !</a></li>
+        	<li><a  href="home.xhtml">Prestation</a></li>
+        	<li><a  href="home.xhtml">Nouveauté</a></li>
+		
+        </ul>
+ <div style="display:none">
+<b:dropButton value="">
+</b:dropButton>
+</div>
+  	<div class="dropdown">
+       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         
+        	<div class="profilPicture">
+        		 <p:graphicImage class="img-profil" value="#{mbUser.user.photo}" alt="No picture set"></p:graphicImage>
+        	</div>
+         
+		</a> 
+	 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">
+                                        Mes offres
+                                    </a>
+                                   
+                                    <a class="dropdown-item" href="#">
+                                        Mes terrains
+                                    </a>
+                                    
+                                    <a class="dropdown-item" href="#">
+                                       Paramètres
+                                    </a>
+									<div class="dropdown-divider"></div>
+									 <a class="dropdown-item" href="#">
+                                       Déconnexion
+                                    </a>
+
+     </div>
+                          
+		</div>
+
+	</nav> 
+
+    </div>
+ 
+  </header><!-- End Header -->
+	
+
+</html>

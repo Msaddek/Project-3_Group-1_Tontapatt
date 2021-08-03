@@ -7,7 +7,13 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
 
+
+<ui:define name="head">
+<title>Inscription</title>
+</ui:define>
+
 <h:head>
+
 	<ui:insert name="head"></ui:insert>
 	 <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
@@ -71,7 +77,7 @@
               
              <h4> Vous n'êtes pas inscrit? <a href="/TontapattWeb/subscription.xhtml" class="text-info">  Inscrivez-vous</a>.</h4>
               </div>
-            </div>
+       </div>
             
   <f:facet name="footer">
     <b:button class="closePop" value="Close" dismiss="modal" />
