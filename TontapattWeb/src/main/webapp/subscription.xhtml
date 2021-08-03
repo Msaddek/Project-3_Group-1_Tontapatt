@@ -150,30 +150,26 @@
 						</div>
 
 						<div>
-							<br /> <label for="inpEmail">Mot de passe :</label><br />
-							<p:password id="inpPassword" value="#{mbUser.password}"
-								placeholder="Mot de passe *" required="#{mbRequired.password}"
+							<br /> <label for="inpPassword">Mot de passe :</label><br />
+							<p:password id="inpPassword" styleClass="passsword-inp"
+								value="#{mbUser.password}" placeholder="Mot de passe *"
+								required="#{mbRequired.password}"
 								requiredMessage="Le mot de passe est requis" toggleMask="true"
 								redisplay="true" match="inpPassword2"
 								validatorMessage="Les mots de passe ne sont pas identiques">
-								<p:ajax update="inpPassword" />
-								<p:ajax update="passwordMessage" />
-							</p:password>
+							</p:password><br />
 							<p:message id="passwordMessage" for="inpPassword" />
 						</div>
 
 						<div>
-							<br /> <label for="inpEmail">Confirmation du mot de
+							<br /> <label for="inpPassword2">Confirmation du mot de
 								passe :</label><br />
-							<p:password id="inpPassword2" value="#{mbUser.password}"
-								placeholder="Mot de passe *" required="#{mbRequired.password2}"
+							<p:password id="inpPassword2" styleClass="passsword-inp"
+								value="#{mbUser.confirmPassword}" placeholder="Mot de passe *"
+								required="#{mbRequired.password2}"
 								requiredMessage="Le mot de passe est requis" toggleMask="true"
 								redisplay="true">
-								<p:ajax update="inpPassword" />
-								<p:ajax update="passwordMessage" />
-								<p:ajax update="inpPassword2" />
-								<p:ajax update="password2Message" />
-							</p:password>
+							</p:password><br />
 							<p:message id="password2Message" for="inpPassword2" />
 
 						</div>
@@ -190,7 +186,7 @@
 						</div>
 
 						<div>
-							<br /> <label for="inpFirstName">Prénom :</label>
+							<label for="inpFirstName">Prénom :</label>
 							<p:inputText id="inpFirstName" value="#{mbUser.firstName}"
 								placeholder="Prénom *" required="#{mbRequired.firstName}"
 								requiredMessage="Vous devez entrer votre prénom">
@@ -202,7 +198,7 @@
 						</div>
 
 						<div>
-							<br /> <label for="inpBirthDate">Date de naisssance :</label>
+							<label for="inpBirthDate">Date de naisssance :</label>
 							<p:calendar id="inpBirthDate" value="#{mbUser.birthDate}"
 								showIcon="true" required="#{mbRequired.birthDate}"
 								requiredMessage="La date de naissance est requise"
@@ -294,7 +290,7 @@
 							<b:inputTextarea id="inpDescription"
 								required="#{mbRequired.description}"
 								value="#{mbUser.description}" rows="5" cols="30"
-								counter="display" maxlength="255"
+								counter="displayGacCharCount" maxlength="255"
 								counterTemplate="{0} caractères restants." autoResize="false" />
 
 						</div>
