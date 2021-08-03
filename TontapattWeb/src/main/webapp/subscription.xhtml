@@ -116,7 +116,8 @@
 							<div class="rs-select2 js-select-simple select--no-search">
 								<label for="inpUserCategory">Type utilisateur :</label><br />
 								<p:selectOneMenu id="inpUserCategory" value="#{mbUser.category}"
-									required="true" converter="entityConverter"
+									required="#{mbRequired.userCategory}"
+									converter="entityConverter"
 									requiredMessage="Vous devez choisir une catégorie">
 									<f:selectItem itemLabel="Choisissez votre categorie"
 										itemValue="" />
@@ -124,6 +125,9 @@
 										var="category" itemLabel="#{category.category}"
 										itemValue="#{category}" />
 									<p:ajax update="userCategoryMessage" />
+									<p:ajax
+										listener="#{mbRequired.requiredSubscriptionForm(mbUser.category)}"
+										update="@form" />
 								</p:selectOneMenu>
 								<br />
 								<b:message id="userCategoryMessage" for="inpUserCategory" />
@@ -132,7 +136,8 @@
 						<div>
 							<br /> <label for="inpEmail">Email :</label>
 							<p:inputText id="inpEmail" value="#{mbUser.email}"
-								required="true" requiredMessage="L'adresse mail est requise"
+								required="#{mbRequired.email}"
+								requiredMessage="L'adresse mail est requise"
 								validatorMessage="Le format de l'adresse mail doit similaire à 'example@domaine.com'"
 								placeholder="example@domaine.com *">
 								<f:validateRegex
@@ -147,7 +152,7 @@
 						<div>
 							<br /> <label for="inpEmail">Mot de passe :</label><br />
 							<p:password id="inpPassword" value="#{mbUser.password}"
-								placeholder="Mot de passe *" required="true"
+								placeholder="Mot de passe *" required="#{mbRequired.password}"
 								requiredMessage="Le mot de passe est requis" toggleMask="true"
 								redisplay="true" match="inpPassword2"
 								validatorMessage="Les mots de passe ne sont pas identiques">
@@ -161,7 +166,7 @@
 							<br /> <label for="inpEmail">Confirmation du mot de
 								passe :</label><br />
 							<p:password id="inpPassword2" value="#{mbUser.password}"
-								placeholder="Mot de passe *" required="true"
+								placeholder="Mot de passe *" required="#{mbRequired.password2}"
 								requiredMessage="Le mot de passe est requis" toggleMask="true"
 								redisplay="true">
 								<p:ajax update="inpPassword" />
@@ -176,7 +181,7 @@
 						<div>
 							<br /> <label for="inpLastName">Nom :</label>
 							<p:inputText id="inpLastName" value="#{mbUser.lastName}"
-								placeholder="Nom *" required="true"
+								placeholder="Nom *" required="#{mbRequired.lastName}"
 								requiredMessage="Vous devez entrer votre nom">
 								<f:ajax update="inpLastName" />
 								<f:ajax update="lastNameMessage" />
@@ -187,7 +192,7 @@
 						<div>
 							<br /> <label for="inpFirstName">Prénom :</label>
 							<p:inputText id="inpFirstName" value="#{mbUser.firstName}"
-								placeholder="Prénom *" required="true"
+								placeholder="Prénom *" required="#{mbRequired.firstName}"
 								requiredMessage="Vous devez entrer votre prénom">
 								<p:ajax update="inpFirstName" />
 								<p:ajax update="firstNameMessage" />
@@ -199,7 +204,7 @@
 						<div>
 							<br /> <label for="inpBirthDate">Date de naisssance :</label>
 							<p:calendar id="inpBirthDate" value="#{mbUser.birthDate}"
-								showIcon="true" required="true"
+								showIcon="true" required="#{mbRequired.birthDate}"
 								requiredMessage="La date de naissance est requise"
 								monthNavigator="true" yearNavigator="true" navigator="true"
 								pattern="dd/MM/yyy" mindate="#{mbDate.minimumDate}"
@@ -214,7 +219,8 @@
 						<div>
 							<label for="inpPhoneNumber">Téléphone :</label>
 							<p:inputText id="inpPhoneNumber" value="#{mbUser.phoneNumber}"
-								required="true" requiredMessage="Le numéro est requis"
+								required="#{mbRequired.phoneNumber}]"
+								requiredMessage="Le numéro est requis"
 								validatorMessage="Le numéro n'est pas valide"
 								placeholder="Numéro de téléphone *">
 								<f:validateRegex pattern="^(\+33|0033|0)(6|7)[0-9]{8}$" />
@@ -228,7 +234,8 @@
 						<div>
 							<label for="inpAdresse">Adresse :</label>
 							<p:inputText id="inpAdresse" value="#{mbUser.address}"
-								required="true" requiredMessage="Vous devez entrer une adresse"
+								required="#{mbRequired.address}"
+								requiredMessage="Vous devez entrer une adresse"
 								placeholder="Numéro et nom de rue *">
 								<p:ajax update="inpAdresse" />
 								<p:ajax update="adresseMessage" />
@@ -241,7 +248,8 @@
 									<div>
 										<label for="inpZipCode">Code postal :</label>
 										<p:inputText id="inpZipCode" value="#{mbZipCodeCity.zipCode}"
-											required="true" requiredMessage="Le code postal est requis"
+											required="#{mbRequired.zipCode}"
+											requiredMessage="Le code postal est requis"
 											validatorMessage="Le code postal n'est pas valide"
 											placeholder="Code postal *">
 											<f:validateRegex
@@ -258,7 +266,7 @@
 									<div>
 										<label for="inpCity">Ville :</label><br />
 										<p:selectOneMenu id="inpCity" value="#{mbUser.city}"
-											required="true"
+											required="#{mbRequired.city}"
 											requiredMessage="Vous devez choisir une ville"
 											converter="entityConverter">
 											<f:selectItem itemLabel="Choisissez une ville" itemValue="" />
@@ -276,13 +284,15 @@
 
 							<label for="inpSiret">Siret :</label>
 							<p:inputText id="inpSiret" value="#{mbUser.siret}"
-								required="false" />
+								required="#{mbRequired.siret}"
+								requiredMessage="Il faut tapez votre siret" />
 							<p:message id="siretMessage" for="inpSiret" />
 						</div>
 
 						<div>
 							<label for="inpDescription">Description :</label>
 							<b:inputTextarea id="inpDescription"
+								required="#{mbRequired.description}"
 								value="#{mbUser.description}" rows="5" cols="30"
 								counter="display" maxlength="255"
 								counterTemplate="{0} caractères restants." autoResize="false" />
@@ -292,6 +302,7 @@
 						<div>
 							<p:fileUpload id="inpPhoto" label="Ajouter une photo"
 								mode="advanced" listener="#{mbUser.uploadPhoto}"
+								required="#{mbRequired.photo}"
 								allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileLimit="1"
 								fileLimitMessage="Vous avez le droit à 1 seule photo"
 								invalidFileMessage="Le fichier doit être de type gif, jpe, jpeg ou png"
@@ -312,12 +323,7 @@
 		</div>
 	</div>
 
-
-
 	<ui:include src="/WEB-INF/include/footer.xhtml"></ui:include>
-
-	<script src="resources/assets/js/subscription.js"></script>
-
 
 </h:body>
 
