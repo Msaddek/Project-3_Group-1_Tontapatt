@@ -50,6 +50,8 @@ public class UserManagedBean implements Serializable {
 	private String email;
 
 	private String password;
+	
+	private String ConfirmPassword;
 
 	private String address;
 
@@ -104,6 +106,7 @@ public class UserManagedBean implements Serializable {
 
 	public String createUser() {
 		String forward = null;
+		ConfirmPassword = password;
 		User newUser = new User();
 		newUser.setFirstName(firstName);
 		newUser.setLastName(lastName);
@@ -256,6 +259,14 @@ public class UserManagedBean implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getConfirmPassword() {
+		return ConfirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		ConfirmPassword = confirmPassword;
 	}
 
 	public String getAddress() {
