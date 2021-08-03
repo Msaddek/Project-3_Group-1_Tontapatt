@@ -43,7 +43,6 @@ public class FenceHeightBusiness implements FenceHeightIBusiness {
 
 	@Override
 	public List<FenceHeight> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return fenceHeightIDAO.getAll();
 	}
 }

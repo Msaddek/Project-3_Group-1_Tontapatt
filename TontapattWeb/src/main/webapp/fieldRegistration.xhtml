@@ -176,6 +176,16 @@
 								counterTemplate="{0} caractères restants." autoResize="false" />
 						</div>
 						<div>
+							<br /> <label for="inpFieldArea">Surface :</label>
+							<p:inputText id="inpFieldArea" value="#{mbField.area}"
+								placeholder="Surface du terrain" required="true"
+								requiredMessage="Veuillez indiquer la surface du terrain">
+								<f:ajax update="inpFieldArea" />
+								<f:ajax update="fieldAreaMessage" />
+							</p:inputText>
+							<b:message id="fieldAreaMessage" for="inpFieldArea" />
+						</div>
+						<div>
 							<div class="rs-select2 js-select-simple select--no-search">
 								<label for="inpGrassHeight">Hauteur de l'herbe:</label><br />
 								<p:selectOneMenu id="inpGrassHeight"
@@ -185,8 +195,8 @@
 									<f:selectItem itemLabel="sélectionnez une hauteur d'herbe"
 										itemValue="" />
 									<f:selectItems value="#{mbGrassHeight.allGrassHeight()}"
-										var="category" itemLabel="#{category.category}"
-										itemValue="#{category}" />
+										var="grassHeight" itemLabel="#{grassHeight.height}"
+										itemValue="#{grassHeight}" />
 									<p:ajax update="grassHeightMessage" />
 								</p:selectOneMenu>
 								<br />
@@ -202,8 +212,8 @@
 									requiredMessage="Veuillez indiquer la hauteur de la clôture de votre terrain">
 									<f:selectItem itemLabel="sélectionnez la hauteur" itemValue="" />
 									<f:selectItems value="#{mbFenceHeight.allFenceHeight()}"
-										var="category" itemLabel="#{category.category}"
-										itemValue="#{category}" />
+										var="fenceHeight" itemLabel="#{fenceHeight.height}"
+										itemValue="#{fenceHeight}" />
 									<p:ajax update="fenceHeightMessage" />
 								</p:selectOneMenu>
 								<br />
@@ -223,8 +233,8 @@
 										itemValue="" />
 									<f:selectItems
 										value="#{mbFlatnessPercentage.allFlatnessPercentage()}"
-										var="category" itemLabel="#{category.category}"
-										itemValue="#{category}" />
+										var="flatnessPercentage" itemLabel="#{flatnessPercentage.percentage}"
+										itemValue="#{flatnessPercentage}" />
 									<p:ajax update="flatnessPercentageMessage" />
 								</p:selectOneMenu>
 								<br />
@@ -236,7 +246,7 @@
 							<div class="rs-select2 js-select-simple select--no-search">
 								<label for="inpVegetationType">Type de végétation:</label><br />
 								<p:selectOneMenu id="inpVegetationType"
-									value="#{mbField.vegetationType}" required="true"
+									value="#{mbField.vegetationTypes}" required="true"
 									converter="entityConverter"
 									requiredMessage="Veuillez indiquer le type de végétation">
 									<f:selectItem itemLabel="sélectionnez le type de végétation"
@@ -274,11 +284,6 @@
 		</div>
 
 	</div>
-
-
-
-
-
 
 	<ui:include src="/WEB-INF/include/footer.xhtml"></ui:include>
 

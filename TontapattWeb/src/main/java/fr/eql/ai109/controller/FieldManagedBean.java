@@ -1,6 +1,8 @@
 package fr.eql.ai109.controller;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -9,8 +11,12 @@ import javax.faces.bean.SessionScoped;
 import fr.eql.ai109.ibusiness.FieldIBusiness;
 import fr.eql.ai109.tontapatt.entity.FenceHeight;
 import fr.eql.ai109.tontapatt.entity.Field;
+import fr.eql.ai109.tontapatt.entity.FieldPhoto;
+import fr.eql.ai109.tontapatt.entity.FieldWithdrawalReason;
 import fr.eql.ai109.tontapatt.entity.FlatnessPercentage;
 import fr.eql.ai109.tontapatt.entity.GrassHeight;
+import fr.eql.ai109.tontapatt.entity.Service;
+import fr.eql.ai109.tontapatt.entity.User;
 import fr.eql.ai109.tontapatt.entity.VegetationType;
 import fr.eql.ai109.tontapatt.entity.ZipCodeCity;
 
@@ -32,23 +38,52 @@ public class FieldManagedBean implements Serializable {
 	
 	private String address;
 	
-	private ZipCodeCity city;
-	
 	private Integer area;
 	
 	private String description;
 	
-	private String photo;
+	private LocalDateTime additionDate;
+	
+	private LocalDateTime withdrawalDate;
+	
+	private Set<Service> services;
+	
+	private Set<FieldPhoto> photos;
 	
 	private GrassHeight grassHeight;
 	
+	private FieldWithdrawalReason fieldWithdrawalReason;
+	
 	private FenceHeight fenceHeight;
+	
+	private User owner;
+	
+	private ZipCodeCity zipCodeCity;
 	
 	private FlatnessPercentage flatnessPercentage;
 	
-	private VegetationType vegetationType;
-		
+	private Set<VegetationType> vegetationTypes;
 
+	
+	public String createField() {
+		String forward = "/fieldRegistrationDone.xhtml?faces-redirection=false";
+		Field newField = new Field();
+		newField.setName(name);
+		newField.setAddress(address);
+		newField.setZipCodeCity(zipCodeCity);
+		newField.setArea(area);
+		newField.setAdditionDate(LocalDateTime.now());
+		newField.setWithdrawalDate(LocalDateTime.now());
+		newField.setGrassHeight(grassHeight);
+		newField.setFenceHeight(fenceHeight);
+		newField.setFlatnessPercentage(flatnessPercentage);
+		newField.setVegetationTypes(vegetationTypes);
+		newField.setPhotos(photos);
+		
+	
+		return forward;
+	}
+	
 	public Field getField() {
 		return field;
 	}
@@ -82,11 +117,11 @@ public class FieldManagedBean implements Serializable {
 	}
 
 	public ZipCodeCity getCity() {
-		return city;
+		return zipCodeCity;
 	}
 
-	public void setCity(ZipCodeCity city) {
-		this.city = city;
+	public void setCity(ZipCodeCity zipCodeCity) {
+		this.zipCodeCity = zipCodeCity;
 	}
 
 	public Integer getArea() {
@@ -105,12 +140,14 @@ public class FieldManagedBean implements Serializable {
 		this.description = description;
 	}
 
-	public String getPhoto() {
-		return photo;
+
+
+	public Set<FieldPhoto> getPhotos() {
+		return photos;
 	}
 
-	public void setPhoto(String photo) {
-		this.photo = photo;
+	public void setPhotos(Set<FieldPhoto> photos) {
+		this.photos = photos;
 	}
 
 	public GrassHeight getGrassHeight() {
@@ -137,13 +174,14 @@ public class FieldManagedBean implements Serializable {
 		this.flatnessPercentage = flatnessPercentage;
 	}
 
-	public VegetationType getVegetationType() {
-		return vegetationType;
+	public Set<VegetationType> getVegetationTypes() {
+		return vegetationTypes;
 	}
 
-	public void setVegetationType(VegetationType vegetationType) {
-		this.vegetationType = vegetationType;
+	public void setVegetationTypes(Set<VegetationType> vegetationTypes) {
+		this.vegetationTypes = vegetationTypes;
 	}
+
 	
 	
 
