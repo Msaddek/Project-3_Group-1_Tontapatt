@@ -22,9 +22,13 @@ public class UserBusiness implements UserIBusiness {
 
 	@Override
 	public User add(User t) {
+		String path = "resources/img/users/";
 		t.setPassword(hashage(t.getPassword()));
 		if (t.getPhoto() == null) {
-			t.setPhoto("resources/assets/img/user.png" );
+			t.setPhoto(path +"user.png");
+		}
+		else {
+			t.setPhoto(path + t.getPhoto());
 		}
 		return userIDAO.add(t);
 	}
