@@ -1,6 +1,7 @@
 package fr.eql.ai109.controller;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -21,6 +22,10 @@ public class FlatnessPercentageManagedBean implements Serializable {
 	@EJB
 	FlatnessPercentageIBusiness business;
 	private FlatnessPercentage flatnessPercentage;
+	
+	public List<FlatnessPercentage> allFlatnessPercentage() {
+		return business.getAll();
+	}
 
 	public FlatnessPercentage getFlatnessPercentage() {
 		return flatnessPercentage;
