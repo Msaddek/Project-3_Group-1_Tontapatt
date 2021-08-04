@@ -8,13 +8,13 @@
 	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
 
 
+	
 
+</h:head>
 
-	<h:head>
-
-		<ui:insert name="head">
+	<ui:insert name="head">
 		<title>Inscription</title>
-		</ui:insert>
+	</ui:insert>
 
 		<meta charset="utf-8" />
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
@@ -26,10 +26,112 @@
   
 	</h:head>
 
+
 	<h:body>
 
 	<header id="header" class="fixed-top">
-		
+
+	<div class="container d-flex align-items-center">
+
+		<h1 class="logo me-auto">
+			<a class="titleT" href="home.xhtml">Tontapatt</a>
+		</h1>
+		<!-- Uncomment below if you prefer to use an image logo -->
+		<!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+		<nav id="navbar" class="navbar order-last order-lg-0">
+		<ul>
+			<li><a class="active" href="home.xhtml">Home</a></li>
+
+		</ul>
+
+		</nav>
+		<!-- .navbar -->
+
+		<button type="button" class="get-started-btn" data-toggle="modal"
+			data-target="#amodal">Identification</button>
+
+		<b:modal id="amodal" closable="false" close-on-escape="false"
+			backdrop="false">
+
+			<div class="modal-body">
+				<div class="form-title text-center">
+					<h3>Connectez-vous</h3>
+					<br />
+				</div>
+				<div class="d-flex flex-column text-center">
+					<b:form id="loginForm">
+						<div class="form-group">
+							<b:inputText type="email" class="form-control" id="inpEmail"
+								placeholder="Adresse mail..." value="#{mbUser.email}" />
+						</div>
+						<div class="form-group">
+							<b:inputText type="password" class="form-control"
+								id="inpPassword" placeholder="Mot de passe..."
+								value="#{mbUser.password}" />
+						</div>
+						<b:message for="inpPassword" />
+						<br />
+						<b:commandButton class="btnLogin" value="Connexion"
+							action="#{mbUser.connect()}" />
+
+					</b:form>
+				</div>
+			</div>
+			<div class="modal-footer d-flex justify-content-center">
+				<div class="signup-section">
+
+					<h4>
+						Vous n'êtes pas inscrit? <a
+							href="/TontapattWeb/subscription.xhtml" class="text-info">
+							Inscrivez-vous</a>.
+					</h4>
+				</div>
+			</div>
+
+			<f:facet name="footer">
+				<b:button class="closePop" value="Close" dismiss="modal" />
+			</f:facet>
+		</b:modal>
+
+
+	</div>
+	</header>
+	<!-- End Header -->
+
+
+	<div class="page-wrapper bg-blue p-t-100 p-b-100 font-robo">
+		<div class="wrapper wrapper--w680">
+			<div class="card card-1">
+				<div class="card-heading"></div>
+				<div class="card-body">
+					<h2 class="title">Inscription</h2>
+					<b:form id="subscriptionForm">
+
+						<div>
+							<div class="rs-select2 js-select-simple select--no-search">
+								<label for="inpUserCategory">Type utilisateur :</label><br />
+								<p:selectOneMenu id="inpUserCategory" value="#{mbUser.category}"
+									required="#{mbRequired.userCategory}"
+									converter="entityConverter"
+									requiredMessage="Vous devez choisir une catégorie">
+									<f:selectItem itemLabel="Choisissez votre categorie"
+										itemValue="" />
+									<f:selectItems value="#{mbUserCategory.allCategories()}"
+										var="category" itemLabel="#{category.category}"
+										itemValue="#{category}" />
+									<p:ajax update="userCategoryMessage" />
+									<p:ajax
+										listener="#{mbRequired.requiredSubscriptionForm(mbUser.category)}"
+										update="@form" />
+								</p:selectOneMenu>
+								<br />
+								<b:message id="userCategoryMessage" for="inpUserCategory" />
+							</div>
+						</div>
+						<div>
+							<br /> <label for="inpEmail">Email :</label>
+
     	<div class="container d-flex align-items-center">
 
       			<h1 class="logo me-auto"><a class="titleT" href="home.xhtml">Tontapatt</a></h1>
@@ -107,7 +209,8 @@
  					<div>
 							<br /><label for="inpEmail">Email :</label>
 							<p:inputText id="inpEmail" value="#{mbUser.email}"
-								required="true" requiredMessage="L'adresse mail est requise"
+								required="#{mbRequired.email}"
+								requiredMessage="L'adresse mail est requise"
 								validatorMessage="Le format de l'adresse mail doit similaire à 'example@domaine.com'"
 								placeholder="example@domaine.com *">
 								<f:validateRegex
@@ -117,175 +220,182 @@
 								<p:ajax update="inpEmail" />
 							</p:inputText>
 							<b:message id="emailMessage" for="inpEmail" />
-					</div>
-					
-					<div>
-							<br /><label for="inpEmail">Mot de passe :</label><br />
-							<p:password id="inpPassword" value="#{mbUser.password}"
-                                placeholder="Mot de passe *" required="true"
-                                requiredMessage="Le mot de passe est requis" toggleMask="true"
-                                redisplay="true" match="inpPassword2"
-                                validatorMessage="Les mots de passe ne sont pas identiques">
-                                <p:ajax update="inpPassword" />
-                                <p:ajax update="passwordMessage" />
-                            </p:password>
-							<p:message id="passwordMessage" for="inpPassword" />
-					</div>
-					
-					<div>
-					<br /><label for="inpEmail">Confirmation du mot de passe :</label><br />
-							<p:password id="inpPassword2" value="#{mbUser.password}"
-                                placeholder="Mot de passe *" required="true"
-                                requiredMessage="Le mot de passe est requis" toggleMask="true"
-                                redisplay="true">
-                                <p:ajax update="inpPassword" />
-                                <p:ajax update="passwordMessage" />
-                                <p:ajax update="inpPassword2" />
-                                <p:ajax update="password2Message" />
-                            </p:password>
-							<p:message id="password2Message" for="inpPassword2" />
+						</div>
 
-					</div>
-				
-					<div>
-					<br /><label for="inpLastName">Nom :</label>
+						<div>
+							<br /> <label for="inpPassword">Mot de passe :</label><br />
+							<p:password id="inpPassword" styleClass="passsword-inp"
+								value="#{mbUser.password}" placeholder="Mot de passe *"
+								required="#{mbRequired.password}"
+								requiredMessage="Le mot de passe est requis" toggleMask="true"
+								redisplay="true" match="inpConfirmPassword"
+								validatorMessage="Les mots de passe ne sont pas identiques">
+							</p:password>
+							<br />
+							<p:message id="passwordMessage" for="inpPassword" />
+						</div>
+
+						<div>
+							<br /> <label for="inpConfirmPassword">Confirmation du
+								mot de passe :</label><br />
+							<p:password id="inpConfirmPassword" styleClass="passsword-inp"
+								value="#{mbUser.confirmPassword}" placeholder="Mot de passe *"
+								required="#{mbRequired.confirmPassword}"
+								requiredMessage="Le mot de passe est requis" toggleMask="true"
+								redisplay="true">
+							</p:password>
+							<br />
+							<p:message id="confirmPasswordMessage" for="inpConfirmPassword" />
+
+						</div>
+
+						<div>
+							<br /> <label for="inpLastName">Nom :</label>
 							<p:inputText id="inpLastName" value="#{mbUser.lastName}"
-								placeholder="Nom *" required="true"
+								placeholder="Nom *" required="#{mbRequired.lastName}"
 								requiredMessage="Vous devez entrer votre nom">
 								<f:ajax update="inpLastName" />
 								<f:ajax update="lastNameMessage" />
 							</p:inputText>
 							<p:message id="lastNameMessage" for="inpLastName" />
-					</div>
-					
-					<div>
-						<br /><label for="inpFirstName">Prénom :</label>
+						</div>
+
+						<div>
+							<label for="inpFirstName">Prénom :</label>
 							<p:inputText id="inpFirstName" value="#{mbUser.firstName}"
-								placeholder="Prénom *" required="true"
+								placeholder="Prénom *" required="#{mbRequired.firstName}"
 								requiredMessage="Vous devez entrer votre prénom">
 								<p:ajax update="inpFirstName" />
 								<p:ajax update="firstNameMessage" />
 							</p:inputText>
 							<p:message id="firstNameMessage" for="inpFirstName" />
-			
-					</div>
-					
-     				<div>
-						<br /><label for="inpBirthDate">Date de naisssance :</label>
+
+						</div>
+
+						<div>
+							<label for="inpBirthDate">Date de naisssance :</label>
 							<p:calendar id="inpBirthDate" value="#{mbUser.birthDate}"
-								showIcon="true" required="true"
+								showIcon="true" required="#{mbRequired.birthDate}"
 								requiredMessage="La date de naissance est requise"
 								monthNavigator="true" yearNavigator="true" navigator="true"
 								pattern="dd/MM/yyy" mindate="#{mbDate.minimumDate}"
-								maxdate="#{mbDate.maximumDate}" >
+								maxdate="#{mbDate.maximumDate}">
 								<p:ajax event="dateSelect" update="inpBirthDate" />
 								<p:ajax event="dateSelect" update="birthDateMessage" />
 							</p:calendar>
 							<p:message id="birthDateMessage" for="inpBirthDate" />
 
-                            </div>
+						</div>
 
-                    <div>
-						<label for="inpPhoneNumber">Téléphone :</label>
+						<div>
+							<label for="inpPhoneNumber">Téléphone :</label>
 							<p:inputText id="inpPhoneNumber" value="#{mbUser.phoneNumber}"
-								required="true" requiredMessage="Le numéro est requis"
-								validatorMessage="Le numéro n'est pas valide" placeholder="Numéro de téléphone *">
+								required="#{mbRequired.phoneNumber}]"
+								requiredMessage="Le numéro est requis"
+								validatorMessage="Le numéro n'est pas valide"
+								placeholder="Numéro de téléphone *">
 								<f:validateRegex pattern="^(\+33|0033|0)(6|7)[0-9]{8}$" />
 								<p:ajax update="inpPhoneNumber" />
 								<p:ajax update="phoneNumberMessage" />
 							</p:inputText>
 							<p:message id="phoneNumberMessage" for="inpPhoneNumber" />
-					</div>
-  
+						</div>
 
-                     			<div>
-						<label for="inpAdresse">Adresse :</label>
+
+						<div>
+							<label for="inpAdresse">Adresse :</label>
 							<p:inputText id="inpAdresse" value="#{mbUser.address}"
-								required="true" requiredMessage="Vous devez entrer une adresse" placeholder="Numéro et nom de rue *">
+								required="#{mbRequired.address}"
+								requiredMessage="Vous devez entrer une adresse"
+								placeholder="Numéro et nom de rue *">
 								<p:ajax update="inpAdresse" />
 								<p:ajax update="adresseMessage" />
 							</p:inputText>
 							<p:message id="adresseMessage" for="inpAdresse" />
-					</div>
-					<div class="codeCity">
-                        <div class="row row-space">
-                            <div class="col-2">
-                     <div>
-                     	<label for="inpZipCode">Code postal :</label>
-						<p:inputText id="inpZipCode" value="#{mbZipCodeCity.zipCode}"
-								required="true" requiredMessage="Le code postal est requis"
-								validatorMessage="Le code postal n'est pas valide" placeholder="Code postal *">
-								<f:validateRegex
-									pattern="^((0[1-9])|([1-8][0-9])|(9[0-8])|(2A)|(2B))[0-9]{3}$" />
-								<p:ajax listener="#{mbZipCodeCity.onZipCodeChange()}"
-									update="inpCity" />
-								<p:ajax update="inpZipCode" />
-								<p:ajax update="zipCodeMessage" />
-						</p:inputText>
-						<p:message id="zipCodeMessage" for="inpZipCode" />
-					</div>
-                            </div>
-                            <div class="col-2">
-                    <div>
-						<label for="inpCity">Ville :</label><br />
-							<p:selectOneMenu id="inpCity" value="#{mbUser.city}"
-								required="true" requiredMessage="Vous devez choisir une ville"
-								converter="entityConverter">
-								<f:selectItem itemLabel="Choisissez une ville" itemValue="" />
-								<f:selectItems value="#{mbZipCodeCity.cities}" var="city"
-									itemLabel="#{city.name}" itemValue="#{city}" />
-								<p:ajax update="inpCity" />
-								<p:ajax update="cityMessage" />
-							</p:selectOneMenu>
-							<p:message id="cityMessage" for="inpCity" />
-					</div>
-                            </div>
-                        </div>
-                     </div>
-                     <div>
-                     	
-						<label for="inpSiret">Siret :</label>
+						</div>
+						<div class="codeCity">
+							<div class="row row-space">
+								<div class="col-2">
+									<div>
+										<label for="inpZipCode">Code postal :</label>
+										<p:inputText id="inpZipCode" value="#{mbZipCodeCity.zipCode}"
+											required="#{mbRequired.zipCode}"
+											requiredMessage="Le code postal est requis"
+											validatorMessage="Le code postal n'est pas valide"
+											placeholder="Code postal *">
+											<f:validateRegex
+												pattern="^((0[1-9])|([1-8][0-9])|(9[0-8])|(2A)|(2B))[0-9]{3}$" />
+											<p:ajax listener="#{mbZipCodeCity.onZipCodeChange()}"
+												update="inpCity" />
+											<p:ajax update="inpZipCode" />
+											<p:ajax update="zipCodeMessage" />
+										</p:inputText>
+										<p:message id="zipCodeMessage" for="inpZipCode" />
+									</div>
+								</div>
+								<div class="col-2">
+									<div>
+										<label for="inpCity">Ville :</label><br />
+										<p:selectOneMenu id="inpCity" value="#{mbUser.city}"
+											required="#{mbRequired.city}"
+											requiredMessage="Vous devez choisir une ville"
+											converter="entityConverter">
+											<f:selectItem itemLabel="Choisissez une ville" itemValue="" />
+											<f:selectItems value="#{mbZipCodeCity.cities}" var="city"
+												itemLabel="#{city.name}" itemValue="#{city}" />
+											<p:ajax update="inpCity" />
+											<p:ajax update="cityMessage" />
+										</p:selectOneMenu>
+										<p:message id="cityMessage" for="inpCity" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div>
+
+							<label for="inpSiret">Siret :</label>
 							<p:inputText id="inpSiret" value="#{mbUser.siret}"
-								required="false" />
+								required="#{mbRequired.siret}"
+								requiredMessage="Il faut tapez votre siret" />
 							<p:message id="siretMessage" for="inpSiret" />
-					</div>
-					
-				<div>
-					    <label for="inpDescription">Description :</label>
+						</div>
+
+						<div>
+							<label for="inpDescription">Description :</label>
 							<b:inputTextarea id="inpDescription"
+								required="#{mbRequired.description}"
 								value="#{mbUser.description}" rows="5" cols="30"
-								counter="display" maxlength="255"
+								counter="displayGacCharCount" maxlength="255"
 								counterTemplate="{0} caractères restants." autoResize="false" />
-							
-					</div> 
-					
-					<div>
-					<p:fileUpload label="Ajouter une photo" url="#{mbUser.photo}"
-						value="#{mbUser.photo}" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
-						fileLimit="1" fileLimitMessage="Vous avez le droit à 1 seul photo"
-						uploadLabel="Télécharger" cancelLabel="Annuler"
-						invalidFileMessage="Le fichier doit être de type gif, jpe, jpeg ou png"
-						oncomplete="Téléchargement terminé">
-					</p:fileUpload>
-					</div>
 
-					
-                        <div class="p-t-20">
-                            <b:commandButton class="btnSubscription" value="Valider" action="#{mbUser.createUser()}" />
-                        </div>
-                    </b:form>
-                </div>
-            </div>
-        </div>
-    </div>
-			
-			
-			
-			<ui:include src="/WEB-INF/include/footer.xhtml"></ui:include>
+						</div>
 
-			<script src="resources/assets/js/subscription.js"></script>
+						<div>
+							<p:fileUpload id="inpPhoto" label="Ajouter une photo"
+								mode="advanced" listener="#{mbUser.uploadPhoto}"
+								required="#{mbRequired.photo}"
+								allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileLimit="1"
+								fileLimitMessage="Vous avez le droit à 1 seule photo"
+								invalidFileMessage="Le fichier doit être de type gif, jpe, jpeg ou png"
+								uploadLabel="Télécharger" cancelLabel="Annuler"
+								update="photoMessage">
+							</p:fileUpload>
+							<p:message id="photoMessage" for="inpPhoto" />
+						</div>
 
 
-	</h:body>
+						<div class="p-t-20">
+							<b:commandButton class="btnSubscription" value="Valider"
+								action="#{mbUser.createUser()}" />
+						</div>
+					</b:form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<ui:include src="/WEB-INF/include/footer.xhtml"></ui:include>
+
+</h:body>
 
 </html>

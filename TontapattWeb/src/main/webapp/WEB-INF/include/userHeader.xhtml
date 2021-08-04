@@ -38,21 +38,23 @@
          
 		</a> 
 	 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#offerParameters.xhtml">
+                                    <a class="dropdown-item" href="#">
                                         Mes offres
                                     </a>
                                    
-                                    <a class="dropdown-item" href="#fieldParameters.xhtml">
+                                    <a class="dropdown-item" href="#">
                                         Mes terrains
                                     </a>
                                     
-                                    <a class="dropdown-item" href="#userParameters.xhtml">
+                                    <a class="dropdown-item" href="#">
                                        Paramètres
                                     </a>
 									<div class="dropdown-divider"></div>
-									<div class="disconnect-btn">
-									<p:commandButton action="#{mbUser.disconnect()}" value="Déconnexion" styleClass="ui-button-danger ui-button-flat" />
-									</div>
+									<h:form>
+										<div class="disconnect-btn">
+											<p:commandButton styleClass="ui-button-danger ui-button-flat" value="Deconnexion" action="#{mbUser.disconnect()}" />
+										</div>
+									</h:form>
                                     
      </div>
                           
