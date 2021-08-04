@@ -4,6 +4,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
 	xmlns:b="http://bootsfaces.net/ui">
 
 <ui:composition template="WEB-INF/template/userTemplate.xhtml" >
@@ -45,7 +46,7 @@
                   </div>
                   <b:message for="inpPassword" />
                   <br />
-                  <b:commandButton  class="btnLogin" value="Connexion" action="#{mbUser.connect()}" />
+                  <b:commandButton  class="btnLogin" value="Connexion" />
                   
                 </b:form>
               </div>
@@ -57,7 +58,7 @@
               </div>
             </div>
             
-  <f:facet name="footer">
+ <f:facet name="footer">
     <b:button id="closePop" value="Close" dismiss="modal" />
   </f:facet>
 </b:modal> 

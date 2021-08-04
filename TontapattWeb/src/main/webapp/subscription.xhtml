@@ -8,85 +8,77 @@
 	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
 
 
-<ui:define name="head">
-<title>Inscription</title>
-</ui:define>
-
-<h:head>
-
-	<ui:insert name="head"></ui:insert>
-	 <meta charset="utf-8" />
-  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-
-  
-  <meta content="" name="description" />
-  <meta content="" name="keywords" />
 
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet" />
-  <link href="resources/assets/css/subscription_style.css" rel="stylesheet" />
-  <link href="resources/assets/css/style.css" rel="stylesheet" />
+	<h:head>
+
+		<ui:insert name="head">
+		<title>Inscription</title>
+		</ui:insert>
+
+		<meta charset="utf-8" />
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet" />
+		<link href="resources/assets/css/subscription_style.css" rel="stylesheet" />
+		<link href="resources/assets/css/style.css" rel="stylesheet" />
 
   
   
-</h:head>
+	</h:head>
 
-<h:body>
+	<h:body>
 
-<header id="header" class="fixed-top">
-    <div class="container d-flex align-items-center">
+	<header id="header" class="fixed-top">
+		
+    	<div class="container d-flex align-items-center">
 
-      <h1 class="logo me-auto"><a class="titleT" href="home.xhtml">Tontapatt</a></h1>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      			<h1 class="logo me-auto"><a class="titleT" href="home.xhtml">Tontapatt</a></h1>
 
-      <nav id="navbar" class="navbar order-last order-lg-0">
-        <ul>
-          <li><a class="active" href="home.xhtml">Home</a></li>
+		      <nav id="navbar" class="navbar order-last order-lg-0">
+		        <ul>
+		          <li><a class="active" href="home.xhtml">Home</a></li>
+		
+		        </ul>
+		        
+		      </nav><!-- .navbar -->
 
-        </ul>
-        
-      </nav><!-- .navbar -->
+			    <button type="button" class="get-started-btn" data-toggle="modal" data-target="#amodal">Identification</button>
+			      
+			      <b:modal id="amodal" closable="false"  close-on-escape="false" backdrop="false" >
+			      
+			            <div class="modal-body">
+			              <div class="form-title text-center">
+			                <h3>Connectez-vous</h3><br />
+			              </div>
+			              <div class="d-flex flex-column text-center">
+			                <b:form id="loginForm">
+			                  <div class="form-group">
+			                    <b:inputText type="email" class="form-control" id="inpEmail" placeholder="Adresse mail..." value="#{mbUser.email}" />
+			                  </div>
+			                  <div class="form-group">
+			                    <b:inputText type="password" class="form-control" id="inpPassword" placeholder="Mot de passe..." value="#{mbUser.password}" />
+			                  </div>
+			                  <b:message for="inpPassword" />
+			                  <br />
+			                  <b:commandButton  class="btnLogin" value="Connexion" action="#{mbUser.connect()}" />
+			                  
+			                </b:form>
+			              </div>
+			            </div>
+			            <div class="modal-footer d-flex justify-content-center">
+			              <div class="signup-section">
+			              
+			             <h4> Vous n'êtes pas inscrit? <a href="/TontapattWeb/subscription.xhtml" class="text-info">  Inscrivez-vous</a>.</h4>
+			              </div>
+			       </div>
+			            
+			  		<f:facet name="footer">
+			    		<b:button class="closePop" value="Close" dismiss="modal" />
+			  		</f:facet>
+				</b:modal> 
 
-    <button type="button" class="get-started-btn" data-toggle="modal" data-target="#amodal">Identification</button>
-      
-      <b:modal id="amodal" closable="false"  close-on-escape="false" backdrop="false" >
-      
-            <div class="modal-body">
-              <div class="form-title text-center">
-                <h3>Connectez-vous</h3><br />
-              </div>
-              <div class="d-flex flex-column text-center">
-                <b:form id="loginForm">
-                  <div class="form-group">
-                    <b:inputText type="email" class="form-control" id="inpEmail" placeholder="Adresse mail..." value="#{mbUser.email}" />
-                  </div>
-                  <div class="form-group">
-                    <b:inputText type="password" class="form-control" id="inpPassword" placeholder="Mot de passe..." value="#{mbUser.password}" />
-                  </div>
-                  <b:message for="inpPassword" />
-                  <br />
-                  <b:commandButton  class="btnLogin" value="Connexion" action="#{mbUser.connect()}" />
-                  
-                </b:form>
-              </div>
-            </div>
-            <div class="modal-footer d-flex justify-content-center">
-              <div class="signup-section">
-              
-             <h4> Vous n'êtes pas inscrit? <a href="/TontapattWeb/subscription.xhtml" class="text-info">  Inscrivez-vous</a>.</h4>
-              </div>
-       </div>
-            
-  <f:facet name="footer">
-    <b:button class="closePop" value="Close" dismiss="modal" />
-  </f:facet>
-</b:modal> 
-
-      
- 	</div>
-  </header><!-- End Header -->
+    	</div>
+	</header><!-- End Header -->
 
 
     <div class="page-wrapper bg-blue p-t-100 p-b-100 font-robo">

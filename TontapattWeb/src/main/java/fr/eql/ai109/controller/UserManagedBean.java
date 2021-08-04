@@ -1,8 +1,16 @@
 package fr.eql.ai109.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.Serializable;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -10,6 +18,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+
+import org.primefaces.event.FileUploadEvent;
 
 import fr.eql.ai109.ibusiness.UserIBusiness;
 import fr.eql.ai109.tontapatt.entity.UnsubscriptionReason;
@@ -40,6 +50,8 @@ public class UserManagedBean implements Serializable {
 	private String email;
 
 	private String password;
+	
+	private String ConfirmPassword;
 
 	private String address;
 
@@ -61,6 +73,10 @@ public class UserManagedBean implements Serializable {
 
 	private UserCategory category;
 	
+	public void init() {
+		System.out.println("je m'initialise");
+	}
+	
 	public String connect() {
 		
 		String forward = null;
@@ -71,16 +87,17 @@ public class UserManagedBean implements Serializable {
 			FacesMessage facesMessage = new FacesMessage(
 					FacesMessage.SEVERITY_WARN,
 					"Identifiant et/ou mot de passe incorrect(s)",
-					"Identifiant et/ou mot de passe incorrect(s)"
-					);
-			FacesContext.getCurrentInstance().addMessage("loginForm:inpEmail", facesMessage);
-			FacesContext.getCurrentInstance().addMessage("loginForm:inpPassword", facesMessage);
-			forward = "/home.xhtml?faces-redirection=false";
+					"Identifiant et/ou mot de passe incorrect(s)");
+			FacesContext.getCurrentInstance().addMessage("loginForm:inpEmail",
+					facesMessage);
+			FacesContext.getCurrentInstance()
+					.addMessage("loginForm:inpPassword", facesMessage);
+			forward = "/home.xhtml?faces-redirect=false";
 		}
-		
+
 		return forward;
 	}
-	
+
 	public String disconnect() {
 		
 		HttpSession session = (HttpSession) FacesContext
@@ -91,12 +108,12 @@ public class UserManagedBean implements Serializable {
 		email = "";
 		password = "";
 		user = new User();
-		System.out.println("hello world");
 		return "/home.xhtml?faces-redirect=true";
 	}
-
+	
 	public String createUser() {
 		String forward = null;
+		ConfirmPassword = password;
 		User newUser = new User();
 		newUser.setFirstName(firstName);
 		newUser.setLastName(lastName);
@@ -113,7 +130,7 @@ public class UserManagedBean implements Serializable {
 		newUser.setZipCodeCity(city);
 
 		forward = verifyIfUserExists(newUser);
-
+		System.out.println("hello je crée un user");
 		return forward;
 	}
 
@@ -122,13 +139,13 @@ public class UserManagedBean implements Serializable {
 		boolean userExists = business.verifyIfUserExists(email);
 		if (!userExists) {
 			user = business.add(newUser);
-			forward = "/subscriptionDone.xhtml?faces-redirect=false";
+			
+			forward = "/subscriptionDone.xhtml?faces-redirect=true";
+			
 		} else {
 			String message = "Adresse mail déjà existante, veuillez vous connecter";
 			FacesMessage facesMessage = new FacesMessage(
-					FacesMessage.SEVERITY_FATAL,
-					message,
-					message);
+					FacesMessage.SEVERITY_FATAL, message, message);
 			FacesContext.getCurrentInstance()
 					.addMessage("subscriptionForm:inpEmail", facesMessage);
 			forward = "/subscription.xhtml?faces-redirect=false";
@@ -142,25 +159,68 @@ public class UserManagedBean implements Serializable {
 		if (userExists) {
 			String message = "Adresse mail déjà existante, veuillez vous connecter";
 			FacesMessage facesMessage = new FacesMessage(
-					FacesMessage.SEVERITY_FATAL,
-					message,
-					message);
+					FacesMessage.SEVERITY_FATAL, message, message);
 			FacesContext.getCurrentInstance()
 					.addMessage("subscriptionForm:inpEmail", facesMessage);
 		}
 	}
 
-	/*
-	 * public void verifyBirthDate() { System.out.println(birthDate); if
-	 * (Period.between(birthDate, LocalDate.now()).getYears() < 18) {
-	 * FacesMessage facesMessage = new FacesMessage( FacesMessage.SEVERITY_WARN,
-	 * "Vous devez avoir 18ans ou plus", "Vous devez avoir 18ans ou plus");
-	 * FacesContext.getCurrentInstance()
-	 * .addMessage("subscriptionForm:inpBirthDate", facesMessage); birthDate =
-	 * null; System.out.println(birthDate); }
-	 * 
-	 * }
-	 */
+	public void uploadPhoto(FileUploadEvent event) {
+		URL url = null;
+		String destination = null;
+		String messageUploded = null;
+		try {
+			url = FacesContext.getCurrentInstance().getExternalContext()
+					.getResource("/");
+			destination = url.getPath() + "/resources/img/users/";
+		} catch (MalformedURLException e1) {
+			messageUploded = "Le fichier n'a pas pu être télécharger";
+			FacesMessage facesMessage = new FacesMessage(
+					FacesMessage.SEVERITY_ERROR, messageUploded, messageUploded);
+			FacesContext.getCurrentInstance()
+					.addMessage("subscriptionForm:inpEmail", facesMessage);
+			e1.printStackTrace();
+		}
+		// Do what you want with the file
+		try {
+			String[] file = event.getFile().getFileName().split("\\.");
+			String fileName = UUID.randomUUID().toString() + "." + file[1];
+			copyFile(fileName,
+					event.getFile().getInputStream(), destination);
+		} catch (IOException e) {
+			messageUploded = "Le fichier n'a pas pu être télécharger";
+			FacesMessage facesMessage = new FacesMessage(
+					FacesMessage.SEVERITY_ERROR, messageUploded, messageUploded);
+			FacesContext.getCurrentInstance()
+					.addMessage("subscriptionForm:inpEmail", facesMessage);
+			e.printStackTrace();
+		}
+		messageUploded = "Télécharge fait!";
+		FacesMessage facesMessage = new FacesMessage(
+				FacesMessage.SEVERITY_INFO, messageUploded, messageUploded);
+		FacesContext.getCurrentInstance()
+				.addMessage("subscriptionForm:inpPhoto", facesMessage);
+	}
+
+	private void copyFile(String fileName, InputStream in, String destination) {
+		try(OutputStream out = new FileOutputStream(
+					new File(destination + fileName))) {
+			// write the inputStream to a FileOutputStream;
+			int read = 0;
+			byte[] bytes = new byte[1024];
+			while ((read = in.read(bytes)) != -1) {
+				out.write(bytes, 0, read);
+			}
+			in.close();
+			out.flush();
+			out.close();
+			photo = fileName;
+			System.out.println("New file created!" + fileName);
+			out.close();
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+	}
 
 	public User getUser() {
 		return user;
@@ -208,6 +268,14 @@ public class UserManagedBean implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getConfirmPassword() {
+		return ConfirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		ConfirmPassword = confirmPassword;
 	}
 
 	public String getAddress() {

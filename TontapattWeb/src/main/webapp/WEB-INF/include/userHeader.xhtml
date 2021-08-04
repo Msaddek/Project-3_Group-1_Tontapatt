@@ -9,9 +9,6 @@
 	xmlns:p="http://primefaces.org/ui">
 
 
-
-
-
 <header id="headerU" class="fixed-top">
 
     <div class="container d-flex align-items-center">
@@ -53,7 +50,9 @@
                                        Paramètres
                                     </a>
 									<div class="dropdown-divider"></div>
-									 <p:link style="color: black" outcome="#{mbUser.disconnect()}" value="Déconnexion" />
+									<div class="disconnect-btn">
+									<p:commandButton action="#{mbUser.disconnect()}" value="Déconnexion" styleClass="ui-button-danger ui-button-flat" />
+									</div>
                                     
      </div>
                           

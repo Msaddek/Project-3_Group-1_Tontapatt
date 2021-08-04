@@ -1024,6 +1024,16 @@ section {
  color: black !important;
 }
 
+.disconnect-btn {
+	
+	font-weight: bold !important;
+	margin-left: 21px !important;
+}
+
+.disconnect-btn .ui-button .ui-button-text {
+	font-size: 17px;
+}
+
 .profilPicture {
 
     max-width:100%;
