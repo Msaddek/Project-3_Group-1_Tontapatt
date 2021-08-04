@@ -22,7 +22,7 @@ public class RequiredManagedBean implements Serializable {
 
 	private Boolean password;
 
-	private Boolean password2;
+	private Boolean confirmPassword;
 
 	private Boolean lastName;
 
@@ -49,7 +49,7 @@ public class RequiredManagedBean implements Serializable {
 		case 1: {
 			email = true;
 			password = true;
-			password2 = true;
+			confirmPassword = true;
 			lastName = true;
 			firstName = true;
 			birthDate = true;
@@ -62,14 +62,14 @@ public class RequiredManagedBean implements Serializable {
 			photo = false;
 			break;
 		}
-		case 2: 
+		case 2:
 		case 4: {
 			email = true;
 			password = true;
-			password2 = true;
+			confirmPassword = true;
 			lastName = true;
 			firstName = false;
-			birthDate = true;
+			birthDate = false;
 			phoneNumber = true;
 			address = true;
 			zipCode = true;
@@ -82,9 +82,9 @@ public class RequiredManagedBean implements Serializable {
 		case 3: {
 			email = true;
 			password = true;
-			password2 = true;
+			confirmPassword = true;
 			lastName = true;
-			firstName = true;
+			firstName = false;
 			birthDate = false;
 			phoneNumber = true;
 			address = true;
@@ -124,12 +124,12 @@ public class RequiredManagedBean implements Serializable {
 		this.password = password;
 	}
 
-	public Boolean getPassword2() {
-		return password2;
+	public Boolean getConfirmPassword() {
+		return confirmPassword;
 	}
 
-	public void setPassword2(Boolean password2) {
-		this.password2 = password2;
+	public void setConfirmPassword(Boolean confirmPassword) {
+		this.confirmPassword = confirmPassword;
 	}
 
 	public Boolean getLastName() {

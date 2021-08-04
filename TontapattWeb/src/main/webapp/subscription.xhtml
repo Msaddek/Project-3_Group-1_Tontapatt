@@ -9,7 +9,7 @@
 
 
 <ui:define name="head">
-<title>Inscription</title>
+	<title>Inscription</title>
 </ui:define>
 
 <h:head>
@@ -62,7 +62,8 @@
 		<button type="button" class="get-started-btn" data-toggle="modal"
 			data-target="#amodal">Identification</button>
 
-		<b:modal id="amodal" closable="false"  close-on-escape="false" backdrop="false">
+		<b:modal id="amodal" closable="false" close-on-escape="false"
+			backdrop="false">
 
 			<div class="modal-body">
 				<div class="form-title text-center">
@@ -161,22 +162,24 @@
 								value="#{mbUser.password}" placeholder="Mot de passe *"
 								required="#{mbRequired.password}"
 								requiredMessage="Le mot de passe est requis" toggleMask="true"
-								redisplay="true" match="inpPassword2"
+								redisplay="true" match="inpConfirmPassword"
 								validatorMessage="Les mots de passe ne sont pas identiques">
-							</p:password><br />
+							</p:password>
+							<br />
 							<p:message id="passwordMessage" for="inpPassword" />
 						</div>
 
 						<div>
-							<br /> <label for="inpPassword2">Confirmation du mot de
-								passe :</label><br />
-							<p:password id="inpPassword2" styleClass="passsword-inp"
+							<br /> <label for="inpConfirmPassword">Confirmation du
+								mot de passe :</label><br />
+							<p:password id="inpConfirmPassword" styleClass="passsword-inp"
 								value="#{mbUser.confirmPassword}" placeholder="Mot de passe *"
-								required="#{mbRequired.password2}"
+								required="#{mbRequired.confirmPassword}"
 								requiredMessage="Le mot de passe est requis" toggleMask="true"
 								redisplay="true">
-							</p:password><br />
-							<p:message id="password2Message" for="inpPassword2" />
+							</p:password>
+							<br />
+							<p:message id="confirmPasswordMessage" for="inpConfirmPassword" />
 
 						</div>
 
