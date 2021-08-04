@@ -106,7 +106,7 @@ public class UserManagedBean implements Serializable {
 		user = new User();
 		return "/home.xhtml?faces-redirect=true";
 	}
-
+	
 	public String createUser() {
 		String forward = null;
 		ConfirmPassword = password;
@@ -126,7 +126,6 @@ public class UserManagedBean implements Serializable {
 		newUser.setZipCodeCity(city);
 
 		forward = verifyIfUserExists(newUser);
-
 		return forward;
 	}
 

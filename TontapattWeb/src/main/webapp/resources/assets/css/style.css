@@ -1024,6 +1024,16 @@ section {
  color: black !important;
 }
 
+.disconnect-btn {
+	
+	font-weight: bold !important;
+	margin-left: 21px !important;
+}
+
+.disconnect-btn .ui-button .ui-button-text {
+	font-size: 17px;
+}
+
 .profilPicture {
 
     max-width:100%;
@@ -1035,4 +1045,16 @@ section {
 	 border-radius: 50%;
 	width: 50px;
     height: 50px;
+}
+
+/* Popup SearchOffer */
+
+.search-animals {
+	display: flex;
+	flex-direction: row;
+}
+
+.search-dates {
+	display: flex;
+	flex-direction: row;
 }
