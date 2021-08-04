@@ -68,7 +68,7 @@ public class RequiredManagedBean implements Serializable {
 			password = true;
 			confirmPassword = true;
 			lastName = true;
-			firstName = false;
+			firstName = true;
 			birthDate = false;
 			phoneNumber = true;
 			address = true;
@@ -84,7 +84,7 @@ public class RequiredManagedBean implements Serializable {
 			password = true;
 			confirmPassword = true;
 			lastName = true;
-			firstName = false;
+			firstName = true;
 			birthDate = false;
 			phoneNumber = true;
 			address = true;
