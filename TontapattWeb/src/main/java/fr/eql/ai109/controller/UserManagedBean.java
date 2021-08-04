@@ -174,7 +174,7 @@ public class UserManagedBean implements Serializable {
 			FacesMessage facesMessage = new FacesMessage(
 					FacesMessage.SEVERITY_ERROR, messageUploded, messageUploded);
 			FacesContext.getCurrentInstance()
-					.addMessage("subscriptionForm:inpEmail", facesMessage);
+					.addMessage("subscriptionForm:inpPhoto", facesMessage);
 			e1.printStackTrace();
 		}
 		// Do what you want with the file
@@ -188,7 +188,7 @@ public class UserManagedBean implements Serializable {
 			FacesMessage facesMessage = new FacesMessage(
 					FacesMessage.SEVERITY_ERROR, messageUploded, messageUploded);
 			FacesContext.getCurrentInstance()
-					.addMessage("subscriptionForm:inpEmail", facesMessage);
+					.addMessage("subscriptionForm:inpPhoto", facesMessage);
 			e.printStackTrace();
 		}
 		messageUploded = "Télécharge fait!";
