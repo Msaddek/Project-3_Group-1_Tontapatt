@@ -174,6 +174,8 @@ public class UserManagedBean implements Serializable {
 					FacesMessage.SEVERITY_ERROR, messageUploded, messageUploded);
 			FacesContext.getCurrentInstance()
 					.addMessage("subscriptionForm:inpPhoto", facesMessage);
+			FacesContext.getCurrentInstance()
+			.addMessage("updateUserForm:inpPhoto", facesMessage);
 			e1.printStackTrace();
 		}
 		// Do what you want with the file
@@ -188,6 +190,8 @@ public class UserManagedBean implements Serializable {
 					FacesMessage.SEVERITY_ERROR, messageUploded, messageUploded);
 			FacesContext.getCurrentInstance()
 					.addMessage("subscriptionForm:inpPhoto", facesMessage);
+			FacesContext.getCurrentInstance()
+			.addMessage("updateUserForm:inpPhoto", facesMessage);
 			e.printStackTrace();
 		}
 		messageUploded = "Télécharge fait!";
@@ -195,6 +199,8 @@ public class UserManagedBean implements Serializable {
 				FacesMessage.SEVERITY_INFO, messageUploded, messageUploded);
 		FacesContext.getCurrentInstance()
 				.addMessage("subscriptionForm:inpPhoto", facesMessage);
+		FacesContext.getCurrentInstance()
+		.addMessage("updateUserForm:inpPhoto", facesMessage);
 	}
 
 	private void copyFile(String fileName, InputStream in, String destination) {
