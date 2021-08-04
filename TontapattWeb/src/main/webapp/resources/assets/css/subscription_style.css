@@ -472,3 +472,10 @@ input {
 	width: 150px;
 }
 
+#subscriptionForm .ui-password-icon {
+    left: 239%;
+}
+
+#subscriptionForm .passsword-inp {
+	width: 247%;
+}

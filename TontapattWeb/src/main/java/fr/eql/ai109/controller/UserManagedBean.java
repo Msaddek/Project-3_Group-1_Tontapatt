@@ -72,11 +72,7 @@ public class UserManagedBean implements Serializable {
 	private UnsubscriptionReason unsubscriptionReason;
 
 	private UserCategory category;
-	
-	public void init() {
-		System.out.println("je m'initialise");
-	}
-	
+
 	public String connect() {
 		
 		String forward = null;
@@ -130,7 +126,6 @@ public class UserManagedBean implements Serializable {
 		newUser.setZipCodeCity(city);
 
 		forward = verifyIfUserExists(newUser);
-		System.out.println("hello je crée un user");
 		return forward;
 	}
 
