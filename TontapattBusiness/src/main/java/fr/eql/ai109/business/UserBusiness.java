@@ -22,13 +22,12 @@ public class UserBusiness implements UserIBusiness {
 
 	@Override
 	public User add(User t) {
-		String path = "resources/img/users/";
 		t.setPassword(hashage(t.getPassword()));
-		if (t.getPhoto() == null) {
-			t.setPhoto(path +"user.png");
+		if (t.getPhoto().equals(null)) {
+			t.setPhoto("user.png");
 		}
 		else {
-			t.setPhoto(path + t.getPhoto());
+			t.setPhoto(t.getPhoto());
 		}
 		return userIDAO.add(t);
 	}
@@ -65,7 +64,10 @@ public class UserBusiness implements UserIBusiness {
 	@Override
 	public User connection(String email, String password) {
 		password = hashage(password);
-		return userIDAO.authenticate(email, password);
+		String path = "resources/img/users/";
+		User user = userIDAO.authenticate(email, password);
+		user.setPhoto(path + user.getPhoto());
+		return user;
 	}
 	
 	private String hashage(String str) {
