@@ -25,8 +25,7 @@ public class UserBusiness implements UserIBusiness {
 		t.setPassword(hashage(t.getPassword()));
 		if (t.getPhoto().equals(null)) {
 			t.setPhoto("user.png");
-		}
-		else {
+		} else {
 			t.setPhoto(t.getPhoto());
 		}
 		return userIDAO.add(t);
@@ -40,8 +39,7 @@ public class UserBusiness implements UserIBusiness {
 
 	@Override
 	public User update(User t) {
-		// TODO Auto-generated method stub
-		return null;
+		return userIDAO.update(t);
 	}
 
 	@Override
@@ -69,29 +67,24 @@ public class UserBusiness implements UserIBusiness {
 		user.setPhoto(path + user.getPhoto());
 		return user;
 	}
-	
+
 	private String hashage(String str) {
-		
-        MessageDigest msg;
+
+		MessageDigest msg;
 		try {
 			msg = MessageDigest.getInstance("SHA-256");
-		    byte[] hash = msg.digest(str.getBytes(StandardCharsets.UTF_8));
-		    StringBuilder s = new StringBuilder();
-		    for (byte b : hash) {
-		    	s.append(Integer.toString((b & 0xff) + 0x100, 16).substring(1));
-		    }
-		    str = s.toString();
+			byte[] hash = msg.digest(str.getBytes(StandardCharsets.UTF_8));
+			StringBuilder s = new StringBuilder();
+			for (byte b : hash) {
+				s.append(Integer.toString((b & 0xff) + 0x100, 16).substring(1));
+			}
+			str = s.toString();
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
-		
-		return str;
- 
-	}
 
-	@Override
-	public User updateUser(User user) {
-		return userIDAO.update(user);
+		return str;
+
 	}
 
 }

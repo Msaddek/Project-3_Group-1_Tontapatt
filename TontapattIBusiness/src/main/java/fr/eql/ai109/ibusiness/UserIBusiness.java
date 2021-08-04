@@ -8,5 +8,4 @@ public interface UserIBusiness extends GenericIBusiness<User> {
 
 	User connection(String email, String password);
 	
-	User updateUser(User user);
 }
