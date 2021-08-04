@@ -37,14 +37,86 @@
                 <h3>Dis nous ce qu'il te faut !</h3><br />
               </div>
               <div class="d-flex flex-column text-center">
-                <b:form id="loginForm">
-                  <div class="form-group">
-                    <b:inputText type="email" class="form-control" id="inpEmail" placeholder="Adresse mail..." value="#{mbUser.email}" />
-                  </div>
-                  <div class="form-group">
-                    <b:inputText type="password" class="form-control" id="inpPassword" placeholder="Mot de passe..." value="#{mbUser.password}" />
-                  </div>
-                  <b:message for="inpPassword" />
+                <b:form id="SearchForm">
+                  
+                               <label for="inpUserField">Choisis ton terrain :</label><br />
+							<p:selectOneMenu id="inpUserField" value="#{mbUser.category}"
+								required="true" converter="entityConverter"
+								requiredMessage="Séléctionnez un terrain" >
+								<f:selectItem itemLabel="Séléctionnez un terrain" itemValue="" />
+								<f:selectItems value="#{mbUserCategory.allCategories()}"
+									var="category" itemLabel="#{category.category}"
+									itemValue="#{category}" />
+	
+							</p:selectOneMenu>
+							<br /><b:message id="inpUserFieldMessage" for="inpUserField" />
+							
+							
+                     <label for="inpServiceType">Type de service :</label><br />
+							<p:selectOneMenu id="inpServiceType" value="#{mbUser.category}"
+								required="true" converter="entityConverter"
+								requiredMessage="Séléctionnez un service" >
+								<f:selectItem itemLabel="Séléctionnez un service" itemValue="" />
+								<f:selectItems value="#{mbUserCategory.allCategories()}"
+									var="category" itemLabel="#{category.category}"
+									itemValue="#{category}" />
+							</p:selectOneMenu>
+							<br /><b:message id="userServiceTypeMessage" for="inpServiceType" />
+							
+				<div class="search-dates">
+                     <div>
+						<label for="inpStartDate">Date de debut :</label><br />
+							<p:calendar id="inpStartDate" value="#{mbUser.birthDate}"
+								showIcon="true" required="true"
+								requiredMessage="La date de naissance est requise"
+								monthNavigator="true" yearNavigator="true" navigator="true"
+								pattern="dd/MM/yyy" mindate="#{mbDate.minimumDate}"
+								maxdate="#{mbDate.maximumDate}" >
+								<p:ajax event="dateSelect" update="inpStartDate" />
+								<p:ajax event="dateSelect" update="startDateMessage" />
+							</p:calendar>
+							<p:message id="startDateMessage" for="inpStartDate" />     
+					</div>
+                    <div>
+						<label for="inpEndDate">Date de fin :</label><br />
+							<p:calendar id="inpEndDate" value="#{mbUser.birthDate}"
+								showIcon="true" required="true"
+								requiredMessage="La date de naissance est requise"
+								monthNavigator="true" yearNavigator="true" navigator="true"
+								pattern="dd/MM/yyy" mindate="#{mbDate.minimumDate}"
+								maxdate="#{mbDate.maximumDate}" >
+								<p:ajax event="dateSelect" update="inpStartDate" />
+								<p:ajax event="dateSelect" update="endDateMessage" />
+							</p:calendar>
+							<p:message id="endDateMessage" for="inpEndDate" />
+					</div>  
+                 </div>
+                 
+                <div class="search-animals">
+                     <div>
+					<label for="inpSpecies">Espèce :</label><br />
+							<p:selectOneMenu id="inpSpecies" value="#{mbUser.category}"
+								required="true" converter="entityConverter"
+								requiredMessage="Séléctionnez un service" >
+								<f:selectItem itemLabel="Séléctionnez une espèce" itemValue="" />
+								<f:selectItems value="#{mbSpeciesCategory.allCategories()}"
+									var="category" itemLabel="#{category.category}"
+									itemValue="#{category}" />
+							</p:selectOneMenu> 
+					</div>
+                    <div>
+							<label for="inpSpecies">Race :</label><br />
+							<p:selectOneMenu id="inpRace" value="#{mbUser.category}"
+								required="true" converter="entityConverter">
+								<f:selectItem itemLabel="Séléctionnez une race" itemValue="" />
+								<f:selectItems value="#{mbRaceCategory.allCategories()}"
+									var="category" itemLabel="#{category.category}"
+									itemValue="#{category}" />
+							</p:selectOneMenu> 
+					</div>  
+                 </div>
+							
+							
                   <br />
                   <b:commandButton  class="btnLogin" value="Connexion" />
                   
