@@ -1,6 +1,7 @@
 package fr.eql.ai109.controller;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -21,6 +22,10 @@ public class RaceManagedBean implements Serializable {
 	@EJB
 	RaceIBusiness business;
 	private Race race;
+	
+	public List<Race> allRace() {
+		return business.getAll();
+	}
 
 	public Race getRace() {
 		return race;

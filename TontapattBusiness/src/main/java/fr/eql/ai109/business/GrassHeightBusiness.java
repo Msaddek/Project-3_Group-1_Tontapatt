@@ -43,7 +43,6 @@ public class GrassHeightBusiness implements GrassHeightIBusiness {
 
 	@Override
 	public List<GrassHeight> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return grassHeightIDAO.getAll();
 	}
 }

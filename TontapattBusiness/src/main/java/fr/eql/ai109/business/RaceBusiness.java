@@ -43,7 +43,6 @@ public class RaceBusiness implements RaceIBusiness {
 
 	@Override
 	public List<Race> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return raceIDAO.getAll();
 	}
 }
