@@ -9,11 +9,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 
-<ui:define name="title">
-		<f:metadata>
-			<f:event listener="#{mbUser.disconnect()}" type="preRenderView"></f:event>
-		</f:metadata> 
-</ui:define>
+
 
 
 <header id="headerU" class="fixed-top">
@@ -57,10 +53,8 @@
                                        Paramètres
                                     </a>
 									<div class="dropdown-divider"></div>
-									 <a class="dropdown-item" href="#">
-                                       Déconnexion
-                                    </a>
-
+									 <p:link style="color: black" outcome="#{mbUser.disconnect()}" value="Déconnexion" />
+                                    
      </div>
                           
 		</div>

@@ -62,11 +62,11 @@ public class UserManagedBean implements Serializable {
 	private UserCategory category;
 	
 	public String connect() {
-		System.out.println("hello world");
+		
 		String forward = null;
 		user = business.connection(email, password);
 		if (user != null) {
-			forward = "/inscription.xhtml?faces-redirection=true";
+			forward = "/connectedPage.xhtml?faces-redirect=true";
 		} else {
 			FacesMessage facesMessage = new FacesMessage(
 					FacesMessage.SEVERITY_WARN,
@@ -82,6 +82,7 @@ public class UserManagedBean implements Serializable {
 	}
 	
 	public String disconnect() {
+		
 		HttpSession session = (HttpSession) FacesContext
 				.getCurrentInstance()
 				.getExternalContext()
@@ -90,7 +91,8 @@ public class UserManagedBean implements Serializable {
 		email = "";
 		password = "";
 		user = new User();
-		return "/home.xhtml?faces-redirection=true";
+		System.out.println("hello world");
+		return "/home.xhtml?faces-redirect=true";
 	}
 
 	public String createUser() {
@@ -120,7 +122,7 @@ public class UserManagedBean implements Serializable {
 		boolean userExists = business.verifyIfUserExists(email);
 		if (!userExists) {
 			user = business.add(newUser);
-			forward = "/subscriptionDone.xhtml?faces-redirection=false";
+			forward = "/subscriptionDone.xhtml?faces-redirect=false";
 		} else {
 			String message = "Adresse mail déjà existante, veuillez vous connecter";
 			FacesMessage facesMessage = new FacesMessage(
@@ -129,7 +131,7 @@ public class UserManagedBean implements Serializable {
 					message);
 			FacesContext.getCurrentInstance()
 					.addMessage("subscriptionForm:inpEmail", facesMessage);
-			forward = "/subscription.xhtml?faces-redirection=false";
+			forward = "/subscription.xhtml?faces-redirect=false";
 		}
 		return forward;
 	}
