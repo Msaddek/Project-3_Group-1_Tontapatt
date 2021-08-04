@@ -44,7 +44,6 @@ public class FlatnessPercentageBusiness
 
 	@Override
 	public List<FlatnessPercentage> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return flatnessPercentageIDAO.getAll();
 	}
 }

@@ -1,6 +1,7 @@
 package fr.eql.ai109.controller;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -8,6 +9,7 @@ import javax.faces.bean.SessionScoped;
 
 import fr.eql.ai109.ibusiness.FenceHeightIBusiness;
 import fr.eql.ai109.tontapatt.entity.FenceHeight;
+
 
 @ManagedBean(name = "mbFenceHeight")
 @SessionScoped
@@ -21,6 +23,10 @@ public class FenceHeightManagedBean implements Serializable {
 	@EJB
 	FenceHeightIBusiness business;
 	private FenceHeight fenceHeight;
+	
+	public List<FenceHeight> allFenceHeight() {
+		return business.getAll();
+	}
 
 	public FenceHeight getFenceHeight() {
 		return fenceHeight;

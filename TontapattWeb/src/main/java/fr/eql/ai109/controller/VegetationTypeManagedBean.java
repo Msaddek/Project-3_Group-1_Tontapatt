@@ -1,6 +1,7 @@
 package fr.eql.ai109.controller;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -21,6 +22,10 @@ public class VegetationTypeManagedBean implements Serializable {
 	@EJB
 	VegetationTypeIBusiness business;
 	private VegetationType vegetationType;
+	
+	public List<VegetationType> allVegetationType() {
+		return business.getAll();
+	}
 
 	public VegetationType getVegetationType() {
 		return vegetationType;
