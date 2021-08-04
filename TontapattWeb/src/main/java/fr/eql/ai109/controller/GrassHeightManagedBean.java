@@ -1,6 +1,7 @@
 package fr.eql.ai109.controller;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -8,6 +9,7 @@ import javax.faces.bean.SessionScoped;
 
 import fr.eql.ai109.ibusiness.GrassHeightIBusiness;
 import fr.eql.ai109.tontapatt.entity.GrassHeight;
+
 
 @ManagedBean(name = "mbGrassHeight")
 @SessionScoped
@@ -22,6 +24,11 @@ public class GrassHeightManagedBean implements Serializable {
 	GrassHeightIBusiness business;
 	private GrassHeight grassHeight;
 
+	public List<GrassHeight> allGrassHeight() {
+		return business.getAll();
+	}
+	
+	
 	public GrassHeight getGrassHeight() {
 		return grassHeight;
 	}

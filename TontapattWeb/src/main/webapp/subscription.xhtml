@@ -7,7 +7,13 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
 
+
+<ui:define name="head">
+<title>Inscription</title>
+</ui:define>
+
 <h:head>
+
 	<ui:insert name="head"></ui:insert>
 	<meta charset="utf-8" />
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
@@ -56,7 +62,7 @@
 		<button type="button" class="get-started-btn" data-toggle="modal"
 			data-target="#amodal">Identification</button>
 
-		<b:modal id="amodal">
+		<b:modal id="amodal" closable="false"  close-on-escape="false" backdrop="false">
 
 			<div class="modal-body">
 				<div class="form-title text-center">

@@ -8,8 +8,8 @@
 	xmlns:b="http://bootsfaces.net/ui">
 
 
-<ui:define name="title">
-<title>Tontapatt</title>
+<ui:define name="head">
+
 		<f:metadata>
 			<f:event listener="#{mbUser.disconnect()}" type="preRenderView"></f:event>
 		</f:metadata> 
@@ -38,7 +38,7 @@
 
     <button type="button" class="get-started-btn" data-toggle="modal" data-target="#amodal">Identification</button>
       
-      <b:modal id="amodal">
+      <b:modal id="amodal" closable="false"  close-on-escape="false" backdrop="false">
       
             <div class="modal-body">
               <div class="form-title text-center">
@@ -67,13 +67,13 @@
             </div>
             
   <f:facet name="footer">
-    <b:button class="closePop" value="Close" dismiss="modal" />
+    <b:button id="closePop" value="Close" dismiss="modal" />
   </f:facet>
 </b:modal> 
 
       
  	</div>
   </header><!-- End Header -->
-
+	
 
 </html>
