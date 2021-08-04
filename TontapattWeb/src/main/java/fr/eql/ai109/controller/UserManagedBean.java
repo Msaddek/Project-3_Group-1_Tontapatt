@@ -132,7 +132,7 @@ public class UserManagedBean implements Serializable {
 		boolean userExists = business.verifyIfUserExists(email);
 		if (!userExists) {
 			user = business.add(newUser);
-			forward = "/subscriptionDone.xhtml?faces-redirection=false";
+			forward = "/subscriptionDone.xhtml?faces-redirection=true";
 		} else {
 			String message = "Adresse mail déjà existante, veuillez vous connecter";
 			FacesMessage facesMessage = new FacesMessage(
