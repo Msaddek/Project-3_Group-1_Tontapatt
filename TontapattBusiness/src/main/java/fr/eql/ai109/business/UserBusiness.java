@@ -82,12 +82,16 @@ public class UserBusiness implements UserIBusiness {
 		    }
 		    str = s.toString();
 		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		return str;
  
+	}
+
+	@Override
+	public User updateUser(User user) {
+		return userIDAO.update(user);
 	}
 
 }
