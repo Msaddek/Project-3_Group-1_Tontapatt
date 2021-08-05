@@ -45,10 +45,11 @@
                                     <a class="dropdown-item" href="fieldParameters.xhtml">
                                         Mes terrains
                                     </a>
-                                    
-                                    <a class="dropdown-item" href="userParameters.xhtml">
-                                       Paramètres
-                                    </a>
+                                    <h:form>
+										<div class="disconnect-btn">
+											<p:commandButton styleClass="ui-button-flat" value="Paramètres" action="#{mbUser.initConnectedUserParam()}" />
+										</div>
+									</h:form>
 									<div class="dropdown-divider"></div>
 									<h:form>
 										<div class="disconnect-btn">
