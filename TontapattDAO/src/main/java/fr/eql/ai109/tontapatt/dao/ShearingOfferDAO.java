@@ -1,13 +1,14 @@
 package fr.eql.ai109.tontapatt.dao;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Set;
 
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
 import fr.eql.ai109.tontapatt.entity.Field;
 import fr.eql.ai109.tontapatt.entity.ShearingOffer;
+import fr.eql.ai109.tontapatt.entity.User;
 import fr.eql.ai109.tontapatt.entity.ZipCodeCity;
 import fr.eql.ai109.tontapatt.idao.ShearingOfferIDAO;
 
@@ -17,8 +18,8 @@ public class ShearingOfferDAO extends GenericDAO<ShearingOffer>
 		implements ShearingOfferIDAO {
 
 	@Override
-	public List<ShearingOffer> searchOfferByFieldLocation(Field field) {
-		List<ShearingOffer> shearingOffers = null;
+	public Set<ShearingOffer> searchOfferByFieldLocation(Field field) {
+		Set<ShearingOffer> shearingOffers = null;
 		LocalDateTime now = LocalDateTime.now();
 		String sqlQuery = "SELECT s.*, " + "z.*, "
 				+ "u.*, "
@@ -32,7 +33,7 @@ public class ShearingOfferDAO extends GenericDAO<ShearingOffer>
 				+ "AND s.withdrawal_date IS NULL "
 				+ "AND s.end_date>=:dateTimeNowParam";
 		try {
-			shearingOffers = (List<ShearingOffer>) em
+			shearingOffers = (Set<ShearingOffer>) em
 					.createNativeQuery(sqlQuery, ShearingOffer.class)
 					.setParameter("fieldLatParam",
 							field.getZipCodeCity().getLatitude())
@@ -65,6 +66,56 @@ public class ShearingOfferDAO extends GenericDAO<ShearingOffer>
 		}
 		System.out.println(em);
 		return distance;
+	}
+
+	@Override
+	public Set<ShearingOffer> getShearingOffersOfConnectedUser(User user) {
+		Set<ShearingOffer> shearingOffers = null;
+		String sqlQuery = "SELECT so FROM ShearingOffer so "
+				+ "WHERE so.user=:userParam AND so.withdrawalDate is NULL";
+		try {
+			shearingOffers = (Set<ShearingOffer>) em.createQuery(sqlQuery)
+					.setParameter("userParam", user).getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return shearingOffers;
+	}
+
+	@Override
+	public Set<ShearingOffer> getExpiredShearingOffersOfConnectedUser(
+			User user) {
+		LocalDateTime now = LocalDateTime.now();
+		Set<ShearingOffer> shearingOffers = null;
+		String sqlQuery = "SELECT so FROM ShearingOffer so "
+				+ "WHERE so.user=:userParam AND so.withdrawalDate is NULL "
+				+ "AND so.endDate<:dateNowParam";
+		try {
+			shearingOffers = (Set<ShearingOffer>) em.createQuery(sqlQuery)
+					.setParameter("userParam", user)
+					.setParameter("dateNowParam", now).getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return shearingOffers;
+	}
+
+	@Override
+	public Set<ShearingOffer> getInProgressShearingOffersOfConnectedUser(
+			User user) {
+		LocalDateTime now = LocalDateTime.now();
+		Set<ShearingOffer> shearingOffers = null;
+		String sqlQuery = "SELECT so FROM ShearingOffer so "
+				+ "WHERE so.user=:userParam AND so.withdrawalDate is NULL "
+				+ "AND so.endDate>=:dateNowParam";
+		try {
+			shearingOffers = (Set<ShearingOffer>) em.createQuery(sqlQuery)
+					.setParameter("userParam", user)
+					.setParameter("dateNowParam", now).getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return shearingOffers;
 	}
 
 }
