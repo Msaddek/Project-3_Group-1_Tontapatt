@@ -39,6 +39,12 @@ public class UserBusiness implements UserIBusiness {
 
 	@Override
 	public User update(User t) {
+		t.setPassword(hashage(t.getPassword()));
+		if (t.getPhoto() == null) {
+			t.setPhoto("user.png");
+		} else {
+			t.setPhoto(t.getPhoto());
+		}
 		return userIDAO.update(t);
 	}
 

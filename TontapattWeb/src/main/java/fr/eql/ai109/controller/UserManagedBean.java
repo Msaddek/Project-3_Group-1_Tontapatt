@@ -124,6 +124,7 @@ public class UserManagedBean implements Serializable {
 		newUser.setZipCodeCity(city);
 
 		forward = verifyIfUserExists(newUser);
+		disconnect();
 		return forward;
 	}
 
@@ -225,9 +226,10 @@ public class UserManagedBean implements Serializable {
 	public String initConnectedUserParam() {
 		address = user.getAddress();
 		city = user.getZipCodeCity();
+		password = null;
+		firstName = user.getFirstName();
+		lastName = user.getLastName();
 		description = user.getDescription();
-		password = user.getPassword();
-		confirmPassword = user.getPassword();
 		phoneNumber = user.getPhoneNumber();
 		return "/userParameters.xhtml?faces-redirect=true";
 	}
