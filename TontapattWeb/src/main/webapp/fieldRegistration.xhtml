@@ -246,55 +246,47 @@
 								<b:message id="flatnessPercentageMessage"
 									for="inpFlatnessPercentage" />
 							</div>
-<!-- 						</div> -->
-<!-- 						<div> -->
-<!-- 							<div class="rs-select2 js-select-simple select--no-search"> -->
-<!-- 								<br /> <label for="inpVegetationType">Type de -->
-<!-- 									végétation et leur pourcentage:</label><br /> -->
-<!-- 								<p:selectManyCheckbox id="inpVegetationType" -->
-<!-- 									value="#{mbVegetationComposition.vegetationType}" -->
-<!-- 									required="true" converter="entityConverter" -->
-<!-- 									requiredMessage="Veuillez indiquer le pourcentage pour chaque type de végétation"> -->
-<!-- 									<f:selectItems value="#{mbVegetationType.allVegetationType()}" -->
-<!-- 										var="vegetationType" itemLabel="#{vegetationType.vegetation}" -->
-<!-- 										itemValue="#{vegetationType}" /> -->
-<!-- 									<p:ajax update="vegetationTypeMessage" /> -->
-<!-- 								</p:selectManyCheckbox> -->
-<!-- 								<br /> -->
-<!-- 								<b:message id="vegetationTypeMessage" for="inpVegetationType" /> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
 
-						<div>
-							<div class="rs-select2 js-select-simple select--no-search">
-								<br /> <label for="inpVegetationType">Type de
-									végétation et leur pourcentage:</label><br />
-								<ul>
-									<ui:repeat value="#{mbVegetationType.allVegetationType()}" var="vegetationType">
-									
-										<li><h:outputText value="#{vegetationType.vegetation}" /></li>
-									</ui:repeat>
-								</ul>
 
+							<div>
+								<div class="rs-select2 js-select-simple select--no-search">
+									<br /> <label for="inpVegetationType">Types de
+										végétations et leurs pourcentages:</label><br />
+									<ul>
+										<ui:repeat value="#{mbVegetationType.allVegetationType()}"
+											var="vegetationType">
+
+											<li><h:outputText value="#{vegetationType.vegetation}" />
+												<p:inputText id="inpVegetationCompositionPercentage" value="#{mbVegetationComposition.percentage}"
+													placeholder="Pourcentage" required="false"
+													requiredMessage="Veuillez indiquer un pourcentage">
+													<f:ajax update="inpVegetationCompositionPercentage" />
+													<f:ajax update="vegetationCompositionPercentageMessage" />
+												</p:inputText> <b:message id="vegetationCompositionPercentageMessage" for="inpVegetationCompositionPercentage" /></li>
+										</ui:repeat>
+									</ul>
+
+								</div>
 							</div>
-						</div>
-						<div>
-							<p:fileUpload id="inpPhoto" label="Ajouter une photo"
-								mode="advanced" listener="#{mbFieldPhoto.uploadPhoto}"
-								required="false" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
-								fileLimit="4" fileLimitMessage="Vous avez le droit à 4 photos"
-								invalidFileMessage="Le fichier doit être de type gif, jpe, jpeg ou png"
-								uploadLabel="Télécharger" cancelLabel="Annuler"
-								update="photoMessage">
-							</p:fileUpload>
-							<p:message id="photoMessage" for="inpPhoto" />
-						</div>
+							<div>
+								<br />
+								<p:fileUpload id="inpPhoto" label="Ajouter une photo"
+									mode="advanced" listener="#{mbFieldPhoto.uploadPhoto}"
+									required="false" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+									fileLimit="4" fileLimitMessage="Vous avez le droit à 4 photos"
+									invalidFileMessage="Le fichier doit être de type gif, jpe, jpeg ou png"
+									uploadLabel="Télécharger" cancelLabel="Annuler"
+									update="photoMessage">
+								</p:fileUpload>
+								<p:message id="photoMessage" for="inpPhoto" />
+							</div>
 
 
 
-						<div class="p-t-20">
-							<b:commandButton class="btnSubscription" value="Valider"
-								action="#{mbField.createField()}" />
+							<div class="p-t-20">
+								<b:commandButton class="btnSubscription" value="Valider"
+									action="#{mbField.createField()}" />
+							</div>
 						</div>
 					</b:form>
 				</div>
