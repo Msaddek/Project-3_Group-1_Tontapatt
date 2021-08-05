@@ -1,13 +1,12 @@
 package fr.eql.ai109.controller;
 
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Set;
-
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-
 import fr.eql.ai109.ibusiness.FieldIBusiness;
 import fr.eql.ai109.tontapatt.entity.FenceHeight;
 import fr.eql.ai109.tontapatt.entity.Field;
@@ -64,9 +63,20 @@ public class FieldManagedBean implements Serializable {
 
 	private Set<VegetationComposition> vegetationCompositions;
 
-	public String createField() {
-		String forward = "/fieldRegistrationDone.xhtml?faces-redirection=false";
+
+//	@ManagedProperty(value = "#{mbUser.user}")
+//	private User connectedUser;
+//	private Set<Field> connectedUserFields;
+//
+//	@PostConstruct()
+//	public void init() {
+//		connectedUserFields = business.findFieldsByUser(connectedUser);
+//	}
+	
+	public String createField(){
+		String forward = "/fieldRegistrationDone.xhtml?faces-redirection=true"; //faire addPhoto.xhtml redirection =false
 		Field newField = new Field();
+
 		newField.setName(name);
 		newField.setAddress(address);
 		newField.setZipCodeCity(zipCodeCity);
@@ -78,6 +88,8 @@ public class FieldManagedBean implements Serializable {
 		newField.setFlatnessPercentage(flatnessPercentage);
 		newField.setVegetationCompositions(vegetationCompositions);
 		newField.setPhotos(photos);
+		
+		field = business.add(newField);
 
 		return forward;
 	}
@@ -178,5 +190,6 @@ public class FieldManagedBean implements Serializable {
 			Set<VegetationComposition> vegetationCompositions) {
 		this.vegetationCompositions = vegetationCompositions;
 	}
+
 
 }

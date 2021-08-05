@@ -109,8 +109,11 @@
 			<div class="card card-1">
 				<div class="card-heading"></div>
 				<div class="card-body">
-					<h2 class="title">Ajouter un nouveau terrain</h2>
-					<b:form id="subscriptionForm">
+					<h2 class="title">Ajouter un nouveau terrain pour M.:</h2>
+					<h4>
+						<h:outputLabel value="#{mbUser.user.lastName}" />
+					</h4>
+					<b:form id="fieldRegistrationForm">
 
 
 						<div>
@@ -139,7 +142,8 @@
 										<label for="inpZipCode">Code postal :</label>
 										<p:inputText id="inpZipCode" value="#{mbZipCodeCity.zipCode}"
 											required="true" requiredMessage="Le code postal est requis"
-											validatorMessage="Le code postal n'est pas valide">
+											validatorMessage="Le code postal n'est pas valide"
+											placeholder="Code postal *">
 											<f:validateRegex
 												pattern="^((0[1-9])|([1-8][0-9])|(9[0-8])|(2A)|(2B))[0-9]{3}$" />
 											<p:ajax listener="#{mbZipCodeCity.onZipCodeChange()}"
@@ -150,24 +154,24 @@
 										<p:message id="zipCodeMessage" for="inpZipCode" />
 									</div>
 								</div>
+								<div class="col-2">
+									<div>
+										<label for="inpCity">Ville :</label><br />
+										<p:selectOneMenu id="inpCity" value="#{mbUser.city}"
+											required="true"
+											requiredMessage="Vous devez choisir une ville"
+											converter="entityConverter">
+											<f:selectItem itemLabel="Choisissez une ville" itemValue="" />
+											<f:selectItems value="#{mbZipCodeCity.cities}" var="city"
+												itemLabel="#{city.name}" itemValue="#{city}" />
+											<p:ajax update="inpCity" />
+											<p:ajax update="cityMessage" />
+										</p:selectOneMenu>
+										<p:message id="cityMessage" for="inpCity" />
+									</div>
+								</div>
 							</div>
 						</div>
-						<div class="col-2">
-							<div>
-								<label for="inpCity">Ville :</label><br />
-								<p:selectOneMenu id="inpCity" value="#{mbField.city}"
-									required="true" requiredMessage="Vous devez choisir une ville"
-									converter="entityConverter">
-									<f:selectItem itemLabel="Choisissez une ville" itemValue="" />
-									<f:selectItems value="#{mbZipCodeCity.cities}" var="city"
-										itemLabel="#{city.name}" itemValue="#{city}" />
-									<p:ajax update="inpCity" />
-									<p:ajax update="cityMessage" />
-								</p:selectOneMenu>
-								<p:message id="cityMessage" for="inpCity" />
-							</div>
-						</div>
-
 						<div>
 							<label for="inpDescription">Description :</label>
 							<b:inputTextarea id="inpDescription"
@@ -187,7 +191,7 @@
 						</div>
 						<div>
 							<div class="rs-select2 js-select-simple select--no-search">
-								<label for="inpGrassHeight">Hauteur de l'herbe:</label><br />
+								<br /> <label for="inpGrassHeight">Hauteur de l'herbe:</label><br />
 								<p:selectOneMenu id="inpGrassHeight"
 									value="#{mbField.grassHeight}" required="true"
 									converter="entityConverter"
@@ -205,7 +209,7 @@
 						</div>
 						<div>
 							<div class="rs-select2 js-select-simple select--no-search">
-								<label for="inpFenceHeight">Hauteur de clôture:</label><br />
+								<br /> <label for="inpFenceHeight">Hauteur de clôture:</label><br />
 								<p:selectOneMenu id="inpFenceHeight"
 									value="#{mbField.fenceHeight}" required="true"
 									converter="entityConverter"
@@ -223,8 +227,8 @@
 
 						<div>
 							<div class="rs-select2 js-select-simple select--no-search">
-								<label for="inpFlatnessPercentage">Pourcentage de
-									terrain plat:</label><br />
+								<br /> <label for="inpFlatnessPercentage">Pourcentage
+									de terrain plat:</label><br />
 								<p:selectOneMenu id="inpFlatnessPercentage"
 									value="#{mbField.flatnessPercentage}" required="true"
 									converter="entityConverter"
@@ -233,7 +237,8 @@
 										itemValue="" />
 									<f:selectItems
 										value="#{mbFlatnessPercentage.allFlatnessPercentage()}"
-										var="flatnessPercentage" itemLabel="#{flatnessPercentage.percentage}"
+										var="flatnessPercentage"
+										itemLabel="#{flatnessPercentage.percentage}"
 										itemValue="#{flatnessPercentage}" />
 									<p:ajax update="flatnessPercentageMessage" />
 								</p:selectOneMenu>
@@ -241,36 +246,50 @@
 								<b:message id="flatnessPercentageMessage"
 									for="inpFlatnessPercentage" />
 							</div>
-						</div>
-						<div>
-							<div class="rs-select2 js-select-simple select--no-search">
-								<label for="inpVegetationType">Type de végétation:</label><br />
-								<p:selectOneMenu id="inpVegetationType"
-									value="#{mbField.vegetationTypes}" required="true"
-									converter="entityConverter"
-									requiredMessage="Veuillez indiquer le type de végétation">
-									<f:selectItem itemLabel="sélectionnez le type de végétation"
-										itemValue="" />
-									<f:selectItems value="#{mbVegetationType.allVegetationType()}"
-										var="category" itemLabel="#{category.category}"
-										itemValue="#{category}" />
-									<p:ajax update="vegetationTypeMessage" />
-								</p:selectOneMenu>
-								<br />
-								<b:message id="vegetationTypeMessage" for="inpVegetationType" />
-							</div>
-						</div>
+<!-- 						</div> -->
+<!-- 						<div> -->
+<!-- 							<div class="rs-select2 js-select-simple select--no-search"> -->
+<!-- 								<br /> <label for="inpVegetationType">Type de -->
+<!-- 									végétation et leur pourcentage:</label><br /> -->
+<!-- 								<p:selectManyCheckbox id="inpVegetationType" -->
+<!-- 									value="#{mbVegetationComposition.vegetationType}" -->
+<!-- 									required="true" converter="entityConverter" -->
+<!-- 									requiredMessage="Veuillez indiquer le pourcentage pour chaque type de végétation"> -->
+<!-- 									<f:selectItems value="#{mbVegetationType.allVegetationType()}" -->
+<!-- 										var="vegetationType" itemLabel="#{vegetationType.vegetation}" -->
+<!-- 										itemValue="#{vegetationType}" /> -->
+<!-- 									<p:ajax update="vegetationTypeMessage" /> -->
+<!-- 								</p:selectManyCheckbox> -->
+<!-- 								<br /> -->
+<!-- 								<b:message id="vegetationTypeMessage" for="inpVegetationType" /> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
 
 						<div>
-							<p:fileUpload label="Ajouter une photo" url="#{mbUser.photo}"
-								value="#{mbUser.photo}" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
-								fileLimit="1"
-								fileLimitMessage="Vous avez le droit à 1 seule photo"
-								uploadLabel="Télécharger" cancelLabel="Annuler"
-								invalidFileMessage="Le fichier doit être de type gif, jpe, jpeg ou png"
-								oncomplete="Téléchargement terminé">
-							</p:fileUpload>
+							<div class="rs-select2 js-select-simple select--no-search">
+								<br /> <label for="inpVegetationType">Type de
+									végétation et leur pourcentage:</label><br />
+								<ul>
+									<ui:repeat value="#{mbVegetationType.allVegetationType()}" var="vegetationType">
+									
+										<li><h:outputText value="#{vegetationType.vegetation}" /></li>
+									</ui:repeat>
+								</ul>
+
+							</div>
 						</div>
+						<div>
+							<p:fileUpload id="inpPhoto" label="Ajouter une photo"
+								mode="advanced" listener="#{mbFieldPhoto.uploadPhoto}"
+								required="false" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+								fileLimit="4" fileLimitMessage="Vous avez le droit à 4 photos"
+								invalidFileMessage="Le fichier doit être de type gif, jpe, jpeg ou png"
+								uploadLabel="Télécharger" cancelLabel="Annuler"
+								update="photoMessage">
+							</p:fileUpload>
+							<p:message id="photoMessage" for="inpPhoto" />
+						</div>
+
 
 
 						<div class="p-t-20">
@@ -286,9 +305,6 @@
 	</div>
 
 	<ui:include src="/WEB-INF/include/footer.xhtml"></ui:include>
-
-	<script src="resources/assets/js/subscription.js"></script>
-
 
 </h:body>
 
