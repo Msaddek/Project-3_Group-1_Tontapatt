@@ -223,15 +223,15 @@ public class UserManagedBean implements Serializable {
 		}
 	}
 
-	public String initConnectedUserParam() {
+	public void initConnectedUserParam() {
 		address = user.getAddress();
 		city = user.getZipCodeCity();
 		password = null;
+		email = user.getEmail();
 		firstName = user.getFirstName();
 		lastName = user.getLastName();
 		description = user.getDescription();
 		phoneNumber = user.getPhoneNumber();
-		return "/userParameters.xhtml?faces-redirect=true";
 	}
 
 	public String updateUser() {
@@ -239,10 +239,19 @@ public class UserManagedBean implements Serializable {
 		user.setZipCodeCity(city);
 		user.setDescription(description);
 		user.setPassword(password);
+		user.setEmail(email);
 		user.setPhoto(photo);
 		user.setPhoneNumber(phoneNumber);
+		user.setFirstName(firstName);
+		user.setLastName(lastName);
 		user = business.update(user);
 		return "/userUpdateDone.xhtml?faces-redirect=true";
+	}
+	
+	public String unsubscribeUser() {
+		user.setUnsubscriptionDate(LocalDateTime.now());
+		disconnect();
+		return "/userUnsubscriptionDone.xhtml?faces-redirect=true";		
 	}
 
 	public User getUser() {
