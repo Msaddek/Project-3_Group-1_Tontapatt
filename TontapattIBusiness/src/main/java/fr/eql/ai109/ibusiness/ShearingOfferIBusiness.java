@@ -16,5 +16,7 @@ public interface ShearingOfferIBusiness
 	Set<ShearingOffer> getExpiredShearingOffersOfConnectedUser(User user);
 
 	Set<ShearingOffer> getInProgressShearingOffersOfConnectedUser(User user);
+	
+	ShearingOffer createShearingOffer(ShearingOffer shearingOffer);
 
 }

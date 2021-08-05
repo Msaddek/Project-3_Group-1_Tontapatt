@@ -72,4 +72,9 @@ public class ShearingOfferBusiness implements ShearingOfferIBusiness {
 		return shearingOfferIDAO.getInProgressShearingOffersOfConnectedUser(user);
 	}
 
+	@Override
+	public ShearingOffer createShearingOffer(ShearingOffer shearingOffer) {
+		return shearingOfferIDAO.add(shearingOffer);
+	}
+
 }
