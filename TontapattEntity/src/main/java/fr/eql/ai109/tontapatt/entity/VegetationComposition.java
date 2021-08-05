@@ -12,7 +12,7 @@ import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "vegetation_compostion")
+@Table(name = "vegetation_composition")
 public class VegetationComposition implements Serializable {
 
 	/**
