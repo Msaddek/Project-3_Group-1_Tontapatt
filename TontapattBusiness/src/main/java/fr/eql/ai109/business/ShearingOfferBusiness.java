@@ -1,6 +1,7 @@
 package fr.eql.ai109.business;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.ejb.Remote;
@@ -8,6 +9,7 @@ import javax.ejb.Stateless;
 
 import fr.eql.ai109.ibusiness.ShearingOfferIBusiness;
 import fr.eql.ai109.tontapatt.entity.ShearingOffer;
+import fr.eql.ai109.tontapatt.entity.User;
 import fr.eql.ai109.tontapatt.idao.ShearingOfferIDAO;
 
 @Remote(ShearingOfferIBusiness.class)
@@ -43,6 +45,12 @@ public class ShearingOfferBusiness implements ShearingOfferIBusiness {
 
 	@Override
 	public List<ShearingOffer> getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Set<ShearingOffer> findShearingOffersByUser(User connectedUser) {
 		// TODO Auto-generated method stub
 		return null;
 	}

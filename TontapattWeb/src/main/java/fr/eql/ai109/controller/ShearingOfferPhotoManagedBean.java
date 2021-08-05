@@ -26,18 +26,18 @@ public class ShearingOfferPhotoManagedBean implements Serializable {
 	ShearingOfferPhotoIBusiness business;
 	private ShearingOfferPhoto shearingOfferPhoto;
 	
-//	public Set<ShearingOfferPhoto> fetchOfferPhotos(){
-//		return business.findPhotosByOffer(shearingOffer);
-//	}
-//	
-//	@ManagedProperty(value = "#{mbShearingOffer}")
-//	private ShearingOffer shearingOffer;
-//	private Set<ShearingOfferPhoto> offerPhotos;
-//	
-//	@PostConstruct()
-//	public void init() {
-//		offerPhotos = business.findPhotosByOffer(shearingOffer);
-//	}
+	public Set<ShearingOfferPhoto> fetchOfferPhotos(){
+		return business.findPhotosByShearingOffer(shearingOffer);
+	}
+	
+	@ManagedProperty(value = "#{mbShearingOffer}")
+	private ShearingOffer shearingOffer;
+	private Set<ShearingOfferPhoto> offerPhotos;
+	
+	@PostConstruct()
+	public void init() {
+		offerPhotos = business.findPhotosByShearingOffer(shearingOffer);
+	}
 
 	public ShearingOfferPhoto getShearingOfferPhoto() {
 		return shearingOfferPhoto;
@@ -47,21 +47,21 @@ public class ShearingOfferPhotoManagedBean implements Serializable {
 		this.shearingOfferPhoto = shearingOfferPhoto;
 	}
 
-//	public ShearingOffer getShearingOffer() {
-//		return shearingOffer;
-//	}
-//
-//	public void setShearingOffer(ShearingOffer shearingOffer) {
-//		this.shearingOffer = shearingOffer;
-//	}
-//
-//	public Set<ShearingOfferPhoto> getOfferPhotos() {
-//		return offerPhotos;
-//	}
-//
-//	public void setOfferPhotos(Set<ShearingOfferPhoto> offerPhotos) {
-//		this.offerPhotos = offerPhotos;
-//	}
+	public ShearingOffer getShearingOffer() {
+		return shearingOffer;
+	}
+
+	public void setShearingOffer(ShearingOffer shearingOffer) {
+		this.shearingOffer = shearingOffer;
+	}
+
+	public Set<ShearingOfferPhoto> getOfferPhotos() {
+		return offerPhotos;
+	}
+
+	public void setOfferPhotos(Set<ShearingOfferPhoto> offerPhotos) {
+		this.offerPhotos = offerPhotos;
+	}
 	
 	
 

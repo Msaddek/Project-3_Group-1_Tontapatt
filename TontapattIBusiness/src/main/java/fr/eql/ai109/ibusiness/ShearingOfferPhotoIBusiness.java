@@ -5,9 +5,8 @@ import java.util.Set;
 import fr.eql.ai109.tontapatt.entity.ShearingOffer;
 import fr.eql.ai109.tontapatt.entity.ShearingOfferPhoto;
 
-public interface ShearingOfferPhotoIBusiness
-		extends GenericIBusiness<ShearingOfferPhoto> {
+public interface ShearingOfferPhotoIBusiness extends GenericIBusiness<ShearingOfferPhoto> {
 
-	//Set<ShearingOfferPhoto> findPhotosByOffer(ShearingOffer shearingOffer);
+	Set<ShearingOfferPhoto> findPhotosByShearingOffer(ShearingOffer shearingOffer);
 
 }

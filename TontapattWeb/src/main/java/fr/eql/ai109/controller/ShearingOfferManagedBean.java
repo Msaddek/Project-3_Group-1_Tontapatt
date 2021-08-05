@@ -58,36 +58,36 @@ public class ShearingOfferManagedBean implements Serializable {
 	
 	private ZipCodeCity zipCodeCity;
 	
-//	public Set<ShearingOffer> fetchUserOffers(){
-//		return business.findOffersByUser(connectedUser);
-//	}
-//	
-//	@ManagedProperty(value = "#{mbUser}")
-//	private User connectedUser;
-//	private Set<ShearingOffer> offers;
-//	
-//	@PostConstruct()
-//	public void init() {
-//		offers = business.findOffersByUser(connectedUser);
-//	}
-	
-	public String createShearingOffer () {
-		String forward;
-		
-		ShearingOffer newOffer = new ShearingOffer();
-		
-		newOffer.setName(name);
-		newOffer.setAddress(address);
-		newOffer.setCreationDate(LocalDateTime.now());
-		newOffer.setDescription(description);
-		newOffer.setAnimalCount(animalCount);
-		newOffer.setMaxTravelDist(maxTravelDist);
-		newOffer.setStartDate(startDate);
-		newOffer.setEndDate(endDate);
-		newOffer.setRace(race);
-		
-		
+	public Set<ShearingOffer> fetchUserOffers(){
+		return business.findShearingOffersByUser(connectedUser);
 	}
+	
+	@ManagedProperty(value = "#{mbUser}")
+	private User connectedUser;
+	private Set<ShearingOffer> offers;
+	
+	@PostConstruct()
+	public void init() {
+		offers = business.findShearingOffersByUser(connectedUser);
+	}
+	
+//	public String createShearingOffer () {
+//		String forward;
+//		
+//		ShearingOffer newOffer = new ShearingOffer();
+//		
+//		newOffer.setName(name);
+//		newOffer.setAddress(address);
+//		newOffer.setCreationDate(LocalDateTime.now());
+//		newOffer.setDescription(description);
+//		newOffer.setAnimalCount(animalCount);
+//		newOffer.setMaxTravelDist(maxTravelDist);
+//		newOffer.setStartDate(startDate);
+//		newOffer.setEndDate(endDate);
+//		newOffer.setRace(race);
+//		
+//		
+//	}
 
 	public ShearingOffer getShearingOffer() {
 		return shearingOffer;
@@ -209,21 +209,21 @@ public class ShearingOfferManagedBean implements Serializable {
 		this.zipCodeCity = zipCodeCity;
 	}
 
-//	public User getConnectedUser() {
-//		return connectedUser;
-//	}
-//
-//	public void setConnectedUser(User connectedUser) {
-//		this.connectedUser = connectedUser;
-//	}
-//
-//	public Set<ShearingOffer> getOffers() {
-//		return offers;
-//	}
-//
-//	public void setOffers(Set<ShearingOffer> offers) {
-//		this.offers = offers;
-//	}
+	public User getConnectedUser() {
+		return connectedUser;
+	}
+
+	public void setConnectedUser(User connectedUser) {
+		this.connectedUser = connectedUser;
+	}
+
+	public Set<ShearingOffer> getOffers() {
+		return offers;
+	}
+
+	public void setOffers(Set<ShearingOffer> offers) {
+		this.offers = offers;
+	}
 
 	
 }
