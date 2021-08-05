@@ -11,6 +11,7 @@
 body {
   font-family: "Open Sans", sans-serif;
   color: #444444;
+  font-size: 14px;
 }
 
 a {
@@ -426,6 +427,7 @@ h1, h2, h3, h4, h5, h6 {
 	flex-direction: row;
 	
 }
+
 /*--------------------------------------------------------------
 # Sections General
 --------------------------------------------------------------*/
@@ -1053,4 +1055,64 @@ section {
 .search-dates {
 	display: flex;
 	flex-direction: row;
+}
+
+/* USER PARAMETERS  */
+
+.avatar-xl img {
+    width: 110px;
+}
+.rounded-circle {
+    border-radius: 50% !important;
+}
+img {
+    vertical-align: middle;
+    border-style: none;
+}
+.text-muted {
+    color: #aeb0b4 !important;
+}
+.text-muted {
+    font-weight: 300;
+}
+.form-control {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #4d5154;
+    background-color: #ffffff;
+    background-clip: padding-box;
+    border: 1px solid #eef0f3;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+#heroU-user {
+width: 100%;
+background: url("../img/nature.jpg") top center;
+background-size: cover;
+position: relative;
+}
+
+/* NAV TABS USER*/
+
+.navTab-user .fade {
+	opacity: 1;
+}
+
+.user-parameters {
+	padding: 50px;
+	height: 750px;
+}
+
+.user-parameter {
+	margin: 20px 0 20px 0
+}
+
+.user-param {
+	padding: 3px;
 }
