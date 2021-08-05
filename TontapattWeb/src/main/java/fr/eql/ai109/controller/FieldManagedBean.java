@@ -79,14 +79,14 @@ public class FieldManagedBean implements Serializable {
 	private Set<VegetationComposition> vegetationCompositions;
 
 
-	@ManagedProperty(value = "#{mbUser.user}")
-	private User connectedUser;
-	private Set<Field> connectedUserFields;
-
-	@PostConstruct()
-	public void init() {
-		connectedUserFields = business.findFieldsByUser(connectedUser);
-	}
+//	@ManagedProperty(value = "#{mbUser.user}")
+//	private User connectedUser;
+//	private Set<Field> connectedUserFields;
+//
+//	@PostConstruct()
+//	public void init() {
+//		connectedUserFields = business.findFieldsByUser(connectedUser);
+//	}
 	
 	public String createField(){
 		String forward = "/fieldRegistrationDone.xhtml?faces-redirection=true"; //faire addPhoto.xhtml redirection =false

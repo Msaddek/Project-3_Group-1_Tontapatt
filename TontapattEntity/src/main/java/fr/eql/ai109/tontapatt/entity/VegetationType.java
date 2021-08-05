@@ -73,14 +73,6 @@ public class VegetationType implements Serializable {
 		this.id = id;
 	}
 
-	public Set<Field> getFields() {
-		return fields;
-	}
-
-	public void setFields(Set<Field> fields) {
-		this.fields = fields;
-	}
-
 	public Set<VegetationComposition> getVegetationCompositions() {
 		return vegetationCompositions;
 	}
