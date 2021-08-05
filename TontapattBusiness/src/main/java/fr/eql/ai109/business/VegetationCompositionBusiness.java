@@ -2,10 +2,16 @@ package fr.eql.ai109.business;
 
 import java.util.List;
 import javax.ejb.EJB;
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
+
+import fr.eql.ai109.ibusiness.UserCategoryIBusiness;
 import fr.eql.ai109.ibusiness.VegetationCompositionIBusiness;
 import fr.eql.ai109.tontapatt.entity.VegetationComposition;
 import fr.eql.ai109.tontapatt.idao.VegetationCompositionIDAO;
 
+@Remote(VegetationCompositionIBusiness.class)
+@Stateless
 public class VegetationCompositionBusiness implements VegetationCompositionIBusiness {
 
 	@EJB
