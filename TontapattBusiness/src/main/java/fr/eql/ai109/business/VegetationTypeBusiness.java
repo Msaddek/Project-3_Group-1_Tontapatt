@@ -43,7 +43,7 @@ public class VegetationTypeBusiness implements VegetationTypeIBusiness {
 
 	@Override
 	public List<VegetationType> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return vegetationTypeIDAO.getAll();
 	}
 }

@@ -29,12 +29,14 @@ public class VegetationType implements Serializable {
 	private Integer id;
 	@Column(name = "vegetation", nullable = false)
 	private String vegetation;
+	
 	@ManyToMany(mappedBy = "vegetationTypes")
 	Set<Field> fields;
+	
 	@ManyToMany
 	@JoinTable(name = "favorite_vegetation", joinColumns = @JoinColumn(name = "vegetation_type_id"), inverseJoinColumns = @JoinColumn(name = "species_id"))
 	private Set<Species> species;
-
+	
 	public VegetationType() {
 		super();
 	}

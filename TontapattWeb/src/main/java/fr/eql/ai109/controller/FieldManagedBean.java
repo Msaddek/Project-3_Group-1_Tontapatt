@@ -1,12 +1,26 @@
 package fr.eql.ai109.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.Serializable;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.Set;
+import java.util.UUID;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+
+import org.primefaces.event.FileUploadEvent;
 
 import fr.eql.ai109.ibusiness.FieldIBusiness;
 import fr.eql.ai109.tontapatt.entity.FenceHeight;
@@ -31,43 +45,53 @@ public class FieldManagedBean implements Serializable {
 
 	@EJB
 	FieldIBusiness business;
-	
+
 	private Field field;
-	
+
 	private String name;
-	
+
 	private String address;
-	
+
 	private Integer area;
-	
+
 	private String description;
-	
+
 	private LocalDateTime additionDate;
-	
+
 	private LocalDateTime withdrawalDate;
-	
+
 	private Set<Service> services;
-	
+
 	private Set<FieldPhoto> photos;
-	
+
 	private GrassHeight grassHeight;
-	
+
 	private FieldWithdrawalReason fieldWithdrawalReason;
-	
+
 	private FenceHeight fenceHeight;
-	
+
 	private User owner;
-	
+
 	private ZipCodeCity zipCodeCity;
-	
+
 	private FlatnessPercentage flatnessPercentage;
-	
+
 	private Set<VegetationType> vegetationTypes;
 
+
+	@ManagedProperty(value = "#{mbUser.user}")
+	private User connectedUser;
+	private Set<Field> connectedUserFields;
+
+	@PostConstruct()
+	public void init() {
+		connectedUserFields = business.findFieldsByUser(connectedUser);
+	}
 	
-	public String createField() {
-		String forward = "/fieldRegistrationDone.xhtml?faces-redirection=false";
+	public String createField(){
+		String forward = "/fieldRegistrationDone.xhtml?faces-redirection=true"; //faire addPhoto.xhtml redirection =false
 		Field newField = new Field();
+
 		newField.setName(name);
 		newField.setAddress(address);
 		newField.setZipCodeCity(zipCodeCity);
@@ -80,10 +104,11 @@ public class FieldManagedBean implements Serializable {
 		newField.setVegetationTypes(vegetationTypes);
 		newField.setPhotos(photos);
 		
-	
+		field = business.add(newField);
+
 		return forward;
 	}
-	
+
 	public Field getField() {
 		return field;
 	}
@@ -140,8 +165,6 @@ public class FieldManagedBean implements Serializable {
 		this.description = description;
 	}
 
-
-
 	public Set<FieldPhoto> getPhotos() {
 		return photos;
 	}
@@ -182,7 +205,7 @@ public class FieldManagedBean implements Serializable {
 		this.vegetationTypes = vegetationTypes;
 	}
 
-	
-	
+
+
 
 }
