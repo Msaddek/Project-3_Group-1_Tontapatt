@@ -23,7 +23,7 @@ public class UserBusiness implements UserIBusiness {
 	@Override
 	public User add(User t) {
 		t.setPassword(hashage(t.getPassword()));
-		if (t.getPhoto().equals(null)) {
+		if (t.getPhoto() == null) {
 			t.setPhoto("user.png");
 		} else {
 			t.setPhoto(t.getPhoto());
@@ -64,7 +64,9 @@ public class UserBusiness implements UserIBusiness {
 		password = hashage(password);
 		String path = "resources/img/users/";
 		User user = userIDAO.authenticate(email, password);
-		user.setPhoto(path + user.getPhoto());
+		if (user != null) {
+			user.setPhoto(path + user.getPhoto());
+		}
 		return user;
 	}
 
