@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.Query;
+
 import fr.eql.ai109.tontapatt.entity.User;
 import fr.eql.ai109.tontapatt.idao.UserIDAO;
 
@@ -46,7 +47,7 @@ public class UserDAO extends GenericDAO<User> implements UserIDAO {
 		List<User> users = null;
 		
 			Query query =  em.createQuery("SELECT u FROM User u WHERE u.email=:emailParam "
-					+ "AND u.password=:passwordParam");
+					+ "AND u.password=:passwordParam AND u.unsubscriptionDate is NULL");
 			query.setParameter("emailParam", email);
 			query.setParameter("passwordParam", password);
 			users = query.getResultList();
