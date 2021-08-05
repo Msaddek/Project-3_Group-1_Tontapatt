@@ -42,12 +42,6 @@ INSERT INTO `grass_height` VALUES (1,'10cm'),(2,'20cm'),(3,'30cm'),(4,'40cm'),(5
 /*!40000 ALTER TABLE `grass_height` ENABLE KEYS */;
 UNLOCK TABLES;
 
-LOCK TABLES `user_category` WRITE;
-/*!40000 ALTER TABLE `user_category` DISABLE KEYS */;
-INSERT INTO `user_category` VALUES (1,'Particulier'),(2,'Professionnel'),(3,'Collectivité locale'),(4,'Association');
-/*!40000 ALTER TABLE `user_category` ENABLE KEYS */;
-UNLOCK TABLES;
-
 LOCK TABLES `field_withdrawal_reason` WRITE;
 /*!40000 ALTER TABLE `field_withdrawal_reason` DISABLE KEYS */;
 INSERT INTO `field_withdrawal_reason` VALUES (1,'Je ne suis plus propriétaire de ce terrain'),(2,'Je ne souhaite plus entretenir ce terrain via l\'éco-pâturage'),(3,'Ce terrain est dangereux pour tout type d\'animaux'),(4,'Autre');
@@ -104,7 +98,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `vegetation_composition` WRITE;
 /*!40000 ALTER TABLE `vegetation_composition` DISABLE KEYS */;
-INSERT INTO `vegetation_composition` VALUES (1,1),(4,1),(8,1),(1,2),(2,2),(5,2),(6,2),(1,3),(2,3),(3,3),(5,3),(7,3);
+INSERT INTO `vegetation_composition` (percentage, field_id, vegetationType_id) VALUES (10,1,1),(15,4,1),(50,8,1),(60,1,2),(33,2,2),(20,5,2),(5,6,2),(90,1,3),(44,2,3),(13,3,3),(53,5,3),(30,7,3);
 /*!40000 ALTER TABLE `vegetation_composition` ENABLE KEYS */;
 UNLOCK TABLES;
 
