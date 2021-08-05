@@ -7,6 +7,7 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
 import fr.eql.ai109.ibusiness.ShearingOfferIBusiness;
+import fr.eql.ai109.tontapatt.entity.Field;
 import fr.eql.ai109.tontapatt.entity.ShearingOffer;
 import fr.eql.ai109.tontapatt.idao.ShearingOfferIDAO;
 
@@ -45,6 +46,11 @@ public class ShearingOfferBusiness implements ShearingOfferIBusiness {
 	public List<ShearingOffer> getAll() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<ShearingOffer> searchOfferByFieldLocation(Field field) {
+		return shearingOfferIDAO.searchOfferByFieldLocation(field);
 	}
 
 }
