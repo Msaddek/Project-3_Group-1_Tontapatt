@@ -6,9 +6,11 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import fr.eql.ai109.ibusiness.ZipCodeCityIBusiness;
+import fr.eql.ai109.tontapatt.entity.User;
 import fr.eql.ai109.tontapatt.entity.ZipCodeCity;
 
 @ManagedBean(name = "mbZipCodeCity")
@@ -25,8 +27,16 @@ public class ZipCodeCityManagedBean implements Serializable {
 	private List<ZipCodeCity> cities;
 	private String zipCode;
 
+	@ManagedProperty(value = "#{mbUser.user}")
+	private User connectedUser;
+
 	@EJB
 	ZipCodeCityIBusiness business;
+
+	public void initCityOfConnectedUser() {
+		city = connectedUser.getZipCodeCity();
+		zipCode = city.getZipCode();
+	}
 
 	public void onZipCodeChange() {
 		if (zipCode != null && !zipCode.equals("")) {
@@ -65,6 +75,14 @@ public class ZipCodeCityManagedBean implements Serializable {
 
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
+	}
+
+	public User getConnectedUser() {
+		return connectedUser;
+	}
+
+	public void setConnectedUser(User connectedUser) {
+		this.connectedUser = connectedUser;
 	}
 
 }
