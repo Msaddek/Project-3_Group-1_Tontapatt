@@ -31,7 +31,7 @@ import fr.eql.ai109.tontapatt.entity.FlatnessPercentage;
 import fr.eql.ai109.tontapatt.entity.GrassHeight;
 import fr.eql.ai109.tontapatt.entity.Service;
 import fr.eql.ai109.tontapatt.entity.User;
-import fr.eql.ai109.tontapatt.entity.VegetationType;
+import fr.eql.ai109.tontapatt.entity.VegetationComposition;
 import fr.eql.ai109.tontapatt.entity.ZipCodeCity;
 
 @ManagedBean(name = "mbField")
@@ -76,7 +76,7 @@ public class FieldManagedBean implements Serializable {
 
 	private FlatnessPercentage flatnessPercentage;
 
-	private Set<VegetationType> vegetationTypes;
+	private Set<VegetationComposition> vegetationCompositions;
 
 
 	@ManagedProperty(value = "#{mbUser.user}")
@@ -101,7 +101,7 @@ public class FieldManagedBean implements Serializable {
 		newField.setGrassHeight(grassHeight);
 		newField.setFenceHeight(fenceHeight);
 		newField.setFlatnessPercentage(flatnessPercentage);
-		newField.setVegetationTypes(vegetationTypes);
+		newField.setVegetationCompositions(vegetationCompositions);
 		newField.setPhotos(photos);
 		
 		field = business.add(newField);
@@ -197,15 +197,14 @@ public class FieldManagedBean implements Serializable {
 		this.flatnessPercentage = flatnessPercentage;
 	}
 
-	public Set<VegetationType> getVegetationTypes() {
-		return vegetationTypes;
+	public Set<VegetationComposition> getVegetationCompositions() {
+		return vegetationCompositions;
 	}
 
-	public void setVegetationTypes(Set<VegetationType> vegetationTypes) {
-		this.vegetationTypes = vegetationTypes;
+	public void setVegetationCompositions(
+			Set<VegetationComposition> vegetationCompositions) {
+		this.vegetationCompositions = vegetationCompositions;
 	}
-
-
 
 
 }

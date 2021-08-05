@@ -35,10 +35,12 @@
 		<class>fr.eql.ai109.tontapatt.entity.UserCategory</class>
 		<class>fr.eql.ai109.tontapatt.entity.VegetationType</class>
 		<class>fr.eql.ai109.tontapatt.entity.ZipCodeCity</class>
+		<class>fr.eql.ai109.tontapatt.entity.VegetationCompositionId</class>
+		<class>fr.eql.ai109.tontapatt.entity.VegetationComposition</class>
 		<properties>
 			<property
 				name="javax.persistence.schema-generation.database.action"
-				value="update" />
+				value="create" />
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.dialect"
 				value="org.hibernate.dialect.MySQL8Dialect" />

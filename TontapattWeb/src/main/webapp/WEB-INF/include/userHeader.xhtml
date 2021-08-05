@@ -9,9 +9,6 @@
 	xmlns:p="http://primefaces.org/ui">
 
 
-
-
-
 <header id="headerU" class="fixed-top">
 
     <div class="container d-flex align-items-center">
@@ -41,19 +38,24 @@
          
 		</a> 
 	 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="offerParameters.xhtml">
                                         Mes offres
                                     </a>
                                    
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="fieldParameters.xhtml">
                                         Mes terrains
                                     </a>
-                                    
-                                    <a class="dropdown-item" href="#">
-                                       Paramètres
-                                    </a>
+                                    <h:form>
+										<div class="disconnect-btn">
+											<p:commandButton styleClass="ui-button-flat" value="Paramètres" action="#{mbUser.initConnectedUserParam()}" />
+										</div>
+									</h:form>
 									<div class="dropdown-divider"></div>
-									 <p:link style="color: black" outcome="#{mbUser.disconnect()}" value="Déconnexion" />
+									<h:form>
+										<div class="disconnect-btn">
+											<p:commandButton styleClass="ui-button-danger ui-button-flat" value="Deconnexion" action="#{mbUser.disconnect()}" />
+										</div>
+									</h:form>
                                     
      </div>
                           

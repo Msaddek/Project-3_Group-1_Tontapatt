@@ -2,6 +2,7 @@ package fr.eql.ai109.tontapatt.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -13,8 +14,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -32,43 +31,57 @@ public class Field implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
+
 	@Column(name = "name", nullable = false)
 	private String name;
+
 	@Column(name = "address", nullable = false)
 	private String address;
+
 	@Column(name = "area", nullable = false)
 	private Integer area;
+
 	@Column(name = "description", nullable = true)
 	private String description;
+
 	@Column(name = "addition_date", nullable = false)
 	private LocalDateTime additionDate;
+
 	@Column(name = "withdrawal_date", nullable = true)
 	private LocalDateTime withdrawalDate;
+
 	@OneToMany(mappedBy = "field", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<Service> services;
+
 	@OneToMany(mappedBy = "field", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<FieldPhoto> photos;
+
+	@OneToMany(mappedBy = "field", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<VegetationComposition> vegetationCompositions = new HashSet<>();
+
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id", nullable = false)
 	private GrassHeight grassHeight;
+
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id")
 	private FieldWithdrawalReason fieldWithdrawalReason;
+
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id", nullable = false)
 	private FenceHeight fenceHeight;
+
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id", nullable = false)
 	private User owner;
+
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id", nullable = false)
 	private ZipCodeCity zipCodeCity;
+
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id", nullable = false)
 	private FlatnessPercentage flatnessPercentage;
-	@ManyToMany
-	@JoinTable(name = "vegetation_composition", joinColumns = @JoinColumn(name = "field_id"), inverseJoinColumns = @JoinColumn(name = "vegetation_type_id"))
-	private Set<VegetationType> vegetationTypes;
 
 	public Field() {
 		super();
@@ -220,14 +233,6 @@ public class Field implements Serializable {
 		this.flatnessPercentage = flatnessPercentage;
 	}
 
-	public Set<VegetationType> getVegetationTypes() {
-		return vegetationTypes;
-	}
-
-	public void setVegetationTypes(Set<VegetationType> vegetationTypes) {
-		this.vegetationTypes = vegetationTypes;
-	}
-
 	public Set<Service> getServices() {
 		return services;
 	}
@@ -242,6 +247,15 @@ public class Field implements Serializable {
 
 	public void setPhotos(Set<FieldPhoto> photos) {
 		this.photos = photos;
+	}
+
+	public Set<VegetationComposition> getVegetationCompositions() {
+		return vegetationCompositions;
+	}
+
+	public void setVegetationCompositions(
+			Set<VegetationComposition> vegetationCompositions) {
+		this.vegetationCompositions = vegetationCompositions;
 	}
 
 }
