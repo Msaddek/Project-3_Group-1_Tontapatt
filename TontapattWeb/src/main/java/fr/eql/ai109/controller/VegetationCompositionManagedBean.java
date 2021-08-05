@@ -1,9 +1,11 @@
 package fr.eql.ai109.controller;
 
 import java.io.Serializable;
+
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+
 import fr.eql.ai109.ibusiness.VegetationCompositionIBusiness;
 import fr.eql.ai109.tontapatt.entity.Field;
 import fr.eql.ai109.tontapatt.entity.VegetationComposition;

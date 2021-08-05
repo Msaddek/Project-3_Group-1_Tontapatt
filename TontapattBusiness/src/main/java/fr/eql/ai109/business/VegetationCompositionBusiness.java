@@ -14,7 +14,7 @@ import fr.eql.ai109.tontapatt.idao.VegetationCompositionIDAO;
 public class VegetationCompositionBusiness implements VegetationCompositionIBusiness {
 
 	@EJB
-	VegetationCompositionIDAO vegetationCompositionIDAO;
+	private VegetationCompositionIDAO vegetationCompositionIDAO;
 	
 	
 	@Override

@@ -98,7 +98,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `vegetation_composition` WRITE;
 /*!40000 ALTER TABLE `vegetation_composition` DISABLE KEYS */;
-INSERT INTO `vegetation_composition` VALUES (1,1),(4,1),(8,1),(1,2),(2,2),(5,2),(6,2),(1,3),(2,3),(3,3),(5,3),(7,3);
+INSERT INTO `vegetation_composition` (percentage, field_id, vegetationType_id) VALUES (10,1,1),(15,4,1),(50,8,1),(60,1,2),(33,2,2),(20,5,2),(5,6,2),(90,1,3),(44,2,3),(13,3,3),(53,5,3),(30,7,3);
 /*!40000 ALTER TABLE `vegetation_composition` ENABLE KEYS */;
 UNLOCK TABLES;
 
