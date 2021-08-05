@@ -1085,6 +1085,7 @@ body .ui-selectonemenu-panel .ui-selectonemenu-items .ui-selectonemenu-item {
 
 .avatar-xl img {
     width: 110px;
+    height: 110px;
 }
 .rounded-circle {
     border-radius: 50% !important;
