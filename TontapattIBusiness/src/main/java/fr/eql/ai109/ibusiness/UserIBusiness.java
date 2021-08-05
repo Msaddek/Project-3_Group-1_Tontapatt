@@ -7,4 +7,5 @@ public interface UserIBusiness extends GenericIBusiness<User> {
 	Boolean verifyIfUserExists(String email);
 
 	User connection(String email, String password);
+	
 }

@@ -17,7 +17,7 @@ import fr.eql.ai109.tontapatt.entity.FlatnessPercentage;
 import fr.eql.ai109.tontapatt.entity.GrassHeight;
 import fr.eql.ai109.tontapatt.entity.Service;
 import fr.eql.ai109.tontapatt.entity.User;
-import fr.eql.ai109.tontapatt.entity.VegetationType;
+import fr.eql.ai109.tontapatt.entity.VegetationComposition;
 import fr.eql.ai109.tontapatt.entity.ZipCodeCity;
 
 @ManagedBean(name = "mbField")
@@ -31,40 +31,39 @@ public class FieldManagedBean implements Serializable {
 
 	@EJB
 	FieldIBusiness business;
-	
-	private Field field;
-	
-	private String name;
-	
-	private String address;
-	
-	private Integer area;
-	
-	private String description;
-	
-	private LocalDateTime additionDate;
-	
-	private LocalDateTime withdrawalDate;
-	
-	private Set<Service> services;
-	
-	private Set<FieldPhoto> photos;
-	
-	private GrassHeight grassHeight;
-	
-	private FieldWithdrawalReason fieldWithdrawalReason;
-	
-	private FenceHeight fenceHeight;
-	
-	private User owner;
-	
-	private ZipCodeCity zipCodeCity;
-	
-	private FlatnessPercentage flatnessPercentage;
-	
-	private Set<VegetationType> vegetationTypes;
 
-	
+	private Field field;
+
+	private String name;
+
+	private String address;
+
+	private Integer area;
+
+	private String description;
+
+	private LocalDateTime additionDate;
+
+	private LocalDateTime withdrawalDate;
+
+	private Set<Service> services;
+
+	private Set<FieldPhoto> photos;
+
+	private GrassHeight grassHeight;
+
+	private FieldWithdrawalReason fieldWithdrawalReason;
+
+	private FenceHeight fenceHeight;
+
+	private User owner;
+
+	private ZipCodeCity zipCodeCity;
+
+	private FlatnessPercentage flatnessPercentage;
+
+	private Set<VegetationComposition> vegetationCompositions;
+
 	public String createField() {
 		String forward = "/fieldRegistrationDone.xhtml?faces-redirection=false";
 		Field newField = new Field();
@@ -77,13 +76,12 @@ public class FieldManagedBean implements Serializable {
 		newField.setGrassHeight(grassHeight);
 		newField.setFenceHeight(fenceHeight);
 		newField.setFlatnessPercentage(flatnessPercentage);
-		newField.setVegetationTypes(vegetationTypes);
+		newField.setVegetationCompositions(vegetationCompositions);
 		newField.setPhotos(photos);
-		
-	
+
 		return forward;
 	}
-	
+
 	public Field getField() {
 		return field;
 	}
@@ -140,8 +138,6 @@ public class FieldManagedBean implements Serializable {
 		this.description = description;
 	}
 
-
-
 	public Set<FieldPhoto> getPhotos() {
 		return photos;
 	}
@@ -174,15 +170,13 @@ public class FieldManagedBean implements Serializable {
 		this.flatnessPercentage = flatnessPercentage;
 	}
 
-	public Set<VegetationType> getVegetationTypes() {
-		return vegetationTypes;
+	public Set<VegetationComposition> getVegetationCompositions() {
+		return vegetationCompositions;
 	}
 
-	public void setVegetationTypes(Set<VegetationType> vegetationTypes) {
-		this.vegetationTypes = vegetationTypes;
+	public void setVegetationCompositions(
+			Set<VegetationComposition> vegetationCompositions) {
+		this.vegetationCompositions = vegetationCompositions;
 	}
-
-	
-	
 
 }

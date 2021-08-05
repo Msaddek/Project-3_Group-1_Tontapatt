@@ -1,9 +1,11 @@
 package fr.eql.ai109.tontapatt.entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -27,10 +30,13 @@ public class VegetationType implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
+
 	@Column(name = "vegetation", nullable = false)
 	private String vegetation;
-	@ManyToMany(mappedBy = "vegetationTypes")
-	Set<Field> fields;
+
+	@OneToMany(mappedBy = "vegetationType", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<VegetationComposition> vegetationCompositions = new HashSet<>();
+
 	@ManyToMany
 	@JoinTable(name = "favorite_vegetation", joinColumns = @JoinColumn(name = "vegetation_type_id"), inverseJoinColumns = @JoinColumn(name = "species_id"))
 	private Set<Species> species;
@@ -69,12 +75,21 @@ public class VegetationType implements Serializable {
 		this.id = id;
 	}
 
-	public Set<Field> getFields() {
-		return fields;
+	public Set<VegetationComposition> getVegetationCompositions() {
+		return vegetationCompositions;
 	}
 
-	public void setFields(Set<Field> fields) {
-		this.fields = fields;
+	public void setVegetationCompositions(
+			Set<VegetationComposition> vegetationCompositions) {
+		this.vegetationCompositions = vegetationCompositions;
+	}
+
+	public Set<Species> getSpecies() {
+		return species;
+	}
+
+	public void setSpecies(Set<Species> species) {
+		this.species = species;
 	}
 
 	public String getVegetation() {
