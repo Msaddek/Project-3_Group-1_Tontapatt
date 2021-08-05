@@ -1048,9 +1048,33 @@ section {
 .search-animals {
 	display: flex;
 	flex-direction: row;
+	justify-content: center;
+}
+
+.search-animal {
+	padding: 7px;
 }
 
 .search-dates {
 	display: flex;
 	flex-direction: row;
+	justify-content: center;
+}
+
+.search-date {
+	margin-left: 27px;
+	margin-right: 10px;
+}
+
+.search-background {
+	font-size: 13px;
+}
+	/* SELECTION LIST */
+
+.ui-selectonemenu label.ui-selectonemenu-label {
+	font-size: 13px;
+}
+
+body .ui-selectonemenu-panel .ui-selectonemenu-items .ui-selectonemenu-item {
+	font-size: 12px;
 }
