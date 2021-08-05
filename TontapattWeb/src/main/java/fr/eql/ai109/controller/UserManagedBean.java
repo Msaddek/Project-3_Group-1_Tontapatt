@@ -50,8 +50,8 @@ public class UserManagedBean implements Serializable {
 	private String email;
 
 	private String password;
-	
-	private String ConfirmPassword;
+
+	private String confirmPassword;
 
 	private String address;
 
@@ -74,7 +74,7 @@ public class UserManagedBean implements Serializable {
 	private UserCategory category;
 
 	public String connect() {
-		
+
 		String forward = null;
 		user = business.connection(email, password);
 		if (user != null) {
@@ -95,11 +95,9 @@ public class UserManagedBean implements Serializable {
 	}
 
 	public String disconnect() {
-		
-		HttpSession session = (HttpSession) FacesContext
-				.getCurrentInstance()
-				.getExternalContext()
-				.getSession(true);
+
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+				.getExternalContext().getSession(true);
 		session.invalidate();
 		email = "";
 		password = "";
@@ -109,7 +107,7 @@ public class UserManagedBean implements Serializable {
 
 	public String createUser() {
 		String forward = null;
-		ConfirmPassword = password;
+		confirmPassword = password;
 		User newUser = new User();
 		newUser.setFirstName(firstName);
 		newUser.setLastName(lastName);
@@ -126,7 +124,6 @@ public class UserManagedBean implements Serializable {
 		newUser.setZipCodeCity(city);
 
 		forward = verifyIfUserExists(newUser);
-
 		return forward;
 	}
 
@@ -135,9 +132,9 @@ public class UserManagedBean implements Serializable {
 		boolean userExists = business.verifyIfUserExists(email);
 		if (!userExists) {
 			user = business.add(newUser);
-			
+
 			forward = "/subscriptionDone.xhtml?faces-redirect=true";
-			
+
 		} else {
 			String message = "Adresse mail déjà existante, veuillez vous connecter";
 			FacesMessage facesMessage = new FacesMessage(
@@ -172,35 +169,42 @@ public class UserManagedBean implements Serializable {
 		} catch (MalformedURLException e1) {
 			messageUploded = "Le fichier n'a pas pu être télécharger";
 			FacesMessage facesMessage = new FacesMessage(
-					FacesMessage.SEVERITY_ERROR, messageUploded, messageUploded);
+					FacesMessage.SEVERITY_ERROR, messageUploded,
+					messageUploded);
 			FacesContext.getCurrentInstance()
-					.addMessage("subscriptionForm:inpEmail", facesMessage);
+					.addMessage("subscriptionForm:inpPhoto", facesMessage);
+			FacesContext.getCurrentInstance()
+					.addMessage("updateUserForm:inpPhoto", facesMessage);
 			e1.printStackTrace();
 		}
 		// Do what you want with the file
 		try {
 			String[] file = event.getFile().getFileName().split("\\.");
 			String fileName = UUID.randomUUID().toString() + "." + file[1];
-			copyFile(fileName,
-					event.getFile().getInputStream(), destination);
+			copyFile(fileName, event.getFile().getInputStream(), destination);
 		} catch (IOException e) {
 			messageUploded = "Le fichier n'a pas pu être télécharger";
 			FacesMessage facesMessage = new FacesMessage(
-					FacesMessage.SEVERITY_ERROR, messageUploded, messageUploded);
+					FacesMessage.SEVERITY_ERROR, messageUploded,
+					messageUploded);
 			FacesContext.getCurrentInstance()
-					.addMessage("subscriptionForm:inpEmail", facesMessage);
+					.addMessage("subscriptionForm:inpPhoto", facesMessage);
+			FacesContext.getCurrentInstance()
+					.addMessage("updateUserForm:inpPhoto", facesMessage);
 			e.printStackTrace();
 		}
 		messageUploded = "Télécharge fait!";
-		FacesMessage facesMessage = new FacesMessage(
-				FacesMessage.SEVERITY_INFO, messageUploded, messageUploded);
+		FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,
+				messageUploded, messageUploded);
 		FacesContext.getCurrentInstance()
 				.addMessage("subscriptionForm:inpPhoto", facesMessage);
+		FacesContext.getCurrentInstance().addMessage("updateUserForm:inpPhoto",
+				facesMessage);
 	}
 
 	private void copyFile(String fileName, InputStream in, String destination) {
-		try(OutputStream out = new FileOutputStream(
-					new File(destination + fileName))) {
+		try (OutputStream out = new FileOutputStream(
+				new File(destination + fileName))) {
 			// write the inputStream to a FileOutputStream;
 			int read = 0;
 			byte[] bytes = new byte[1024];
@@ -216,6 +220,27 @@ public class UserManagedBean implements Serializable {
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
+	}
+
+	public String initConnectedUserParam() {
+		address = user.getAddress();
+		city = user.getZipCodeCity();
+		description = user.getDescription();
+		password = user.getPassword();
+		confirmPassword = user.getPassword();
+		phoneNumber = user.getPhoneNumber();
+		return "/userParameters.xhtml?faces-redirect=true";
+	}
+
+	public String updateUser() {
+		user.setAddress(address);
+		user.setZipCodeCity(city);
+		user.setDescription(description);
+		user.setPassword(password);
+		user.setPhoto(photo);
+		user.setPhoneNumber(phoneNumber);
+		user = business.update(user);
+		return "/userUpdateDone.xhtml?faces-redirect=true";
 	}
 
 	public User getUser() {
@@ -267,11 +292,11 @@ public class UserManagedBean implements Serializable {
 	}
 
 	public String getConfirmPassword() {
-		return ConfirmPassword;
+		return confirmPassword;
 	}
 
 	public void setConfirmPassword(String confirmPassword) {
-		ConfirmPassword = confirmPassword;
+		this.confirmPassword = confirmPassword;
 	}
 
 	public String getAddress() {
