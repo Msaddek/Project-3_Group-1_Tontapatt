@@ -8,6 +8,14 @@ import fr.eql.ai109.tontapatt.entity.User;
 public interface ShearingOfferIBusiness
 		extends GenericIBusiness<ShearingOffer> {
 
-	//Set<ShearingOffer> findOffersByUser(User connectedUser);
+	Set<ShearingOffer> searchOfferByFieldLocation(Field field);
+
+	Set<ShearingOffer> getShearingOffersOfConnectedUser(User user);
+
+	Set<ShearingOffer> getExpiredShearingOffersOfConnectedUser(User user);
+
+	Set<ShearingOffer> getInProgressShearingOffersOfConnectedUser(User user);
+	
+	ShearingOffer createShearingOffer(ShearingOffer shearingOffer);
 
 }

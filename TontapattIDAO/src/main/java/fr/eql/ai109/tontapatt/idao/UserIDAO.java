@@ -9,5 +9,7 @@ public interface UserIDAO extends GenericIDAO<User> {
 	Boolean exists(User user);
 
 	User authenticate(String login, String password);
+	
+	Boolean verifyDuplicateEmailOnUpdate(Integer id, String email);
 
 }
