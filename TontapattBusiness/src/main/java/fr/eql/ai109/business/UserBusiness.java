@@ -39,13 +39,18 @@ public class UserBusiness implements UserIBusiness {
 
 	@Override
 	public User update(User t) {
-		t.setPassword(hashage(t.getPassword()));
 		if (t.getPhoto() == null) {
 			t.setPhoto("user.png");
 		} else {
 			t.setPhoto(t.getPhoto());
 		}
 		return userIDAO.update(t);
+	}
+
+	@Override
+	public User updatePassword(User user) {
+		user.setPassword(hashage(user.getPassword()));
+		return userIDAO.update(user);
 	}
 
 	@Override
@@ -68,11 +73,7 @@ public class UserBusiness implements UserIBusiness {
 	@Override
 	public User connection(String email, String password) {
 		password = hashage(password);
-		String path = "resources/img/users/";
 		User user = userIDAO.authenticate(email, password);
-		if (user != null) {
-			user.setPhoto(path + user.getPhoto());
-		}
 		return user;
 	}
 
@@ -93,6 +94,11 @@ public class UserBusiness implements UserIBusiness {
 
 		return str;
 
+	}
+
+	@Override
+	public Boolean verifyDuplicateEmailOnUpdate(Integer id, String email) {
+		return userIDAO.verifyDuplicateEmailOnUpdate(id, email);
 	}
 
 }
