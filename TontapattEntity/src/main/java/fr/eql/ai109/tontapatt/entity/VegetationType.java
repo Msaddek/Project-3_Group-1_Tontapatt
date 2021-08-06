@@ -2,9 +2,9 @@ package fr.eql.ai109.tontapatt.entity;
 
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -43,28 +43,6 @@ public class VegetationType implements Serializable {
 	public VegetationType() {
 		super();
 	}
-
-	public void addField(Field field) {
-		VegetationComposition vegetationComposition = new VegetationComposition(field,this);
-		vegetationCompositions.add(vegetationComposition);
-		field.getVegetationCompositions().add(vegetationComposition);
-	}
-
-	public void removeField(Field field) {
-		for (Iterator<VegetationComposition> iterator = vegetationCompositions.iterator();
-				iterator.hasNext(); ) {
-			VegetationComposition vegetationComposition = iterator.next();
-
-			if (vegetationComposition.getVegetationType().equals(this) &&
-					vegetationComposition.getField().equals(field)) {
-				iterator.remove();
-				vegetationComposition.getField().getVegetationCompositions().remove(vegetationComposition);
-				vegetationComposition.setVegetationType(null);
-				vegetationComposition.setField(null);
-			}
-		}
-	}
-
 
 	@Override
 	public int hashCode() {
@@ -112,6 +90,7 @@ public class VegetationType implements Serializable {
 	public void setSpecies(Set<Species> species) {
 		this.species = species;
 	}
+
 	public String getVegetation() {
 		return vegetation;
 	}

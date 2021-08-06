@@ -1,15 +1,15 @@
 package fr.eql.ai109.tontapatt.entity;
 
 import java.io.Serializable;
-import java.util.Iterator;
 import java.util.Objects;
 
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 @Entity
@@ -21,15 +21,17 @@ public class VegetationComposition implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	private VegetationCompositionId id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private Integer id;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@MapsId("fieldId")
+	@ManyToOne
+	@JoinColumn(referencedColumnName = "id", nullable = true)
 	private Field field;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@MapsId("vegetationTypeId")
+	@ManyToOne
+	@JoinColumn(referencedColumnName = "id", nullable = true)
 	private VegetationType vegetationType;
 
 	@Column(name = "percentage", nullable = false)
@@ -59,15 +61,16 @@ public class VegetationComposition implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		VegetationComposition other = (VegetationComposition) obj;
-		return Objects.equals(field, other.field) && Objects.equals(percentage, other.percentage)
+		return Objects.equals(field, other.field)
+				&& Objects.equals(percentage, other.percentage)
 				&& Objects.equals(vegetationType, other.vegetationType);
 	}
 
-	public VegetationCompositionId getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(VegetationCompositionId id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

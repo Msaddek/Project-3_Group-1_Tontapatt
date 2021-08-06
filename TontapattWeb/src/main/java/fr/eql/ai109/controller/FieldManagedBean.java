@@ -1,6 +1,5 @@
 package fr.eql.ai109.controller;
 
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -11,6 +10,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+
 import fr.eql.ai109.ibusiness.FieldIBusiness;
 import fr.eql.ai109.tontapatt.entity.FenceHeight;
 import fr.eql.ai109.tontapatt.entity.Field;
@@ -67,11 +67,10 @@ public class FieldManagedBean implements Serializable {
 	private FlatnessPercentage flatnessPercentage;
 
 	private Set<VegetationComposition> vegetationCompositions;
-	
-	private VegetationComposition  vegetationComposition;
-	
-	private Integer vegetationPercentage;
 
+	private VegetationComposition vegetationComposition;
+
+	private Integer vegetationPercentage;
 
 	@ManagedProperty(value = "#{mbUser.user}")
 	private User connectedUser;
@@ -80,10 +79,15 @@ public class FieldManagedBean implements Serializable {
 	@PostConstruct()
 	public void init() {
 		connectedUserFields = fieldBusiness.findFieldsByUser(connectedUser);
+		
+		vegetationCompositions = new HashSet<>();
 	}
 
-	public String createField(){
-		String forward = "/fieldRegistrationDone.xhtml?faces-redirect=true"; //faire addPhoto.xhtml redirection =false
+	public String createField() {
+		String forward = "/fieldRegistrationDone.xhtml?faces-redirect=true"; // faire
+																				// addPhoto.xhtml
+																				// redirection
+																				// =false
 		System.out.println(forward);
 		Field newField = new Field();
 
@@ -99,26 +103,23 @@ public class FieldManagedBean implements Serializable {
 		newField.setOwner(connectedUser);
 		field = fieldBusiness.add(newField);
 		System.out.println("***********" + field.getId());
-		for (VegetationComposition vc:vegetationCompositions) {
+		for (VegetationComposition vc : vegetationCompositions) {
 			vc.setField(field);
 		}
 		field.setVegetationCompositions(vegetationCompositions);
 		field = fieldBusiness.update(field);
 		return forward;
 	}
-	
+
 	public void createVegetationComposition(VegetationType vegetationType) {
-		
 		vegetationComposition = new VegetationComposition();
-		vegetationCompositions = new HashSet<>();
 		System.out.println(vegetationType.getVegetation());
 		System.out.println(vegetationPercentage);
 		vegetationComposition.setPercentage(vegetationPercentage);
 		vegetationComposition.setVegetationType(vegetationType);
 		vegetationCompositions.add(vegetationComposition);
-		
-	}
 
+	}
 
 	public Field getField() {
 		return field;
@@ -261,7 +262,8 @@ public class FieldManagedBean implements Serializable {
 		return fieldWithdrawalReason;
 	}
 
-	public void setFieldWithdrawalReason(FieldWithdrawalReason fieldWithdrawalReason) {
+	public void setFieldWithdrawalReason(
+			FieldWithdrawalReason fieldWithdrawalReason) {
 		this.fieldWithdrawalReason = fieldWithdrawalReason;
 	}
 
@@ -285,7 +287,8 @@ public class FieldManagedBean implements Serializable {
 		return vegetationComposition;
 	}
 
-	public void setVegetationComposition(VegetationComposition vegetationComposition) {
+	public void setVegetationComposition(
+			VegetationComposition vegetationComposition) {
 		this.vegetationComposition = vegetationComposition;
 	}
 
@@ -296,6 +299,5 @@ public class FieldManagedBean implements Serializable {
 	public void setVegetationPercentage(Integer vegetationPercentage) {
 		this.vegetationPercentage = vegetationPercentage;
 	}
-
 
 }
