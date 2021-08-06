@@ -2,6 +2,7 @@ package fr.eql.ai109.tontapatt.entity;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -34,14 +35,36 @@ public class VegetationType implements Serializable {
 
 	@OneToMany(mappedBy = "vegetationType", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<VegetationComposition> vegetationCompositions = new HashSet<>();
-	
+
 	@ManyToMany
 	@JoinTable(name = "favorite_vegetation", joinColumns = @JoinColumn(name = "vegetation_type_id"), inverseJoinColumns = @JoinColumn(name = "species_id"))
 	private Set<Species> species;
-	
+
 	public VegetationType() {
 		super();
 	}
+
+	public void addField(Field field) {
+		VegetationComposition vegetationComposition = new VegetationComposition(field,this);
+		vegetationCompositions.add(vegetationComposition);
+		field.getVegetationCompositions().add(vegetationComposition);
+	}
+
+	public void removeField(Field field) {
+		for (Iterator<VegetationComposition> iterator = vegetationCompositions.iterator();
+				iterator.hasNext(); ) {
+			VegetationComposition vegetationComposition = iterator.next();
+
+			if (vegetationComposition.getVegetationType().equals(this) &&
+					vegetationComposition.getField().equals(field)) {
+				iterator.remove();
+				vegetationComposition.getField().getVegetationCompositions().remove(vegetationComposition);
+				vegetationComposition.setVegetationType(null);
+				vegetationComposition.setField(null);
+			}
+		}
+	}
+
 
 	@Override
 	public int hashCode() {

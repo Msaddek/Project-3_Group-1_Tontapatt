@@ -1,6 +1,7 @@
 package fr.eql.ai109.tontapatt.entity;
 
 import java.io.Serializable;
+import java.util.Iterator;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -38,6 +39,12 @@ public class VegetationComposition implements Serializable {
 		super();
 	}
 
+	public VegetationComposition(Field field, VegetationType vegetationType) {
+		super();
+		this.field = field;
+		this.vegetationType = vegetationType;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(field, percentage, vegetationType);
@@ -52,8 +59,7 @@ public class VegetationComposition implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		VegetationComposition other = (VegetationComposition) obj;
-		return Objects.equals(field, other.field)
-				&& Objects.equals(percentage, other.percentage)
+		return Objects.equals(field, other.field) && Objects.equals(percentage, other.percentage)
 				&& Objects.equals(vegetationType, other.vegetationType);
 	}
 

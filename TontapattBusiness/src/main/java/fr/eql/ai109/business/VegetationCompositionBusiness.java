@@ -19,8 +19,8 @@ public class VegetationCompositionBusiness implements VegetationCompositionIBusi
 	
 	@Override
 	public VegetationComposition add(VegetationComposition t) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return vegetationCompositionIDAO.add(t);
 	}
 
 	@Override

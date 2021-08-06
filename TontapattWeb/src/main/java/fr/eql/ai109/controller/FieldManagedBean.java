@@ -3,9 +3,13 @@ package fr.eql.ai109.controller;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
+
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import fr.eql.ai109.ibusiness.FieldIBusiness;
 import fr.eql.ai109.tontapatt.entity.FenceHeight;
@@ -17,6 +21,7 @@ import fr.eql.ai109.tontapatt.entity.GrassHeight;
 import fr.eql.ai109.tontapatt.entity.Service;
 import fr.eql.ai109.tontapatt.entity.User;
 import fr.eql.ai109.tontapatt.entity.VegetationComposition;
+import fr.eql.ai109.tontapatt.entity.VegetationType;
 import fr.eql.ai109.tontapatt.entity.ZipCodeCity;
 
 @ManagedBean(name = "mbField")
@@ -29,7 +34,7 @@ public class FieldManagedBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EJB
-	FieldIBusiness business;
+	FieldIBusiness fieldBusiness;
 
 	private Field field;
 
@@ -62,37 +67,58 @@ public class FieldManagedBean implements Serializable {
 	private FlatnessPercentage flatnessPercentage;
 
 	private Set<VegetationComposition> vegetationCompositions;
-
-
-//	@ManagedProperty(value = "#{mbUser.user}")
-//	private User connectedUser;
-//	private Set<Field> connectedUserFields;
-//
-//	@PostConstruct()
-//	public void init() {
-//		connectedUserFields = business.findFieldsByUser(connectedUser);
-//	}
 	
+	private VegetationComposition  vegetationComposition;
+	
+	private Integer vegetationPercentage;
+
+
+	@ManagedProperty(value = "#{mbUser.user}")
+	private User connectedUser;
+	private Set<Field> connectedUserFields;
+
+	@PostConstruct()
+	public void init() {
+		connectedUserFields = fieldBusiness.findFieldsByUser(connectedUser);
+	}
+
 	public String createField(){
-		String forward = "/fieldRegistrationDone.xhtml?faces-redirection=true"; //faire addPhoto.xhtml redirection =false
+		String forward = "/fieldRegistrationDone.xhtml?faces-redirect=true"; //faire addPhoto.xhtml redirection =false
+		System.out.println(forward);
 		Field newField = new Field();
 
 		newField.setName(name);
 		newField.setAddress(address);
-		newField.setZipCodeCity(zipCodeCity);
 		newField.setArea(area);
 		newField.setAdditionDate(LocalDateTime.now());
-		newField.setWithdrawalDate(LocalDateTime.now());
 		newField.setGrassHeight(grassHeight);
 		newField.setFenceHeight(fenceHeight);
 		newField.setFlatnessPercentage(flatnessPercentage);
-		newField.setVegetationCompositions(vegetationCompositions);
 		newField.setPhotos(photos);
-		
-		field = business.add(newField);
-
+		newField.setZipCodeCity(zipCodeCity);
+		newField.setOwner(connectedUser);
+		field = fieldBusiness.add(newField);
+		System.out.println("***********" + field.getId());
+		for (VegetationComposition vc:vegetationCompositions) {
+			vc.setField(field);
+		}
+		field.setVegetationCompositions(vegetationCompositions);
+		field = fieldBusiness.update(field);
 		return forward;
 	}
+	
+	public void createVegetationComposition(VegetationType vegetationType) {
+		
+		vegetationComposition = new VegetationComposition();
+		vegetationCompositions = new HashSet<>();
+		System.out.println(vegetationType.getVegetation());
+		System.out.println(vegetationPercentage);
+		vegetationComposition.setPercentage(vegetationPercentage);
+		vegetationComposition.setVegetationType(vegetationType);
+		vegetationCompositions.add(vegetationComposition);
+		
+	}
+
 
 	public Field getField() {
 		return field;
@@ -103,11 +129,11 @@ public class FieldManagedBean implements Serializable {
 	}
 
 	public FieldIBusiness getBusiness() {
-		return business;
+		return fieldBusiness;
 	}
 
 	public void setBusiness(FieldIBusiness business) {
-		this.business = business;
+		this.fieldBusiness = business;
 	}
 
 	public String getName() {
@@ -189,6 +215,86 @@ public class FieldManagedBean implements Serializable {
 	public void setVegetationCompositions(
 			Set<VegetationComposition> vegetationCompositions) {
 		this.vegetationCompositions = vegetationCompositions;
+	}
+
+	public User getConnectedUser() {
+		return connectedUser;
+	}
+
+	public void setConnectedUser(User connectedUser) {
+		this.connectedUser = connectedUser;
+	}
+
+	public Set<Field> getConnectedUserFields() {
+		return connectedUserFields;
+	}
+
+	public void setConnectedUserFields(Set<Field> connectedUserFields) {
+		this.connectedUserFields = connectedUserFields;
+	}
+
+	public LocalDateTime getAdditionDate() {
+		return additionDate;
+	}
+
+	public void setAdditionDate(LocalDateTime additionDate) {
+		this.additionDate = additionDate;
+	}
+
+	public LocalDateTime getWithdrawalDate() {
+		return withdrawalDate;
+	}
+
+	public void setWithdrawalDate(LocalDateTime withdrawalDate) {
+		this.withdrawalDate = withdrawalDate;
+	}
+
+	public Set<Service> getServices() {
+		return services;
+	}
+
+	public void setServices(Set<Service> services) {
+		this.services = services;
+	}
+
+	public FieldWithdrawalReason getFieldWithdrawalReason() {
+		return fieldWithdrawalReason;
+	}
+
+	public void setFieldWithdrawalReason(FieldWithdrawalReason fieldWithdrawalReason) {
+		this.fieldWithdrawalReason = fieldWithdrawalReason;
+	}
+
+	public User getOwner() {
+		return owner;
+	}
+
+	public void setOwner(User owner) {
+		this.owner = owner;
+	}
+
+	public ZipCodeCity getZipCodeCity() {
+		return zipCodeCity;
+	}
+
+	public void setZipCodeCity(ZipCodeCity zipCodeCity) {
+		this.zipCodeCity = zipCodeCity;
+	}
+
+	public VegetationComposition getVegetationComposition() {
+		return vegetationComposition;
+	}
+
+	public void setVegetationComposition(VegetationComposition vegetationComposition) {
+		this.vegetationComposition = vegetationComposition;
+	}
+
+	public Integer getVegetationPercentage() {
+		return vegetationPercentage;
+	}
+
+	public void setVegetationPercentage(Integer vegetationPercentage) {
+		this.vegetationPercentage = vegetationPercentage;
 	}
 
 

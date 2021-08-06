@@ -157,7 +157,7 @@
 								<div class="col-2">
 									<div>
 										<label for="inpCity">Ville :</label><br />
-										<p:selectOneMenu id="inpCity" value="#{mbUser.city}"
+										<p:selectOneMenu id="inpCity" value="#{mbField.city}"
 											required="true"
 											requiredMessage="Vous devez choisir une ville"
 											converter="entityConverter">
@@ -247,7 +247,6 @@
 									for="inpFlatnessPercentage" />
 							</div>
 
-
 							<div>
 								<div class="rs-select2 js-select-simple select--no-search">
 									<br /> <label for="inpVegetationType">Types de
@@ -255,23 +254,26 @@
 									<ul>
 										<ui:repeat value="#{mbVegetationType.allVegetationType()}"
 											var="vegetationType">
-
 											<li><h:outputText value="#{vegetationType.vegetation}" />
-												<p:inputText id="inpVegetationCompositionPercentage" value="#{mbVegetationComposition.percentage}"
+												<p:inputText id="inpVegetationCompositionPercentage"
+													value="#{mbField.vegetationPercentage}"
 													placeholder="Pourcentage" required="false"
 													requiredMessage="Veuillez indiquer un pourcentage">
-													<f:ajax update="inpVegetationCompositionPercentage" />
-													<f:ajax update="vegetationCompositionPercentageMessage" />
-												</p:inputText> <b:message id="vegetationCompositionPercentageMessage" for="inpVegetationCompositionPercentage" /></li>
+													<p:ajax listener="#{mbField.createVegetationComposition(vegetationType)}"/>
+													<p:ajax update="inpVegetationCompositionPercentage" />
+													<p:ajax update="vegetationCompositionPercentageMessage" />
+												</p:inputText> <p:message id="vegetationCompositionPercentageMessage"
+													for="inpVegetationCompositionPercentage" /></li>
 										</ui:repeat>
 									</ul>
 
 								</div>
 							</div>
+
 							<div>
 								<br />
 								<p:fileUpload id="inpPhoto" label="Ajouter une photo"
-									mode="advanced" listener="#{mbFieldPhoto.uploadPhoto}"
+									mode="advanced" listener="#{mbFieldPhoto.uploadPhoto()}"
 									required="false" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
 									fileLimit="4" fileLimitMessage="Vous avez le droit à 4 photos"
 									invalidFileMessage="Le fichier doit être de type gif, jpe, jpeg ou png"
@@ -280,6 +282,7 @@
 								</p:fileUpload>
 								<p:message id="photoMessage" for="inpPhoto" />
 							</div>
+
 
 
 
