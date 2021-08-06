@@ -8,4 +8,8 @@ public interface UserIBusiness extends GenericIBusiness<User> {
 
 	User connection(String email, String password);
 	
+	Boolean verifyDuplicateEmailOnUpdate(Integer id, String email);
+	
+	User updatePassword(User user);
+	
 }
