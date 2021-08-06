@@ -1,6 +1,7 @@
 package fr.eql.ai109.tontapatt.entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -34,8 +35,12 @@ public class Species implements Serializable {
 	private Set<Race> races;
 	@ManyToMany(mappedBy = "species")
 	Set<FenceHeight> fenceHeights;
-	@ManyToMany(mappedBy = "species")
-	Set<FlatnessPercentage> flatnessPercentages;
+
+	@OneToMany(mappedBy = "species", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<FavoriteFlatness> favoriteFlatnesses = new HashSet<>();
+//	@ManyToMany(mappedBy = "species")
+//	Set<FlatnessPercentage> flatnessPercentages;
+
 	@ManyToMany(mappedBy = "species")
 	Set<VegetationType> vegetationTypes;
 
@@ -81,6 +86,14 @@ public class Species implements Serializable {
 		this.species = species;
 	}
 
+	public Set<Race> getRaces() {
+		return races;
+	}
+
+	public void setRaces(Set<Race> races) {
+		this.races = races;
+	}
+
 	public Set<FenceHeight> getFenceHeights() {
 		return fenceHeights;
 	}
@@ -89,13 +102,12 @@ public class Species implements Serializable {
 		this.fenceHeights = fenceHeights;
 	}
 
-	public Set<FlatnessPercentage> getFlatnessPercentages() {
-		return flatnessPercentages;
+	public Set<FavoriteFlatness> getFavoriteFlatnesses() {
+		return favoriteFlatnesses;
 	}
 
-	public void setFlatnessPercentages(
-			Set<FlatnessPercentage> flatnessPercentages) {
-		this.flatnessPercentages = flatnessPercentages;
+	public void setFavoriteFlatnesses(Set<FavoriteFlatness> favoriteFlatnesses) {
+		this.favoriteFlatnesses = favoriteFlatnesses;
 	}
 
 	public Set<VegetationType> getVegetationTypes() {
@@ -106,12 +118,6 @@ public class Species implements Serializable {
 		this.vegetationTypes = vegetationTypes;
 	}
 
-	public Set<Race> getRaces() {
-		return races;
-	}
-
-	public void setRaces(Set<Race> races) {
-		this.races = races;
-	}
+	
 
 }

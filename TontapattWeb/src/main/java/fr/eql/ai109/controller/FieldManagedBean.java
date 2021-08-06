@@ -4,8 +4,11 @@ package fr.eql.ai109.controller;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Set;
+
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import fr.eql.ai109.ibusiness.FieldIBusiness;
 import fr.eql.ai109.tontapatt.entity.FenceHeight;
@@ -64,17 +67,21 @@ public class FieldManagedBean implements Serializable {
 	private Set<VegetationComposition> vegetationCompositions;
 
 
-//	@ManagedProperty(value = "#{mbUser.user}")
-//	private User connectedUser;
-//	private Set<Field> connectedUserFields;
-//
-//	@PostConstruct()
-//	public void init() {
-//		connectedUserFields = business.findFieldsByUser(connectedUser);
-//	}
+	@ManagedProperty(value = "#{mbUser.user}")
+	private User connectedUser;
+	public LocalDateTime getAdditionDate() {
+		return additionDate;
+	}
+
+	private Set<Field> connectedUserFields;
+
+	@PostConstruct()
+	public void init() {
+		connectedUserFields = business.findFieldsByUser(connectedUser);
+	}
 	
 	public String createField(){
-		String forward = "/fieldRegistrationDone.xhtml?faces-redirection=true"; //faire addPhoto.xhtml redirection =false
+		 //faire addPhoto.xhtml redirection =false
 		Field newField = new Field();
 
 		newField.setName(name);
@@ -82,15 +89,20 @@ public class FieldManagedBean implements Serializable {
 		newField.setZipCodeCity(zipCodeCity);
 		newField.setArea(area);
 		newField.setAdditionDate(LocalDateTime.now());
-		newField.setWithdrawalDate(LocalDateTime.now());
 		newField.setGrassHeight(grassHeight);
 		newField.setFenceHeight(fenceHeight);
 		newField.setFlatnessPercentage(flatnessPercentage);
-		newField.setVegetationCompositions(vegetationCompositions);
-		newField.setPhotos(photos);
+		//newField.setVegetationCompositions(vegetationCompositions);
+		//newField.setPhotos(photos);
+		newField.setOwner(connectedUser);
 		
 		field = business.add(newField);
+		
+		System.out.println(name+ " " +address+ " " +zipCodeCity+ " " +area+ " "
+				+ " " +grassHeight+ " " +fenceHeight+ " " +flatnessPercentage+ " "
+				+ " " +connectedUser);
 
+		String forward = "/fieldRegistrationDone.xhtml?faces-redirect=true";
 		return forward;
 	}
 
@@ -191,5 +203,64 @@ public class FieldManagedBean implements Serializable {
 		this.vegetationCompositions = vegetationCompositions;
 	}
 
+	public void setAdditionDate(LocalDateTime additionDate) {
+		this.additionDate = additionDate;
+	}
+
+	public LocalDateTime getWithdrawalDate() {
+		return withdrawalDate;
+	}
+
+	public void setWithdrawalDate(LocalDateTime withdrawalDate) {
+		this.withdrawalDate = withdrawalDate;
+	}
+
+	public Set<Service> getServices() {
+		return services;
+	}
+
+	public void setServices(Set<Service> services) {
+		this.services = services;
+	}
+
+	public FieldWithdrawalReason getFieldWithdrawalReason() {
+		return fieldWithdrawalReason;
+	}
+
+	public void setFieldWithdrawalReason(FieldWithdrawalReason fieldWithdrawalReason) {
+		this.fieldWithdrawalReason = fieldWithdrawalReason;
+	}
+
+	public User getOwner() {
+		return owner;
+	}
+
+	public void setOwner(User owner) {
+		this.owner = owner;
+	}
+
+	public ZipCodeCity getZipCodeCity() {
+		return zipCodeCity;
+	}
+
+	public void setZipCodeCity(ZipCodeCity zipCodeCity) {
+		this.zipCodeCity = zipCodeCity;
+	}
+
+	public User getConnectedUser() {
+		return connectedUser;
+	}
+
+	public void setConnectedUser(User connectedUser) {
+		this.connectedUser = connectedUser;
+	}
+
+	public Set<Field> getConnectedUserFields() {
+		return connectedUserFields;
+	}
+
+	public void setConnectedUserFields(Set<Field> connectedUserFields) {
+		this.connectedUserFields = connectedUserFields;
+	}
 
 }
