@@ -110,7 +110,7 @@ public class UserManagedBean implements Serializable {
 		confirmPassword = password;
 		User newUser = new User();
 		newUser.setFirstName(firstName);
-		newUser.setLastName(lastName);
+		newUser.setLastName(lastName.toUpperCase());
 		newUser.setBirthDate(birthDate);
 		newUser.setEmail(email);
 		newUser.setPassword(password);
