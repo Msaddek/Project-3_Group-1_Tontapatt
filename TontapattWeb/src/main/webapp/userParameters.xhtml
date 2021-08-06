@@ -35,7 +35,8 @@
 						<div class="row mt-5 align-items-center">
 							<div class="col-md-3 text-center mb-5">
 								<div class="avatar avatar-xl">
-									<p:graphicImage value="#{mbUser.user.photo}"
+									<p:graphicImage
+										value="resources/img/users/#{mbUser.user.photo}"
 										class="avatar-img rounded-circle"></p:graphicImage>
 								</div>
 							</div>
@@ -45,7 +46,8 @@
 										<h1 class="mb-1">#{mbUser.user.firstName}
 											#{mbUser.user.lastName}</h1>
 										<p class="small mb-3">
-											<span class="badge badge-dark">#{mbUser.user.zipCodeCity.name}, FR</span>
+											<span class="badge badge-dark">#{mbUser.user.zipCodeCity.name},
+												FR</span>
 										</p>
 									</div>
 								</div>
@@ -95,14 +97,20 @@
 									<div class="user-parameter">
 										<b:form>
 											<div class="user-param">
-												<label for="lastname">Nom</label>
-												<p:inputText type="text" id="lastname" class="form-control"
-													value="#{mbUser.user.lastName}" />
+												<label for="inpLastName">Nom</label>
+												<p:inputText type="text" id="inpLastName"
+													class="form-control" value="#{mbUser.lastName}"
+													required="true"
+													requiredMessage="Vous devez entrer votre nom" />
+												<p:message id="lastNameMessage" for="inpLastName" />
 											</div>
 											<div class="user-param">
-												<label for="firstname">Prénom</label>
-												<p:inputText type="text" id="firstname" class="form-control"
-													value="#{mbUser.user.firstName}" />
+												<label for="inpFirstName">Prénom</label>
+												<p:inputText type="text" id="inpFirstName"
+													class="form-control" value="#{mbUser.firstName}"
+													required="true"
+													requiredMessage="Vous devez entrer votre nom" />
+												<p:message id="firstNameMessage" for="inpFirstName" />
 											</div>
 											<div class="user-param">
 												<label for="inpAdresse">Adresse :</label><br />
@@ -160,7 +168,8 @@
 													</div>
 												</div>
 											</div>
-											<b:button class="get-started-btn" value="Modifier" action="#" />
+											<b:commandButton class="get-started-btn" value="Modifier"
+												action="#{mbUser.updateNameAndAddress()}" />
 										</b:form>
 									</div>
 								</div>
@@ -169,11 +178,21 @@
 									aria-labelledby="nav-email-tab">
 
 									<div class="user-parameter">
-										<b:form>
+										<b:form id="updateEmailForm">
 											<div class="user-param">
-												<label for="lastname">Email</label>
-												<p:inputText type="text" id="email" class="form-control"
-													value="#{mbUser.user.email}" />
+												<label for="inpEmail">Email</label>
+												<p:inputText type="text" id="inpEmail" class="form-control"
+													value="#{mbUser.email}" required="true"
+													requiredMessage="L'adresse mail est requise"
+													validatorMessage="Le format de l'adresse mail doit similaire à 'example@domaine.com'">
+													<f:validateRegex
+														pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+													<p:ajax event="blur"
+														listener="#{mbUser.verifyEmailExistBeforeUpdate}"
+														update="emailMessage" />
+													<p:ajax update="inpEmail" />
+												</p:inputText>
+												<p:message id="emailMessage" for="inpEmail" />
 											</div>
 											<div class="user-param">
 												<label for="inpPhoneNumber">Téléphone :</label><br />
@@ -189,7 +208,8 @@
 												<p:message id="phoneNumberMessage" for="inpPhoneNumber" />
 											</div>
 											<br />
-											<b:button class="get-started-btn" value="Modifier" action="#" />
+											<b:commandButton class="get-started-btn" value="Modifier"
+												action="#{mbUser.updateContact()}" />
 										</b:form>
 									</div>
 
@@ -226,7 +246,8 @@
 													for="inpConfirmPassword" />
 
 											</div>
-											<b:button class="get-started-btn" value="Modifier" action="#" />
+											<b:commandButton class="get-started-btn" value="Modifier"
+												action="#{mbUser.updatePassword()}" />
 										</b:form>
 									</div>
 								</div>
@@ -256,7 +277,8 @@
 												</p:fileUpload>
 												<p:message id="photoMessage" for="inpPhoto" />
 											</div>
-											<b:button class="get-started-btn" value="Modifier" action="#" />
+											<b:commandButton class="get-started-btn" value="Modifier"
+												action="#{mbUser.updateDescriptionAndPhoto()}" />
 										</b:form>
 									</div>
 								</div>
@@ -265,15 +287,29 @@
 									aria-labelledby="nav-unscription-tab">
 									<div class="user-parameter">
 										<b:form>
-											<label for="inpDescription">Décris nous la raison de
-												ton départ:</label>
-											<b:inputTextarea id="inpDescription" required="#false"
-												value="#{mbUser.description}" rows="5" cols="30"
-												counter="displayGacCharCount" maxlength="255"
+											<label for="inpUnsubsriptionReason">Choisis une
+												raison de départ :</label><br />
+											<p:selectOneMenu id="inpUnsubsriptionReason"
+												value="#{mbUser.unsubscriptionReason}"
+												required="true"
+												requiredMessage="Vous devez choisir une raison"
+												converter="entityConverter">
+												<f:selectItem itemLabel="Choisissez une raison" itemValue="" />
+												<f:selectItems
+													value="#{mbUnsubscriptionReason.showAllUnsubscriptionReasons()}"
+													var="reason" itemLabel="#{reason.reason}"
+													itemValue="#{reason}" />
+											</p:selectOneMenu><br />
+											<label for="inpUnsubsriptionDescription">Décris nous
+												la raison de ton départ:</label>
+											<b:inputTextarea id="inpUnsubsriptionDescription"
+												required="false"
+												value="#{mbUser.withdrawalReasonDescription}" rows="5"
+												cols="30" counter="displayGacCharCount" maxlength="255"
 												counterTemplate="{0} caractères restants."
 												autoResize="false" />
-											<b:button class="get-started-btn" value="Se désinscrire"
-												action="#" />
+											<b:commandButton class="get-started-btn"
+												value="Se désinscrire" action="#{mbUser.unsubscribeUser()}" />
 										</b:form>
 									</div>
 								</div>
