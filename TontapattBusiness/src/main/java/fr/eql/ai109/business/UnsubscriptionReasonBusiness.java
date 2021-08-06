@@ -44,7 +44,6 @@ public class UnsubscriptionReasonBusiness
 
 	@Override
 	public List<UnsubscriptionReason> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return unsubscriptionReasonIDAO.getAll();
 	}
 }

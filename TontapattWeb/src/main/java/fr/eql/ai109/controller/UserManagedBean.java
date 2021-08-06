@@ -59,6 +59,8 @@ public class UserManagedBean implements Serializable {
 
 	private String description;
 
+	private String withdrawalReasonDescription;
+
 	private String siret;
 
 	private String phoneNumber;
@@ -110,7 +112,7 @@ public class UserManagedBean implements Serializable {
 		confirmPassword = password;
 		User newUser = new User();
 		newUser.setFirstName(firstName);
-		newUser.setLastName(lastName);
+		newUser.setLastName(lastName.toUpperCase());
 		newUser.setBirthDate(birthDate);
 		newUser.setEmail(email);
 		newUser.setPassword(password);
@@ -223,26 +225,85 @@ public class UserManagedBean implements Serializable {
 		}
 	}
 
-	public String initConnectedUserParam() {
+	public void initConnectedUserParam() {
 		address = user.getAddress();
 		city = user.getZipCodeCity();
 		password = null;
+		email = user.getEmail();
 		firstName = user.getFirstName();
 		lastName = user.getLastName();
 		description = user.getDescription();
 		phoneNumber = user.getPhoneNumber();
-		return "/userParameters.xhtml?faces-redirect=true";
 	}
 
-	public String updateUser() {
+	public String updateNameAndAddress() {
 		user.setAddress(address);
 		user.setZipCodeCity(city);
-		user.setDescription(description);
-		user.setPassword(password);
-		user.setPhoto(photo);
-		user.setPhoneNumber(phoneNumber);
+		user.setFirstName(firstName);
+		user.setLastName(lastName.toUpperCase());
 		user = business.update(user);
 		return "/userUpdateDone.xhtml?faces-redirect=true";
+	}
+
+	public String updateContact() {
+		User newUser = user;
+		newUser.setEmail(email);
+		newUser.setPhoneNumber(phoneNumber);
+		return verifyEmailExistBeforeUpdate(newUser);
+	}
+
+	private String verifyEmailExistBeforeUpdate(User newUser) {
+		String forward;
+		boolean emailExists = business.verifyDuplicateEmailOnUpdate(
+				newUser.getId(), newUser.getEmail());
+		if (!emailExists) {
+			user = business.update(newUser);
+
+			forward = "/userUpdateDone.xhtml?faces-redirect=true";
+
+		} else {
+			String message = "Adresse mail déjà existante, veuillez choisir un autre";
+			FacesMessage facesMessage = new FacesMessage(
+					FacesMessage.SEVERITY_FATAL, message, message);
+			FacesContext.getCurrentInstance()
+					.addMessage("updateEmailForm:inpEmail", facesMessage);
+			forward = "/userParameters.xhtml?faces-redirect=false";
+		}
+		return forward;
+	}
+
+	public void verifyEmailExistBeforeUpdate() {
+		boolean emailExists = business
+				.verifyDuplicateEmailOnUpdate(user.getId(), email);
+		if (emailExists) {
+			String message = "Adresse mail déjà existante, veuillez choisir un autre";
+			FacesMessage facesMessage = new FacesMessage(
+					FacesMessage.SEVERITY_FATAL, message, message);
+			FacesContext.getCurrentInstance()
+					.addMessage("updateEmailForm:inpEmail", facesMessage);
+		}
+	}
+
+	public String updatePassword() {
+		user.setPassword(password);
+		user = business.updatePassword(user);
+		return "/userUpdateDone.xhtml?faces-redirect=true";
+	}
+
+	public String updateDescriptionAndPhoto() {
+		user.setDescription(description);
+		user.setPhoto(photo);
+		user = business.update(user);
+		System.out.println("ok");
+		return "/userUpdateDone.xhtml?faces-redirect=true";
+	}
+
+	public String unsubscribeUser() {
+		user.setUnsubscriptionDate(LocalDateTime.now());
+		user.setUnsubscriptionReason(unsubscriptionReason);
+		user = business.update(user);
+		
+		return disconnect();
 	}
 
 	public User getUser() {
@@ -323,6 +384,15 @@ public class UserManagedBean implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getWithdrawalReasonDescription() {
+		return withdrawalReasonDescription;
+	}
+
+	public void setWithdrawalReasonDescription(
+			String withdrawalReasonDescription) {
+		this.withdrawalReasonDescription = withdrawalReasonDescription;
 	}
 
 	public String getSiret() {
