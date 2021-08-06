@@ -19,7 +19,9 @@ public class UserDAO extends GenericDAO<User> implements UserIDAO {
 		List<User> users = null;
 
 		try {
-			users = (List<User>) em.createQuery("SELECT u From User u WHERE u.email=:emailParam")
+			users = (List<User>) em
+					.createQuery(
+							"SELECT u From User u WHERE u.email=:emailParam")
 					.setParameter("emailParam", email).getResultList();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -30,34 +32,52 @@ public class UserDAO extends GenericDAO<User> implements UserIDAO {
 
 	@Override
 	public Boolean exists(User user) {
-		
+
 		List<User> users = null;
-		
-		Query query = em.createQuery("SELECT u FROM User u WHERE u.email=:emailParam");
+
+		Query query = em
+				.createQuery("SELECT u FROM User u WHERE u.email=:emailParam");
 		query.setParameter("emailParam", user.getEmail());
 		users = query.getResultList();
-		
-	return users.size() > 0;
+
+		return users.size() > 0;
 	}
 
 	@Override
 	public User authenticate(String email, String password) {
-		
+
 		User user = null;
 		List<User> users = null;
-		
-			Query query =  em.createQuery("SELECT u FROM User u WHERE u.email=:emailParam "
-					+ "AND u.password=:passwordParam AND u.unsubscriptionDate is NULL");
-			query.setParameter("emailParam", email);
-			query.setParameter("passwordParam", password);
-			users = query.getResultList();
-			
+
+		Query query = em
+				.createQuery("SELECT u FROM User u WHERE u.email=:emailParam "
+						+ "AND u.password=:passwordParam AND u.unsubscriptionDate is NULL");
+		query.setParameter("emailParam", email);
+		query.setParameter("passwordParam", password);
+		users = query.getResultList();
+
 		if (users.size() > 0) {
 			user = users.get(0);
+			user.setLastName(user.getLastName().toUpperCase());
 		}
 		return user;
-		
+
 	}
 
+	@Override
+	public Boolean verifyDuplicateEmailOnUpdate(Integer id, String email) {
+		List<User> users = null;
+
+		try {
+			users = (List<User>) em.createQuery(
+					"SELECT u From User u WHERE u.id!=:idParam AND u.email=:emailParam")
+					.setParameter("emailParam", email)
+					.setParameter("idParam", id).getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return users.size() > 0;
+	}
 
 }
