@@ -209,7 +209,8 @@
 											</div>
 											<br />
 											<b:commandButton class="get-started-btn" value="Modifier"
-												action="#{mbUser.updateContact()}" />
+												action="#{mbUser.updateContact()}"
+												oncomplete="dialogWidget.show()" />
 										</b:form>
 									</div>
 
@@ -288,10 +289,10 @@
 									<div class="user-parameter">
 										<b:form>
 											<label for="inpUnsubsriptionReason">Choisis une
-												raison de départ :</label><br />
+												raison de départ :</label>
+											<br />
 											<p:selectOneMenu id="inpUnsubsriptionReason"
-												value="#{mbUser.unsubscriptionReason}"
-												required="true"
+												value="#{mbUser.unsubscriptionReason}" required="true"
 												requiredMessage="Vous devez choisir une raison"
 												converter="entityConverter">
 												<f:selectItem itemLabel="Choisissez une raison" itemValue="" />
@@ -299,7 +300,8 @@
 													value="#{mbUnsubscriptionReason.showAllUnsubscriptionReasons()}"
 													var="reason" itemLabel="#{reason.reason}"
 													itemValue="#{reason}" />
-											</p:selectOneMenu><br />
+											</p:selectOneMenu>
+											<br />
 											<label for="inpUnsubsriptionDescription">Décris nous
 												la raison de ton départ:</label>
 											<b:inputTextarea id="inpUnsubsriptionDescription"
@@ -314,6 +316,15 @@
 									</div>
 								</div>
 							</div>
+							<p:dialog widgetVar="dialogWidget">
+								<h:form id="dialog">
+									<p:panel>
+										<p>
+											<p:message id="messageUpdateConfirmation" />
+										</p>
+									</p:panel>
+								</h:form>
+							</p:dialog>
 						</div>
 					</div>
 
