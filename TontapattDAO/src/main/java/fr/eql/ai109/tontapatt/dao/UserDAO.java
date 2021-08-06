@@ -54,6 +54,7 @@ public class UserDAO extends GenericDAO<User> implements UserIDAO {
 			
 		if (users.size() > 0) {
 			user = users.get(0);
+			user.setLastName(user.getLastName().toUpperCase());
 		}
 		return user;
 		
