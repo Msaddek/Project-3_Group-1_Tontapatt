@@ -249,6 +249,11 @@ public class UserManagedBean implements Serializable {
 		User newUser = user;
 		newUser.setEmail(email);
 		newUser.setPhoneNumber(phoneNumber);
+		String message = "L'adresse mail et/ou le numéro de portable sont à jour";
+		FacesMessage facesMessage = new FacesMessage(
+				FacesMessage.SEVERITY_INFO, message, message);
+		FacesContext.getCurrentInstance()
+				.addMessage("messageUpdateConfirmation", facesMessage);
 		return verifyEmailExistBeforeUpdate(newUser);
 	}
 
