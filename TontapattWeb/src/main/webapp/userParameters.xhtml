@@ -6,136 +6,321 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
 
+<f:metadata>
+
+	<f:viewAction action="#{mbZipCodeCity.initCityOfConnectedUser()}" />
+	<f:viewAction action="#{mbZipCodeCity.onZipCodeChange()}" />
+	<f:viewAction action="#{mbUser.initConnectedUserParam()}" />
+</f:metadata>
+
+
 <ui:composition template="WEB-INF/template/userTemplate.xhtml">
 
 	<ui:define name="head">
-		<title>Identification</title>
+		<title>Paramètres</title>
 	</ui:define>
 
 	<ui:define name="content">
-		<div class="page-wrapper bg-blue p-t-100 p-b-100 font-robo">
-			<div class="wrapper wrapper--w680">
-				<div class="card card-1">
-					<div class="card-heading"></div>
-					<div class="card-body">
-						<h2 class="title">Inscription</h2>
-						<b:form id="updateUserForm">
-							<div>
-								<br /> <label for="inpPassword">Mot de passe :</label><br />
-								<p:password id="inpPassword" styleClass="passsword-inp"
-									value="#{mbUser.password}" placeholder="Mot de passe *"
-									required="true" requiredMessage="Le mot de passe est requis"
-									toggleMask="true" redisplay="true" match="inpConfirmPassword"
-									validatorMessage="Les mots de passe ne sont pas identiques">
-								</p:password>
-								<br />
-								<p:message id="passwordMessage" for="inpPassword" />
+
+		<div class="container">
+
+
+			<div class="user-parameters">
+				<div class="section-title">
+					<h2>Mes paramètres</h2>
+					<p>Gérer mes paramètres</p>
+				</div>
+				<div class="row justify-content-center">
+					<div class="col-12 col-lg-10 col-xl-8 mx-auto">
+						<div class="row mt-5 align-items-center">
+							<div class="col-md-3 text-center mb-5">
+								<div class="avatar avatar-xl">
+									<p:graphicImage
+										value="resources/img/users/#{mbUser.user.photo}"
+										class="avatar-img rounded-circle"></p:graphicImage>
+								</div>
 							</div>
-
-							<div>
-								<br /> <label for="inpConfirmPassword">Confirmation du
-									mot de passe :</label><br />
-								<p:password id="inpConfirmPassword" styleClass="passsword-inp"
-									value="#{mbUser.confirmPassword}" placeholder="Mot de passe *"
-									required="true" requiredMessage="Le mot de passe est requis"
-									toggleMask="true" redisplay="true">
-								</p:password>
-								<br />
-								<p:message id="confirmPasswordMessage" for="inpConfirmPassword" />
-
-							</div>
-
-							<div>
-								<label for="inpPhoneNumber">Téléphone :</label>
-								<p:inputText id="inpPhoneNumber" value="#{mbUser.phoneNumber}"
-									required="true" requiredMessage="Le numéro est requis"
-									validatorMessage="Le numéro n'est pas valide"
-									placeholder="Numéro de téléphone *">
-									<f:validateRegex pattern="^(\+33|0033|0)(6|7)[0-9]{8}$" />
-									<p:ajax update="inpPhoneNumber" />
-									<p:ajax update="phoneNumberMessage" />
-								</p:inputText>
-								<p:message id="phoneNumberMessage" for="inpPhoneNumber" />
-							</div>
-
-							<div>
-								<label for="inpAdresse">Adresse :</label>
-								<p:inputText id="inpAdresse" value="#{mbUser.address}"
-									required="true" requiredMessage="Vous devez entrer une adresse">
-									<p:ajax update="inpAdresse" />
-									<p:ajax update="adresseMessage" />
-								</p:inputText>
-								<p:message id="adresseMessage" for="inpAdresse" />
-							</div>
-
-							<div class="codeCity">
-								<div class="row row-space">
-									<div class="col-2">
-										<div>
-											<label for="inpZipCode">Code postal :</label>
-											<p:inputText id="inpZipCode" value="#{mbZipCodeCity.zipCode}"
-												required="true" requiredMessage="Le code postal est requis"
-												validatorMessage="Le code postal n'est pas valide"
-												placeholder="Code postal *">
-												<f:validateRegex
-													pattern="^((0[1-9])|([1-8][0-9])|(9[0-8])|(2A)|(2B))[0-9]{3}$" />
-												<p:ajax listener="#{mbZipCodeCity.onZipCodeChange()}"
-													update="inpCity" />
-												<p:ajax update="inpZipCode" />
-												<p:ajax update="zipCodeMessage" />
-											</p:inputText>
-											<p:message id="zipCodeMessage" for="inpZipCode" />
-										</div>
+							<div class="col">
+								<div class="row align-items-center">
+									<div class="col-md-7">
+										<h1 class="mb-1">#{mbUser.user.firstName}
+											#{mbUser.user.lastName}</h1>
+										<p class="small mb-3">
+											<span class="badge badge-dark">#{mbUser.user.zipCodeCity.name},
+												FR</span>
+										</p>
 									</div>
-									<div class="col-2">
-										<div>
-											<label for="inpCity">Ville :</label><br />
-											<p:selectOneMenu id="inpCity" value="#{mbUser.city}"
-												required="true"
-												requiredMessage="Vous devez choisir une ville"
-												converter="entityConverter">
-												<f:selectItem itemLabel="Choisissez une ville" itemValue="" />
-												<f:selectItems value="#{mbZipCodeCity.cities}" var="city"
-													itemLabel="#{city.name}" itemValue="#{city}" />
-												<p:ajax update="inpCity" />
-												<p:ajax update="cityMessage" />
-											</p:selectOneMenu>
-											<p:message id="cityMessage" for="inpCity" />
-										</div>
+								</div>
+								<div class="row mb-4">
+									<div class="col-md-7">
+										<p class="text-muted">#{mbUser.description}</p>
 									</div>
 								</div>
 							</div>
+						</div>
 
-							<div>
-								<label for="inpDescription">Description :</label>
-								<b:inputTextarea id="inpDescription" required="#false"
-									value="#{mbUser.description}" rows="5" cols="30"
-									counter="displayGacCharCount" maxlength="255"
-									counterTemplate="{0} caractères restants." autoResize="false" />
-							</div>
+						<div class="navTab-user">
+							<nav>
+							<div class="nav nav-tabs" id="nav-tab" role="tablist">
 
-							<div>
-								<p:fileUpload id="inpPhoto" label="Ajouter une photo"
-									mode="advanced" listener="#{mbUser.uploadPhoto}"
-									required="#false" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
-									fileLimit="1"
-									fileLimitMessage="Vous avez le droit à 1 seule photo"
-									invalidFileMessage="Le fichier doit être de type gif, jpe, jpeg ou png"
-									uploadLabel="Télécharger" cancelLabel="Annuler"
-									update="photoMessage">
-								</p:fileUpload>
-								<p:message id="photoMessage" for="inpPhoto" />
-							</div>
+								<button class="nav-link active" id="nav-profil-tab"
+									data-bs-toggle="tab" data-bs-target="#nav-profil" type="button"
+									role="tab" aria-controls="nav-home" aria-selected="true">Profil</button>
 
-							<div class="p-t-20">
-								<b:commandButton class="btnSubscription" value="Valider"
-									action="#{mbUser.updateUser()}" />
+								<button class="nav-link" id="nav-email-tab" data-bs-toggle="tab"
+									data-bs-target="#nav-email" type="button" role="tab"
+									aria-controls="nav-email" aria-selected="false">Contact</button>
+
+								<button class="nav-link" id="nav-mdp-tab" data-bs-toggle="tab"
+									data-bs-target="#nav-mdp" type="button" role="tab"
+									aria-controls="nav-mdp" aria-selected="false">Mot de
+									passe</button>
+
+								<button class="nav-link" id="nav-description-tab"
+									data-bs-toggle="tab" data-bs-target="#nav-description"
+									type="button" role="tab" aria-controls="nav-description"
+									aria-selected="false">Photo/Description</button>
+
+								<button class="nav-link" id="nav-unscription-tab"
+									data-bs-toggle="tab" data-bs-target="#nav-unscription"
+									type="button" role="tab" aria-controls="nav-unscription"
+									aria-selected="false" style="color: red;">Se
+									désinscrire</button>
+
 							</div>
-						</b:form>
+							</nav>
+
+							<div class="tab-content" id="nav-tabContent">
+
+								<div class="tab-pane fade show active" id="nav-profil"
+									role="tabpanel" aria-labelledby="nav-profil-tab">
+									<div class="user-parameter">
+										<b:form>
+											<div class="user-param">
+												<label for="inpLastName">Nom</label>
+												<p:inputText type="text" id="inpLastName"
+													class="form-control" value="#{mbUser.lastName}"
+													required="true"
+													requiredMessage="Vous devez entrer votre nom" />
+												<p:message id="lastNameMessage" for="inpLastName" />
+											</div>
+											<div class="user-param">
+												<label for="inpFirstName">Prénom</label>
+												<p:inputText type="text" id="inpFirstName"
+													class="form-control" value="#{mbUser.firstName}"
+													required="true"
+													requiredMessage="Vous devez entrer votre nom" />
+												<p:message id="firstNameMessage" for="inpFirstName" />
+											</div>
+											<div class="user-param">
+												<label for="inpAdresse">Adresse :</label><br />
+												<p:inputText id="inpAdresse" value="#{mbUser.address}"
+													required="true"
+													requiredMessage="Vous devez entrer une adresse">
+													<p:ajax update="inpAdresse" />
+													<p:ajax update="adresseMessage" />
+												</p:inputText>
+												<p:message id="adresseMessage" for="inpAdresse" />
+											</div>
+
+
+											<div class="codeCity">
+												<div class="row row-space">
+													<div class="col-2">
+														<div>
+															<div class="user-param">
+																<label for="inpZipCode">Code postal :</label>
+																<p:inputText id="inpZipCode"
+																	value="#{mbZipCodeCity.zipCode}" required="true"
+																	requiredMessage="Le code postal est requis"
+																	validatorMessage="Le code postal n'est pas valide"
+																	placeholder="Code postal *">
+																	<f:validateRegex
+																		pattern="^((0[1-9])|([1-8][0-9])|(9[0-8])|(2A)|(2B))[0-9]{3}$" />
+																	<p:ajax listener="#{mbZipCodeCity.onZipCodeChange()}"
+																		update="inpCity" />
+																	<p:ajax update="inpZipCode" />
+																	<p:ajax update="zipCodeMessage" />
+																</p:inputText>
+																<p:message id="zipCodeMessage" for="inpZipCode" />
+															</div>
+														</div>
+													</div>
+													<div class="col-2">
+														<div>
+															<div class="user-param">
+																<label for="inpCity">Ville :</label><br />
+																<p:selectOneMenu id="inpCity" value="#{mbUser.city}"
+																	required="true"
+																	requiredMessage="Vous devez choisir une ville"
+																	converter="entityConverter">
+																	<f:selectItem itemLabel="Choisissez une ville"
+																		itemValue="" />
+																	<f:selectItems value="#{mbZipCodeCity.cities}"
+																		var="city" itemLabel="#{city.name}"
+																		itemValue="#{city}" />
+																	<p:ajax update="inpCity" />
+																	<p:ajax update="cityMessage" />
+																</p:selectOneMenu>
+																<p:message id="cityMessage" for="inpCity" />
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<b:commandButton class="get-started-btn" value="Modifier"
+												action="#{mbUser.updateNameAndAddress()}" />
+										</b:form>
+									</div>
+								</div>
+
+								<div class="tab-pane fade" id="nav-email" role="tabpanel"
+									aria-labelledby="nav-email-tab">
+
+									<div class="user-parameter">
+										<b:form id="updateEmailForm">
+											<div class="user-param">
+												<label for="inpEmail">Email</label>
+												<p:inputText type="text" id="inpEmail" class="form-control"
+													value="#{mbUser.email}" required="true"
+													requiredMessage="L'adresse mail est requise"
+													validatorMessage="Le format de l'adresse mail doit similaire à 'example@domaine.com'">
+													<f:validateRegex
+														pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+													<p:ajax event="blur"
+														listener="#{mbUser.verifyEmailExistBeforeUpdate}"
+														update="emailMessage" />
+													<p:ajax update="inpEmail" />
+												</p:inputText>
+												<p:message id="emailMessage" for="inpEmail" />
+											</div>
+											<div class="user-param">
+												<label for="inpPhoneNumber">Téléphone :</label><br />
+												<p:inputText id="inpPhoneNumber"
+													value="#{mbUser.phoneNumber}" required="true"
+													requiredMessage="Le numéro est requis"
+													validatorMessage="Le numéro n'est pas valide"
+													placeholder="Numéro de téléphone *">
+													<f:validateRegex pattern="^(\+33|0033|0)(6|7)[0-9]{8}$" />
+													<p:ajax update="inpPhoneNumber" />
+													<p:ajax update="phoneNumberMessage" />
+												</p:inputText>
+												<p:message id="phoneNumberMessage" for="inpPhoneNumber" />
+											</div>
+											<br />
+											<b:commandButton class="get-started-btn" value="Modifier"
+												action="#{mbUser.updateContact()}" />
+										</b:form>
+									</div>
+
+								</div>
+								<div class="tab-pane fade" id="nav-mdp" role="tabpanel"
+									aria-labelledby="nav-mdp-tab">
+									<div class="user-parameter">
+										<b:form>
+											<div>
+												<label for="inpPassword">Mot de passe :</label><br />
+												<p:password id="inpPassword" styleClass="passsword-inp"
+													value="#{mbUser.password}" placeholder="Mot de passe *"
+													required="true"
+													requiredMessage="Le mot de passe est requis"
+													toggleMask="true" redisplay="true"
+													match="inpConfirmPassword"
+													validatorMessage="Les mots de passe ne sont pas identiques">
+												</p:password>
+												<p:message id="passwordMessage" for="inpPassword" />
+											</div>
+
+											<div>
+												<br /> <label for="inpConfirmPassword">Confirmation
+													du mot de passe :</label><br />
+												<p:password id="inpConfirmPassword"
+													styleClass="passsword-inp"
+													value="#{mbUser.confirmPassword}"
+													placeholder="Mot de passe *" required="true"
+													requiredMessage="Le mot de passe est requis"
+													toggleMask="true" redisplay="true">
+												</p:password>
+												<br />
+												<p:message id="confirmPasswordMessage"
+													for="inpConfirmPassword" />
+
+											</div>
+											<b:commandButton class="get-started-btn" value="Modifier"
+												action="#{mbUser.updatePassword()}" />
+										</b:form>
+									</div>
+								</div>
+
+								<div class="tab-pane fade" id="nav-description" role="tabpanel"
+									aria-labelledby="nav-description-tab">
+									<div class="user-parameter">
+										<b:form>
+											<div>
+												<label for="inpDescription">Description :</label>
+												<b:inputTextarea id="inpDescription" required="#false"
+													value="#{mbUser.description}" rows="5" cols="30"
+													counter="displayGacCharCount" maxlength="255"
+													counterTemplate="{0} caractères restants."
+													autoResize="false" />
+											</div>
+
+											<div>
+												<p:fileUpload id="inpPhoto" label="Ajouter une photo"
+													mode="advanced" listener="#{mbUser.uploadPhoto}"
+													required="#false" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+													fileLimit="1"
+													fileLimitMessage="Vous avez le droit à 1 seule photo"
+													invalidFileMessage="Le fichier doit être de type gif, jpe, jpeg ou png"
+													uploadLabel="Télécharger" cancelLabel="Annuler"
+													update="photoMessage">
+												</p:fileUpload>
+												<p:message id="photoMessage" for="inpPhoto" />
+											</div>
+											<b:commandButton class="get-started-btn" value="Modifier"
+												action="#{mbUser.updateDescriptionAndPhoto()}" />
+										</b:form>
+									</div>
+								</div>
+
+								<div class="tab-pane fade" id="nav-unscription" role="tabpanel"
+									aria-labelledby="nav-unscription-tab">
+									<div class="user-parameter">
+										<b:form>
+											<label for="inpUnsubsriptionReason">Choisis une
+												raison de départ :</label><br />
+											<p:selectOneMenu id="inpUnsubsriptionReason"
+												value="#{mbUser.unsubscriptionReason}"
+												required="true"
+												requiredMessage="Vous devez choisir une raison"
+												converter="entityConverter">
+												<f:selectItem itemLabel="Choisissez une raison" itemValue="" />
+												<f:selectItems
+													value="#{mbUnsubscriptionReason.showAllUnsubscriptionReasons()}"
+													var="reason" itemLabel="#{reason.reason}"
+													itemValue="#{reason}" />
+											</p:selectOneMenu><br />
+											<label for="inpUnsubsriptionDescription">Décris nous
+												la raison de ton départ:</label>
+											<b:inputTextarea id="inpUnsubsriptionDescription"
+												required="false"
+												value="#{mbUser.withdrawalReasonDescription}" rows="5"
+												cols="30" counter="displayGacCharCount" maxlength="255"
+												counterTemplate="{0} caractères restants."
+												autoResize="false" />
+											<b:commandButton class="get-started-btn"
+												value="Se désinscrire" action="#{mbUser.unsubscribeUser()}" />
+										</b:form>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
+
 				</div>
 			</div>
 		</div>
+
 	</ui:define>
 </ui:composition>
 </html>
