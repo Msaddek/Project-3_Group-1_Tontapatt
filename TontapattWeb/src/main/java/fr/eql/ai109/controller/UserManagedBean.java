@@ -19,6 +19,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import org.primefaces.PrimeFaces;
 import org.primefaces.event.FileUploadEvent;
 
 import fr.eql.ai109.ibusiness.UserIBusiness;
@@ -74,6 +75,8 @@ public class UserManagedBean implements Serializable {
 	private UnsubscriptionReason unsubscriptionReason;
 
 	private UserCategory category;
+	
+	private String dialogMessage;
 
 	public String connect() {
 
@@ -236,35 +239,31 @@ public class UserManagedBean implements Serializable {
 		phoneNumber = user.getPhoneNumber();
 	}
 
-	public String updateNameAndAddress() {
+	public void updateNameAndAddress() {
 		user.setAddress(address);
 		user.setZipCodeCity(city);
 		user.setFirstName(firstName);
 		user.setLastName(lastName.toUpperCase());
 		user = business.update(user);
-		return "/userUpdateDone.xhtml?faces-redirect=true";
+		dialogMessage = "Votre profile est à jour!";
+		PrimeFaces.current().executeScript("PF('dialogWidget').show()");
 	}
 
-	public String updateContact() {
+	public void updateContact() {
 		User newUser = user;
 		newUser.setEmail(email);
 		newUser.setPhoneNumber(phoneNumber);
-		String message = "L'adresse mail et/ou le numéro de portable sont à jour";
-		FacesMessage facesMessage = new FacesMessage(
-				FacesMessage.SEVERITY_INFO, message, message);
-		FacesContext.getCurrentInstance()
-				.addMessage("messageUpdateConfirmation", facesMessage);
-		return verifyEmailExistBeforeUpdate(newUser);
+		
+		verifyEmailExistBeforeUpdate(newUser);
 	}
 
-	private String verifyEmailExistBeforeUpdate(User newUser) {
-		String forward;
+	private void verifyEmailExistBeforeUpdate(User newUser) {
 		boolean emailExists = business.verifyDuplicateEmailOnUpdate(
 				newUser.getId(), newUser.getEmail());
 		if (!emailExists) {
 			user = business.update(newUser);
-
-			forward = "/userUpdateDone.xhtml?faces-redirect=true";
+			dialogMessage = "Votre adresse mail et/ou le numéro de portable sont à jour";
+			PrimeFaces.current().executeScript("PF('dialogWidget').show()");
 
 		} else {
 			String message = "Adresse mail déjà existante, veuillez choisir un autre";
@@ -272,9 +271,7 @@ public class UserManagedBean implements Serializable {
 					FacesMessage.SEVERITY_FATAL, message, message);
 			FacesContext.getCurrentInstance()
 					.addMessage("updateEmailForm:inpEmail", facesMessage);
-			forward = "/userParameters.xhtml?faces-redirect=false";
 		}
-		return forward;
 	}
 
 	public void verifyEmailExistBeforeUpdate() {
@@ -289,18 +286,19 @@ public class UserManagedBean implements Serializable {
 		}
 	}
 
-	public String updatePassword() {
+	public void updatePassword() {
 		user.setPassword(password);
 		user = business.updatePassword(user);
-		return "/userUpdateDone.xhtml?faces-redirect=true";
+		dialogMessage = "Votre mot de passe est à jour!";
+		PrimeFaces.current().executeScript("PF('dialogWidget').show()");
 	}
 
-	public String updateDescriptionAndPhoto() {
+	public void updateDescriptionAndPhoto() {
 		user.setDescription(description);
 		user.setPhoto(photo);
 		user = business.update(user);
-		System.out.println("ok");
-		return "/userUpdateDone.xhtml?faces-redirect=true";
+		dialogMessage = "Votre photo et/ou description sont à jour!";
+		PrimeFaces.current().executeScript("PF('dialogWidget').show()");
 	}
 
 	public String unsubscribeUser() {
@@ -455,6 +453,14 @@ public class UserManagedBean implements Serializable {
 
 	public void setCategory(UserCategory category) {
 		this.category = category;
+	}
+
+	public String getDialogMessage() {
+		return dialogMessage;
+	}
+
+	public void setDialogMessage(String dialogMessage) {
+		this.dialogMessage = dialogMessage;
 	}
 
 }
