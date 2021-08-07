@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui" xmlns:p="http://primefaces.org/ui">
+
+
+<header id="headerU" class="fixed-top">
+
+<div class="container d-flex align-items-center">
+
+	<h1 class="logo me-auto">
+		<a class="titleT" href="home.xhtml">Tontapatt</a>
+	</h1>
+
+	<nav id="navbar" class="navbar order-last order-lg-0">
+	<ul>
+
+		<li><a class="active" href="connectedPage.xhtml">Hey,
+				#{mbUser.user.firstName} !</a></li>
+		<li><a href="home.xhtml">Prestation</a></li>
+		<li><a href="home.xhtml">Nouveauté</a></li>
+
+	</ul>
+	<div style="display: none">
+		<b:dropButton value="">
+		</b:dropButton>
+	</div>
+	<div class="dropdown">
+		<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+			role="button" data-toggle="dropdown" aria-haspopup="true"
+			aria-expanded="false">
+
+			<div class="profilPicture">
+				<p:graphicImage class="img-profil" value="resources/img/users/#{mbUser.user.photo}"
+					alt="No picture set"></p:graphicImage>
+			</div>
+
+		</a>
+		<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+			<div>
+				<a class="dropdown-item" href="offerParameters.xhtml"> Mes
+					offres</a>
+			</div>
+			<div>
+				<a class="dropdown-item" href="fieldParameters.xhtml"> Mes
+					terrains</a>
+			</div>
+			<div>
+				<a class="dropdown-item" href="userParameters.xhtml"> Mes
+					Paramètres</a>
+			</div>
+			<div class="dropdown-divider"></div>
+			<h:form>
+				<div class="disconnect-btn">
+					<p:commandButton styleClass="ui-button-danger ui-button-flat"
+						value="Deconnexion" action="#{mbUser.disconnect()}" />
+				</div>
+			</h:form>
+
+		</div>
+
+	</div>
+
+	</nav>
+
+</div>
+
+</header>
+
+<section id="heroF"
+	class="d-flex justify-content-center align-items-center">
+<div class="container position-relative" data-aos="zoom-in"
+	data-aos-delay="100">
+
+	<font face="Arial" size="20px" color="white">Tableau de bord</font>
+	<div class="bord-elements">
+		<div class="bord-element">
+			<a href="courses.html" class="btn-get-started" data-toggle="modal"
+				data-target="#amodal">
+				<div class="searchBar">
+					<div>Ajouter un terrain</div>
+					<div id="iconSearch">
+						<b:iconAwesome name="plus" size="lg" />
+					</div>
+				</div>
+			</a>
+		</div>
+
+
+		<div class="bord-element">
+			<a href="#" class="btn-get-started" data-toggle="modal"
+				data-target="#amodal">
+				<div class="searchBar">
+					<div>Paramétrer mes terrains</div>
+					<div id="iconSearch">
+						<b:iconAwesome name="cog" size="lg" />
+					</div>
+				</div>
+			</a>
+		</div>
+	</div>
+</div>
+
+</section>
+
+</html>
