@@ -1,6 +1,7 @@
 package fr.eql.ai109.business;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.ejb.Remote;
@@ -8,6 +9,7 @@ import javax.ejb.Stateless;
 
 import fr.eql.ai109.ibusiness.RaceIBusiness;
 import fr.eql.ai109.tontapatt.entity.Race;
+import fr.eql.ai109.tontapatt.entity.Species;
 import fr.eql.ai109.tontapatt.idao.RaceIDAO;
 
 @Remote(RaceIBusiness.class)
@@ -45,5 +47,10 @@ public class RaceBusiness implements RaceIBusiness {
 	public List<Race> getAll() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Set<Race> getRacesBySpecies(Species species) {
+		return raceIDAO.getRacesBySpecies(species);
 	}
 }
