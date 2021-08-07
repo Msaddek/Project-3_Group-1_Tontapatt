@@ -428,6 +428,174 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /*--------------------------------------------------------------
+# HeroF Section
+--------------------------------------------------------------*/
+#heroF {
+  width: 100%;
+  height: 50vh;
+  background: url("../img/natureF.jpg") top center;
+  background-size: cover;
+  position: relative;
+}
+
+#heroF:before {
+  content: "";
+  background: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+#heroF .container {
+  text-align: center;
+}
+
+@media (max-width: 992px) {
+  #heroF .container {
+    padding-top: 2px;
+  }
+}
+
+#heroF h1 {
+  margin: 0;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 56px;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+}
+
+#heroF h2 {
+  color: #eee;
+  margin: 10px 0 0 0;
+  font-size: 24px;
+}
+
+#heroF .btn-get-started {
+  font-family: "Raleway", sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 10px 0px 10px 55px;
+  border-radius: 50px;
+  transition: 0.5s;
+  border: 2px solid #fff;
+  color: #fff;
+}
+
+#heroF .btn-get-started:hover {
+  background: #5fcf80;
+  border: 2px solid #5fcf80;
+}
+
+@media (min-width: 1024px) {
+  #heroF {
+    background-attachment: fixed;
+  }
+}
+
+@media (max-width: 768px) {
+  #heroF {
+    height: 100vh;
+  }
+  #heroF h1 {
+    font-size: 28px;
+    line-height: 36px;
+  }
+  #heroF h2 {
+    font-size: 18px;
+    line-height: 24px;
+  }
+}
+
+/*--------------------------------------------------------------
+# HeroO Section
+--------------------------------------------------------------*/
+#heroO {
+  width: 100%;
+  height: 50vh;
+  background: url("../img/natureO.jpg") top center;
+   background-size: cover;
+  position: relative;
+}
+
+#heroO:before {
+  content: "";
+  background: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+#heroO .container {
+  text-align: center;
+}
+
+@media (max-width: 992px) {
+  #heroO .container {
+    padding-top: 2px;
+  }
+}
+
+#heroO h1 {
+  margin: 0;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 56px;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+}
+
+#heroO h2 {
+  color: #eee;
+  margin: 10px 0 0 0;
+  font-size: 24px;
+}
+
+#heroO .btn-get-started {
+  font-family: "Raleway", sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 10px 0px 10px 55px;
+  border-radius: 50px;
+  transition: 0.5s;
+  border: 2px solid #fff;
+  color: #fff;
+}
+
+#heroO .btn-get-started:hover {
+  background: #5fcf80;
+  border: 2px solid #5fcf80;
+}
+
+@media (min-width: 1024px) {
+  #heroO {
+    background-attachment: fixed;
+  }
+}
+
+@media (max-width: 768px) {
+  #heroO {
+    height: 100vh;
+  }
+  #heroO h1 {
+    font-size: 28px;
+    line-height: 36px;
+  }
+  #heroO h2 {
+    font-size: 18px;
+    line-height: 24px;
+  }
+}
+
+/*--------------------------------------------------------------
 # Sections General
 --------------------------------------------------------------*/
 section {
@@ -1152,4 +1320,38 @@ position: relative;
 	justify-content: center;
 	padding: 10px;
 	margin-top: 20px;
+}
+
+.offer-box {
+	padding: 10px;
+}
+
+.tableau-bord {
+	text-align: center;
+}
+/* USER OFFERS PAGE */
+
+.title-page {
+	margin-left: 300px;
+	margin-top: 50px;
+}
+.table-box{
+	padding: 0 50px 0 50px;
+	text-align:center;
+	justify-content: center;
+	margin-bottom: 100px;
+}
+.table-offer {
+	    position: relative;
+    margin: 1rem -15px 0;
+    border: solid #f7f7f9;
+    border-width: .2rem 0 0;
+    padding: 1.5rem;
+}
+
+.table {
+	width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    background-color: transparent;
 }
