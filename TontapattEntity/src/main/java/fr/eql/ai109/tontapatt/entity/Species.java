@@ -36,10 +36,9 @@ public class Species implements Serializable {
 	@ManyToMany(mappedBy = "species")
 	Set<FenceHeight> fenceHeights;
 
-	@OneToMany(mappedBy = "species", cascade = CascadeType.ALL, orphanRemoval = true)
-	private Set<FavoriteFlatness> favoriteFlatnesses = new HashSet<>();
-//	@ManyToMany(mappedBy = "species")
-//	Set<FlatnessPercentage> flatnessPercentages;
+	
+	@ManyToMany(mappedBy = "species")
+	Set<FlatnessPercentage> flatnessPercentages;
 
 	@ManyToMany(mappedBy = "species")
 	Set<VegetationType> vegetationTypes;
@@ -102,21 +101,8 @@ public class Species implements Serializable {
 		this.fenceHeights = fenceHeights;
 	}
 
-	public Set<FavoriteFlatness> getFavoriteFlatnesses() {
-		return favoriteFlatnesses;
-	}
 
-	public void setFavoriteFlatnesses(Set<FavoriteFlatness> favoriteFlatnesses) {
-		this.favoriteFlatnesses = favoriteFlatnesses;
-	}
 
-	public Set<VegetationType> getVegetationTypes() {
-		return vegetationTypes;
-	}
-
-	public void setVegetationTypes(Set<VegetationType> vegetationTypes) {
-		this.vegetationTypes = vegetationTypes;
-	}
 
 	
 

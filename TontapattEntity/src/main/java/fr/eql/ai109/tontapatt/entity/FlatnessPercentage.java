@@ -34,11 +34,9 @@ public class FlatnessPercentage implements Serializable {
 	private Integer percentage;
 	@OneToMany(mappedBy = "flatnessPercentage", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<Field> fields;
-	@OneToMany(mappedBy = "flatnessPercentage", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private Set<Species> species;
-	/*@ManyToMany
+	@ManyToMany
 	@JoinTable(name = "favorite_flatness", joinColumns = @JoinColumn(name = "flatness_percentage_id"), inverseJoinColumns = @JoinColumn(name = "species_id"))
-	private Set<Species> species;*/
+	private Set<Species> species;
 
 	public FlatnessPercentage() {
 		super();

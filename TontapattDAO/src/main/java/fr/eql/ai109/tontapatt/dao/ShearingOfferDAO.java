@@ -1,9 +1,7 @@
 package fr.eql.ai109.tontapatt.dao;
 
-<<<<<<< HEAD
-=======
+
 import java.time.LocalDateTime;
->>>>>>> main
 import java.util.Set;
 
 import javax.ejb.Remote;
@@ -12,30 +10,17 @@ import javax.persistence.Query;
 
 import fr.eql.ai109.tontapatt.entity.Field;
 import fr.eql.ai109.tontapatt.entity.ShearingOffer;
-<<<<<<< HEAD
 import fr.eql.ai109.tontapatt.entity.ShearingOfferPhoto;
 import fr.eql.ai109.tontapatt.entity.User;
-=======
 import fr.eql.ai109.tontapatt.entity.User;
 import fr.eql.ai109.tontapatt.entity.ZipCodeCity;
->>>>>>> main
 import fr.eql.ai109.tontapatt.idao.ShearingOfferIDAO;
 
 @Remote(ShearingOfferIDAO.class)
 @Stateless
 public class ShearingOfferDAO extends GenericDAO<ShearingOffer>
 		implements ShearingOfferIDAO {
-<<<<<<< HEAD
 	
-	@Override
-	public Set<ShearingOffer> findShearingOffersByUser(User user) {
-		Set<ShearingOffer> offers = null;
-		Query query = em.createQuery("SELECT so FROM ShearingOffer so WHERE so.breeder=:breederParam ");
-		query.setParameter("breederParam", user);
-		offers = (Set<ShearingOffer>) query.getResultList();
-		return offers;
-	}
-=======
 
 	@Override
 	public Set<ShearingOffer> searchOfferByFieldLocation(Field field) {
@@ -138,5 +123,4 @@ public class ShearingOfferDAO extends GenericDAO<ShearingOffer>
 		return shearingOffers;
 	}
 
->>>>>>> main
 }
