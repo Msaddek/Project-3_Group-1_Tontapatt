@@ -11,6 +11,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
+import org.primefaces.PrimeFaces;
+
 import fr.eql.ai109.ibusiness.FieldIBusiness;
 import fr.eql.ai109.tontapatt.entity.FenceHeight;
 import fr.eql.ai109.tontapatt.entity.Field;
@@ -71,10 +73,17 @@ public class FieldManagedBean implements Serializable {
 	private VegetationComposition vegetationComposition;
 
 	private Integer vegetationPercentage;
+	
+	private String dialogMessage;
 
 	@ManagedProperty(value = "#{mbUser.user}")
 	private User connectedUser;
 	private Set<Field> connectedUserFields;
+	
+	//TODO TOKEEP???????????????????
+	@ManagedProperty(value = "#{mbField.field}")
+	private Field selectedField;
+	
 
 	@PostConstruct()
 	public void init() {
@@ -82,7 +91,39 @@ public class FieldManagedBean implements Serializable {
 		
 		vegetationCompositions = new HashSet<>();
 	}
+	
+	public void initSelectedFieldParam() {
+		name = field.getName();
+		address = field.getAddress();
+		area = field.getArea();
+		description = field.getDescription();
+		grassHeight = field.getGrassHeight();
+		fenceHeight = field.getFenceHeight();
+		flatnessPercentage = field.getFlatnessPercentage();
+		// TODO: végétations
+	}
+	
+	public void updateNameAndAddress() {
+		field.setAddress(address);
+		field.setZipCodeCity(zipCodeCity);
+		field.setName(name);
+		field = fieldBusiness.update(field);
+		dialogMessage = "Votre profil est à jour!";
+		PrimeFaces.current().executeScript("PF('dialogWidget').show()");
+	}
+	
+	public void updateDescriptionAndSurface() {
+		field.setDescription(description);
+		field.setArea(area);
+		field = fieldBusiness.update(field);
+		dialogMessage = "Votre photo et/ou description sont à jour!";
+		PrimeFaces.current().executeScript("PF('dialogWidget').show()");
+	}
 
+//TODO update photo
+//TODO update attributs avec référentiels
+//TODO update vegetationComposition
+	
 	public String createField() {
 		String forward = "/fieldRegistrationDone.xhtml?faces-redirect=true"; // faire
 																				// addPhoto.xhtml
@@ -298,6 +339,14 @@ public class FieldManagedBean implements Serializable {
 
 	public void setVegetationPercentage(Integer vegetationPercentage) {
 		this.vegetationPercentage = vegetationPercentage;
+	}
+	
+	public String getDialogMessage() {
+		return dialogMessage;
+	}
+
+	public void setDialogMessage(String dialogMessage) {
+		this.dialogMessage = dialogMessage;
 	}
 
 }

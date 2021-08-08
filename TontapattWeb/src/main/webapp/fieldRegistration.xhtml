@@ -109,10 +109,8 @@
 			<div class="card card-1">
 				<div class="card-heading"></div>
 				<div class="card-body">
-					<h2 class="title">Ajouter un nouveau terrain pour M.:</h2>
-					<h4>
-						<h:outputLabel value="#{mbUser.user.lastName}" />
-					</h4>
+					<h2 class="title">Ajouter un terrain</h2>
+					
 					<b:form id="fieldRegistrationForm">
 
 
@@ -259,7 +257,8 @@
 													value="#{mbField.vegetationPercentage}"
 													placeholder="Pourcentage" required="false"
 													requiredMessage="Veuillez indiquer un pourcentage">
-													<p:ajax listener="#{mbField.createVegetationComposition(vegetationType)}"/>
+													<p:ajax
+														listener="#{mbField.createVegetationComposition(vegetationType)}" />
 													<p:ajax update="inpVegetationCompositionPercentage" />
 													<p:ajax update="vegetationCompositionPercentageMessage" />
 												</p:inputText> <p:message id="vegetationCompositionPercentageMessage"
@@ -272,18 +271,63 @@
 
 							<div>
 								<br />
-								<p:fileUpload id="inpPhoto" label="Ajouter une photo"
+								<p:fileUpload id="inpPhoto1"
+									label="Ajouter la première photo"
 									mode="advanced" listener="#{mbFieldPhoto.uploadPhoto()}"
 									required="false" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
-									fileLimit="4" fileLimitMessage="Vous avez le droit à 4 photos"
+									requiredMessage="Vous devez télécharger au moins une photo"
+									fileLimit="1" fileLimitMessage="Vous avez le droit à 1 photo"
 									invalidFileMessage="Le fichier doit être de type gif, jpe, jpeg ou png"
 									uploadLabel="Télécharger" cancelLabel="Annuler"
-									update="photoMessage">
+									update="photoMessage1">
 								</p:fileUpload>
-								<p:message id="photoMessage" for="inpPhoto" />
+								<p:message id="photoMessage1" for="inpPhoto1" />
 							</div>
 
+							<div>
+								<br />
+								<p:fileUpload id="inpPhoto2"
+									label="Ajouter la deuxième photo"
+									mode="advanced" listener="#{mbFieldPhoto.uploadPhoto()}"
+									required="false" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+									requiredMessage="Vous devez télécharger au moins une photo"
+									fileLimit="1" fileLimitMessage="Vous avez le droit à 1 photo"
+									invalidFileMessage="Le fichier doit être de type gif, jpe, jpeg ou png"
+									uploadLabel="Télécharger" cancelLabel="Annuler"
+									update="photoMessage2">
+								</p:fileUpload>
+								<p:message id="photoMessage2" for="inpPhoto2" />
+							</div>
 
+							<div>
+								<br />
+								<p:fileUpload id="inpPhoto3"
+									label="Ajouter la troisième photo"
+									mode="advanced" listener="#{mbFieldPhoto.uploadPhoto()}"
+									required="false" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+									requiredMessage="Vous devez télécharger au moins une photo"
+									fileLimit="1" fileLimitMessage="Vous avez le droit à 1 photo"
+									invalidFileMessage="Le fichier doit être de type gif, jpe, jpeg ou png"
+									uploadLabel="Télécharger" cancelLabel="Annuler"
+									update="photoMessage3">
+								</p:fileUpload>
+								<p:message id="photoMessage3" for="inpPhoto3" />
+							</div>
+
+							<div>
+								<br />
+								<p:fileUpload id="inpPhoto4"
+									label="Ajouter la quatrième photo"
+									mode="advanced" listener="#{mbFieldPhoto.uploadPhoto()}"
+									required="false" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+									requiredMessage="Vous devez télécharger au moins une photo"
+									fileLimit="1" fileLimitMessage="Vous avez le droit à 1 photo"
+									invalidFileMessage="Le fichier doit être de type gif, jpe, jpeg ou png"
+									uploadLabel="Télécharger" cancelLabel="Annuler"
+									update="photoMessage4">
+								</p:fileUpload>
+								<p:message id="photoMessage4" for="inpPhoto4" />
+							</div>
 
 
 							<div class="p-t-20">

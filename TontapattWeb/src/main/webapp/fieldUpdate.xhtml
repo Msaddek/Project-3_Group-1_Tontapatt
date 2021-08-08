@@ -1,0 +1,212 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+
+<f:metadata>
+
+	<f:viewAction action="#{mbZipCodeCity.initCityOfConnectedUser()}" />
+	<f:viewAction action="#{mbZipCodeCity.onZipCodeChange()}" />
+	<f:viewAction action="#{mbField.initSelectedFieldParam()}" />
+</f:metadata>
+
+
+<ui:composition template="WEB-INF/template/userFieldTemplate.xhtml">
+
+	<ui:define name="head">
+		<title>Paramètres de terrain</title>
+	</ui:define>
+
+	<ui:define name="content">
+
+		<div class="container">
+
+
+			<div class="field-parameters">
+				<div class="section-title">
+					<h2>Mon terrain</h2>
+					<p>Gérer les informations du terrain</p>
+				</div>
+				<div class="row justify-content-center">
+					<div class="col-12 col-lg-10 col-xl-8 mx-auto">
+						<div class="row mt-5 align-items-center">
+
+							<div class="col">
+								<div class="row align-items-center">
+									<div class="col-md-7">
+										<h1 class="mb-1">#{mbField.field.name}</h1>
+										<p class="small mb-3">
+											<span class="badge badge-dark">#{mbField.field.zipCodeCity.name},
+												FR</span>
+										</p>
+									</div>
+								</div>
+								<div class="row mb-4">
+									<div class="col-md-7">
+										<p class="text-muted">#{mbField.description}</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="navTab-user">
+							<nav>
+							<div class="nav nav-tabs" id="nav-tab" role="tablist">
+
+								<button class="nav-link active" id="nav-profil-tab"
+									data-bs-toggle="tab" data-bs-target="#nav-profil" type="button"
+									role="tab" aria-controls="nav-home" aria-selected="true">Profil</button>
+
+								<button class="nav-link" id="nav-email-tab" data-bs-toggle="tab"
+									data-bs-target="#nav-email" type="button" role="tab"
+									aria-controls="nav-email" aria-selected="false">Contact</button>
+
+								<button class="nav-link" id="nav-mdp-tab" data-bs-toggle="tab"
+									data-bs-target="#nav-mdp" type="button" role="tab"
+									aria-controls="nav-mdp" aria-selected="false">Mot de
+									passe</button>
+
+								<button class="nav-link" id="nav-description-tab"
+									data-bs-toggle="tab" data-bs-target="#nav-description"
+									type="button" role="tab" aria-controls="nav-description"
+									aria-selected="false">Photo/Description</button>
+
+								<button class="nav-link" id="nav-unscription-tab"
+									data-bs-toggle="tab" data-bs-target="#nav-unscription"
+									type="button" role="tab" aria-controls="nav-unscription"
+									aria-selected="false" style="color: red;">Se
+									désinscrire</button>
+
+							</div>
+							</nav>
+
+							<div class="tab-content" id="nav-tabContent">
+
+								<div class="tab-pane fade show active" id="nav-profil"
+									role="tabpanel" aria-labelledby="nav-profil-tab">
+									<div class="field-parameter">
+										<b:form>
+											<div class="field-param">
+												<label for="inpName">Nom</label>
+												<p:inputText type="text" id="inpName" class="form-control"
+													value="#{mbField.name}" required="true"
+													requiredMessage="Vous devez entrer votre nom" />
+												<p:message id="nameMessage" for="inpName" />
+											</div>
+
+											<div class="field-param">
+												<label for="inpAdresse">Adresse :</label><br />
+												<p:inputText id="inpAdresse" value="#{mbField.address}"
+													required="true"
+													requiredMessage="Vous devez entrer une adresse">
+													<p:ajax update="inpAdresse" />
+													<p:ajax update="adresseMessage" />
+												</p:inputText>
+												<p:message id="adresseMessage" for="inpAdresse" />
+											</div>
+
+
+											<div class="codeCity">
+												<div class="row row-space">
+													<div class="col-2">
+														<div>
+															<div class="field-param">
+																<label for="inpZipCode">Code postal :</label>
+																<p:inputText id="inpZipCode"
+																	value="#{mbZipCodeCity.zipCode}" required="true"
+																	requiredMessage="Le code postal est requis"
+																	validatorMessage="Le code postal n'est pas valide"
+																	placeholder="Code postal *">
+																	<f:validateRegex
+																		pattern="^((0[1-9])|([1-8][0-9])|(9[0-8])|(2A)|(2B))[0-9]{3}$" />
+																	<p:ajax listener="#{mbZipCodeCity.onZipCodeChange()}"
+																		update="inpCity" />
+																	<p:ajax update="inpZipCode" />
+																	<p:ajax update="zipCodeMessage" />
+																</p:inputText>
+																<p:message id="zipCodeMessage" for="inpZipCode" />
+															</div>
+														</div>
+													</div>
+													<div class="col-2">
+														<div>
+															<div class="field-param">
+																<label for="inpCity">Ville :</label><br />
+																<p:selectOneMenu id="inpCity" value="#{mbField.city}"
+																	required="true"
+																	requiredMessage="Vous devez choisir une ville"
+																	converter="entityConverter">
+																	<f:selectItem itemLabel="Choisissez une ville"
+																		itemValue="" />
+																	<f:selectItems value="#{mbZipCodeCity.cities}"
+																		var="city" itemLabel="#{city.name}"
+																		itemValue="#{city}" />
+																	<p:ajax update="inpCity" />
+																	<p:ajax update="cityMessage" />
+																</p:selectOneMenu>
+																<p:message id="cityMessage" for="inpCity" />
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<b:commandButton class="get-started-btn" value="Modifier"
+												action="#{mbField.updateNameAndAddress()}" />
+										</b:form>
+									</div>
+								</div>
+
+								<div class="tab-pane fade" id="nav-email" role="tabpanel"
+									aria-labelledby="nav-email-tab">
+
+									<div class="user-parameter">
+										<b:form id="updateDescriptionSurfaceForm">
+											<div>
+												<label for="inpDescription">Description :</label>
+												<b:inputTextarea id="inpDescription" required="#false"
+													value="#{mbField.description}" rows="5" cols="30"
+													counter="displayGacCharCount" maxlength="255"
+													counterTemplate="{0} caractères restants."
+													autoResize="false" />
+											</div>
+
+											<div class="field-param">
+												<label for="inpSurface">Surface</label>
+												<p:inputText type="text" id="inpSurface"
+													class="form-control" value="#{mbField.surface}"
+													required="true"
+													requiredMessage="Vous devez entrer une surface" />
+												<p:message id="surfaceMessage" for="inpSurface" />
+											</div>
+
+											<br />
+											<b:commandButton class="get-started-btn" value="Modifier"
+												action="#{mbField.updateDescriptionAndSurface()}"
+												oncomplete="dialogWidget.show()" />
+										</b:form>
+									</div>
+
+								</div>
+
+								<p:dialog widgetVar="dialogWidget">
+									<h:form id="dialog">
+										<p:panel>
+											<p>
+												<h:outputText value="#{mbField.dialogMessage}" />
+											</p>
+										</p:panel>
+									</h:form>
+								</p:dialog>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>
