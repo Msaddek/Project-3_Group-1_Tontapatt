@@ -22,8 +22,7 @@ public class ShearingOfferBusiness implements ShearingOfferIBusiness {
 
 	@Override
 	public ShearingOffer add(ShearingOffer t) {
-		// TODO Auto-generated method stub
-		return null;
+		return shearingOfferIDAO.add(t);
 	}
 
 	@Override
@@ -34,8 +33,7 @@ public class ShearingOfferBusiness implements ShearingOfferIBusiness {
 
 	@Override
 	public ShearingOffer update(ShearingOffer t) {
-		// TODO Auto-generated method stub
-		return null;
+		return shearingOfferIDAO.update(t);
 	}
 
 	@Override

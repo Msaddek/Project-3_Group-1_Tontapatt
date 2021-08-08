@@ -43,7 +43,6 @@ public class SpeciesBusiness implements SpeciesIBusiness {
 
 	@Override
 	public List<Species> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return speciesIDAO.getAll();
 	}
 }
