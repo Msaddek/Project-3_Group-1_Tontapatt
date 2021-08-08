@@ -152,8 +152,8 @@
 								showIcon="true" required="true"
 								requiredMessage="La date de naissance est requise"
 								monthNavigator="true" yearNavigator="true" navigator="true"
-								pattern="dd/MM/yyy" mindate="#{mbDate.minimumDate}"
-								maxdate="#{mbDate.maximumDate}" >
+								pattern="dd/MM/yyy" mindate="#{mbDate.minimumAgeDate}"
+								maxdate="#{mbDate.maximumAgeDate}" >
 								<p:ajax event="dateSelect" update="inpStartDate" />
 								<p:ajax event="dateSelect" update="startDateMessage" />
 							</p:calendar>
@@ -165,8 +165,8 @@
 								showIcon="true" required="true"
 								requiredMessage="La date de naissance est requise"
 								monthNavigator="true" yearNavigator="true" navigator="true"
-								pattern="dd/MM/yyy" mindate="#{mbDate.minimumDate}"
-								maxdate="#{mbDate.maximumDate}" >
+								pattern="dd/MM/yyy" mindate="#{mbDate.minimumAgeDate}"
+								maxdate="#{mbDate.maximumAgeDate}" >
 								<p:ajax event="dateSelect" update="inpStartDate" />
 								<p:ajax event="dateSelect" update="endDateMessage" />
 							</p:calendar>

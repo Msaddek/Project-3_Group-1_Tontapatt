@@ -15,16 +15,33 @@ public class DateManagedBean implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private LocalDate maximumDate = LocalDate.now().minusYears(18);
+	private LocalDate maximumAgeDate = LocalDate.now().minusYears(18);
 
-	private LocalDate minimumDate = LocalDate.now().minusYears(99);
+	private LocalDate minimumAgeDate = LocalDate.now().minusYears(99);
 
-	public LocalDate getMaximumDate() {
-		return maximumDate;
+	private LocalDate minimumOfferStartDate = LocalDate.now();
+
+	private LocalDate minimumOfferEndDate = LocalDate.now();
+
+	public void minimumOfferEndDate(LocalDate startDate) {
+
+		minimumOfferEndDate = startDate.plusDays(1);
 	}
 
-	public LocalDate getMinimumDate() {
-		return minimumDate;
+	public LocalDate getMaximumAgeDate() {
+		return maximumAgeDate;
+	}
+
+	public LocalDate getMinimumAgeDate() {
+		return minimumAgeDate;
+	}
+
+	public LocalDate getMinimumOfferStartDate() {
+		return minimumOfferStartDate;
+	}
+
+	public LocalDate getMinimumOfferEndDate() {
+		return minimumOfferEndDate;
 	}
 
 }

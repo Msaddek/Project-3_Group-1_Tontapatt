@@ -1,6 +1,7 @@
 package fr.eql.ai109.tontapatt.entity;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Set;
@@ -30,49 +31,69 @@ public class Service implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
+
 	@Column(name = "request_date", nullable = false)
 	private LocalDateTime requestDate;
+
 	@Column(name = "start_date", nullable = false)
-	private LocalDateTime startDate;
+	private LocalDate startDate;
+
 	@Column(name = "end_date", nullable = false)
-	private LocalDateTime endDate;
+	private LocalDate endDate;
+
 	@Column(name = "validation_date", nullable = true)
 	private LocalDateTime validationDate;
+
 	@Column(name = "herd_setup_date", nullable = true)
 	private LocalDateTime herdSetupDate;
+
 	@Column(name = "equipment_setup_date", nullable = true)
 	private LocalDateTime equipmentSetupDate;
+
 	@Column(name = "herd_uninstall_date", nullable = true)
 	private LocalDateTime herdUninstallDate;
+
 	@Column(name = "equipment_uninstall_date", nullable = true)
 	private LocalDateTime equipmentUninstallDate;
+
 	@Column(name = "refusal_date", nullable = true)
 	private LocalDateTime refusalDate;
+
 	@Column(name = "cancellation_date", nullable = true)
 	private LocalDateTime cancellationDate;
+
 	@Column(name = "premature_cancellation_date", nullable = true)
 	private LocalDateTime prematureCancellationDate;
+
 	@Column(name = "price", nullable = false)
 	private Double price;
+
 	@OneToMany(mappedBy = "service", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<Rating> ratings;
+
 	@OneToMany(mappedBy = "service", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<Anomaly> anomalies;
+
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id", nullable = false)
 	private Field field;
+
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id", nullable = false)
 	private PaymentMethod paymentMethod;
+
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id")
 	private RefusalReason refusalReason;
+
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id")
 	private PrematureCancellationReason prematureCancellationReason;
+
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id")
 	private CancellationReason cancellationReason;
+
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id", nullable = false)
 	private ShearingOffer shearingOffer;
@@ -160,19 +181,19 @@ public class Service implements Serializable {
 		this.requestDate = requestDate;
 	}
 
-	public LocalDateTime getStartDate() {
+	public LocalDate getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(LocalDateTime startDate) {
+	public void setStartDate(LocalDate startDate) {
 		this.startDate = startDate;
 	}
 
-	public LocalDateTime getEndDate() {
+	public LocalDate getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(LocalDateTime endDate) {
+	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
 	}
 
