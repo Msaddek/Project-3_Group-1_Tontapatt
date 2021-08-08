@@ -1,6 +1,7 @@
 package fr.eql.ai109.tontapatt.entity;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Set;
@@ -41,10 +42,10 @@ public class ShearingOffer implements Serializable {
 	private LocalDateTime creationDate;
 
 	@Column(name = "start_date", nullable = false)
-	private LocalDateTime startDate;
+	private LocalDate startDate;
 
 	@Column(name = "end_date", nullable = false)
-	private LocalDateTime endDate;
+	private LocalDate endDate;
 
 	@Column(name = "description", nullable = false)
 	private String description;
@@ -178,19 +179,19 @@ public class ShearingOffer implements Serializable {
 		this.creationDate = creationDate;
 	}
 
-	public LocalDateTime getStartDate() {
+	public LocalDate getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(LocalDateTime startDate) {
+	public void setStartDate(LocalDate startDate) {
 		this.startDate = startDate;
 	}
 
-	public LocalDateTime getEndDate() {
+	public LocalDate getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(LocalDateTime endDate) {
+	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
 	}
 

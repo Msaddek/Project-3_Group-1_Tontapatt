@@ -13,9 +13,9 @@
 <h:head>
 
 	<ui:insert name="head">
-	<title>Inscription</title>
+		<title>Inscription</title>
 	</ui:insert>
-	
+
 	<meta charset="utf-8" />
 
 	<link
@@ -207,8 +207,8 @@
 								showIcon="true" required="#{mbRequired.birthDate}"
 								requiredMessage="La date de naissance est requise"
 								monthNavigator="true" yearNavigator="true" navigator="true"
-								pattern="dd/MM/yyy" mindate="#{mbDate.minimumDate}"
-								maxdate="#{mbDate.maximumDate}">
+								pattern="dd/MM/yyyy" mindate="#{mbDate.minimumAgeDate}"
+								maxdate="#{mbDate.maximumAgeDate}">
 								<p:ajax event="dateSelect" update="inpBirthDate" />
 								<p:ajax event="dateSelect" update="birthDateMessage" />
 							</p:calendar>

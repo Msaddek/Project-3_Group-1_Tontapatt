@@ -1,26 +1,22 @@
 package fr.eql.ai109.tontapatt.dao;
 
-
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
-import javax.persistence.Query;
 
 import fr.eql.ai109.tontapatt.entity.Field;
 import fr.eql.ai109.tontapatt.entity.ShearingOffer;
-import fr.eql.ai109.tontapatt.entity.ShearingOfferPhoto;
 import fr.eql.ai109.tontapatt.entity.User;
-import fr.eql.ai109.tontapatt.entity.User;
-import fr.eql.ai109.tontapatt.entity.ZipCodeCity;
 import fr.eql.ai109.tontapatt.idao.ShearingOfferIDAO;
 
 @Remote(ShearingOfferIDAO.class)
 @Stateless
 public class ShearingOfferDAO extends GenericDAO<ShearingOffer>
 		implements ShearingOfferIDAO {
-	
 
 	@Override
 	public Set<ShearingOffer> searchOfferByFieldLocation(Field field) {
@@ -51,36 +47,14 @@ public class ShearingOfferDAO extends GenericDAO<ShearingOffer>
 		return shearingOffers;
 	}
 
-	public ZipCodeCity calculateDistance() {
-		ZipCodeCity distance = null;
-		try {
-			System.out.println(em);
-			System.out.println("ok");
-
-			String sqlString = "SELECT id, name, zip_code, latitude, longitude, "
-					+ "CalcDistance(41.9714498244, 9.24775602009, 42.3941662475, "
-					+ "9.37311777417) AS distance FROM zip_code_city WHERE id=1";
-
-			distance = (ZipCodeCity) em
-					.createNativeQuery(sqlString, ZipCodeCity.class)
-					.getSingleResult();
-			System.out.println(distance.getName());
-			System.out.println("ok");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		System.out.println(em);
-		return distance;
-	}
-
 	@Override
 	public Set<ShearingOffer> getShearingOffersOfConnectedUser(User user) {
 		Set<ShearingOffer> shearingOffers = null;
 		String sqlQuery = "SELECT so FROM ShearingOffer so "
-				+ "WHERE so.user=:userParam AND so.withdrawalDate is NULL";
+				+ "WHERE so.breeder=:userParam AND so.withdrawalDate is NULL";
 		try {
-			shearingOffers = (Set<ShearingOffer>) em.createQuery(sqlQuery)
-					.setParameter("userParam", user).getResultList();
+			shearingOffers = new HashSet<ShearingOffer>(em.createQuery(sqlQuery)
+					.setParameter("userParam", user).getResultList());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -90,15 +64,15 @@ public class ShearingOfferDAO extends GenericDAO<ShearingOffer>
 	@Override
 	public Set<ShearingOffer> getExpiredShearingOffersOfConnectedUser(
 			User user) {
-		LocalDateTime now = LocalDateTime.now();
+		LocalDate now = LocalDate.now();
 		Set<ShearingOffer> shearingOffers = null;
 		String sqlQuery = "SELECT so FROM ShearingOffer so "
-				+ "WHERE so.user=:userParam AND so.withdrawalDate is NULL "
+				+ "WHERE so.breeder=:userParam AND so.withdrawalDate is NULL "
 				+ "AND so.endDate<:dateNowParam";
 		try {
-			shearingOffers = (Set<ShearingOffer>) em.createQuery(sqlQuery)
+			shearingOffers = new HashSet<ShearingOffer>(em.createQuery(sqlQuery)
 					.setParameter("userParam", user)
-					.setParameter("dateNowParam", now).getResultList();
+					.setParameter("dateNowParam", now).getResultList());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -108,15 +82,15 @@ public class ShearingOfferDAO extends GenericDAO<ShearingOffer>
 	@Override
 	public Set<ShearingOffer> getInProgressShearingOffersOfConnectedUser(
 			User user) {
-		LocalDateTime now = LocalDateTime.now();
+		LocalDate now = LocalDate.now();
 		Set<ShearingOffer> shearingOffers = null;
 		String sqlQuery = "SELECT so FROM ShearingOffer so "
-				+ "WHERE so.user=:userParam AND so.withdrawalDate is NULL "
+				+ "WHERE so.breeder=:userParam AND so.withdrawalDate is NULL "
 				+ "AND so.endDate>=:dateNowParam";
 		try {
-			shearingOffers = (Set<ShearingOffer>) em.createQuery(sqlQuery)
+			shearingOffers = new HashSet<ShearingOffer>(em.createQuery(sqlQuery)
 					.setParameter("userParam", user)
-					.setParameter("dateNowParam", now).getResultList();
+					.setParameter("dateNowParam", now).getResultList());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
