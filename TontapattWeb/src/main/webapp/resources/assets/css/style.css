@@ -1355,3 +1355,106 @@ position: relative;
     margin-bottom: 1rem;
     background-color: transparent;
 }
+
+
+/* CREATION OFFRE */
+
+@import
+	url("https://fonts.googleapis.com/css?family=Nunito:400,900|Montserrat|Roboto")
+	;
+
+.containerO {
+	background: #ffffff;
+	position: relative;
+	box-shadow: 2px 5px 20px rgb(119 119 119/ 50%);
+	margin: 100px auto;
+	display: block;
+	max-width: 1000px;
+	min-width: 600px;
+}
+
+.containerO .leftbox {
+	top: -5%;
+	left: 5%;
+	position: absolute;
+	width: 15%;
+	height: 110%;
+	background: #7ed386;
+	box-shadow: 3px 3px 10px rgba(119, 119, 119, 0.5);
+	padding: 5px;
+	max-width: 100%;
+}
+
+.containerO nav a {
+	list-style: none;
+	padding: 35px;
+	color: #ffffff;
+	font-size: 1.1em;
+	display: block;
+	transition: all 0.3s ease-in-out;
+}
+
+.containerO nav a:hover {
+	color: #3fb6a8;
+	transform: scale(1.2);
+	cursor: pointer;
+}
+
+.containerO nav a:first-child {
+	margin-top: 7px;
+}
+
+.containerO .active {
+	color: #3fb6a8;
+}
+
+.containerO .rightbox {
+	margin-left: 28%;
+	height: 100%;
+	max-width: 100%;
+}
+
+.containerO h1 {
+	font-family: "Montserrat", sans-serif;
+	color: #7ed386;
+	padding: 15px;
+}
+
+.categories-offer {
+	display: flex;
+	flex-direction: column;
+	padding: 15px 0;
+}
+
+.double-category {
+	display: flex;
+	flex-direction: row;
+}
+
+.category-offer {
+	margin-left: 40px;
+	padding: 1px;
+	max-width: 100%;
+}
+
+.containerO .ui-inputfield {
+	font-size: 15px;
+}
+
+.containerO .ui-selectonemenu label.ui-selectonemenu-label {
+	font-size: 16px;
+}
+
+.containerO button, input, optgroup, select, textarea {
+	max-width: 100%;
+}
+
+
+
+@media screen and (max-width:767px) {
+	div.containerO {
+		float: none;
+		clear: both;
+		width: 100%;
+	}
+}
