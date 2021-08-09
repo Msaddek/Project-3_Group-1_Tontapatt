@@ -30,7 +30,6 @@ public class VegetationType implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
-
 	@Column(name = "vegetation", nullable = false)
 	private String vegetation;
 

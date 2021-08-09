@@ -1,12 +1,14 @@
 package fr.eql.ai109.business;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
 import fr.eql.ai109.ibusiness.FieldPhotoIBusiness;
+import fr.eql.ai109.tontapatt.entity.Field;
 import fr.eql.ai109.tontapatt.entity.FieldPhoto;
 import fr.eql.ai109.tontapatt.idao.FieldPhotoIDAO;
 
@@ -45,5 +47,10 @@ public class FieldPhotoBusiness implements FieldPhotoIBusiness {
 	public List<FieldPhoto> getAll() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Set<FieldPhoto> findPhotosByField(Field field) {
+		return fieldPhotoIDAO.findPhotosByField(field);
 	}
 }

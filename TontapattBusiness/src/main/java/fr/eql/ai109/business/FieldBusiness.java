@@ -1,6 +1,7 @@
 package fr.eql.ai109.business;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.ejb.Remote;
@@ -8,6 +9,7 @@ import javax.ejb.Stateless;
 
 import fr.eql.ai109.ibusiness.FieldIBusiness;
 import fr.eql.ai109.tontapatt.entity.Field;
+import fr.eql.ai109.tontapatt.entity.User;
 import fr.eql.ai109.tontapatt.idao.FieldIDAO;
 
 @Remote(FieldIBusiness.class)
@@ -19,8 +21,7 @@ public class FieldBusiness implements FieldIBusiness {
 
 	@Override
 	public Field add(Field t) {
-		// TODO Auto-generated method stub
-		return null;
+		return fieldIDAO.add(t);
 	}
 
 	@Override
@@ -31,8 +32,8 @@ public class FieldBusiness implements FieldIBusiness {
 
 	@Override
 	public Field update(Field t) {
-		// TODO Auto-generated method stub
-		return null;
+	
+		return fieldIDAO.update(t);
 	}
 
 	@Override
@@ -43,6 +44,12 @@ public class FieldBusiness implements FieldIBusiness {
 
 	@Override
 	public List<Field> getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Set<Field> findFieldsByUser(User user) {
 		// TODO Auto-generated method stub
 		return null;
 	}
