@@ -248,83 +248,62 @@
 							<div>
 								<div class="rs-select2 js-select-simple select--no-search">
 									<br /> <label for="inpVegetationType">Types de
-										végétations et leurs pourcentages:</label><br />
+										végétation :</label><br />
 									<ul>
-										<ui:repeat value="#{mbVegetationType.allVegetationType()}"
-											var="vegetationType">
-											<li><h:outputText value="#{vegetationType.vegetation}" />
-												<p:inputText id="inpVegetationCompositionPercentage"
-													value="#{mbField.vegetationPercentage}"
-													placeholder="Pourcentage" required="false"
-													requiredMessage="Veuillez indiquer un pourcentage">
-													<p:ajax
-														listener="#{mbField.createVegetationComposition(vegetationType)}" />
-													<p:ajax update="inpVegetationCompositionPercentage" />
-													<p:ajax update="vegetationCompositionPercentageMessage" />
-												</p:inputText> <p:message id="vegetationCompositionPercentageMessage"
-													for="inpVegetationCompositionPercentage" /></li>
-										</ui:repeat>
+										<p:selectManyMenu id="inpVegetationComposition"
+											value="#{mbField.vegetationCompositions}"
+											converter="entityConverter" showCheckbox="true" filter="true"
+											filterMatchMode="contains" var="vegetationComposition"
+											required="false">
+											<f:selectItems
+												value="#{mbVegetationType.allVegetationCompositions()}"
+												var="vc" itemLabel="#{vc.vegetationType.vegetation}"
+												itemValue="#{vc}">
+											</f:selectItems>
+											<p:column>
+												<h:outputText
+													value="#{vegetationComposition.vegetationType.vegetation}" />
+											</p:column>
+											<p:ajax update="vegetationComposition" />
+										</p:selectManyMenu>
 									</ul>
 
 								</div>
 							</div>
 
 							<div>
-								<br />
-								<p:fileUpload id="inpPhoto1" label="Ajouter la première photo"
-									mode="advanced" listener="#{mbFieldPhoto.uploadPhoto()}"
-									required="false" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
-									requiredMessage="Vous devez télécharger au moins une photo"
-									fileLimit="1" fileLimitMessage="Vous avez le droit à 1 photo"
-									invalidFileMessage="Le fichier doit être de type gif, jpe, jpeg ou png"
-									uploadLabel="Télécharger" cancelLabel="Annuler"
-									update="photoMessage1">
-								</p:fileUpload>
-								<p:message id="photoMessage1" for="inpPhoto1" />
+								<h:panelGroup id="vegetationComposition">
+								<br /> <label for="vegetationComposition">Pourcentage
+									de végétation :</label><br />
+									<ui:repeat var="composition"
+										value="#{mbField.vegetationCompositions}">
+										<h:outputText id="vegetationType"
+											value="#{composition.vegetationType.vegetation}" />
+										<p:inputNumber id="inpvegetationPercentage"
+											value="#{composition.percentage}" required="true"
+											requiredMessage="Il faut entrer le pourcentage"
+											validatorMessage="Le nombre doit être un nombre entier positif entre 0 et 100"
+											decimalPlaces="0" minValue="0" maxValue="100" symbol=" %"
+											symbolPosition="s" />
+										<p:message id="vegetationpercentageMessage"
+											for="inpvegetationPercentage" />
+										<br />
+									</ui:repeat>
+								</h:panelGroup>
 							</div>
 
 							<div>
 								<br />
-								<p:fileUpload id="inpPhoto2" label="Ajouter la deuxième photo"
-									mode="advanced" listener="#{mbFieldPhoto.uploadPhoto()}"
-									required="false" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
-									requiredMessage="Vous devez télécharger au moins une photo"
-									fileLimit="1" fileLimitMessage="Vous avez le droit à 1 photo"
+								<label for="inpPhoto">Photos du terrain :</label><br />
+								<p:fileUpload id="inpPhoto" label="Ajouter les photos"
+									listener="#{mbField.uploadPhoto}" mode="advanced"
+									multiple="true" fileLimit="4"
+									allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
 									invalidFileMessage="Le fichier doit être de type gif, jpe, jpeg ou png"
-									uploadLabel="Télécharger" cancelLabel="Annuler"
-									update="photoMessage2">
-								</p:fileUpload>
-								<p:message id="photoMessage2" for="inpPhoto2" />
+									fileLimitMessage="Vous avez droit à 4 photos"
+									uploadLabel="Télécharger" cancelLabel="Annuler" />
+								<p:message id="photoMessage" for="inpPhoto" />
 							</div>
-
-							<div>
-								<br />
-								<p:fileUpload id="inpPhoto3" label="Ajouter la troisième photo"
-									mode="advanced" listener="#{mbFieldPhoto.uploadPhoto()}"
-									required="false" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
-									requiredMessage="Vous devez télécharger au moins une photo"
-									fileLimit="1" fileLimitMessage="Vous avez le droit à 1 photo"
-									invalidFileMessage="Le fichier doit être de type gif, jpe, jpeg ou png"
-									uploadLabel="Télécharger" cancelLabel="Annuler"
-									update="photoMessage3">
-								</p:fileUpload>
-								<p:message id="photoMessage3" for="inpPhoto3" />
-							</div>
-
-							<div>
-								<br />
-								<p:fileUpload id="inpPhoto4" label="Ajouter la quatrième photo"
-									mode="advanced" listener="#{mbFieldPhoto.uploadPhoto()}"
-									required="false" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
-									requiredMessage="Vous devez télécharger au moins une photo"
-									fileLimit="1" fileLimitMessage="Vous avez le droit à 1 photo"
-									invalidFileMessage="Le fichier doit être de type gif, jpe, jpeg ou png"
-									uploadLabel="Télécharger" cancelLabel="Annuler"
-									update="photoMessage4">
-								</p:fileUpload>
-								<p:message id="photoMessage4" for="inpPhoto4" />
-							</div>
-
 
 							<div class="p-t-20">
 								<b:commandButton class="btnSubscription" value="Valider"

@@ -51,7 +51,6 @@ public class FieldPhotoBusiness implements FieldPhotoIBusiness {
 
 	@Override
 	public Set<FieldPhoto> findPhotosByField(Field field) {
-		// TODO Auto-generated method stub
-		return null;
+		return fieldPhotoIDAO.findPhotosByField(field);
 	}
 }
