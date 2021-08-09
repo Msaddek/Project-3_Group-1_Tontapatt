@@ -81,8 +81,8 @@ public class FieldManagedBean implements Serializable {
 	private Set<Field> connectedUserFields;
 	
 	//TODO TOKEEP???????????????????
-	@ManagedProperty(value = "#{mbField.field}")
-	private Field selectedField;
+	//@ManagedProperty(value = "#{mbField.field}")
+	//private Field selectedField;
 	
 
 	@PostConstruct()
