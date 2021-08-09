@@ -35,7 +35,6 @@ import fr.eql.ai109.tontapatt.entity.GrassHeight;
 import fr.eql.ai109.tontapatt.entity.Service;
 import fr.eql.ai109.tontapatt.entity.User;
 import fr.eql.ai109.tontapatt.entity.VegetationComposition;
-import fr.eql.ai109.tontapatt.entity.VegetationType;
 import fr.eql.ai109.tontapatt.entity.ZipCodeCity;
 
 @ManagedBean(name = "mbField")
@@ -158,16 +157,6 @@ public class FieldManagedBean implements Serializable {
 		field.setPhotos(photos);
 		field = fieldBusiness.update(field);
 		return forward;
-	}
-
-	public void createVegetationComposition(VegetationType vegetationType) {
-		vegetationComposition = new VegetationComposition();
-		System.out.println(vegetationType.getVegetation());
-		System.out.println(vegetationPercentage);
-		vegetationComposition.setPercentage(vegetationPercentage);
-		vegetationComposition.setVegetationType(vegetationType);
-		vegetationCompositions.add(vegetationComposition);
-
 	}
 
 	public void uploadPhoto(FileUploadEvent e) {
