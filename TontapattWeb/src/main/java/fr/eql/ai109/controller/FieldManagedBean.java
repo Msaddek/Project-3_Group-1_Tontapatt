@@ -209,13 +209,11 @@ public class FieldManagedBean implements Serializable {
 			}
 			in.close();
 			out.flush();
-			out.close();
 			System.out.println(fileName);
 			FieldPhoto fp = new FieldPhoto();
 			fp.setLink(fileName);
 			photos.add(fp);
 			System.out.println("New file created!" + fileName);
-			out.close();
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
