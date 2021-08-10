@@ -1,6 +1,7 @@
 package fr.eql.ai109.controller;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -21,13 +22,15 @@ public class VegetationCompositionManagedBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EJB
-	VegetationCompositionIBusiness business;
+	VegetationCompositionIBusiness vegetationCompositionBusiness;
 	
 	private VegetationComposition vegetationComposition;
 	private Field field;
 	private VegetationType vegetationType;
 	private Integer percentage;
+	private Set<VegetationComposition> vegetationCompositions;
 	
+
 	
 	
 	public VegetationComposition getVegetationComposition() {
@@ -55,4 +58,16 @@ public class VegetationCompositionManagedBean implements Serializable {
 	public void setPercentage(Integer percentage) {
 		this.percentage = percentage;
 	}
+
+
+	public Set<VegetationComposition> getVegetationCompositions() {
+		return vegetationCompositions;
+	}
+
+
+	public void setVegetationCompositions(Set<VegetationComposition> vegetationCompositions) {
+		this.vegetationCompositions = vegetationCompositions;
+	}
+	
+	
 }

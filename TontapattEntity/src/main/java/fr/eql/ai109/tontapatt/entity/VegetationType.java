@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,11 +35,11 @@ public class VegetationType implements Serializable {
 
 	@OneToMany(mappedBy = "vegetationType", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<VegetationComposition> vegetationCompositions = new HashSet<>();
-	
+
 	@ManyToMany
 	@JoinTable(name = "favorite_vegetation", joinColumns = @JoinColumn(name = "vegetation_type_id"), inverseJoinColumns = @JoinColumn(name = "species_id"))
 	private Set<Species> species;
-	
+
 	public VegetationType() {
 		super();
 	}
@@ -89,6 +90,7 @@ public class VegetationType implements Serializable {
 	public void setSpecies(Set<Species> species) {
 		this.species = species;
 	}
+
 	public String getVegetation() {
 		return vegetation;
 	}

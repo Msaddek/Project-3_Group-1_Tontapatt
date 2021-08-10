@@ -109,10 +109,8 @@
 			<div class="card card-1">
 				<div class="card-heading"></div>
 				<div class="card-body">
-					<h2 class="title">Ajouter un nouveau terrain pour M.:</h2>
-					<h4>
-						<h:outputLabel value="#{mbUser.user.lastName}" />
-					</h4>
+					<h2 class="title">Ajouter un terrain</h2>
+
 					<b:form id="fieldRegistrationForm">
 
 
@@ -157,7 +155,7 @@
 								<div class="col-2">
 									<div>
 										<label for="inpCity">Ville :</label><br />
-										<p:selectOneMenu id="inpCity" value="#{mbUser.city}"
+										<p:selectOneMenu id="inpCity" value="#{mbField.city}"
 											required="true"
 											requiredMessage="Vous devez choisir une ville"
 											converter="entityConverter">
@@ -247,41 +245,65 @@
 									for="inpFlatnessPercentage" />
 							</div>
 
-
 							<div>
 								<div class="rs-select2 js-select-simple select--no-search">
 									<br /> <label for="inpVegetationType">Types de
-										végétations et leurs pourcentages:</label><br />
+										végétation :</label><br />
 									<ul>
-										<ui:repeat value="#{mbVegetationType.allVegetationType()}"
-											var="vegetationType">
-
-											<li><h:outputText value="#{vegetationType.vegetation}" />
-												<p:inputText id="inpVegetationCompositionPercentage" value="#{mbVegetationComposition.percentage}"
-													placeholder="Pourcentage" required="false"
-													requiredMessage="Veuillez indiquer un pourcentage">
-													<f:ajax update="inpVegetationCompositionPercentage" />
-													<f:ajax update="vegetationCompositionPercentageMessage" />
-												</p:inputText> <b:message id="vegetationCompositionPercentageMessage" for="inpVegetationCompositionPercentage" /></li>
-										</ui:repeat>
+										<p:selectManyMenu id="inpVegetationComposition"
+											value="#{mbField.vegetationCompositions}"
+											converter="entityConverter" showCheckbox="true" filter="true"
+											filterMatchMode="contains" var="vegetationComposition"
+											required="false">
+											<f:selectItems
+												value="#{mbVegetationType.allVegetationCompositions()}"
+												var="vc" itemLabel="#{vc.vegetationType.vegetation}"
+												itemValue="#{vc}">
+											</f:selectItems>
+											<p:column>
+												<h:outputText
+													value="#{vegetationComposition.vegetationType.vegetation}" />
+											</p:column>
+											<p:ajax update="vegetationComposition" />
+										</p:selectManyMenu>
 									</ul>
 
 								</div>
 							</div>
+
 							<div>
-								<br />
-								<p:fileUpload id="inpPhoto" label="Ajouter une photo"
-									mode="advanced" listener="#{mbFieldPhoto.uploadPhoto}"
-									required="false" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
-									fileLimit="4" fileLimitMessage="Vous avez le droit à 4 photos"
-									invalidFileMessage="Le fichier doit être de type gif, jpe, jpeg ou png"
-									uploadLabel="Télécharger" cancelLabel="Annuler"
-									update="photoMessage">
-								</p:fileUpload>
-								<p:message id="photoMessage" for="inpPhoto" />
+								<h:panelGroup id="vegetationComposition">
+								<br /> <label for="vegetationComposition">Pourcentage
+									de végétation :</label><br />
+									<ui:repeat var="composition"
+										value="#{mbField.vegetationCompositions}">
+										<h:outputText id="vegetationType"
+											value="#{composition.vegetationType.vegetation}" />
+										<p:inputNumber id="inpvegetationPercentage"
+											value="#{composition.percentage}" required="true"
+											requiredMessage="Il faut entrer le pourcentage"
+											validatorMessage="Le nombre doit être un nombre entier positif entre 0 et 100"
+											decimalPlaces="0" minValue="0" maxValue="100" symbol=" %"
+											symbolPosition="s" />
+										<p:message id="vegetationpercentageMessage"
+											for="inpvegetationPercentage" />
+										<br />
+									</ui:repeat>
+								</h:panelGroup>
 							</div>
 
-
+							<div>
+								<br />
+								<label for="inpPhoto">Photos du terrain :</label><br />
+								<p:fileUpload id="inpPhoto" label="Ajouter les photos"
+									listener="#{mbField.uploadPhoto}" mode="advanced"
+									multiple="true" fileLimit="4"
+									allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+									invalidFileMessage="Le fichier doit être de type gif, jpe, jpeg ou png"
+									fileLimitMessage="Vous avez droit à 4 photos"
+									uploadLabel="Télécharger" cancelLabel="Annuler" />
+								<p:message id="photoMessage" for="inpPhoto" />
+							</div>
 
 							<div class="p-t-20">
 								<b:commandButton class="btnSubscription" value="Valider"

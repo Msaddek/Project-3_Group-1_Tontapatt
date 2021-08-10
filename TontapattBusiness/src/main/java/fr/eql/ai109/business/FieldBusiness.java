@@ -21,8 +21,7 @@ public class FieldBusiness implements FieldIBusiness {
 
 	@Override
 	public Field add(Field t) {
-		// TODO Auto-generated method stub
-		return null;
+		return fieldIDAO.add(t);
 	}
 
 	@Override
@@ -33,8 +32,8 @@ public class FieldBusiness implements FieldIBusiness {
 
 	@Override
 	public Field update(Field t) {
-		// TODO Auto-generated method stub
-		return null;
+	
+		return fieldIDAO.update(t);
 	}
 
 	@Override
