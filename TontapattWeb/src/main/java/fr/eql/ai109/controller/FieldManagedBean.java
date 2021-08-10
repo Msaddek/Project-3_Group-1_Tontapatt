@@ -33,6 +33,7 @@ import fr.eql.ai109.tontapatt.entity.FieldWithdrawalReason;
 import fr.eql.ai109.tontapatt.entity.FlatnessPercentage;
 import fr.eql.ai109.tontapatt.entity.GrassHeight;
 import fr.eql.ai109.tontapatt.entity.Service;
+import fr.eql.ai109.tontapatt.entity.ShearingOffer;
 import fr.eql.ai109.tontapatt.entity.User;
 import fr.eql.ai109.tontapatt.entity.VegetationComposition;
 import fr.eql.ai109.tontapatt.entity.ZipCodeCity;
@@ -48,6 +49,11 @@ public class FieldManagedBean implements Serializable {
 
 	@EJB
 	FieldIBusiness fieldBusiness;
+	
+	@ManagedProperty(value = "#{mbUser.user}")
+	private User connectedUser;
+	
+	private Set<Field> connectedUserFields;
 
 	private Field field;
 
@@ -89,17 +95,20 @@ public class FieldManagedBean implements Serializable {
 
 	private UploadedFile file;
 
-	@ManagedProperty(value = "#{mbUser.user}")
-	private User connectedUser;
-	private Set<Field> connectedUserFields;
-
+	
 	@PostConstruct()
 	public void init() {
-		connectedUserFields = fieldBusiness.findFieldsByUser(connectedUser);
-		photos = new HashSet<FieldPhoto>();
+		connectedUserFields = fieldBusiness.getFieldsOfConnectedUser(connectedUser);
+		photos = new HashSet<>();
 		vegetationCompositions = new HashSet<>();
 	}
 
+	public String fieldUpdate (Field field) {
+		this.field = field;
+		return "/fieldUpdate.xhtml?faces-redirect=true";
+		
+	}
+	//to keep??
 	public void initSelectedFieldParam() {
 		name = field.getName();
 		address = field.getAddress();
@@ -146,7 +155,7 @@ public class FieldManagedBean implements Serializable {
 		newField.setZipCodeCity(zipCodeCity);
 		newField.setOwner(connectedUser);
 		field = fieldBusiness.add(newField);
-		System.out.println("***********" + field.getId());
+		System.out.println(field.getId());
 		for (VegetationComposition vc : vegetationCompositions) {
 			vc.setField(field);
 		}

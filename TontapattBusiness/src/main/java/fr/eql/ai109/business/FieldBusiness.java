@@ -49,8 +49,8 @@ public class FieldBusiness implements FieldIBusiness {
 	}
 
 	@Override
-	public Set<Field> findFieldsByUser(User user) {
-		// TODO Auto-generated method stub
-		return null;
+	public Set<Field> getFieldsOfConnectedUser(User user) {
+		
+		return fieldIDAO.getFieldsOfConnectedUser(user);
 	}
 }
