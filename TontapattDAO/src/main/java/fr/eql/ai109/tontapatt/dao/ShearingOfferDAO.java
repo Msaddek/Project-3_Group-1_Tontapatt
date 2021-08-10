@@ -52,6 +52,7 @@ public class ShearingOfferDAO extends GenericDAO<ShearingOffer>
 		Set<ShearingOffer> shearingOffers = null;
 		String sqlQuery = "SELECT so FROM ShearingOffer so "
 				+ "WHERE so.breeder=:userParam AND so.withdrawalDate is NULL";
+		System.out.println("je suis laaaaaaaaaaaaaaaaaaa");
 		try {
 			shearingOffers = new HashSet<ShearingOffer>(em.createQuery(sqlQuery)
 					.setParameter("userParam", user).getResultList());

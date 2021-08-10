@@ -1,5 +1,6 @@
 package fr.eql.ai109.tontapatt.dao;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.ejb.Remote;
@@ -18,8 +19,9 @@ public class FieldDAO extends GenericDAO<Field> implements FieldIDAO {
 	public Set<Field> findFieldsByUser(User user) {
 		Set<Field> fields = null;
 		try {
-			fields = (Set<Field>) em.createQuery("SELECT f from Field f WHERE f.owner=:ownerParam")
-					.setParameter("ownerParam", user).getResultList();
+			fields = new HashSet<Field>(em.createQuery("SELECT f from Field f WHERE f.owner=:ownerParam")
+					.setParameter("ownerParam", user).getResultList());
+
 		} catch (Exception e) {
 
 			e.printStackTrace();

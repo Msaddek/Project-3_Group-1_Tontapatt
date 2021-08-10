@@ -35,7 +35,8 @@
 			aria-expanded="false">
 
 			<div class="profilPicture">
-				<p:graphicImage class="img-profil" value="resources/img/users/#{mbUser.user.photo}"
+				<p:graphicImage class="img-profil"
+					value="resources/img/users/#{mbUser.user.photo}"
 					alt="No picture set"></p:graphicImage>
 			</div>
 
@@ -112,105 +113,102 @@
 			</a>
 		</div>
 	</div>
-           <b:modal id="amodal">
-      		<div class="search-background">
-            <div class="modal-body">
-              <div class="form-title text-center">
-                <h3>Dis nous ce qu'il te faut !</h3><br />
-              </div>
-              <div class="d-flex flex-column text-center">
-                <b:form id="SearchForm">
-                  
-                               <label for="inpUserField">Choisis ton terrain :</label><br />
-							<p:selectOneMenu id="inpUserField" value="#{mbUser.category}"
-								required="true" converter="entityConverter"
-								requiredMessage="Séléctionnez un terrain" >
-								<f:selectItem itemLabel="Séléctionnez un terrain" itemValue="" />
-								<f:selectItems value="#{mbUserCategory.allCategories()}"
-									var="category" itemLabel="#{category.category}"
-									itemValue="#{category}" />
-	
-							</p:selectOneMenu>
-							<br /><b:message id="inpUserFieldMessage" for="inpUserField" /><br />
-							
-							
-                     <label for="inpServiceType">Type de service :</label><br />
-							<p:selectOneMenu id="inpServiceType" value="#{mbUser.category}"
-								required="true" converter="entityConverter"
-								requiredMessage="Séléctionnez un service" >
-								<f:selectItem itemLabel="Séléctionnez un service" itemValue="" />
-								<f:selectItems value="#{mbUserCategory.allCategories()}"
-									var="category" itemLabel="#{category.category}"
-									itemValue="#{category}" />
-							</p:selectOneMenu>
-							<br /><b:message id="userServiceTypeMessage" for="inpServiceType" /><br />
-							
-				<div class="search-dates">
-                     <div class="search-date">
-						<label style="margin-right: 10px" for="inpStartDate">Date de debut :</label><br />
-							<p:calendar id="inpStartDate" value="#{mbUser.birthDate}"
-								showIcon="true" required="true"
-								requiredMessage="La date de naissance est requise"
-								monthNavigator="true" yearNavigator="true" navigator="true"
-								pattern="dd/MM/yyy" mindate="#{mbDate.minimumAgeDate}"
-								maxdate="#{mbDate.maximumAgeDate}" >
-								<p:ajax event="dateSelect" update="inpStartDate" />
-								<p:ajax event="dateSelect" update="startDateMessage" />
-							</p:calendar>
-							<p:message id="startDateMessage" for="inpStartDate" />     
-					</div>
-                    <div class="search-date">
-						<label style="margin-right: 10px" for="inpEndDate">Date de fin :</label><br />
-							<p:calendar id="inpEndDate" value="#{mbUser.birthDate}"
-								showIcon="true" required="true"
-								requiredMessage="La date de naissance est requise"
-								monthNavigator="true" yearNavigator="true" navigator="true"
-								pattern="dd/MM/yyy" mindate="#{mbDate.minimumAgeDate}"
-								maxdate="#{mbDate.maximumAgeDate}" >
-								<p:ajax event="dateSelect" update="inpStartDate" />
-								<p:ajax event="dateSelect" update="endDateMessage" />
-							</p:calendar>
-							<p:message id="endDateMessage" for="inpEndDate" />
-					</div>  
-                 </div>
-                 <br />
-                <div class="search-animals">
-                     <div class="search-animal">
-					<label for="inpSpecies">Espèce :</label><br />
-							<p:selectOneMenu id="inpSpecies" value="#{mbUser.category}"
-								required="true" converter="entityConverter"
-								requiredMessage="Séléctionnez un service" >
-								<f:selectItem itemLabel="Séléctionnez une espèce" itemValue="" />
-								<f:selectItems value="#{mbSpeciesCategory.allCategories()}"
-									var="category" itemLabel="#{category.category}"
-									itemValue="#{category}" />
-							</p:selectOneMenu> 
-					</div>
-                    <div class="search-animal">
-							<label for="inpSpecies">Race :</label><br />
-							<p:selectOneMenu id="inpRace" value="#{mbUser.category}"
-								required="true" converter="entityConverter">
-								<f:selectItem itemLabel="Séléctionnez une race" itemValue="" />
-								<f:selectItems value="#{mbRaceCategory.allCategories()}"
-									var="category" itemLabel="#{category.category}"
-									itemValue="#{category}" />
-							</p:selectOneMenu> 
-					</div>  
-                 </div>
-							
-							
-                  <br />
-                  <b:commandButton  class="btnLogin" value="Rechercher" />
-                  
-                </b:form>
-              </div>
-            </div>
-            
- <f:facet name="footer">
-    <b:button id="closePop" value="Close" dismiss="modal" />
-  </f:facet>
-  </div>
-</b:modal> 
+	<b:modal id="amodal">
+		<div class="search-background">
+			<div class="modal-body">
+				<div class="form-title text-center">
+					<h3>Dis nous ce qu'il te faut !</h3>
+					<br />
+				</div>
+				<div class="d-flex flex-column text-center">
+					<h:form id="SearchForm">
+
+						<label for="inpUserField">Choisis ton terrain :</label>
+						<br />
+						<h:selectOneMenu id="inpUserField" value="#{mbService.field}"
+							required="true" converter="entityConverter"
+							requiredMessage="Séléctionnez un terrain">
+							<f:selectItem itemLabel="Séléctionnez un terrain" itemValue="" />
+							<f:selectItems value="#{mbField.connectedUserFields}" var="field"
+								itemLabel="#{field.name}" itemValue="#{field}" />
+
+						</h:selectOneMenu>
+						<br />
+						<b:message id="inpUserFieldMessage" for="inpUserField" />
+						<br />
+
+
+						<label for="inpServiceType">Type de service :</label>
+						<br />
+						<h:selectOneMenu id="inpServiceType" value="#{mbUser.category}"
+							required="false" converter="entityConverter"
+							requiredMessage="Séléctionnez un service">
+							<f:selectItem itemLabel="Séléctionnez un service" itemValue="" />
+							<f:selectItems value="#{mbUserCategory.allCategories()}"
+								var="category" itemLabel="#{category.category}"
+								itemValue="#{category}" />
+						</h:selectOneMenu>
+						<br />
+						<b:message id="userServiceTypeMessage" for="inpServiceType" />
+						<br />
+
+						<div class="search-dates">
+							<div class="search-date">
+								<label style="margin-right: 10px" for="inpStartDate">Date
+									de debut :</label><br />
+								<p:calendar id="inpStartDate" value="#{mbService.startDate}"
+									showIcon="true" required="false"
+									requiredMessage="La date de naissance est requise"
+									monthNavigator="true" yearNavigator="true" navigator="true"
+									pattern="dd/MM/yyy" mindate="#{mbDate.minimumServiceStartDate}">
+									<p:ajax event="dateSelect" update="inpStartDate" />
+									<p:ajax event="dateSelect" update="startDateMessage" />
+								</p:calendar>
+								<p:message id="startDateMessage" for="inpStartDate" />
+							</div>
+							<div class="search-date">
+								<label style="margin-right: 10px" for="inpEndDate">Date
+									de fin :</label><br />
+								<p:calendar id="inpEndDate" value="#{mbService.endDate}"
+									showIcon="true" required="true"
+									requiredMessage="La date de naissance est requise"
+									monthNavigator="true" yearNavigator="true" navigator="true"
+									pattern="dd/MM/yyy" mindate="#{mbDate.minimumServiceEndDate}">
+									<p:ajax event="dateSelect" update="inpStartDate" />
+									<p:ajax event="dateSelect" update="endDateMessage" />
+								</p:calendar>
+								<p:message id="endDateMessage" for="inpEndDate" />
+							</div>
+						</div>
+						<br />
+						<div class="search-animals">
+							<div class="search-animal">
+								<label for="inpSpecies">Espèce :</label><br />
+								<h:selectOneMenu id="inpSpecies" value="#{mbSpecies.species}"
+									required="true" converter="entityConverter"
+									requiredMessage="Séléctionnez un service">
+									<f:selectItem itemLabel="Séléctionnez une espèce" itemValue="" />
+									<f:selectItems value="#{mbSpecies.allSpecies()}" var="species"
+										itemLabel="#{species.species}" itemValue="#{species}" />
+								</h:selectOneMenu>
+							</div>
+
+						</div>
+
+
+						<br />
+						<b:commandButton class="btnLogin" value="Rechercher"
+							action="#{mbShearingOffer.showOffersByFieldLocation(mbService.field)}" />
+
+					</h:form>
+				</div>
+			</div>
+
+			<f:facet name="footer">
+				<b:button id="closePop" value="Close" dismiss="modal" />
+			</f:facet>
+		</div>
+	</b:modal>
 
 </div>
 

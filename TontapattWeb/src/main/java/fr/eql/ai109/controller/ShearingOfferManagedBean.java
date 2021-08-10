@@ -251,7 +251,11 @@ public class ShearingOfferManagedBean implements Serializable {
 	}
 	
 	public String showOffersByFieldLocation(Field field) {
+		shearingOfferSearchResult = new HashSet<ShearingOffer>();
 		shearingOfferSearchResult = business.searchOfferByFieldLocation(field);
+		for (ShearingOffer shearingOffer : shearingOfferSearchResult) {
+			System.out.println("--------------------------" +shearingOffer.toString());
+		}
 		return "/offerSearchPage.xhtml?faces-redirect=true";
 	}
 
