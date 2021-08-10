@@ -4,15 +4,16 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "vegetation_compostion")
+@Table(name = "vegetation_composition")
 public class VegetationComposition implements Serializable {
 
 	/**
@@ -20,15 +21,17 @@ public class VegetationComposition implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	private VegetationCompositionId id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private Integer id;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@MapsId("fieldId")
+	@ManyToOne
+	@JoinColumn(referencedColumnName = "id", nullable = true)
 	private Field field;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@MapsId("vegetationTypeId")
+	@ManyToOne
+	@JoinColumn(referencedColumnName = "id", nullable = true)
 	private VegetationType vegetationType;
 
 	@Column(name = "percentage", nullable = false)
@@ -36,6 +39,12 @@ public class VegetationComposition implements Serializable {
 
 	public VegetationComposition() {
 		super();
+	}
+
+	public VegetationComposition(Field field, VegetationType vegetationType) {
+		super();
+		this.field = field;
+		this.vegetationType = vegetationType;
 	}
 
 	@Override
@@ -57,11 +66,11 @@ public class VegetationComposition implements Serializable {
 				&& Objects.equals(vegetationType, other.vegetationType);
 	}
 
-	public VegetationCompositionId getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(VegetationCompositionId id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

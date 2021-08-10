@@ -24,6 +24,96 @@ UNLOCK TABLES;
 INSERT INTO `user_category` VALUES (1,'Particulier'),(2,'Entreprise'),(3,'Collectivité locale'),(4,'Association');
 /*!40000 ALTER TABLE `user_category` ENABLE KEYS */;
 
+LOCK TABLES `fence_height` WRITE;
+/*!40000 ALTER TABLE `fence_height` DISABLE KEYS */;
+INSERT INTO `fence_height` VALUES (1,'1'),(2,'2'),(3,'3');
+/*!40000 ALTER TABLE `fence_height` ENABLE KEYS */;
+UNLOCK TABLES;
+
+LOCK TABLES `flatness_percentage` WRITE;
+/*!40000 ALTER TABLE `flatness_percentage` DISABLE KEYS */;
+INSERT INTO `flatness_percentage` VALUES (1,10),(2,20),(3,30),(4,40),(5,50),(6,60),(7,70),(8,80),(9,90),(10,100);
+/*!40000 ALTER TABLE `flatness_percentage` ENABLE KEYS */;
+UNLOCK TABLES;
+
+LOCK TABLES `grass_height` WRITE;
+/*!40000 ALTER TABLE `grass_height` DISABLE KEYS */;
+INSERT INTO `grass_height` VALUES (1,'10cm'),(2,'20cm'),(3,'30cm'),(4,'40cm'),(5,'50cm'),(6,'60cm'),(7,'70cm'),(8,'80cm'),(9,'90cm'),(10,'100cm');
+/*!40000 ALTER TABLE `grass_height` ENABLE KEYS */;
+UNLOCK TABLES;
+
+LOCK TABLES `field_withdrawal_reason` WRITE;
+/*!40000 ALTER TABLE `field_withdrawal_reason` DISABLE KEYS */;
+INSERT INTO `field_withdrawal_reason` VALUES (1,'Je ne suis plus propriétaire de ce terrain'),(2,'Je ne souhaite plus entretenir ce terrain via l\'éco-pâturage'),(3,'Ce terrain est dangereux pour tout type d\'animaux'),(4,'Autre');
+/*!40000 ALTER TABLE `field_withdrawal_reason` ENABLE KEYS */;
+UNLOCK TABLES;
+
+LOCK TABLES `refusal_reason` WRITE;
+/*!40000 ALTER TABLE `refusal_reason` DISABLE KEYS */;
+INSERT INTO `refusal_reason` VALUES (1,'Le terrain est dangereux pour mon bétail'),(2,'Je ne souhaite pas gérer les installations sur ce terrain'),(3,'Je ne souhaite pas coopérer avec ce client'),(4,'Autre');
+/*!40000 ALTER TABLE `refusal_reason` ENABLE KEYS */;
+UNLOCK TABLES;
+
+LOCK TABLES `premature_cancellation_reason` WRITE;
+/*!40000 ALTER TABLE `premature_cancellation_reason` DISABLE KEYS */;
+INSERT INTO `premature_cancellation_reason` VALUES (1,'Mauvaise entente avec le client'),(2,'Désaccord sur le contrat'),(3,'Le terrain est dangereux pour mon bétail'),(4,'Je ne souhaite pas gérer les installations sur ce terrain'),(5,'Autre');
+/*!40000 ALTER TABLE `premature_cancellation_reason` ENABLE KEYS */;
+UNLOCK TABLES;
+
+LOCK TABLES `unsubscription_reason` WRITE;
+/*!40000 ALTER TABLE `unsubscription_reason` DISABLE KEYS */;
+INSERT INTO `unsubscription_reason` VALUES (1,'Je ne souhaite plus être impliqué avec Tontapatt'),(2,'Je suis client d\'une autre entreprise d\'éco-pâturage'),(3,'Autre');
+/*!40000 ALTER TABLE `unsubscription_reason` ENABLE KEYS */;
+UNLOCK TABLES;
+
+LOCK TABLES `anomaly_type` WRITE;
+/*!40000 ALTER TABLE `anomaly_type` DISABLE KEYS */;
+INSERT INTO `anomaly_type` VALUES (1,'Intempéries'),(2,'Clôture cassée'),(3,'Point d\'eau hors service'),(4,'Abri endommagé'),(5,'Animal blessé');
+/*!40000 ALTER TABLE `anomaly_type` ENABLE KEYS */;
+UNLOCK TABLES;
+
+LOCK TABLES `payment_method` WRITE;
+/*!40000 ALTER TABLE `payment_method` DISABLE KEYS */;
+INSERT INTO `payment_method` VALUES (1,'Visa'),(2,'Mastercard');
+/*!40000 ALTER TABLE `payment_method` ENABLE KEYS */;
+UNLOCK TABLES;
+
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (19,'9 Route des Plaines','1959-04-15','L\'éco-pâturage et moi faisons bon ménage','jlriviere@caramail.fr','Jean-Luc','Rivière','00000000','0123456789',NULL,'2021-07-05 00:00:00.000000',NULL,NULL,NULL,1,1520),(20,'15 Avenue Dubourg',NULL,'Association pro-écolo','mboisier@latonte.com','Marie','Boisier','11111111','0223456789',NULL,'2021-07-01 00:00:00.000000','12345678912345',NULL,NULL,4,9095),(21,'45 Rue des Moineaux','1954-02-23','Les chèvres, j\'adore','hdubois@live.fr','Hervé','Dubois','22222222','0323456789',NULL,'2021-07-15 00:00:00.000000',NULL,NULL,NULL,1,9200),(22,'23 Place des Fêtes',NULL,'Mairie d\'Annecy','jbonvent@mairie-annecy.fr','Josiane','Bonvent','33333333','0423456789',NULL,'2021-07-16 00:00:00.000000','32165498754321',NULL,NULL,3,29625),(23,'23 Rue des Bois',NULL,'Atelier de fabrication de bouteilles','jacques-lebeau@labibine.fr','Jacques','Lebeau','44444444','0523456789',NULL,'2021-07-20 00:00:00.000000','78945612312345',NULL,NULL,2,29860),(24,'1 Rue des Framboisiers','1965-01-15','Proprio de plusieurs terrains','p-antoine@wanadude.fr','Pierre','Antoine','55555555','0723456789',NULL,'2021-07-14 00:00:00.000000',NULL,NULL,NULL,1,7832),(25,'78 Rue des Noisettes','1962-02-17','','anne-beausejour@mymail.fr','Anne','Beauséjour','66666666','0823456789',NULL,'2021-07-26 00:00:00.000000',NULL,NULL,NULL,1,2520);
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+LOCK TABLES `field` WRITE;
+/*!40000 ALTER TABLE `field` DISABLE KEYS */;
+INSERT INTO `field` VALUES (1,'2021-07-21 00:00:00.000000','10 Route des Plaines',20000,'Vaste terrain','Terrain des plaines',NULL,2,NULL,10,5,19,1520),(2,'2021-07-22 00:00:00.000000','15 Avenue Dubourg',1000,'Grand jardin','Jardin de l\'association',NULL,2,NULL,9,10,20,9095),(3,'2021-07-23 00:00:00.000000','60 Rue des Moineaux',15000,'Grand terrain','Terrain de Dubois',NULL,1,NULL,5,8,21,9200),(4,'2021-07-20 00:00:00.000000','23 Place des Fêtes',500,'Jardin de la mairie d\'Annecy','Jardin d\'Annecy',NULL,1,NULL,10,7,22,29625),(5,'2021-07-20 00:00:00.000000','23 Rue des Bois',700,'Terrain derrière les locaux','Terrain de la Bibine',NULL,3,NULL,9,4,23,29860),(6,'2021-07-23 00:00:00.000000','40 Route des Fraisiers',1200,'Terrain de taille moyenne','Terrain des Fraisiers',NULL,1,NULL,3,3,24,29860),(7,'2021-07-25 00:00:00.000000','85 Rue des Tournesols',2400,'Terrain','Parc des Tournesols',NULL,2,NULL,2,1,24,29860),(8,'2021-07-23 00:00:00.000000','123 Route du Soleil',500,'Petit jardin','Jardin du Soleil',NULL,1,NULL,9,2,24,29860);
+/*!40000 ALTER TABLE `field` ENABLE KEYS */;
+UNLOCK TABLES;
+
+LOCK TABLES `vegetation_type` WRITE;
+/*!40000 ALTER TABLE `vegetation_type` DISABLE KEYS */;
+INSERT INTO `vegetation_type` VALUES (1,'Ronce'),(2,'Aubépines'),(3,'Jeunes Pins');
+/*!40000 ALTER TABLE `vegetation_type` ENABLE KEYS */;
+UNLOCK TABLES;
+
+LOCK TABLES `vegetation_composition` WRITE;
+/*!40000 ALTER TABLE `vegetation_composition` DISABLE KEYS */;
+INSERT INTO `vegetation_composition` (percentage, field_id, vegetationType_id) VALUES (10,1,1),(15,4,1),(50,8,1),(60,1,2),(33,2,2),(20,5,2),(5,6,2),(90,1,3),(44,2,3),(13,3,3),(53,5,3),(30,7,3);
+/*!40000 ALTER TABLE `vegetation_composition` ENABLE KEYS */;
+UNLOCK TABLES;
+
+LOCK TABLES `shearing_offer` WRITE;
+/*!40000 ALTER TABLE `shearing_offer` DISABLE KEYS */;
+INSERT INTO `shearing_offer` VALUES (1,'9 Route des Plaines',50,15,'2021-07-22 00:00:00.000000','Je propose des moutons',20,'2021-09-30 00:00:00.000000',100,'Offre de M Rivière','2021-09-01 00:00:00.000000',NULL,19,NULL,1,1520),(2,'45 Rue de Moineaux',30,20,'2021-07-23 00:00:00.000000','J\'adore mes chèvres',50,'2021-10-31 00:00:00.000000',80,'Offre de M Dubois','2021-10-01 00:00:00.000000',NULL,21,NULL,6,9200),(3,'78 Rue des Noisettes',20,25,'2021-07-24 00:00:00.000000','Anne propose des ânes',20,'2021-11-30 00:00:00.000000',20,'Les âneries d\'Anne','2021-11-01 00:00:00.000000',NULL,25,NULL,11,2520);
+/*!40000 ALTER TABLE `shearing_offer` ENABLE KEYS */;
+UNLOCK TABLES;
+
+LOCK TABLES `service` WRITE;
+/*!40000 ALTER TABLE `service` DISABLE KEYS */;
+INSERT INTO `service` VALUES (1,NULL,'2021-09-30 00:00:00.000000','2021-08-30 00:00:00.000000','2021-09-30 00:00:00.000000','2021-08-31 00:00:00.000000','2021-09-30 00:00:00.000000',NULL,1500,NULL,'2021-09-01 00:00:00.000000','2021-09-01 00:00:00.000000','2021-08-01 00:00:00.000000',NULL,1,1,NULL,NULL,1),(2,NULL,'2021-10-31 00:00:00.000000','2021-09-29 00:00:00.000000','2021-10-31 00:00:00.000000','2021-09-30 00:00:00.000000','2021-10-31 00:00:00.000000',NULL,2000,NULL,'2021-09-15 00:00:00.000000','2021-10-01 00:00:00.000000','2021-08-15 00:00:00.000000',NULL,2,2,NULL,NULL,2);
+/*!40000 ALTER TABLE `service` ENABLE KEYS */;
+UNLOCK TABLES;
+
 SET GLOBAL log_bin_trust_function_creators = 1;
 USE `tontapatt_db`;
 DROP function IF EXISTS `CalcDistance`;
