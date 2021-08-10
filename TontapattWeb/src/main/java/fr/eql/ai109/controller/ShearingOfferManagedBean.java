@@ -31,6 +31,7 @@ import fr.eql.ai109.tontapatt.entity.OfferWithdrawalReason;
 import fr.eql.ai109.tontapatt.entity.Race;
 import fr.eql.ai109.tontapatt.entity.ShearingOffer;
 import fr.eql.ai109.tontapatt.entity.ShearingOfferPhoto;
+import fr.eql.ai109.tontapatt.entity.Species;
 import fr.eql.ai109.tontapatt.entity.User;
 import fr.eql.ai109.tontapatt.entity.ZipCodeCity;
 
@@ -45,7 +46,7 @@ public class ShearingOfferManagedBean implements Serializable {
 
 	@EJB
 	ShearingOfferIBusiness business;
-	
+
 	@ManagedProperty(value = "#{mbUser.user}")
 	private User connectedUser;
 
@@ -54,39 +55,39 @@ public class ShearingOfferManagedBean implements Serializable {
 	private Set<ShearingOffer> connectedUserExpiredOffers;
 
 	private Set<ShearingOffer> connectedUserInProgress;
-	
+
 	private Set<ShearingOffer> shearingOfferSearchResult;
 
 	private ShearingOffer shearingOffer;
-	
+
 	private String address;
-	
+
 	private Integer animalCount;
-	
+
 	private Double animalDailyPrice;
-	
+
 	private LocalDateTime creationDate;
-	
+
 	private String description;
-	
+
 	private LocalDate endDate;
-	
+
 	private Integer maxTravelDistance;
-	
+
 	private String name;
-	
+
 	private LocalDate startDate;
-	
+
 	private Race race;
-	
+
 	private ZipCodeCity city;
-	
+
 	private ShearingOfferPhoto photo;
-	
+
 	private Set<ShearingOfferPhoto> photos;
-	
+
 	private UploadedFile file;
-	
+
 	private OfferWithdrawalReason offerWithdrawalReason;
 
 	@PostConstruct
@@ -99,13 +100,13 @@ public class ShearingOfferManagedBean implements Serializable {
 				.getInProgressShearingOffersOfConnectedUser(connectedUser);
 		photos = new HashSet<>();
 	}
-	
-	public String offerDetails (ShearingOffer offer) {
+
+	public String offerDetails(ShearingOffer offer) {
 		this.shearingOffer = offer;
 		return "/offerDetails.xhtml?faces-redirect=true";
-		
+
 	}
-	
+
 	public String createOffer() {
 		ShearingOffer newShearingOffer = new ShearingOffer();
 		newShearingOffer.setCreationDate(LocalDateTime.now());
@@ -121,7 +122,7 @@ public class ShearingOfferManagedBean implements Serializable {
 		newShearingOffer.setRace(race);
 		newShearingOffer.setZipCodeCity(city);
 		shearingOffer = business.add(newShearingOffer);
-		
+
 		for (ShearingOfferPhoto sop : photos) {
 			sop.setShearingOffer(shearingOffer);
 		}
@@ -130,7 +131,7 @@ public class ShearingOfferManagedBean implements Serializable {
 		init();
 		return "/offerParameters.xhtml?faces-redirect=true";
 	}
-	
+
 	public void uploadPhoto(FileUploadEvent event) {
 		System.out.println("connected user " + connectedUser.getId());
 		URL url = null;
@@ -153,7 +154,8 @@ public class ShearingOfferManagedBean implements Serializable {
 		try {
 			this.file = event.getFile();
 			String[] fileString = this.file.getFileName().split("\\.");
-			String fileName = UUID.randomUUID().toString() + "." + fileString[1];
+			String fileName = UUID.randomUUID().toString() + "."
+					+ fileString[1];
 			copyFile(fileName, this.file.getInputStream(), destination);
 		} catch (IOException e) {
 			messageUploded = "Le fichier n'a pas pu être télécharger";
@@ -189,7 +191,7 @@ public class ShearingOfferManagedBean implements Serializable {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	public void initOfferParamForCreation() {
 		shearingOffer = new ShearingOffer();
 		address = null;
@@ -207,7 +209,7 @@ public class ShearingOfferManagedBean implements Serializable {
 		photos = new HashSet<>();
 		file = null;
 	}
-	
+
 	public void initOfferParamForModification() {
 		address = shearingOffer.getAddress();
 		animalCount = shearingOffer.getAnimalCount();
@@ -225,7 +227,7 @@ public class ShearingOfferManagedBean implements Serializable {
 		photos = new HashSet<>();
 		file = null;
 	}
-	
+
 	public String updateOffer() {
 		shearingOffer.setAddress(address);
 		shearingOffer.setAnimalCount(animalCount);
@@ -241,7 +243,7 @@ public class ShearingOfferManagedBean implements Serializable {
 		init();
 		return "/offerParameters.xhtml?faces-redirect=true";
 	}
-	
+
 	public String withdrawOffer() {
 		shearingOffer.setWithdrawalDate(LocalDateTime.now());
 		shearingOffer.setOfferWithdrawalReason(offerWithdrawalReason);
@@ -249,12 +251,15 @@ public class ShearingOfferManagedBean implements Serializable {
 		init();
 		return "/offerParameters.xhtml?faces-redirect=true";
 	}
-	
-	public String showOffersByFieldLocation(Field field) {
+
+	public String showOffersByFieldLocation(Field field, Species species,
+			LocalDate serviceStartDate, LocalDate serviceEndDate) {
 		shearingOfferSearchResult = new HashSet<ShearingOffer>();
-		shearingOfferSearchResult = business.searchOfferByFieldLocation(field);
+		shearingOfferSearchResult = business.searchOfferByFieldLocation(field,
+				species, serviceStartDate, serviceEndDate);
 		for (ShearingOffer shearingOffer : shearingOfferSearchResult) {
-			System.out.println("--------------------------" +shearingOffer.toString());
+			System.out.println(
+					"--------------------------" + shearingOffer.toString());
 		}
 		return "/offerSearchPage.xhtml?faces-redirect=true";
 	}
