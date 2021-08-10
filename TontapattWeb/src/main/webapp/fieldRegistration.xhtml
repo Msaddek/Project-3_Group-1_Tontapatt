@@ -297,7 +297,8 @@
 								<label for="inpPhoto">Photos du terrain :</label><br />
 								<p:fileUpload id="inpPhoto" label="Ajouter les photos"
 									listener="#{mbField.uploadPhoto}" mode="advanced"
-									multiple="true" fileLimit="4"
+									multiple="true" fileLimit="4" required="true"
+									requiredMessage="Vous devez ajouter des photos pour enregistrer le terrain"
 									allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
 									invalidFileMessage="Le fichier doit être de type gif, jpe, jpeg ou png"
 									fileLimitMessage="Vous avez droit à 4 photos"

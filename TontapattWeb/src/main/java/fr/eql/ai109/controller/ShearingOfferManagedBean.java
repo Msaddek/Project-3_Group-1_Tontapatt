@@ -23,8 +23,11 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.file.UploadedFile;
 
 import fr.eql.ai109.ibusiness.ShearingOfferIBusiness;
+import fr.eql.ai109.tontapatt.entity.Field;
+import fr.eql.ai109.tontapatt.entity.OfferWithdrawalReason;
 import fr.eql.ai109.tontapatt.entity.Race;
 import fr.eql.ai109.tontapatt.entity.ShearingOffer;
 import fr.eql.ai109.tontapatt.entity.ShearingOfferPhoto;
@@ -51,6 +54,8 @@ public class ShearingOfferManagedBean implements Serializable {
 	private Set<ShearingOffer> connectedUserExpiredOffers;
 
 	private Set<ShearingOffer> connectedUserInProgress;
+	
+	private Set<ShearingOffer> shearingOfferSearchResult;
 
 	private ShearingOffer shearingOffer;
 	
@@ -79,6 +84,10 @@ public class ShearingOfferManagedBean implements Serializable {
 	private ShearingOfferPhoto photo;
 	
 	private Set<ShearingOfferPhoto> photos;
+	
+	private UploadedFile file;
+	
+	private OfferWithdrawalReason offerWithdrawalReason;
 
 	@PostConstruct
 	public void init() {
@@ -112,6 +121,7 @@ public class ShearingOfferManagedBean implements Serializable {
 		newShearingOffer.setRace(race);
 		newShearingOffer.setZipCodeCity(city);
 		shearingOffer = business.add(newShearingOffer);
+		
 		for (ShearingOfferPhoto sop : photos) {
 			sop.setShearingOffer(shearingOffer);
 		}
@@ -140,9 +150,10 @@ public class ShearingOfferManagedBean implements Serializable {
 		}
 		// Do what you want with the file
 		try {
-			String[] file = event.getFile().getFileName().split("\\.");
-			String fileName = UUID.randomUUID().toString() + "." + file[1];
-			copyFile(fileName, event.getFile().getInputStream(), destination);
+			this.file = event.getFile();
+			String[] fileString = this.file.getFileName().split("\\.");
+			String fileName = UUID.randomUUID().toString() + "." + fileString[1];
+			copyFile(fileName, this.file.getInputStream(), destination);
 		} catch (IOException e) {
 			messageUploded = "Le fichier n'a pas pu être télécharger";
 			FacesMessage facesMessage = new FacesMessage(
@@ -169,16 +180,76 @@ public class ShearingOfferManagedBean implements Serializable {
 			}
 			in.close();
 			out.flush();
-			out.close();
 			photo = new ShearingOfferPhoto();
 			photo.setLink(fileName);
-			photo.setShearingOffer(shearingOffer);
 			photos.add(photo);
 			System.out.println("New file created!" + fileName);
-			out.close();
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
+	}
+	
+	public void initOfferParamForCreation() {
+		shearingOffer = new ShearingOffer();
+		address = null;
+		animalCount = null;
+		animalDailyPrice = null;
+		creationDate = null;
+		description = null;
+		endDate = null;
+		maxTravelDistance = null;
+		name = null;
+		startDate = null;
+		race = null;
+		city = null;
+		photo = null;
+		photos = new HashSet<>();
+		file = null;
+	}
+	
+	public void initOfferParamForModification() {
+		address = shearingOffer.getAddress();
+		animalCount = shearingOffer.getAnimalCount();
+		animalDailyPrice = shearingOffer.getAnimalDailyPrice();
+		creationDate = shearingOffer.getCreationDate();
+		description = shearingOffer.getDescription();
+		endDate = shearingOffer.getEndDate();
+		maxTravelDistance = shearingOffer.getMaxTravelDist();
+		name = shearingOffer.getName();
+		startDate = shearingOffer.getStartDate();
+		race = shearingOffer.getRace();
+		city = shearingOffer.getZipCodeCity();
+		System.out.println("cityyyyyyyyyyy " + city.getName());
+		photo = null;
+		photos = new HashSet<>();
+		file = null;
+	}
+	
+	public String updateOffer() {
+		shearingOffer.setAddress(address);
+		shearingOffer.setAnimalCount(animalCount);
+		shearingOffer.setAnimalDailyPrice(animalDailyPrice);
+		shearingOffer.setDescription(description);
+		shearingOffer.setEndDate(endDate);
+		shearingOffer.setMaxTravelDist(maxTravelDistance);
+		shearingOffer.setName(name);
+		shearingOffer.setStartDate(startDate);
+		shearingOffer.setRace(race);
+		shearingOffer.setZipCodeCity(city);
+		shearingOffer = business.update(shearingOffer);
+		return "/offerParameters.xhtml?faces-redirect=true";
+	}
+	
+	public String withdrawOffer() {
+		shearingOffer.setWithdrawalDate(LocalDateTime.now());
+		shearingOffer.setOfferWithdrawalReason(offerWithdrawalReason);
+		shearingOffer = business.update(shearingOffer);
+		return "/offerParameters.xhtml?faces-redirect=true";
+	}
+	
+	public String showOffersByFieldLocation(Field field) {
+		shearingOfferSearchResult = business.searchOfferByFieldLocation(field);
+		return "/offerSearchPage.xhtml?faces-redirect=true";
 	}
 
 	public ShearingOffer getShearingOffer() {
@@ -221,6 +292,15 @@ public class ShearingOfferManagedBean implements Serializable {
 	public void setConnectedUserInProgress(
 			Set<ShearingOffer> connectedUserInProgress) {
 		this.connectedUserInProgress = connectedUserInProgress;
+	}
+
+	public Set<ShearingOffer> getShearingOfferSearchResult() {
+		return shearingOfferSearchResult;
+	}
+
+	public void setShearingOfferSearchResult(
+			Set<ShearingOffer> shearingOfferSearchResult) {
+		this.shearingOfferSearchResult = shearingOfferSearchResult;
 	}
 
 	public String getAddress() {
@@ -325,6 +405,23 @@ public class ShearingOfferManagedBean implements Serializable {
 
 	public void setPhotos(Set<ShearingOfferPhoto> photos) {
 		this.photos = photos;
+	}
+
+	public UploadedFile getFile() {
+		return file;
+	}
+
+	public void setFile(UploadedFile file) {
+		this.file = file;
+	}
+
+	public OfferWithdrawalReason getOfferWithdrawalReason() {
+		return offerWithdrawalReason;
+	}
+
+	public void setOfferWithdrawalReason(
+			OfferWithdrawalReason offerWithdrawalReason) {
+		this.offerWithdrawalReason = offerWithdrawalReason;
 	}
 
 }
