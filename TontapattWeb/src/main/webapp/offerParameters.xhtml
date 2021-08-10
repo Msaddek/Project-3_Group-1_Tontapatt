@@ -8,12 +8,19 @@
 
 <ui:composition template="WEB-INF/template/userOffersTemplate.xhtml">
 
+
+
 	<ui:define name="head">
 		<title>Mes offres</title>
+		<f:metadata>
+			<f:event listener="#{mbShearingOffer.init()}" type="preRenderView"></f:event>
+		</f:metadata>
+
+
 	</ui:define>
 
 	<ui:define name="content">
-
+		
 		<main>
 		<div class="title-page">
 			<div class="section-title">
@@ -32,19 +39,29 @@
 							<th scope="col">Nombre d'animaux</th>
 							<th scope="col">Ville</th>
 							<th scope="col">Couverture</th>
-							<th scope="col">Date de création</th>
-							<th scope="col">Date de création</th>
+							<th scope="col">Date de début</th>
+							<th scope="col">Date de fin</th>
 							<th scope="col">En prestation</th>
 						</tr>
 					</thead>
 					<tbody>
 
-						<p:repeat value="#{mbUserCategory.allCategories()}" var="category">
+						<ui:repeat value="#{mbShearingOffer.connectedUserOffers}"
+							var="offer">
 							<tr>
-								<th scope="row">#{category.id}</th>
-								<td>#{category.category}</td>
+								<th scope="row"><h:form>
+								<b:commandButton value = "#{offer.id}" action="#{mbShearingOffer.offerDetails(offer)}" />
+								</h:form></th>
+								<td>#{offer.name}</td>
+								<td>#{offer.race.species.species}</td>
+								<td>#{offer.animalCount}</td>
+								<td>#{offer.zipCodeCity.name}</td>
+								<td>#{offer.maxTravelDist} Km</td>
+								<td>#{offer.startDate}</td>
+								<td>#{offer.endDate}</td>
+								<td>?</td>
 							</tr>
-						</p:repeat>
+						</ui:repeat>
 
 
 					</tbody>

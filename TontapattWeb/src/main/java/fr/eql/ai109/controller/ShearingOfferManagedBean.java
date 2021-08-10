@@ -91,6 +91,12 @@ public class ShearingOfferManagedBean implements Serializable {
 		photos = new HashSet<>();
 	}
 	
+	public String offerDetails (ShearingOffer offer) {
+		this.shearingOffer = offer;
+		return "/offerDetails.xhtml?faces-redirect=true";
+		
+	}
+	
 	public String createOffer() {
 		ShearingOffer newShearingOffer = new ShearingOffer();
 		newShearingOffer.setCreationDate(LocalDateTime.now());
@@ -111,7 +117,7 @@ public class ShearingOfferManagedBean implements Serializable {
 		}
 		shearingOffer.setPhotos(photos);
 		shearingOffer = business.update(shearingOffer);
-		return "/shearingOfferCreationDone.xhtml?faces-redirect=true";
+		return "/offerParameters.xhtml?faces-redirect=true";
 	}
 	
 	public void uploadPhoto(FileUploadEvent event) {

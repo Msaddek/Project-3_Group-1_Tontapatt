@@ -22,7 +22,7 @@
 		</div>
 
 		<div class="containerO">
-	
+
 			<div id="logo">
 				<h1 class="logo"></h1>
 			</div>
@@ -51,35 +51,36 @@
 						<div class="form-row m-b-55">
 							<div class="categories-offer">
 								<h2>Dates</h2>
-					<div class="double-category">
-								<div class="category-offer">
-								
-									<p:calendar id="inpStartDate"
-										value="#{mbShearingOffer.startDate}" showIcon="true"
-										placeholder="Date de début" required="true"
-										requiredMessage="La date de début est requise"
-										monthNavigator="true" yearNavigator="true" navigator="true"
-										pattern="dd/MM/yyyy" mindate="#{mbDate.minimumOfferStartDate}">
-										<p:ajax event="dateSelect" update="inpStartDate" />
-										<p:ajax event="dateSelect" update="startDateMessage" />
-										<p:ajax event="dateSelect"
-											listener="#{mbDate.minimumOfferEndDate(mbShearingOffer.startDate)}"
-											update="inpEndDate" />
-									</p:calendar>
-									<p:message id="startDateMessage" for="inpStartDate" />
-								</div>
+								<div class="double-category">
+									<div class="category-offer">
 
-								<div class="category-offer">
-									<p:calendar id="inpEndDate" value="#{mbShearingOffer.endDate}"
-										showIcon="true" placeholder="Date de fin" required="true"
-										requiredMessage="La date de fin est requise"
-										monthNavigator="true" yearNavigator="true" navigator="true"
-										pattern="dd/MM/yyyy" mindate="#{mbDate.minimumOfferEndDate}">
-										<p:ajax event="dateSelect" update="inpEndDate" />
-										<p:ajax event="dateSelect" update="endDateMessage" />
-									</p:calendar>
-									<p:message id="endDateMessage" for="inpEndDate" />
-								</div>
+										<p:calendar id="inpStartDate"
+											value="#{mbShearingOffer.startDate}" showIcon="true"
+											placeholder="Date de début" required="true"
+											requiredMessage="La date de début est requise"
+											monthNavigator="true" yearNavigator="true" navigator="true"
+											pattern="dd/MM/yyyy"
+											mindate="#{mbDate.minimumOfferStartDate}">
+											<p:ajax event="dateSelect" update="inpStartDate" />
+											<p:ajax event="dateSelect" update="startDateMessage" />
+											<p:ajax event="dateSelect"
+												listener="#{mbDate.minimumOfferEndDate(mbShearingOffer.startDate)}"
+												update="inpEndDate" />
+										</p:calendar>
+										<p:message id="startDateMessage" for="inpStartDate" />
+									</div>
+
+									<div class="category-offer">
+										<p:calendar id="inpEndDate" value="#{mbShearingOffer.endDate}"
+											showIcon="true" placeholder="Date de fin" required="true"
+											requiredMessage="La date de fin est requise"
+											monthNavigator="true" yearNavigator="true" navigator="true"
+											pattern="dd/MM/yyyy" mindate="#{mbDate.minimumOfferEndDate}">
+											<p:ajax event="dateSelect" update="inpEndDate" />
+											<p:ajax event="dateSelect" update="endDateMessage" />
+										</p:calendar>
+										<p:message id="endDateMessage" for="inpEndDate" />
+									</div>
 								</div>
 							</div>
 						</div>
@@ -103,35 +104,36 @@
 						<div class="form-row m-b-55">
 							<div class="categories-offer">
 								<h2>Commune</h2>
-<div class="double-category">
-								<div class="category-offer">
-								
-									<p:inputText id="inpZipCode" value="#{mbZipCodeCity.zipCode}"
-										required="true" requiredMessage="Le code postal est requis"
-										validatorMessage="Le code postal n'est pas valide"
-										placeholder="Code postal *">
-										<f:validateRegex
-											pattern="^((0[1-9])|([1-8][0-9])|(9[0-8])|(2A)|(2B))[0-9]{3}$" />
-										<p:ajax listener="#{mbZipCodeCity.onZipCodeChange()}"
-											update="inpCity" />
-										<p:ajax update="inpZipCode" />
-										<p:ajax update="zipCodeMessage" />
-									</p:inputText>
-									<p:message id="zipCodeMessage" for="inpZipCode" />
-								</div>
+								<div class="double-category">
+									<div class="category-offer">
 
-								<div class="category-offer">
-									<p:selectOneMenu id="inpCity" value="#{mbShearingOffer.city}"
-										required="true" requiredMessage="Vous devez choisir une ville"
-										converter="entityConverter">
-										<f:selectItem itemLabel="Choisissez une ville" itemValue="" />
-										<f:selectItems value="#{mbZipCodeCity.cities}" var="city"
-											itemLabel="#{city.name}" itemValue="#{city}" />
-										<p:ajax update="inpCity" />
-										<p:ajax update="cityMessage" />
-									</p:selectOneMenu>
-									<p:message id="cityMessage" for="inpCity" />
-								</div>
+										<p:inputText id="inpZipCode" value="#{mbZipCodeCity.zipCode}"
+											required="true" requiredMessage="Le code postal est requis"
+											validatorMessage="Le code postal n'est pas valide"
+											placeholder="Code postal *">
+											<f:validateRegex
+												pattern="^((0[1-9])|([1-8][0-9])|(9[0-8])|(2A)|(2B))[0-9]{3}$" />
+											<p:ajax listener="#{mbZipCodeCity.onZipCodeChange()}"
+												update="inpCity" />
+											<p:ajax update="inpZipCode" />
+											<p:ajax update="zipCodeMessage" />
+										</p:inputText>
+										<p:message id="zipCodeMessage" for="inpZipCode" />
+									</div>
+
+									<div class="category-offer">
+										<p:selectOneMenu id="inpCity" value="#{mbShearingOffer.city}"
+											required="true"
+											requiredMessage="Vous devez choisir une ville"
+											converter="entityConverter">
+											<f:selectItem itemLabel="Choisissez une ville" itemValue="" />
+											<f:selectItems value="#{mbZipCodeCity.cities}" var="city"
+												itemLabel="#{city.name}" itemValue="#{city}" />
+											<p:ajax update="inpCity" />
+											<p:ajax update="cityMessage" />
+										</p:selectOneMenu>
+										<p:message id="cityMessage" for="inpCity" />
+									</div>
 								</div>
 							</div>
 						</div>
@@ -140,36 +142,37 @@
 							<div class="categories-offer">
 								<h2>Troupeau</h2>
 								<div class="double-category">
-								<div class="category-offer">
-								
-									<p:selectOneMenu id="inpSpecies" value="#{mbRace.species}"
-										required="true"
-										requiredMessage="Vous devez choisir une espèce"
-										converter="entityConverter">
-										<f:selectItem itemLabel="Choisissez une espece" itemValue="" />
-										<f:selectItems value="#{mbSpecies.allSpecies()}" var="species"
-											itemLabel="#{species.species}" itemValue="#{species}" />
-										<p:ajax listener="#{mbRace.onSpeciesChange()}"
-											update="inpRace" />
-										<p:ajax update="inpSpecies" />
-										<p:ajax update="speciesMessage" />
-										<p:ajax update="raceMessage" />
-									</p:selectOneMenu>
-									<p:message id="speciesMessage" for="inpSpecies" />
-								</div>
+									<div class="category-offer">
 
-								<div class="category-offer">
-									<p:selectOneMenu id="inpRace" value="#{mbShearingOffer.race}"
-										required="true" requiredMessage="Vous devez choisir une race"
-										converter="entityConverter">
-										<f:selectItem itemLabel="Choisissez une race" itemValue="" />
-										<f:selectItems value="#{mbRace.races}" var="race"
-											itemLabel="#{race.race}" itemValue="#{race}" />
-										<p:ajax update="inpRace" />
-										<p:ajax update="raceMessage" />
-									</p:selectOneMenu>
-									<p:message id="raceMessage" for="inpRace" />
-								</div>
+										<p:selectOneMenu id="inpSpecies" value="#{mbRace.species}"
+											required="true"
+											requiredMessage="Vous devez choisir une espèce"
+											converter="entityConverter">
+											<f:selectItem itemLabel="Choisissez une espece" itemValue="" />
+											<f:selectItems value="#{mbSpecies.allSpecies()}"
+												var="species" itemLabel="#{species.species}"
+												itemValue="#{species}" />
+											<p:ajax listener="#{mbRace.onSpeciesChange()}"
+												update="inpRace" />
+											<p:ajax update="inpSpecies" />
+											<p:ajax update="speciesMessage" />
+											<p:ajax update="raceMessage" />
+										</p:selectOneMenu>
+										<p:message id="speciesMessage" for="inpSpecies" />
+									</div>
+
+									<div class="category-offer">
+										<p:selectOneMenu id="inpRace" value="#{mbShearingOffer.race}"
+											required="true" requiredMessage="Vous devez choisir une race"
+											converter="entityConverter">
+											<f:selectItem itemLabel="Choisissez une race" itemValue="" />
+											<f:selectItems value="#{mbRace.races}" var="race"
+												itemLabel="#{race.race}" itemValue="#{race}" />
+											<p:ajax update="inpRace" />
+											<p:ajax update="raceMessage" />
+										</p:selectOneMenu>
+										<p:message id="raceMessage" for="inpRace" />
+									</div>
 								</div>
 							</div>
 						</div>
@@ -177,27 +180,27 @@
 						<div class="form-row m-b-55">
 							<div class="categories-offer">
 								<h2>Taille et prix</h2>
-							<div class="double-category">
-								<div class="category-offer">
-									<p:inputNumber id="inpAnimalCount"
-										value="#{mbShearingOffer.animalCount}"
-										placeholder="Nombre d'animaux" required="true"
-										requiredMessage="Il faut entrer le nombre d'animaux"
-										validatorMessage="Le nombre doit être un nombre entier positif"
-										decimalPlaces="0" minValue="0" />
-									<p:message id="animalCountMessage" for="inpAnimalCount" />
-								</div>
+								<div class="double-category">
+									<div class="category-offer">
+										<p:inputNumber id="inpAnimalCount"
+											value="#{mbShearingOffer.animalCount}"
+											placeholder="Nombre d'animaux" required="true"
+											requiredMessage="Il faut entrer le nombre d'animaux"
+											validatorMessage="Le nombre doit être un nombre entier positif"
+											decimalPlaces="0" minValue="0" />
+										<p:message id="animalCountMessage" for="inpAnimalCount" />
+									</div>
 
-								<div class="category-offer">
-									<p:inputNumber id="inpAnimalDailyPrice"
-										value="#{mbShearingOffer.animalDailyPrice}" required="true"
-										requiredMessage="Il faut entrer un prix"
-										validatorMessage="Le nombre doit être un nombre positif"
-										decimalPlaces="0" minValue="0" placeholder="Prix (en €)" />
-									<p:message id="animalDailyPriceMessage"
-										for="inpAnimalDailyPrice" />
+									<div class="category-offer">
+										<p:inputNumber id="inpAnimalDailyPrice"
+											value="#{mbShearingOffer.animalDailyPrice}" required="true"
+											requiredMessage="Il faut entrer un prix"
+											validatorMessage="Le nombre doit être un nombre positif"
+											decimalPlaces="0" minValue="0" placeholder="Prix (en €)" />
+										<p:message id="animalDailyPriceMessage"
+											for="inpAnimalDailyPrice" />
+									</div>
 								</div>
-							</div>
 							</div>
 						</div>
 
@@ -206,96 +209,99 @@
 								<h2>Distance</h2>
 								<div class="category-offer">
 									<p:inputNumber id="inpMaxDist"
-									value="#{mbShearingOffer.maxTravelDistance}" required="true"
-									requiredMessage="Il faut entrer la distance maximal que vous pouvez parcourir"
-									validatorMessage="La distance doit être un nombre entier"
-									decimalPlaces="0" minValue="0" placeholder="Distance max (en km)" />
-								<p:message id="maxDistMessage" for="inpMaxDist" />
+										value="#{mbShearingOffer.maxTravelDistance}" required="true"
+										requiredMessage="Il faut entrer la distance maximal que vous pouvez parcourir"
+										validatorMessage="La distance doit être un nombre entier"
+										decimalPlaces="0" minValue="0"
+										placeholder="Distance max (en km)" />
+									<p:message id="maxDistMessage" for="inpMaxDist" />
 								</div>
 							</div>
 						</div>
-						
+
 						<div class="form-row">
 							<div class="categories-offer">
 								<h2>Description</h2>
 								<div class="category-offer">
 									<h:inputTextarea id="inpDescription" required="true"
-									requiredMessage="Vous devez entrer la description de votre offre"
-									value="#{mbShearingOffer.description}" rows="10" cols="80"
-									counter="display" maxlength="500"
-									counterTemplate="{0} caractères restants." autoResize="false" />
+										requiredMessage="Vous devez entrer la description de votre offre"
+										value="#{mbShearingOffer.description}" rows="10" cols="80"
+										counter="display" maxlength="500"
+										counterTemplate="{0} caractères restants." autoResize="false" />
 								</div>
 							</div>
 						</div>
-						
+
 						<div class="form-row m-b-55">
 							<div class="categories-offer">
-							
+
 								<h2>Photos</h2>
-							<div style="display: flex; flex-direction: column;">
-								<div class="category-offer">
-									<p:fileUpload id="inpPhoto1"
-								label="Ajouter la première photo du troupeau :" mode="advanced"
-								listener="#{mbShearingOffer.uploadPhoto}" required="true"
-								requiredMessage="Vous devez télécharger une photo de votre troupeau"
-								allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileLimit="1"
-								fileLimitMessage="Vous avez le droit à une photos"
-								invalidFileMessage="Le fichier doit être de type gif, jpe, jpeg ou png"
-								uploadLabel="Télécharger" cancelLabel="Annuler"
-								update="photoMessage1" />
-							<p:message id="photoMessage1" for="inpPhoto1" />
-							
+								<div style="display: flex; flex-direction: column;">
+									<div class="category-offer">
+										<p:fileUpload id="inpPhoto1"
+											label="Ajouter la première photo du troupeau :"
+											mode="advanced" listener="#{mbShearingOffer.uploadPhoto}"
+											required="true"
+											requiredMessage="Vous devez télécharger une photo de votre troupeau"
+											allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileLimit="1"
+											fileLimitMessage="Vous avez le droit à une photos"
+											invalidFileMessage="Le fichier doit être de type gif, jpe, jpeg ou png"
+											uploadLabel="Télécharger" cancelLabel="Annuler"
+											update="photoMessage1" />
+										<p:message id="photoMessage1" for="inpPhoto1" />
 
-								
-															<p:fileUpload id="inpPhoto2"
-								label="Ajouter la deuxième photo du troupeau :" mode="advanced"
-								listener="#{mbShearingOffer.uploadPhoto}" required="true"
-								requiredMessage="Vous devez télécharger une photo de votre troupeau"
-								allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileLimit="1"
-								fileLimitMessage="Vous avez le droit à une photos"
-								invalidFileMessage="Le fichier doit être de type gif, jpe, jpeg ou png"
-								uploadLabel="Télécharger" cancelLabel="Annuler"
-								update="photoMessage2" />
-							<p:message id="photoMessage2" for="inpPhoto2" />
-								
-				
-								
-															<p:fileUpload id="inpPhoto3"
-								label="Ajouter la troisième photo du troupeau :" mode="advanced"
-								listener="#{mbShearingOffer.uploadPhoto}" required="true"
-								requiredMessage="Vous devez télécharger une photo de votre troupeau"
-								allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileLimit="1"
-								fileLimitMessage="Vous avez le droit à une photos"
-								invalidFileMessage="Le fichier doit être de type gif, jpe, jpeg ou png"
-								uploadLabel="Télécharger" cancelLabel="Annuler"
-								update="photoMessage3" />
-							<p:message id="photoMessage3" for="inpPhoto3" />
-							
-								
-																<p:fileUpload id="inpPhoto4"
-								label="Ajouter la quatrième photo du troupeau :" mode="advanced"
-								listener="#{mbShearingOffer.uploadPhoto}" required="true"
-								requiredMessage="Vous devez télécharger une photo de votre troupeau"
-								allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileLimit="1"
-								fileLimitMessage="Vous avez le droit à une photos"
-								invalidFileMessage="Le fichier doit être de type gif, jpe, jpeg ou png"
-								uploadLabel="Télécharger" cancelLabel="Annuler"
-								update="photoMessage4" />
-							<p:message id="photoMessage4" for="inpPhoto4" />
-								
-</div>
-							</div>
+
+
+										<p:fileUpload id="inpPhoto2"
+											label="Ajouter la deuxième photo du troupeau :"
+											mode="advanced" listener="#{mbShearingOffer.uploadPhoto}"
+											required="false"
+											requiredMessage="Vous devez télécharger une photo de votre troupeau"
+											allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileLimit="1"
+											fileLimitMessage="Vous avez le droit à une photos"
+											invalidFileMessage="Le fichier doit être de type gif, jpe, jpeg ou png"
+											uploadLabel="Télécharger" cancelLabel="Annuler"
+											update="photoMessage2" />
+										<p:message id="photoMessage2" for="inpPhoto2" />
+
+
+
+										<p:fileUpload id="inpPhoto3"
+											label="Ajouter la troisième photo du troupeau :"
+											mode="advanced" listener="#{mbShearingOffer.uploadPhoto}"
+											required="false"
+											requiredMessage="Vous devez télécharger une photo de votre troupeau"
+											allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileLimit="1"
+											fileLimitMessage="Vous avez le droit à une photos"
+											invalidFileMessage="Le fichier doit être de type gif, jpe, jpeg ou png"
+											uploadLabel="Télécharger" cancelLabel="Annuler"
+											update="photoMessage3" />
+										<p:message id="photoMessage3" for="inpPhoto3" />
+
+
+										<p:fileUpload id="inpPhoto4"
+											label="Ajouter la quatrième photo du troupeau :"
+											mode="advanced" listener="#{mbShearingOffer.uploadPhoto}"
+											required="false"
+											requiredMessage="Vous devez télécharger une photo de votre troupeau"
+											allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileLimit="1"
+											fileLimitMessage="Vous avez le droit à une photos"
+											invalidFileMessage="Le fichier doit être de type gif, jpe, jpeg ou png"
+											uploadLabel="Télécharger" cancelLabel="Annuler"
+											update="photoMessage4" />
+										<p:message id="photoMessage4" for="inpPhoto4" />
+
+									</div>
+								</div>
 							</div>
 						</div>
 
 
-						<div>
-
-						</div>
+						<div></div>
 
 						<div>
-							<b:commandButton class="get-started-btn"
-								value="Enregistrer" action="#{mbShearingOffer.createOffer()}" />
+							<b:commandButton class="get-started-btn" value="Enregistrer"
+								action="#{mbShearingOffer.createOffer()}" />
 						</div>
 					</b:form>
 				</div>
