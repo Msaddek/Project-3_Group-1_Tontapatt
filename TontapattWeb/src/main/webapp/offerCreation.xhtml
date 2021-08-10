@@ -6,6 +6,12 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
 
+<f:metadata>
+	<f:viewAction action="#{mbShearingOffer.initOfferParamForCreation()}" />
+	<f:viewAction action="#{mbRace.initRaceParamForOfferCreation()}" />
+	<f:viewAction action="#{mbZipCodeCity.initCityForOfferCreation()}" />
+</f:metadata>
+
 <ui:composition template="WEB-INF/template/userOffersTemplate.xhtml">
 
 	<ui:define name="head">
@@ -110,7 +116,7 @@
 										<p:inputText id="inpZipCode" value="#{mbZipCodeCity.zipCode}"
 											required="true" requiredMessage="Le code postal est requis"
 											validatorMessage="Le code postal n'est pas valide"
-											placeholder="Code postal *">
+											placeholder="Code postal">
 											<f:validateRegex
 												pattern="^((0[1-9])|([1-8][0-9])|(9[0-8])|(2A)|(2B))[0-9]{3}$" />
 											<p:ajax listener="#{mbZipCodeCity.onZipCodeChange()}"
@@ -196,7 +202,7 @@
 											value="#{mbShearingOffer.animalDailyPrice}" required="true"
 											requiredMessage="Il faut entrer un prix"
 											validatorMessage="Le nombre doit être un nombre positif"
-											decimalPlaces="0" minValue="0" placeholder="Prix (en €)" />
+											decimalPlaces="2" minValue="0" placeholder="Prix (en €)" />
 										<p:message id="animalDailyPriceMessage"
 											for="inpAnimalDailyPrice" />
 									</div>
@@ -236,66 +242,17 @@
 							<div class="categories-offer">
 
 								<h2>Photos</h2>
-								<div style="display: flex; flex-direction: column;">
-									<div class="category-offer">
-										<p:fileUpload id="inpPhoto1"
-											label="Ajouter la première photo du troupeau :"
-											mode="advanced" listener="#{mbShearingOffer.uploadPhoto}"
-											required="true"
-											requiredMessage="Vous devez télécharger une photo de votre troupeau"
-											allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileLimit="1"
-											fileLimitMessage="Vous avez le droit à une photos"
-											invalidFileMessage="Le fichier doit être de type gif, jpe, jpeg ou png"
-											uploadLabel="Télécharger" cancelLabel="Annuler"
-											update="photoMessage1" />
-										<p:message id="photoMessage1" for="inpPhoto1" />
-
-
-
-										<p:fileUpload id="inpPhoto2"
-											label="Ajouter la deuxième photo du troupeau :"
-											mode="advanced" listener="#{mbShearingOffer.uploadPhoto}"
-											required="false"
-											requiredMessage="Vous devez télécharger une photo de votre troupeau"
-											allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileLimit="1"
-											fileLimitMessage="Vous avez le droit à une photos"
-											invalidFileMessage="Le fichier doit être de type gif, jpe, jpeg ou png"
-											uploadLabel="Télécharger" cancelLabel="Annuler"
-											update="photoMessage2" />
-										<p:message id="photoMessage2" for="inpPhoto2" />
-
-
-
-										<p:fileUpload id="inpPhoto3"
-											label="Ajouter la troisième photo du troupeau :"
-											mode="advanced" listener="#{mbShearingOffer.uploadPhoto}"
-											required="false"
-											requiredMessage="Vous devez télécharger une photo de votre troupeau"
-											allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileLimit="1"
-											fileLimitMessage="Vous avez le droit à une photos"
-											invalidFileMessage="Le fichier doit être de type gif, jpe, jpeg ou png"
-											uploadLabel="Télécharger" cancelLabel="Annuler"
-											update="photoMessage3" />
-										<p:message id="photoMessage3" for="inpPhoto3" />
-
-
-										<p:fileUpload id="inpPhoto4"
-											label="Ajouter la quatrième photo du troupeau :"
-											mode="advanced" listener="#{mbShearingOffer.uploadPhoto}"
-											required="false"
-											requiredMessage="Vous devez télécharger une photo de votre troupeau"
-											allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileLimit="1"
-											fileLimitMessage="Vous avez le droit à une photos"
-											invalidFileMessage="Le fichier doit être de type gif, jpe, jpeg ou png"
-											uploadLabel="Télécharger" cancelLabel="Annuler"
-											update="photoMessage4" />
-										<p:message id="photoMessage4" for="inpPhoto4" />
-
-									</div>
-								</div>
+								<p:fileUpload id="inpPhoto" label="Ajouter les photos"
+									listener="#{mbShearingOffer.uploadPhoto}" mode="advanced"
+									multiple="true" fileLimit="4" required="true"
+									requiredMessage="Vous devez ajouter des photos pour enregistrer l'offre"
+									allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+									invalidFileMessage="Le fichier doit être de type gif, jpe, jpeg ou png"
+									fileLimitMessage="Vous avez droit à 4 photos"
+									uploadLabel="Télécharger" cancelLabel="Annuler" />
+								<p:message id="photoMessage" for="inpPhoto" />
 							</div>
 						</div>
-
 
 						<div></div>
 
@@ -312,5 +269,4 @@
 	</ui:define>
 
 </ui:composition>
-
 </html>

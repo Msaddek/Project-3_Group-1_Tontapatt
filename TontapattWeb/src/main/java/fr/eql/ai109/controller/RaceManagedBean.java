@@ -5,10 +5,12 @@ import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import fr.eql.ai109.ibusiness.RaceIBusiness;
 import fr.eql.ai109.tontapatt.entity.Race;
+import fr.eql.ai109.tontapatt.entity.ShearingOffer;
 import fr.eql.ai109.tontapatt.entity.Species;
 
 @ManagedBean(name = "mbRace")
@@ -23,6 +25,9 @@ public class RaceManagedBean implements Serializable {
 	@EJB
 	RaceIBusiness business;
 	
+	@ManagedProperty(value = "#{mbShearingOffer.shearingOffer}")
+	private ShearingOffer selectedShearingOffer;
+	
 	private Race race;
 
 	private Set<Race> races;
@@ -31,6 +36,15 @@ public class RaceManagedBean implements Serializable {
 	
 	public void onSpeciesChange() {
 		races = business.getRacesBySpecies(species);
+	}
+	
+	public void initRaceParamForOfferCreation() {
+		species = null;
+	}
+	
+	public void initRaceParamForOfferModification() {
+		species = selectedShearingOffer.getRace().getSpecies();
+		race = selectedShearingOffer.getRace();
 	}
 
 	public Race getRace() {
@@ -55,6 +69,14 @@ public class RaceManagedBean implements Serializable {
 
 	public void setSpecies(Species species) {
 		this.species = species;
+	}
+
+	public ShearingOffer getSelectedShearingOffer() {
+		return selectedShearingOffer;
+	}
+
+	public void setSelectedShearingOffer(ShearingOffer selectedShearingOffer) {
+		this.selectedShearingOffer = selectedShearingOffer;
 	}
 
 }
