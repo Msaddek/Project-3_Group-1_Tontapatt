@@ -22,6 +22,10 @@ public class DateManagedBean implements Serializable {
 	private LocalDate minimumOfferStartDate = LocalDate.now();
 
 	private LocalDate minimumOfferEndDate = LocalDate.now();
+	
+	private LocalDate minimumServiceStartDate = LocalDate.now().plusDays(3);
+	
+	private LocalDate minimumServiceEndDate = minimumServiceStartDate.plusDays(1);
 
 	public void minimumOfferEndDate(LocalDate startDate) {
 
@@ -42,6 +46,20 @@ public class DateManagedBean implements Serializable {
 
 	public LocalDate getMinimumOfferEndDate() {
 		return minimumOfferEndDate;
+	}
+
+	/**
+	 * @return the minimumServiceStartDate
+	 */
+	public LocalDate getMinimumServiceStartDate() {
+		return minimumServiceStartDate;
+	}
+
+	/**
+	 * @return the minimumServiceEndDate
+	 */
+	public LocalDate getMinimumServiceEndDate() {
+		return minimumServiceEndDate;
 	}
 
 }
