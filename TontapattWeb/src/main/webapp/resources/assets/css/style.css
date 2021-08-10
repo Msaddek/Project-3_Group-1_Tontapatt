@@ -1534,3 +1534,13 @@ position: relative;
 	width: 100%;
 	font-size: 14px;
 }
+
+header.scrolled {
+  background-color: #fff !important;
+  transition: background-color 200ms linear;
+  
+}
+
+header.scrolled nav a {
+	color: black !important;
+}
