@@ -10,6 +10,9 @@
 
 	<ui:define name="head">
 		<title>Mes terrains</title>
+		<f:metadata>
+			<f:event listener="#{mbField.init()}" type="preRenderView"></f:event>
+		</f:metadata>
 	</ui:define>
 
 	<ui:define name="content">
@@ -30,18 +33,25 @@
 							<th scope="col">Nom</th>
 							<th scope="col">Ville</th>
 							<th scope="col">Surface</th>
-							<th scope="col">Date d'ajout</th>
-							<th scope="col">En prestation</th>
+							<th scope="col">Rien!</th>
+
 						</tr>
 					</thead>
 					<tbody>
 
-						<p:repeat value="#{mbUserCategory.allCategories()}" var="category">
+						<ui:repeat value="#{mbField.connectedUserFields}" 
+						var="toto">
 							<tr>
-								<th scope="row">#{category.id}</th>
-								<td>#{category.category}</td>
+								<th scope="row"><h:form>
+										<b:commandButton value="#{toto.id}"
+											action="#{mbField.fieldDetails(toto)}" />
+									</h:form></th>
+								<td>#{toto.name}</td>
+								<td>#{toto.zipCodeCity.name}</td>
+								<td>#{toto.area}</td>
+								<td>"blablabla"</td>
 							</tr>
-						</p:repeat>
+						</ui:repeat>
 
 
 					</tbody>
@@ -52,6 +62,6 @@
 
 	</ui:define>
 
-</ui:composition>
 
+</ui:composition>
 </html>

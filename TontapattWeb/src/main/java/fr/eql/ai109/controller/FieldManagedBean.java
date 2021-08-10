@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -20,11 +19,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-
 import org.primefaces.PrimeFaces;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
-
 import fr.eql.ai109.ibusiness.FieldIBusiness;
 import fr.eql.ai109.tontapatt.entity.FenceHeight;
 import fr.eql.ai109.tontapatt.entity.Field;
@@ -48,6 +45,11 @@ public class FieldManagedBean implements Serializable {
 
 	@EJB
 	FieldIBusiness fieldBusiness;
+	
+	@ManagedProperty(value = "#{mbUser.user}")
+	private User connectedUser;
+	
+	private Set<Field> connectedUserFields;
 
 	private Field field;
 
@@ -89,51 +91,23 @@ public class FieldManagedBean implements Serializable {
 
 	private UploadedFile file;
 
-	@ManagedProperty(value = "#{mbUser.user}")
-	private User connectedUser;
-	private Set<Field> connectedUserFields;
-
+	
 	@PostConstruct()
 	public void init() {
-		connectedUserFields = fieldBusiness.findFieldsByUser(connectedUser);
-		photos = new HashSet<FieldPhoto>();
+		connectedUserFields = fieldBusiness.getFieldsOfConnectedUser(connectedUser);
+		photos = new HashSet<>();
 		vegetationCompositions = new HashSet<>();
 	}
-
-	public void initSelectedFieldParam() {
-		name = field.getName();
-		address = field.getAddress();
-		area = field.getArea();
-		description = field.getDescription();
-		grassHeight = field.getGrassHeight();
-		fenceHeight = field.getFenceHeight();
-		flatnessPercentage = field.getFlatnessPercentage();
-		// TODO: végétations
+	
+	public String fieldDetails (Field field) {
+		this.field = field;
+		return "/fieldUpdate.xhtml?faces-redirect=true";
+		
 	}
-
-	public void updateNameAndAddress() {
-		field.setAddress(address);
-		field.setZipCodeCity(zipCodeCity);
-		field.setName(name);
-		field = fieldBusiness.update(field);
-		dialogMessage = "Votre profil est à jour!";
-		PrimeFaces.current().executeScript("PF('dialogWidget').show()");
-	}
-
-	public void updateDescriptionAndSurface() {
-		field.setDescription(description);
-		field.setArea(area);
-		field = fieldBusiness.update(field);
-		dialogMessage = "Votre photo et/ou description sont à jour!";
-		PrimeFaces.current().executeScript("PF('dialogWidget').show()");
-	}
-
+	
 	public String createField() {
-		String forward = "/fieldRegistrationDone.xhtml?faces-redirect=true"; // faire
-																				// addPhoto.xhtml
-																				// redirection
-																				// =false
-		System.out.println(forward);
+		String forward = "/fieldParameters.xhtml?faces-redirect=true";
+		
 		Field newField = new Field();
 
 		newField.setName(name);
@@ -146,7 +120,7 @@ public class FieldManagedBean implements Serializable {
 		newField.setZipCodeCity(zipCodeCity);
 		newField.setOwner(connectedUser);
 		field = fieldBusiness.add(newField);
-		System.out.println("***********" + field.getId());
+		System.out.println(field.getId());
 		for (VegetationComposition vc : vegetationCompositions) {
 			vc.setField(field);
 		}
@@ -158,7 +132,9 @@ public class FieldManagedBean implements Serializable {
 		field = fieldBusiness.update(field);
 		return forward;
 	}
-
+	
+	
+	
 	public void uploadPhoto(FileUploadEvent e) {
 		URL url = null;
 		String destination = null;
@@ -218,6 +194,60 @@ public class FieldManagedBean implements Serializable {
 			System.out.println(e.getMessage());
 		}
 	}
+	
+	public void initFieldParamForCreation() {
+		field = new Field();
+		name = null;
+		address = null;
+		zipCodeCity = null;
+		area = null;
+		description = null;
+		grassHeight = null;
+		fenceHeight = null;
+		flatnessPercentage = null;
+		additionDate = null;
+		withdrawalDate =null;
+		fieldWithdrawalReason = null;
+		photos = new HashSet<>();
+		file = null;
+		services = new HashSet<>();
+		
+		//TODO vegetationComposition
+	}
+
+	public void initFieldParamForModification() {
+		name = field.getName();
+		address = field.getAddress();
+		zipCodeCity = field.getZipCodeCity();
+		area = field.getArea();
+		description = field.getDescription();
+		grassHeight = field.getGrassHeight();
+		fenceHeight = field.getFenceHeight();
+		flatnessPercentage = field.getFlatnessPercentage();
+		additionDate = field.getAdditionDate();
+		withdrawalDate = field.getWithdrawalDate();
+		fieldWithdrawalReason = field.getFieldWithdrawalReason();
+		photos = new HashSet<>();
+		file = null;
+		services = new HashSet<>();
+		
+		//TODO vegetationComposition
+		
+	}
+
+	public String updateField() {
+		field.setName(name);
+		field.setAddress(address);
+		field.setZipCodeCity(zipCodeCity);
+		field.setDescription(description);
+		field.setArea(area);
+		field.setGrassHeight(grassHeight);
+		field.setFenceHeight(fenceHeight);
+		field.setFlatnessPercentage(flatnessPercentage);
+		field = fieldBusiness.update(field);
+		return "/fieldParameters.xhtml?faces-redirect=true";
+	}
+
 
 	public Field getField() {
 		return field;
