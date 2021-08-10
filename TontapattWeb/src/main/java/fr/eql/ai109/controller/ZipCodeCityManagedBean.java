@@ -123,4 +123,18 @@ public class ZipCodeCityManagedBean implements Serializable {
 		this.selectedShearingOffer = selectedShearingOffer;
 	}
 
+	/**
+	 * @return the selectedField
+	 */
+	public Field getSelectedField() {
+		return selectedField;
+	}
+
+	/**
+	 * @param selectedField the selectedField to set
+	 */
+	public void setSelectedField(Field selectedField) {
+		this.selectedField = selectedField;
+	}
+
 }
