@@ -6,6 +6,14 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
 
+<f:metadata>
+	<f:viewAction action="#{mbShearingOffer.initOfferParamForModification()}" />
+	<f:viewAction action="#{mbRace.initRaceParamForOfferModification()}" />
+	<f:viewAction action="#{mbRace.onSpeciesChange()}" />
+	<f:viewAction action="#{mbZipCodeCity.initCityOfSelectedOffer()}" />
+	<f:viewAction action="#{mbZipCodeCity.onZipCodeChange()}" />
+</f:metadata>
+
 <ui:composition template="WEB-INF/template/userOffersTemplate.xhtml">
 
 	<ui:define name="head">
@@ -82,7 +90,7 @@
 										value="#{mbShearingOffer.animalDailyPrice}" required="true"
 										requiredMessage="Il faut entrer un prix"
 										validatorMessage="Le nombre doit être un nombre positif"
-										decimalPlaces="0" minValue="0" placeholder="Prix (en €)" />
+										decimalPlaces="2" minValue="0" placeholder="Prix (en €)" />
 									<p:message id="animalDailyPriceMessage"
 										for="inpAnimalDailyPrice" />
 								</div>
@@ -101,48 +109,6 @@
 											update="inpEndDate" />
 									</p:calendar>
 									<p:message id="startDateMessage" for="inpStartDate" />
-								</div>
-
-								<div class="form-group">
-									<p:fileUpload id="inpPhoto1"
-										label="Ajouter la première photo du troupeau :"
-										mode="advanced" listener="#{mbShearingOffer.uploadPhoto}"
-										required="true"
-										requiredMessage="Vous devez télécharger une photo de votre troupeau"
-										allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileLimit="1"
-										fileLimitMessage="Vous avez le droit à une photos"
-										invalidFileMessage="Le fichier doit être de type gif, jpe, jpeg ou png"
-										uploadLabel="Télécharger" cancelLabel="Annuler"
-										update="photoMessage1" />
-									<p:message id="photoMessage1" for="inpPhoto1" />
-								</div>
-
-								<div class="form-group">
-									<p:fileUpload id="inpPhoto2"
-										label="Ajouter la deuxième photo du troupeau :"
-										mode="advanced" listener="#{mbShearingOffer.uploadPhoto}"
-										required="false"
-										requiredMessage="Vous devez télécharger une photo de votre troupeau"
-										allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileLimit="1"
-										fileLimitMessage="Vous avez le droit à une photos"
-										invalidFileMessage="Le fichier doit être de type gif, jpe, jpeg ou png"
-										uploadLabel="Télécharger" cancelLabel="Annuler"
-										update="photoMessage2" />
-									<p:message id="photoMessage2" for="inpPhoto2" />
-								</div>
-
-								<div class="form-group">
-									<p:fileUpload id="inpPhoto3"
-										label="Ajouter la troisième photo du troupeau :"
-										mode="advanced" listener="#{mbShearingOffer.uploadPhoto}"
-										required="false"
-										requiredMessage="Vous devez télécharger une photo de votre troupeau"
-										allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileLimit="1"
-										fileLimitMessage="Vous avez le droit à une photos"
-										invalidFileMessage="Le fichier doit être de type gif, jpe, jpeg ou png"
-										uploadLabel="Télécharger" cancelLabel="Annuler"
-										update="photoMessage3" />
-									<p:message id="photoMessage3" for="inpPhoto3" />
 								</div>
 
 								<div class="form-group"></div>
@@ -228,20 +194,6 @@
 								</div>
 
 								<div class="form-group">
-									<p:fileUpload id="inpPhoto4"
-										label="Ajouter la quatrième photo du troupeau :"
-										mode="advanced" listener="#{mbShearingOffer.uploadPhoto}"
-										required="false"
-										requiredMessage="Vous devez télécharger une photo de votre troupeau"
-										allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileLimit="1"
-										fileLimitMessage="Vous avez le droit à une photos"
-										invalidFileMessage="Le fichier doit être de type gif, jpe, jpeg ou png"
-										uploadLabel="Télécharger" cancelLabel="Annuler"
-										update="photoMessage4" />
-									<p:message id="photoMessage4" for="inpPhoto4" />
-								</div>
-
-								<div class="form-group">
 									<h:inputTextarea id="inpDescription" required="true"
 										requiredMessage="Vous devez entrer la description de votre offre"
 										value="#{mbShearingOffer.description}" rows="7" cols="80"
@@ -250,7 +202,7 @@
 								</div>
 
 								<b:commandButton class="get-started-btn" value="Enregistrer"
-						action="#{mbShearingOffer.createOffer()}" />
+						action="#{mbShearingOffer.updateOffer()}" />
 						
 						
 							</div>
