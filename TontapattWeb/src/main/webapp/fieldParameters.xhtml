@@ -10,9 +10,7 @@
 
 	<ui:define name="head">
 		<title>Mes terrains</title>
-		<f:metadata>
-			<f:event listener="#{mbField.init()}" type="preRenderView"></f:event>
-		</f:metadata>
+
 	</ui:define>
 
 	<ui:define name="content">
@@ -39,8 +37,7 @@
 					</thead>
 					<tbody>
 
-						<ui:repeat value="#{mbField.connectedUserFields}" 
-						var="toto">
+						<ui:repeat value="#{mbField.connectedUserFields}" var="toto">
 							<tr>
 								<th scope="row"><h:form>
 										<b:commandButton value="#{toto.id}"
