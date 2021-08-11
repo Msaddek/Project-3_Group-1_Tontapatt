@@ -8,6 +8,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
 import fr.eql.ai109.ibusiness.ZipCodeCityIBusiness;
 import fr.eql.ai109.tontapatt.entity.Field;
@@ -16,7 +17,7 @@ import fr.eql.ai109.tontapatt.entity.User;
 import fr.eql.ai109.tontapatt.entity.ZipCodeCity;
 
 @ManagedBean(name = "mbZipCodeCity")
-@SessionScoped
+@ViewScoped
 public class ZipCodeCityManagedBean implements Serializable {
 
 	/**
@@ -58,7 +59,7 @@ public class ZipCodeCityManagedBean implements Serializable {
 	}
 	
 	public void initCityOfSelectedField() {
-		System.out.println(selectedShearingOffer.getId());
+		System.out.println(selectedField.getId());
 		city = selectedField.getZipCodeCity();
 		zipCode = city.getZipCode();
 	}

@@ -6,6 +6,13 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
 
+<f:metadata>
+	<f:viewAction action="#{mbField.initFieldParamForModification()}" />
+	<f:viewAction action="#{mbZipCodeCity.initCityOfSelectedField()}" />
+	<f:viewAction action="#{mbZipCodeCity.onZipCodeChange()}" />
+</f:metadata>
+
+
 <ui:composition template="WEB-INF/template/userFieldTemplate.xhtml">
 
 	<ui:define name="head">
