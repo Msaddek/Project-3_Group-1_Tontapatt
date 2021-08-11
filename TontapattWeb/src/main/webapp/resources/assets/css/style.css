@@ -1283,9 +1283,6 @@ img {
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
-.jess{
-	border : solid 2px darkseagreen;
-}
 
 #heroU-user {
 width: 100%;
@@ -1298,9 +1295,6 @@ position: relative;
 
 .navTab-user .fade {
 	opacity: 1;
-}
-.nav-link {
-	color : #009378;
 }
 
 .user-parameters {
