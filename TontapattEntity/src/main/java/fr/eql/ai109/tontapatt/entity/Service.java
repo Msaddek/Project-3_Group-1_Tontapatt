@@ -67,6 +67,9 @@ public class Service implements Serializable {
 
 	@Column(name = "price", nullable = false)
 	private Double price;
+	
+	@Column(name = "distance", nullable = false)
+	private Double distance;
 
 	@OneToMany(mappedBy = "service", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<Rating> ratings;
@@ -106,7 +109,7 @@ public class Service implements Serializable {
 	public int hashCode() {
 		return Objects.hash(cancellationDate, endDate, equipmentSetupDate,
 				equipmentUninstallDate, herdSetupDate, herdUninstallDate,
-				prematureCancellationDate, price, refusalDate, requestDate,
+				prematureCancellationDate, price, distance, refusalDate, requestDate,
 				startDate, validationDate);
 	}
 
@@ -129,6 +132,7 @@ public class Service implements Serializable {
 				&& Objects.equals(prematureCancellationDate,
 						other.prematureCancellationDate)
 				&& Objects.equals(price, other.price)
+				&& Objects.equals(distance, other.distance)
 				&& Objects.equals(refusalDate, other.refusalDate)
 				&& Objects.equals(requestDate, other.requestDate)
 				&& Objects.equals(startDate, other.startDate)
@@ -162,6 +166,8 @@ public class Service implements Serializable {
 				+ prematureCancellationDate
 				+ ", price="
 				+ price
+				+ ", distance="
+				+ distance
 				+ "]";
 	}
 
@@ -269,6 +275,14 @@ public class Service implements Serializable {
 
 	public void setPrice(Double price) {
 		this.price = price;
+	}
+
+	public Double getDistance() {
+		return distance;
+	}
+
+	public void setDistance(Double distance) {
+		this.distance = distance;
 	}
 
 	public Set<Rating> getRatings() {
