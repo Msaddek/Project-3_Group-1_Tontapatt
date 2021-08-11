@@ -239,6 +239,13 @@ public class FieldManagedBean implements Serializable {
 		init();
 		return "/fieldParameters.xhtml?faces-redirect=true";
 	}
+	
+	public String withdrawField() {
+		field.setFieldWithdrawalReason(fieldWithdrawalReason);
+		field.setWithdrawalDate(LocalDateTime.now());
+		field = fieldBusiness.update(field);
+		return "/fieldParameters.xhtml?faces-redirect=true";
+	}
 
 	public Field getField() {
 		return field;
