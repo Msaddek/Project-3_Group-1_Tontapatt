@@ -79,10 +79,6 @@ public class ZipCodeCityManagedBean implements Serializable {
 		}
 	}
 
-	/*
-	 * public ZipCodeCity calculateDistance() { city =
-	 * business.calculateDistance(); System.out.println(city); return city; }
-	 */
 	public ZipCodeCity getCity() {
 		return city;
 	}
