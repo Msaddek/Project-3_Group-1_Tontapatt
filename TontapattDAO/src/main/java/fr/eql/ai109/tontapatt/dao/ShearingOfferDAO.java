@@ -52,9 +52,17 @@ public class ShearingOfferDAO extends GenericDAO<ShearingOffer>
 		Set<ShearingOffer> shearingOffers = null;
 		String sqlQuery = "SELECT so FROM ShearingOffer so "
 				+ "WHERE so.breeder=:userParam AND so.withdrawalDate is NULL";
+		String sqlQueryPhotos = "SELECT op FROM ShearingOfferPhoto op WHERE "
+				+ "op.shearingOffer=:offerParam";
 		try {
 			shearingOffers = new HashSet<ShearingOffer>(em.createQuery(sqlQuery)
 					.setParameter("userParam", user).getResultList());
+			for (ShearingOffer shearingOffer : shearingOffers) {
+				shearingOffer
+						.setPhotos(new HashSet<>(em.createQuery(sqlQueryPhotos)
+								.setParameter("offerParam", shearingOffer)
+								.getFirstResult()));
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -69,10 +77,18 @@ public class ShearingOfferDAO extends GenericDAO<ShearingOffer>
 		String sqlQuery = "SELECT so FROM ShearingOffer so "
 				+ "WHERE so.breeder=:userParam AND so.withdrawalDate is NULL "
 				+ "AND so.endDate<:dateNowParam";
+		String sqlQueryPhotos = "SELECT op FROM ShearingOfferPhoto op WHERE "
+				+ "op.shearingOffer=:offerParam";
 		try {
-			shearingOffers = new HashSet<ShearingOffer>(em.createQuery(sqlQuery)
-					.setParameter("userParam", user)
-					.setParameter("dateNowParam", now).getResultList());
+			shearingOffers = new HashSet<ShearingOffer>(
+					em.createQuery(sqlQuery).setParameter("userParam", user)
+							.setParameter("dateNowParam", now).getResultList());
+			for (ShearingOffer shearingOffer : shearingOffers) {
+				shearingOffer
+						.setPhotos(new HashSet<>(em.createQuery(sqlQueryPhotos)
+								.setParameter("offerParam", shearingOffer)
+								.getFirstResult()));
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -84,13 +100,22 @@ public class ShearingOfferDAO extends GenericDAO<ShearingOffer>
 			User user) {
 		LocalDate now = LocalDate.now();
 		Set<ShearingOffer> shearingOffers = null;
-		String sqlQuery = "SELECT so FROM ShearingOffer so "
+		String sqlQueryShearingOffers = "SELECT so FROM ShearingOffer so "
 				+ "WHERE so.breeder=:userParam AND so.withdrawalDate is NULL "
 				+ "AND so.endDate>=:dateNowParam";
+		String sqlQueryPhotos = "SELECT op FROM ShearingOfferPhoto op WHERE "
+				+ "op.shearingOffer=:offerParam";
 		try {
-			shearingOffers = new HashSet<ShearingOffer>(em.createQuery(sqlQuery)
-					.setParameter("userParam", user)
-					.setParameter("dateNowParam", now).getResultList());
+			shearingOffers = new HashSet<ShearingOffer>(
+					em.createQuery(sqlQueryShearingOffers)
+							.setParameter("userParam", user)
+							.setParameter("dateNowParam", now).getResultList());
+			for (ShearingOffer shearingOffer : shearingOffers) {
+				shearingOffer
+						.setPhotos(new HashSet<>(em.createQuery(sqlQueryPhotos)
+								.setParameter("offerParam", shearingOffer)
+								.getFirstResult()));
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
