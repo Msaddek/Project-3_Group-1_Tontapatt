@@ -7,7 +7,6 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 
 import fr.eql.ai109.ibusiness.ZipCodeCityIBusiness;
@@ -32,10 +31,10 @@ public class ZipCodeCityManagedBean implements Serializable {
 
 	@ManagedProperty(value = "#{mbUser.user}")
 	private User connectedUser;
-	
+
 	@ManagedProperty(value = "#{mbShearingOffer.shearingOffer}")
 	private ShearingOffer selectedShearingOffer;
-	
+
 	@ManagedProperty(value = "#{mbField.field}")
 	private Field selectedField;
 
@@ -46,24 +45,24 @@ public class ZipCodeCityManagedBean implements Serializable {
 		city = connectedUser.getZipCodeCity();
 		zipCode = city.getZipCode();
 	}
-	
+
 	public void initCityOfSelectedOffer() {
 		System.out.println(selectedShearingOffer.getId());
 		city = selectedShearingOffer.getZipCodeCity();
 		zipCode = city.getZipCode();
 	}
-	
+
 	public void initCityForOfferCreation() {
 		city = null;
 		zipCode = null;
 	}
-	
+
 	public void initCityOfSelectedField() {
 		System.out.println(selectedField.getId());
 		city = selectedField.getZipCodeCity();
 		zipCode = city.getZipCode();
 	}
-	
+
 	public void initCityForFieldCreation() {
 		city = null;
 		zipCode = null;
@@ -132,5 +131,4 @@ public class ZipCodeCityManagedBean implements Serializable {
 		this.selectedField = selectedField;
 	}
 
-	
 }
