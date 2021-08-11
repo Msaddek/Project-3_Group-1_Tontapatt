@@ -21,15 +21,15 @@
 	</ui:define>
 
 	<ui:define name="content">
-		<div class="title-page">
-			<div class="section-title">
-				<h2>Mes paramètres</h2>
-				<p>Gérer mes paramètres</p>
-			</div>
-			<div class="container"></div>
+
+		<div class="container">
+
 
 			<div class="user-parameters">
-
+				<div class="section-title">
+					<h2>Mes paramètres</h2>
+					<p>Gérer mes paramètres</p>
+				</div>
 				<div class="row justify-content-center">
 					<div class="col-12 col-lg-10 col-xl-8 mx-auto">
 						<div class="row mt-5 align-items-center">
@@ -42,15 +42,13 @@
 							</div>
 							<div class="col">
 								<div class="row align-items-center">
-									<div class="jess">
-										<div class="col-md-7">
-											<h1 class="mb-1">#{mbUser.user.firstName}
-												#{mbUser.user.lastName}</h1>
-											<p class="small mb-3">
-												<span class="badge badge-dark">#{mbUser.user.zipCodeCity.name},
-													FR</span>
-											</p>
-										</div>
+									<div class="col-md-7">
+										<h1 class="mb-1">#{mbUser.user.firstName}
+											#{mbUser.user.lastName}</h1>
+										<p class="small mb-3">
+											<span class="badge badge-dark">#{mbUser.user.zipCodeCity.name},
+												FR</span>
+										</p>
 									</div>
 								</div>
 								<div class="row mb-4">
@@ -290,7 +288,7 @@
 									aria-labelledby="nav-unscription-tab">
 									<div class="user-parameter">
 										<b:form>
-											<label for="inpUnsubsriptionReason">Choisissez une
+											<label for="inpUnsubsriptionReason">Choisis une
 												raison de départ :</label>
 											<br />
 											<p:selectOneMenu id="inpUnsubsriptionReason"
@@ -304,8 +302,8 @@
 													itemValue="#{reason}" />
 											</p:selectOneMenu>
 											<br />
-											<label for="inpUnsubsriptionDescription">Décrivez
-												la raison de votre départ:</label>
+											<label for="inpUnsubsriptionDescription">Décris nous
+												la raison de ton départ:</label>
 											<b:inputTextarea id="inpUnsubsriptionDescription"
 												required="false"
 												value="#{mbUser.withdrawalReasonDescription}" rows="5"
@@ -333,6 +331,7 @@
 				</div>
 			</div>
 		</div>
+
 	</ui:define>
 </ui:composition>
 </html>
