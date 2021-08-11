@@ -7,6 +7,6 @@ import fr.eql.ai109.tontapatt.entity.User;
 
 public interface FieldIDAO extends GenericIDAO<Field> {
 	
-	Set<Field> findFieldsByUser(User user);
+	Set<Field> getFieldsOfConnectedUser(User user);
 	
 }

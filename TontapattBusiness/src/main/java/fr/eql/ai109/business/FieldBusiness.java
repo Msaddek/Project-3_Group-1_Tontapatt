@@ -49,8 +49,8 @@ public class FieldBusiness implements FieldIBusiness {
 	}
 
 	@Override
-	public Set<Field> findFieldsByUser(User user) {
+	public Set<Field> getFieldsOfConnectedUser(User user) {
 		
-		return fieldIDAO.findFieldsByUser(user);
+		return fieldIDAO.getFieldsOfConnectedUser(user);
 	}
-}
+
