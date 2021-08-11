@@ -7,7 +7,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
 import fr.eql.ai109.ibusiness.ZipCodeCityIBusiness;
 import fr.eql.ai109.tontapatt.entity.Field;
@@ -16,7 +16,7 @@ import fr.eql.ai109.tontapatt.entity.User;
 import fr.eql.ai109.tontapatt.entity.ZipCodeCity;
 
 @ManagedBean(name = "mbZipCodeCity")
-@SessionScoped
+@ViewScoped
 public class ZipCodeCityManagedBean implements Serializable {
 
 	/**
@@ -31,10 +31,10 @@ public class ZipCodeCityManagedBean implements Serializable {
 
 	@ManagedProperty(value = "#{mbUser.user}")
 	private User connectedUser;
-	
+
 	@ManagedProperty(value = "#{mbShearingOffer.shearingOffer}")
 	private ShearingOffer selectedShearingOffer;
-	
+
 	@ManagedProperty(value = "#{mbField.field}")
 	private Field selectedField;
 
@@ -45,24 +45,24 @@ public class ZipCodeCityManagedBean implements Serializable {
 		city = connectedUser.getZipCodeCity();
 		zipCode = city.getZipCode();
 	}
-	
+
 	public void initCityOfSelectedOffer() {
 		System.out.println(selectedShearingOffer.getId());
 		city = selectedShearingOffer.getZipCodeCity();
 		zipCode = city.getZipCode();
 	}
-	
+
 	public void initCityForOfferCreation() {
 		city = null;
 		zipCode = null;
 	}
-	
+
 	public void initCityOfSelectedField() {
-		System.out.println(selectedShearingOffer.getId());
+		System.out.println(selectedField.getId());
 		city = selectedField.getZipCodeCity();
 		zipCode = city.getZipCode();
 	}
-	
+
 	public void initCityForFieldCreation() {
 		city = null;
 		zipCode = null;
@@ -79,10 +79,6 @@ public class ZipCodeCityManagedBean implements Serializable {
 		}
 	}
 
-	/*
-	 * public ZipCodeCity calculateDistance() { city =
-	 * business.calculateDistance(); System.out.println(city); return city; }
-	 */
 	public ZipCodeCity getCity() {
 		return city;
 	}
@@ -121,6 +117,14 @@ public class ZipCodeCityManagedBean implements Serializable {
 
 	public void setSelectedShearingOffer(ShearingOffer selectedShearingOffer) {
 		this.selectedShearingOffer = selectedShearingOffer;
+	}
+
+	public Field getSelectedField() {
+		return selectedField;
+	}
+
+	public void setSelectedField(Field selectedField) {
+		this.selectedField = selectedField;
 	}
 
 }

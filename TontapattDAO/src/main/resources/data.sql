@@ -26,7 +26,7 @@ INSERT INTO `user_category` VALUES (1,'Particulier'),(2,'Entreprise'),(3,'Collec
 
 LOCK TABLES `fence_height` WRITE;
 /*!40000 ALTER TABLE `fence_height` DISABLE KEYS */;
-INSERT INTO `fence_height` VALUES (1,'1'),(2,'2'),(3,'3');
+INSERT INTO `fence_height` VALUES (1,'1 m'),(2,'2 m'),(3,'3 m');
 /*!40000 ALTER TABLE `fence_height` ENABLE KEYS */;
 UNLOCK TABLES;
 

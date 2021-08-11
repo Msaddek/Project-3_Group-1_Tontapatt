@@ -21,7 +21,6 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
-import org.primefaces.PrimeFaces;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
 
@@ -48,6 +47,11 @@ public class FieldManagedBean implements Serializable {
 
 	@EJB
 	FieldIBusiness fieldBusiness;
+
+	@ManagedProperty(value = "#{mbUser.user}")
+	private User connectedUser;
+
+	private Set<Field> connectedUserFields;
 
 	private Field field;
 
@@ -89,51 +93,23 @@ public class FieldManagedBean implements Serializable {
 
 	private UploadedFile file;
 
-	@ManagedProperty(value = "#{mbUser.user}")
-	private User connectedUser;
-	private Set<Field> connectedUserFields;
-
 	@PostConstruct()
 	public void init() {
-		connectedUserFields = fieldBusiness.findFieldsByUser(connectedUser);
-		photos = new HashSet<FieldPhoto>();
+		connectedUserFields = fieldBusiness
+				.getFieldsOfConnectedUser(connectedUser);
+		photos = new HashSet<>();
 		vegetationCompositions = new HashSet<>();
 	}
 
-	public void initSelectedFieldParam() {
-		name = field.getName();
-		address = field.getAddress();
-		area = field.getArea();
-		description = field.getDescription();
-		grassHeight = field.getGrassHeight();
-		fenceHeight = field.getFenceHeight();
-		flatnessPercentage = field.getFlatnessPercentage();
-		// TODO: végétations
-	}
+	public String fieldDetails(Field field) {
+		this.field = field;
+		return "/fieldUpdate.xhtml?faces-redirect=true";
 
-	public void updateNameAndAddress() {
-		field.setAddress(address);
-		field.setZipCodeCity(zipCodeCity);
-		field.setName(name);
-		field = fieldBusiness.update(field);
-		dialogMessage = "Votre profil est à jour!";
-		PrimeFaces.current().executeScript("PF('dialogWidget').show()");
-	}
-
-	public void updateDescriptionAndSurface() {
-		field.setDescription(description);
-		field.setArea(area);
-		field = fieldBusiness.update(field);
-		dialogMessage = "Votre photo et/ou description sont à jour!";
-		PrimeFaces.current().executeScript("PF('dialogWidget').show()");
 	}
 
 	public String createField() {
-		String forward = "/fieldRegistrationDone.xhtml?faces-redirect=true"; // faire
-																				// addPhoto.xhtml
-																				// redirection
-																				// =false
-		System.out.println(forward);
+		String forward = "/fieldParameters.xhtml?faces-redirect=true";
+
 		Field newField = new Field();
 
 		newField.setName(name);
@@ -146,7 +122,7 @@ public class FieldManagedBean implements Serializable {
 		newField.setZipCodeCity(zipCodeCity);
 		newField.setOwner(connectedUser);
 		field = fieldBusiness.add(newField);
-		System.out.println("***********" + field.getId());
+		System.out.println(field.getId());
 		for (VegetationComposition vc : vegetationCompositions) {
 			vc.setField(field);
 		}
@@ -156,6 +132,7 @@ public class FieldManagedBean implements Serializable {
 		}
 		field.setPhotos(photos);
 		field = fieldBusiness.update(field);
+		init();
 		return forward;
 	}
 
@@ -179,9 +156,10 @@ public class FieldManagedBean implements Serializable {
 		// Do what you want with the file
 		try {
 			this.file = e.getFile();
-				String[] fileString = this.file.getFileName().split("\\.");
-				String fileName = UUID.randomUUID().toString() + "." + fileString[1];
-				copyFile(fileName, this.file.getInputStream(), destination);
+			String[] fileString = this.file.getFileName().split("\\.");
+			String fileName = UUID.randomUUID().toString() + "."
+					+ fileString[1];
+			copyFile(fileName, this.file.getInputStream(), destination);
 		} catch (IOException e2) {
 			messageUploded = "Le fichier n'a pas pu être téléchargé";
 			FacesMessage facesMessage = new FacesMessage(
@@ -217,6 +195,56 @@ public class FieldManagedBean implements Serializable {
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
+	}
+
+	public void initFieldParamForCreation() {
+		field = new Field();
+		name = null;
+		address = null;
+		zipCodeCity = null;
+		area = null;
+		description = null;
+		grassHeight = null;
+		fenceHeight = null;
+		flatnessPercentage = null;
+		additionDate = null;
+		withdrawalDate = null;
+		fieldWithdrawalReason = null;
+		photos = new HashSet<>();
+		file = null;
+	}
+
+	public void initFieldParamForModification() {
+		name = field.getName();
+		address = field.getAddress();
+		zipCodeCity = field.getZipCodeCity();
+		area = field.getArea();
+		description = field.getDescription();
+		grassHeight = field.getGrassHeight();
+		fenceHeight = field.getFenceHeight();
+		flatnessPercentage = field.getFlatnessPercentage();
+		additionDate = field.getAdditionDate();
+	}
+
+	public String updateField() {
+		field.setName(name);
+		field.setAddress(address);
+		field.setZipCodeCity(zipCodeCity);
+		field.setDescription(description);
+		field.setArea(area);
+		field.setGrassHeight(grassHeight);
+		field.setFenceHeight(fenceHeight);
+		field.setFlatnessPercentage(flatnessPercentage);
+		field = fieldBusiness.update(field);
+		init();
+		return "/fieldParameters.xhtml?faces-redirect=true";
+	}
+
+	public String withdrawField() {
+		field.setFieldWithdrawalReason(fieldWithdrawalReason);
+		field.setWithdrawalDate(LocalDateTime.now());
+		field = fieldBusiness.update(field);
+		return "/fieldParameters.xhtml?faces-redirect=true";
 	}
 
 	public Field getField() {

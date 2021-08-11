@@ -79,7 +79,7 @@
 	<font face="Arial" size="20px" color="white">Tableau de bord</font>
 	<div class="bord-elements">
 		<div class="bord-element">
-			<a href="courses.html" class="btn-get-started" data-toggle="modal"
+			<a href="fieldRegistration.xhtml" class="btn-get-started" data-toggle="modal"
 				data-target="#amodal">
 				<div class="searchBar">
 					<div>Ajouter un terrain</div>
@@ -116,12 +116,12 @@
       		<div class="search-background">
             <div class="modal-body">
               <div class="form-title text-center">
-                <h3>Dis nous ce qu'il te faut !</h3><br />
+                <h3>Dites nous ce qu'il vous faut !</h3><br />
               </div>
               <div class="d-flex flex-column text-center">
                 <b:form id="SearchForm">
                   
-                               <label for="inpUserField">Choisis ton terrain :</label><br />
+                               <label for="inpUserField">Choisissez votre terrain :</label><br />
 							<p:selectOneMenu id="inpUserField" value="#{mbUser.category}"
 								required="true" converter="entityConverter"
 								requiredMessage="Séléctionnez un terrain" >
@@ -147,7 +147,7 @@
 							
 				<div class="search-dates">
                      <div class="search-date">
-						<label style="margin-right: 10px" for="inpStartDate">Date de debut :</label><br />
+						<label style="margin-right: 10px" for="inpStartDate">Date de début :</label><br />
 							<p:calendar id="inpStartDate" value="#{mbUser.birthDate}"
 								showIcon="true" required="true"
 								requiredMessage="La date de naissance est requise"
