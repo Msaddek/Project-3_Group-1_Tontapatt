@@ -127,6 +127,7 @@ public class ShearingOfferManagedBean implements Serializable {
 		}
 		shearingOffer.setPhotos(photos);
 		shearingOffer = business.update(shearingOffer);
+		init();
 		return "/offerParameters.xhtml?faces-redirect=true";
 	}
 	
@@ -237,6 +238,7 @@ public class ShearingOfferManagedBean implements Serializable {
 		shearingOffer.setRace(race);
 		shearingOffer.setZipCodeCity(city);
 		shearingOffer = business.update(shearingOffer);
+		init();
 		return "/offerParameters.xhtml?faces-redirect=true";
 	}
 	
@@ -244,6 +246,7 @@ public class ShearingOfferManagedBean implements Serializable {
 		shearingOffer.setWithdrawalDate(LocalDateTime.now());
 		shearingOffer.setOfferWithdrawalReason(offerWithdrawalReason);
 		shearingOffer = business.update(shearingOffer);
+		init();
 		return "/offerParameters.xhtml?faces-redirect=true";
 	}
 	

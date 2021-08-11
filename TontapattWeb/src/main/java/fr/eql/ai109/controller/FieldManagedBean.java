@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -19,9 +20,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import org.primefaces.PrimeFaces;
+
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
+
 import fr.eql.ai109.ibusiness.FieldIBusiness;
 import fr.eql.ai109.tontapatt.entity.FenceHeight;
 import fr.eql.ai109.tontapatt.entity.Field;
@@ -45,10 +47,10 @@ public class FieldManagedBean implements Serializable {
 
 	@EJB
 	FieldIBusiness fieldBusiness;
-	
+
 	@ManagedProperty(value = "#{mbUser.user}")
 	private User connectedUser;
-	
+
 	private Set<Field> connectedUserFields;
 
 	private Field field;
@@ -91,23 +93,23 @@ public class FieldManagedBean implements Serializable {
 
 	private UploadedFile file;
 
-	
 	@PostConstruct()
 	public void init() {
-		connectedUserFields = fieldBusiness.getFieldsOfConnectedUser(connectedUser);
+		connectedUserFields = fieldBusiness
+				.getFieldsOfConnectedUser(connectedUser);
 		photos = new HashSet<>();
 		vegetationCompositions = new HashSet<>();
 	}
-	
-	public String fieldDetails (Field field) {
+
+	public String fieldDetails(Field field) {
 		this.field = field;
 		return "/fieldUpdate.xhtml?faces-redirect=true";
-		
+
 	}
-	
+
 	public String createField() {
 		String forward = "/fieldParameters.xhtml?faces-redirect=true";
-		
+
 		Field newField = new Field();
 
 		newField.setName(name);
@@ -130,11 +132,10 @@ public class FieldManagedBean implements Serializable {
 		}
 		field.setPhotos(photos);
 		field = fieldBusiness.update(field);
+		init();
 		return forward;
 	}
-	
-	
-	
+
 	public void uploadPhoto(FileUploadEvent e) {
 		URL url = null;
 		String destination = null;
@@ -155,9 +156,10 @@ public class FieldManagedBean implements Serializable {
 		// Do what you want with the file
 		try {
 			this.file = e.getFile();
-				String[] fileString = this.file.getFileName().split("\\.");
-				String fileName = UUID.randomUUID().toString() + "." + fileString[1];
-				copyFile(fileName, this.file.getInputStream(), destination);
+			String[] fileString = this.file.getFileName().split("\\.");
+			String fileName = UUID.randomUUID().toString() + "."
+					+ fileString[1];
+			copyFile(fileName, this.file.getInputStream(), destination);
 		} catch (IOException e2) {
 			messageUploded = "Le fichier n'a pas pu être téléchargé";
 			FacesMessage facesMessage = new FacesMessage(
@@ -194,7 +196,7 @@ public class FieldManagedBean implements Serializable {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	public void initFieldParamForCreation() {
 		field = new Field();
 		name = null;
@@ -206,13 +208,10 @@ public class FieldManagedBean implements Serializable {
 		fenceHeight = null;
 		flatnessPercentage = null;
 		additionDate = null;
-		withdrawalDate =null;
+		withdrawalDate = null;
 		fieldWithdrawalReason = null;
 		photos = new HashSet<>();
 		file = null;
-		services = new HashSet<>();
-		
-		//TODO vegetationComposition
 	}
 
 	public void initFieldParamForModification() {
@@ -225,14 +224,6 @@ public class FieldManagedBean implements Serializable {
 		fenceHeight = field.getFenceHeight();
 		flatnessPercentage = field.getFlatnessPercentage();
 		additionDate = field.getAdditionDate();
-		withdrawalDate = field.getWithdrawalDate();
-		fieldWithdrawalReason = field.getFieldWithdrawalReason();
-		photos = new HashSet<>();
-		file = null;
-		services = new HashSet<>();
-		
-		//TODO vegetationComposition
-		
 	}
 
 	public String updateField() {
@@ -245,9 +236,16 @@ public class FieldManagedBean implements Serializable {
 		field.setFenceHeight(fenceHeight);
 		field.setFlatnessPercentage(flatnessPercentage);
 		field = fieldBusiness.update(field);
+		init();
 		return "/fieldParameters.xhtml?faces-redirect=true";
 	}
 
+	public String withdrawField() {
+		field.setFieldWithdrawalReason(fieldWithdrawalReason);
+		field.setWithdrawalDate(LocalDateTime.now());
+		field = fieldBusiness.update(field);
+		return "/fieldParameters.xhtml?faces-redirect=true";
+	}
 
 	public Field getField() {
 		return field;
