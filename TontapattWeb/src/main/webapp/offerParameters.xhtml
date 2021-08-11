@@ -16,56 +16,69 @@
 	</ui:define>
 
 	<ui:define name="content">
-		
-		<main>
 		<div class="title-page">
 			<div class="section-title">
 				<h2>Mes offres</h2>
 				<p>Gérer mes offres</p>
 			</div>
 		</div>
-		<div class="table-box">
-			<div class="table-offer">
-				<table class="table table-hover">
-					<thead>
-						<tr>
-							<th scope="col">#</th>
-							<th scope="col">Titre</th>
-							<th scope="col">Espèce</th>
-							<th scope="col">Nombre d'animaux</th>
-							<th scope="col">Ville</th>
-							<th scope="col">Couverture</th>
-							<th scope="col">Date de début</th>
-							<th scope="col">Date de fin</th>
-							<th scope="col">En prestation</th>
-						</tr>
-					</thead>
-					<tbody>
-
+		<div class="container py-5">
+			<div class="row text-center text-white mb-5">
+				<div class="col-lg-7 mx-auto">
+					<h1 class="display-4">Product List</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-8 mx-auto">
+		
+					<ul class="list-group shadow">
+				
 						<ui:repeat value="#{mbShearingOffer.connectedUserOffers}"
 							var="offer">
-							<tr>
-								<th scope="row"><h:form>
-								<b:commandButton value = "#{offer.id}" action="#{mbShearingOffer.offerDetails(offer)}" />
-								</h:form></th>
-								<td>#{offer.name}</td>
-								<td>#{offer.race.species.species}</td>
-								<td>#{offer.animalCount}</td>
-								<td>#{offer.zipCodeCity.name}</td>
-								<td>#{offer.maxTravelDist} Km</td>
-								<td>#{offer.startDate}</td>
-								<td>#{offer.endDate}</td>
-								<td>?</td>
-							</tr>
+						<li class="list-group-item">
+						
+							<div
+								class="media align-items-lg-center flex-column flex-lg-row p-3">
+								<div class="media-body order-2 order-lg-1">
+									<h5 class="mt-0 font-weight-bold mb-2">#{offer.name}</h5>
+									<p class="font-italic text-muted mb-0 small">#{offer.description}</p>
+									<div
+										class="d-flex align-items-center justify-content-between mt-1">
+										<h6 class="font-weight-bold my-2">#{offer.race.species.species}</h6>
+									</div>
+								</div>
+								<p:graphicImage value="resources/img/offers/mouton.jpg"
+									alt="Generic placeholder image" width="200"
+									class="ml-lg-5 order-1 order-lg-2"></p:graphicImage>
+							</div> <!-- End -->
+						</li>
 						</ui:repeat>
-
-
-					</tbody>
-				</table>
+						<!-- End -->
+					</ul>
+					<!-- End -->
+				</div>
 			</div>
 		</div>
-		</main>
 
+		<style>
+.text-gray {
+	color: #aaa
+}
+
+img {
+
+	width: 140px
+}
+
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: .5rem 1rem;
+    color: #212529;
+    text-decoration: none;
+    background-color: #fff;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+</style>
 	</ui:define>
 
 </ui:composition>

@@ -125,31 +125,16 @@
 
 						<label for="inpUserField">Choisis ton terrain :</label>
 						<br />
-						<h:selectOneMenu id="inpUserField" value="#{mbService.field}"
+						<b:selectOneMenu id="inpUserField" value="#{mbService.field}"
 							required="true" converter="entityConverter"
 							requiredMessage="Séléctionnez un terrain">
 							<f:selectItem itemLabel="Séléctionnez un terrain" itemValue="" />
 							<f:selectItems value="#{mbField.connectedUserFields}" var="field"
 								itemLabel="#{field.name}" itemValue="#{field}" />
 
-						</h:selectOneMenu>
+						</b:selectOneMenu>
 						<br />
 						<b:message id="inpUserFieldMessage" for="inpUserField" />
-						<br />
-
-
-						<label for="inpServiceType">Type de service :</label>
-						<br />
-						<h:selectOneMenu id="inpServiceType" value="#{mbUser.category}"
-							required="false" converter="entityConverter"
-							requiredMessage="Séléctionnez un service">
-							<f:selectItem itemLabel="Séléctionnez un service" itemValue="" />
-							<f:selectItems value="#{mbUserCategory.allCategories()}"
-								var="category" itemLabel="#{category.category}"
-								itemValue="#{category}" />
-						</h:selectOneMenu>
-						<br />
-						<b:message id="userServiceTypeMessage" for="inpServiceType" />
 						<br />
 
 						<div class="search-dates">
@@ -184,13 +169,13 @@
 						<div class="search-animals">
 							<div class="search-animal">
 								<label for="inpSpecies">Espèce :</label><br />
-								<h:selectOneMenu id="inpSpecies" value="#{mbSpecies.species}"
+								<b:selectOneMenu id="inpSpecies" value="#{mbSpecies.species}"
 									required="true" converter="entityConverter"
 									requiredMessage="Séléctionnez un service">
 									<f:selectItem itemLabel="Séléctionnez une espèce" itemValue="" />
 									<f:selectItems value="#{mbSpecies.allSpecies()}" var="species"
 										itemLabel="#{species.species}" itemValue="#{species}" />
-								</h:selectOneMenu>
+								</b:selectOneMenu>
 							</div>
 
 						</div>
