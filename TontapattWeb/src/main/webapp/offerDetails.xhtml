@@ -198,11 +198,15 @@
 									</div>
 
 									<div class="form-group">
-										<h:inputTextarea id="inpDescription" required="true"
+										<b:inputTextarea id="inpDescription" required="true"
 											requiredMessage="Vous devez entrer la description de votre offre"
 											value="#{mbShearingOffer.description}" rows="7" cols="80"
-											counter="display" maxlength="500"
-											counterTemplate="{0} caractères restants." autoResize="false" />
+											counter="display" maxlength="255"
+											validatorMessage="La description doit comporter au moins 30 charactères"
+											counterTemplate="{0} caractères restants." autoResize="false">
+											<f:validateLength minimum="30" />
+										</b:inputTextarea>
+										<b:message id="descriptionMessage" for="inpDescription" />
 									</div>
 
 									<b:commandButton class="get-started-btn" value="Enregistrer"
