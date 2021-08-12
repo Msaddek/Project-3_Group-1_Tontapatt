@@ -1,6 +1,7 @@
 package fr.eql.ai109.business;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.ejb.Remote;
@@ -8,6 +9,8 @@ import javax.ejb.Stateless;
 
 import fr.eql.ai109.ibusiness.RatingIBusiness;
 import fr.eql.ai109.tontapatt.entity.Rating;
+import fr.eql.ai109.tontapatt.entity.ShearingOffer;
+import fr.eql.ai109.tontapatt.entity.User;
 import fr.eql.ai109.tontapatt.idao.RatingIDAO;
 
 @Remote(RatingIBusiness.class)
@@ -45,5 +48,10 @@ public class RatingBusiness implements RatingIBusiness {
 	public List<Rating> getAll() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Set<Rating> getAllBySearingOffer(ShearingOffer selectedOffer, User connectedUser) {
+		return ratingIDAO.getAllBySearingOffer(selectedOffer, connectedUser);
 	}
 }

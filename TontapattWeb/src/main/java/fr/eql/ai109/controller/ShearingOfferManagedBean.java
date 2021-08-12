@@ -11,7 +11,6 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -28,12 +27,10 @@ import org.primefaces.model.file.UploadedFile;
 
 import fr.eql.ai109.ibusiness.ShearingOfferIBusiness;
 import fr.eql.ai109.tontapatt.entity.Field;
-import fr.eql.ai109.tontapatt.entity.FieldWithdrawalReason;
 import fr.eql.ai109.tontapatt.entity.OfferWithdrawalReason;
 import fr.eql.ai109.tontapatt.entity.Race;
 import fr.eql.ai109.tontapatt.entity.ShearingOffer;
 import fr.eql.ai109.tontapatt.entity.ShearingOfferPhoto;
-import fr.eql.ai109.tontapatt.entity.Species;
 import fr.eql.ai109.tontapatt.entity.User;
 import fr.eql.ai109.tontapatt.entity.ZipCodeCity;
 
@@ -108,14 +105,23 @@ public class ShearingOfferManagedBean implements Serializable {
 		return "/offerDetails.xhtml?faces-redirect=true";
 
 	}
-	
+
 	public String offerDetailedView(ShearingOffer shearingOffer) {
 		this.shearingOffer = shearingOffer;
 		return "/offerDetailedView.xhtml?faces-redirect=true";
-		
+
 	}
 
 	public String createOffer() {
+		if (photos.isEmpty()) {
+			String messageUploded = "Vous devez télécharger au moins une photo";
+			FacesMessage facesMessage = new FacesMessage(
+					FacesMessage.SEVERITY_ERROR, messageUploded,
+					messageUploded);
+			FacesContext.getCurrentInstance()
+					.addMessage("offerCreationForm:inpPhoto", facesMessage);
+			return "/offerCreation.xhtml?faces-redirect=false";
+		}
 		ShearingOffer newShearingOffer = new ShearingOffer();
 		newShearingOffer.setCreationDate(LocalDateTime.now());
 		newShearingOffer.setAddress(address);
@@ -173,7 +179,7 @@ public class ShearingOfferManagedBean implements Serializable {
 			FacesContext.getCurrentInstance()
 					.addMessage("offerCreationForm:inpPhoto", facesMessage);
 		}
-		messageUploded = "Télécharge fait!";
+		messageUploded = photos.size() + "/4 photos téléchargée(s)";
 		FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,
 				messageUploded, messageUploded);
 		FacesContext.getCurrentInstance()
@@ -260,12 +266,11 @@ public class ShearingOfferManagedBean implements Serializable {
 		return "/offerParameters.xhtml?faces-redirect=true";
 	}
 
-
-	public String showOffersByFieldLocation(Field field, Species species,
+	public String showOffersByFieldLocation(Field selectedField,
 			LocalDate serviceStartDate, LocalDate serviceEndDate) {
 		shearingOfferSearchResult = new HashSet<ShearingOffer>();
-		shearingOfferSearchResult = business.searchOfferByFieldLocation(field,
-				species, serviceStartDate, serviceEndDate);
+		shearingOfferSearchResult = business.searchOfferByFieldLocation(
+				selectedField, serviceStartDate, serviceStartDate);
 		for (ShearingOffer shearingOffer : shearingOfferSearchResult) {
 			System.out.println(
 					"--------------------------" + shearingOffer.toString());

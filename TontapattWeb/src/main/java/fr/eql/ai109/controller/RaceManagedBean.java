@@ -6,7 +6,7 @@ import java.util.Set;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
 import fr.eql.ai109.ibusiness.RaceIBusiness;
 import fr.eql.ai109.tontapatt.entity.Race;
@@ -14,7 +14,7 @@ import fr.eql.ai109.tontapatt.entity.ShearingOffer;
 import fr.eql.ai109.tontapatt.entity.Species;
 
 @ManagedBean(name = "mbRace")
-@SessionScoped
+@ViewScoped
 public class RaceManagedBean implements Serializable {
 
 	/**
