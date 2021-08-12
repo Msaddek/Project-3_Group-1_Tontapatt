@@ -1303,6 +1303,9 @@ img {
 .navTab-user .fade {
 	opacity: 1;
 }
+.nav-link{
+	color: #009378;
+}
 
 .user-parameters {
 	padding: 50px;
