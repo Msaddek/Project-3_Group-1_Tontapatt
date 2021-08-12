@@ -7,6 +7,11 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
 
+<f:metadata>
+	<f:viewAction action="#{mbField.initFieldParamForCreation()}" />
+	<f:viewAction action="#{mbZipCodeCity.initCityForFieldCreation()}" />
+</f:metadata>
+
 <h:head>
 	<ui:insert name="head"></ui:insert>
 	<meta charset="utf-8" />

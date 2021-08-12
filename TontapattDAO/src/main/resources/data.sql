@@ -26,13 +26,13 @@ INSERT INTO `user_category` VALUES (1,'Particulier'),(2,'Entreprise'),(3,'Collec
 
 LOCK TABLES `fence_height` WRITE;
 /*!40000 ALTER TABLE `fence_height` DISABLE KEYS */;
-INSERT INTO `fence_height` VALUES (1,'1'),(2,'2'),(3,'3');
+INSERT INTO `fence_height` VALUES (1,'1 m'),(2,'2 m'),(3,'3 m');
 /*!40000 ALTER TABLE `fence_height` ENABLE KEYS */;
 UNLOCK TABLES;
 
 LOCK TABLES `flatness_percentage` WRITE;
 /*!40000 ALTER TABLE `flatness_percentage` DISABLE KEYS */;
-INSERT INTO `flatness_percentage` VALUES (1,10),(2,20),(3,30),(4,40),(5,50),(6,60),(7,70),(8,80),(9,90),(10,100);
+INSERT INTO `flatness_percentage` VALUES (1,10%),(2,20%),(3,30%),(4,40%),(5,50%),(6,60%),(7,70%),(8,80%),(9,90%),(10,100%);
 /*!40000 ALTER TABLE `flatness_percentage` ENABLE KEYS */;
 UNLOCK TABLES;
 
