@@ -1,6 +1,7 @@
 package fr.eql.ai109.controller;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -22,6 +23,10 @@ public class OfferWithdrawalReasonManagedBean implements Serializable {
 	OfferWithdrawalReasonIBusiness business;
 	private OfferWithdrawalReason offerWithdrawalReason;
 
+	public List<OfferWithdrawalReason> allOfferWithdrawalReason() {
+		return business.getAll();
+	}
+	
 	public OfferWithdrawalReason getOfferWithdrawalReason() {
 		return offerWithdrawalReason;
 	}
