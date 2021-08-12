@@ -54,3 +54,4 @@ public class FieldBusiness implements FieldIBusiness {
 		return fieldIDAO.getFieldsOfConnectedUser(user);
 	}
 
+}

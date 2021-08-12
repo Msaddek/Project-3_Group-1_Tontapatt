@@ -101,8 +101,8 @@ public class FieldManagedBean implements Serializable {
 		vegetationCompositions = new HashSet<>();
 	}
 
-	public String fieldDetails(Field field) {
-		this.field = field;
+	public String fieldDetails() {
+
 		return "/fieldUpdate.xhtml?faces-redirect=true";
 
 	}
