@@ -31,6 +31,7 @@
 							<th scope="col">Nom</th>
 							<th scope="col">Ville</th>
 							<th scope="col">Surface</th>
+							<th scope="col">Vue détaillée</th>
 
 						</tr>
 					</thead>
@@ -45,6 +46,11 @@
 								<td>#{toto.name}</td>
 								<td>#{toto.zipCodeCity.name}</td>
 								<td>#{toto.area}</td>
+								<th scope="row"><h:form>
+										<b:commandButton value="Voir"
+											action="#{mbField.fieldDetailedView(toto)}" />
+									</h:form></th>
+								
 							</tr>
 						</ui:repeat>
 

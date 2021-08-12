@@ -106,6 +106,12 @@ public class FieldManagedBean implements Serializable {
 		return "/fieldUpdate.xhtml?faces-redirect=true";
 
 	}
+	
+	public String fieldDetailedView(Field field) {
+		this.field = field;
+		return "/fieldDetails.xhtml?faces-redirect=true";
+
+	}
 
 	public String createField() {
 		String forward = "/fieldParameters.xhtml?faces-redirect=true";
