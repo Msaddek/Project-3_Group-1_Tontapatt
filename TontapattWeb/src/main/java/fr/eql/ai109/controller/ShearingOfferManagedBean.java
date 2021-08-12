@@ -101,8 +101,8 @@ public class ShearingOfferManagedBean implements Serializable {
 		photos = new HashSet<>();
 	}
 
-	public String offerDetails(ShearingOffer offer) {
-		this.shearingOffer = offer;
+	public String offerDetails() {
+
 		return "/offerDetails.xhtml?faces-redirect=true";
 
 	}

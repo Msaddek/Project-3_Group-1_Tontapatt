@@ -62,7 +62,7 @@ public class ShearingOfferDAO extends GenericDAO<ShearingOffer>
 				shearingOffer
 						.setPhotos(new HashSet<>(em.createQuery(sqlQueryPhotos)
 								.setParameter("offerParam", shearingOffer)
-								.getFirstResult()));
+								.getResultList()));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -88,7 +88,7 @@ public class ShearingOfferDAO extends GenericDAO<ShearingOffer>
 				shearingOffer
 						.setPhotos(new HashSet<>(em.createQuery(sqlQueryPhotos)
 								.setParameter("offerParam", shearingOffer)
-								.getFirstResult()));
+								.getResultList()));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -115,7 +115,7 @@ public class ShearingOfferDAO extends GenericDAO<ShearingOffer>
 				shearingOffer
 						.setPhotos(new HashSet<>(em.createQuery(sqlQueryPhotos)
 								.setParameter("offerParam", shearingOffer)
-								.getFirstResult()));
+								.getResultList()));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
