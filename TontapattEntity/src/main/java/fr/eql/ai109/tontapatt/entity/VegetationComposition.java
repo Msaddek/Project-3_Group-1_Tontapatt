@@ -27,11 +27,11 @@ public class VegetationComposition implements Serializable {
 	private Integer id;
 
 	@ManyToOne
-	@JoinColumn(referencedColumnName = "id", nullable = true)
+	@JoinColumn(referencedColumnName = "id", nullable = false)
 	private Field field;
 
 	@ManyToOne
-	@JoinColumn(referencedColumnName = "id", nullable = true)
+	@JoinColumn(referencedColumnName = "id", nullable = false)
 	private VegetationType vegetationType;
 
 	@Column(name = "percentage", nullable = false)

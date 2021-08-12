@@ -1,5 +1,6 @@
 package fr.eql.ai109.business;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
@@ -10,6 +11,7 @@ import javax.ejb.Stateless;
 import fr.eql.ai109.ibusiness.ShearingOfferIBusiness;
 import fr.eql.ai109.tontapatt.entity.Field;
 import fr.eql.ai109.tontapatt.entity.ShearingOffer;
+import fr.eql.ai109.tontapatt.entity.Species;
 import fr.eql.ai109.tontapatt.entity.User;
 import fr.eql.ai109.tontapatt.idao.ShearingOfferIDAO;
 
@@ -49,11 +51,6 @@ public class ShearingOfferBusiness implements ShearingOfferIBusiness {
 	}
 
 	@Override
-	public Set<ShearingOffer> searchOfferByFieldLocation(Field field) {
-		return shearingOfferIDAO.searchOfferByFieldLocation(field);
-	}
-
-	@Override
 	public Set<ShearingOffer> getShearingOffersOfConnectedUser(User user) {
 		return shearingOfferIDAO.getShearingOffersOfConnectedUser(user);
 	}
@@ -73,6 +70,13 @@ public class ShearingOfferBusiness implements ShearingOfferIBusiness {
 	@Override
 	public ShearingOffer createShearingOffer(ShearingOffer shearingOffer) {
 		return shearingOfferIDAO.add(shearingOffer);
+	}
+
+	@Override
+	public Set<ShearingOffer> searchOfferByFieldLocation(Field field,
+			Species species, LocalDate serviceStartDate,
+			LocalDate serviceEndDate) {
+		return shearingOfferIDAO.searchOfferByFieldLocation(field, species, serviceStartDate, serviceEndDate);
 	}
 
 }

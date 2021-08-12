@@ -1,6 +1,7 @@
 package fr.eql.ai109.business;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.ejb.Remote;
@@ -8,6 +9,7 @@ import javax.ejb.Stateless;
 
 import fr.eql.ai109.ibusiness.ServiceIBusiness;
 import fr.eql.ai109.tontapatt.entity.Service;
+import fr.eql.ai109.tontapatt.entity.User;
 import fr.eql.ai109.tontapatt.idao.ServiceIDAO;
 
 @Remote(ServiceIBusiness.class)
@@ -45,5 +47,15 @@ public class ServiceBusiness implements ServiceIBusiness {
 	public List<Service> getAll() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Set<Service> getAllByFieldOwner(User connectedUser) {
+		return serviceIDAO.getAllByFieldOwner(connectedUser);
+	}
+
+	@Override
+	public Set<Service> getAllByOfferBreeder(User connectedUser) {
+		return serviceIDAO.getAllByOfferBreeder(connectedUser);
 	}
 }
