@@ -44,7 +44,7 @@ public class FieldWithdrawalReasonBusiness
 
 	@Override
 	public List<FieldWithdrawalReason> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return fieldWithdrawalReasonIDAO.getAll();
 	}
 }
