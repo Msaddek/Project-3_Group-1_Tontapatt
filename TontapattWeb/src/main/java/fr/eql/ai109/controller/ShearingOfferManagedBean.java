@@ -45,7 +45,7 @@ public class ShearingOfferManagedBean implements Serializable {
 
 	@EJB
 	ShearingOfferIBusiness business;
-	
+
 	@ManagedProperty(value = "#{mbUser.user}")
 	private User connectedUser;
 
@@ -54,39 +54,39 @@ public class ShearingOfferManagedBean implements Serializable {
 	private Set<ShearingOffer> connectedUserExpiredOffers;
 
 	private Set<ShearingOffer> connectedUserInProgress;
-	
+
 	private Set<ShearingOffer> shearingOfferSearchResult;
 
 	private ShearingOffer shearingOffer;
-	
+
 	private String address;
-	
+
 	private Integer animalCount;
-	
+
 	private Double animalDailyPrice;
-	
+
 	private LocalDateTime creationDate;
-	
+
 	private String description;
-	
+
 	private LocalDate endDate;
-	
+
 	private Integer maxTravelDistance;
-	
+
 	private String name;
-	
+
 	private LocalDate startDate;
-	
+
 	private Race race;
-	
+
 	private ZipCodeCity city;
-	
+
 	private ShearingOfferPhoto photo;
-	
+
 	private Set<ShearingOfferPhoto> photos;
-	
+
 	private UploadedFile file;
-	
+
 	private OfferWithdrawalReason offerWithdrawalReason;
 
 	@PostConstruct
@@ -99,14 +99,23 @@ public class ShearingOfferManagedBean implements Serializable {
 				.getInProgressShearingOffersOfConnectedUser(connectedUser);
 		photos = new HashSet<>();
 	}
-	
-	public String offerDetails (ShearingOffer offer) {
+
+	public String offerDetails(ShearingOffer offer) {
 		this.shearingOffer = offer;
 		return "/offerDetails.xhtml?faces-redirect=true";
-		
+
 	}
-	
+
 	public String createOffer() {
+		if (photos.isEmpty()) {
+			String messageUploded = "Vous devez télécharger au moins une photo";
+			FacesMessage facesMessage = new FacesMessage(
+					FacesMessage.SEVERITY_ERROR, messageUploded,
+					messageUploded);
+			FacesContext.getCurrentInstance()
+					.addMessage("offerCreationForm:inpPhoto", facesMessage);
+			return "/offerCreation.xhtml?faces-redirect=false";
+		}
 		ShearingOffer newShearingOffer = new ShearingOffer();
 		newShearingOffer.setCreationDate(LocalDateTime.now());
 		newShearingOffer.setAddress(address);
@@ -121,7 +130,7 @@ public class ShearingOfferManagedBean implements Serializable {
 		newShearingOffer.setRace(race);
 		newShearingOffer.setZipCodeCity(city);
 		shearingOffer = business.add(newShearingOffer);
-		
+
 		for (ShearingOfferPhoto sop : photos) {
 			sop.setShearingOffer(shearingOffer);
 		}
@@ -130,7 +139,7 @@ public class ShearingOfferManagedBean implements Serializable {
 		init();
 		return "/offerParameters.xhtml?faces-redirect=true";
 	}
-	
+
 	public void uploadPhoto(FileUploadEvent event) {
 		System.out.println("connected user " + connectedUser.getId());
 		URL url = null;
@@ -153,7 +162,8 @@ public class ShearingOfferManagedBean implements Serializable {
 		try {
 			this.file = event.getFile();
 			String[] fileString = this.file.getFileName().split("\\.");
-			String fileName = UUID.randomUUID().toString() + "." + fileString[1];
+			String fileName = UUID.randomUUID().toString() + "."
+					+ fileString[1];
 			copyFile(fileName, this.file.getInputStream(), destination);
 		} catch (IOException e) {
 			messageUploded = "Le fichier n'a pas pu être télécharger";
@@ -163,7 +173,7 @@ public class ShearingOfferManagedBean implements Serializable {
 			FacesContext.getCurrentInstance()
 					.addMessage("offerCreationForm:inpPhoto", facesMessage);
 		}
-		messageUploded = "Télécharge fait!";
+		messageUploded = photos.size() + "/4 photos téléchargée(s)";
 		FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,
 				messageUploded, messageUploded);
 		FacesContext.getCurrentInstance()
@@ -189,7 +199,7 @@ public class ShearingOfferManagedBean implements Serializable {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	public void initOfferParamForCreation() {
 		shearingOffer = new ShearingOffer();
 		address = null;
@@ -207,7 +217,7 @@ public class ShearingOfferManagedBean implements Serializable {
 		photos = new HashSet<>();
 		file = null;
 	}
-	
+
 	public void initOfferParamForModification() {
 		address = shearingOffer.getAddress();
 		animalCount = shearingOffer.getAnimalCount();
@@ -225,7 +235,7 @@ public class ShearingOfferManagedBean implements Serializable {
 		photos = new HashSet<>();
 		file = null;
 	}
-	
+
 	public String updateOffer() {
 		shearingOffer.setAddress(address);
 		shearingOffer.setAnimalCount(animalCount);
@@ -241,7 +251,7 @@ public class ShearingOfferManagedBean implements Serializable {
 		init();
 		return "/offerParameters.xhtml?faces-redirect=true";
 	}
-	
+
 	public String withdrawOffer() {
 		shearingOffer.setWithdrawalDate(LocalDateTime.now());
 		shearingOffer.setOfferWithdrawalReason(offerWithdrawalReason);
@@ -249,9 +259,11 @@ public class ShearingOfferManagedBean implements Serializable {
 		init();
 		return "/offerParameters.xhtml?faces-redirect=true";
 	}
-	
-	public String showOffersByFieldLocation(Field field) {
-		shearingOfferSearchResult = business.searchOfferByFieldLocation(field);
+
+	public String showOffersByFieldLocation(Field selectedField,
+			LocalDate serviceStartDate, LocalDate serviceEndDate) {
+		shearingOfferSearchResult = business.searchOfferByFieldLocation(
+				selectedField, serviceStartDate, serviceStartDate);
 		return "/offerSearchPage.xhtml?faces-redirect=true";
 	}
 
