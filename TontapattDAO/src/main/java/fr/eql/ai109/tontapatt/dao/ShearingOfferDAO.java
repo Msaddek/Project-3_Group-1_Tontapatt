@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 
 import fr.eql.ai109.tontapatt.entity.Field;
 import fr.eql.ai109.tontapatt.entity.ShearingOffer;
+import fr.eql.ai109.tontapatt.entity.Species;
 import fr.eql.ai109.tontapatt.entity.User;
 import fr.eql.ai109.tontapatt.idao.ShearingOfferIDAO;
 
@@ -19,7 +20,7 @@ public class ShearingOfferDAO extends GenericDAO<ShearingOffer>
 		implements ShearingOfferIDAO {
 
 	@Override
-	public Set<ShearingOffer> searchOfferByFieldLocation(Field field) {
+	public Set<ShearingOffer> searchOfferByFieldLocation(Field field, Species species, LocalDate serviceStartDate, LocalDate serviceEndDate) {
 		Set<ShearingOffer> shearingOffers = null;
 		LocalDateTime now = LocalDateTime.now();
 		String sqlQuery = "SELECT s.*, " + "z.*, "
@@ -121,5 +122,6 @@ public class ShearingOfferDAO extends GenericDAO<ShearingOffer>
 		}
 		return shearingOffers;
 	}
+
 
 }
