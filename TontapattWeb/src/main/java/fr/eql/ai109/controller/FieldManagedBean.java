@@ -121,6 +121,7 @@ public class FieldManagedBean implements Serializable {
 		newField.setFlatnessPercentage(flatnessPercentage);
 		newField.setZipCodeCity(zipCodeCity);
 		newField.setOwner(connectedUser);
+		newField.setDescription(description);
 		field = fieldBusiness.add(newField);
 		System.out.println(field.getId());
 		for (VegetationComposition vc : vegetationCompositions) {
