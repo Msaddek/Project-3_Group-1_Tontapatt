@@ -136,7 +136,7 @@
 								<p:ajax update="inpAdresse" />
 								<p:ajax update="adresseMessage" />
 							</p:inputText>
-							<p:message id="adresseMessage" for="inpAdresse" />
+							<b:message id="adresseMessage" for="inpAdresse" />
 						</div>
 						<div class="codeCity">
 							<div class="row row-space">
@@ -154,7 +154,7 @@
 											<p:ajax update="inpZipCode" />
 											<p:ajax update="zipCodeMessage" />
 										</p:inputText>
-										<p:message id="zipCodeMessage" for="inpZipCode" />
+										<b:message id="zipCodeMessage" for="inpZipCode" />
 									</div>
 								</div>
 								<div class="col-2">
@@ -170,7 +170,7 @@
 											<p:ajax update="inpCity" />
 											<p:ajax update="cityMessage" />
 										</p:selectOneMenu>
-										<p:message id="cityMessage" for="inpCity" />
+										<b:message id="cityMessage" for="inpCity" />
 									</div>
 								</div>
 							</div>
@@ -180,7 +180,11 @@
 							<b:inputTextarea id="inpDescription"
 								value="#{mbField.description}" rows="5" cols="30"
 								counter="display" maxlength="255"
-								counterTemplate="{0} caractères restants." autoResize="false" />
+								validatorMessage="La description doit comporter au moins 30 charactères"
+								counterTemplate="{0} caractères restants." autoResize="false">
+								<f:validateLength minimum="30" />
+							</b:inputTextarea>
+							<b:message id="descriptionMessage" for="inpDescription" />
 						</div>
 						<div>
 							<br /> <label for="inpFieldArea">Surface :</label>
@@ -292,7 +296,7 @@
 											validatorMessage="Le nombre doit être un nombre entier positif entre 0 et 100"
 											decimalPlaces="0" minValue="0" maxValue="100" symbol=" %"
 											symbolPosition="s" />
-										<p:message id="vegetationpercentageMessage"
+										<b:message id="vegetationpercentageMessage"
 											for="inpvegetationPercentage" />
 										<br />
 									</ui:repeat>
@@ -308,8 +312,10 @@
 									allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
 									invalidFileMessage="Le fichier doit être de type gif, jpe, jpeg ou png"
 									fileLimitMessage="Vous avez droit à 4 photos"
-									uploadLabel="Télécharger" cancelLabel="Annuler" />
-								<p:message id="photoMessage" for="inpPhoto" />
+									uploadLabel="Télécharger" cancelLabel="Annuler"
+									update="photoMessage">
+								</p:fileUpload>
+								<b:message id="photoMessage" for="inpPhoto" />
 							</div>
 
 							<div class="p-t-20">
