@@ -23,10 +23,15 @@
 				<p>Gérer mes terrains</p>
 			</div>
 		</div>
+<<<<<<< HEAD
 		
 		
+=======
+
+
+>>>>>>> main
 		<c:forEach items="#{mbField.connectedUserFields}" var="field">
-		
+
 			<div class="box-parameters">
 				<div class="carousel-box">
 					<b:carousel class="carousel">
@@ -37,25 +42,40 @@
 						</c:forEach>
 					</b:carousel>
 				</div>
-				
+
 				<div class="wrap-image">
-				<p:commandLink action="#{mbField.fieldDetails()}">
-				<f:setPropertyActionListener value="#{field}" target="#{mbField.field}" />
-				<div class="description-box">
-					<div class="title-zone">
-					<div class="icon-parameters-box"><b:iconAwesome name="tree" size="lg" /></div>
-						<h1>#{field.name}</h1>
-					</div>
-					<div class="d-flex justify-content-between align-items-center mb-3">
-						<h4>#{field.zipCodeCity.name}</h4>
-					</div>
-					<div class="field-description">
-						<p>#{field.description.subSequence(0,10)}...</p>
+					<p:commandLink action="#{mbField.fieldDetails()}">
+						<f:setPropertyActionListener value="#{field}"
+							target="#{mbField.field}" />
+						<div class="description-box">
+							<div class="title-zone">
+								<div class="icon-parameters-box">
+									<b:iconAwesome name="tree" size="lg" />
+								</div>
+								<h1>#{field.name}</h1>
+							</div>
+							<div
+								class="d-flex justify-content-between align-items-center mb-3">
+								<h4>#{field.zipCodeCity.name}</h4>
+							</div>
+							<div class="field-description">
+								<p>#{field.description.subSequence(0,10)}...</p>
+							</div>
+
+						</div>
+					</p:commandLink>
+					<div>
+						<h:form>
+							<b:commandButton value="Voir"
+								action="#{mbField.fieldDetailedView(field)}" />
+						</h:form>
 					</div>
 				</div>
+<<<<<<< HEAD
 				</p:commandLink>
+=======
+>>>>>>> main
 			</div>
-	</div>
 		</c:forEach> </main>
 
 	</ui:define>
