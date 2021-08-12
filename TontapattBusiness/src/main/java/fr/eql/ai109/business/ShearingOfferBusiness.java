@@ -1,5 +1,6 @@
 package fr.eql.ai109.business;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
@@ -28,7 +29,7 @@ public class ShearingOfferBusiness implements ShearingOfferIBusiness {
 	@Override
 	public void delete(ShearingOffer t) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -49,8 +50,10 @@ public class ShearingOfferBusiness implements ShearingOfferIBusiness {
 	}
 
 	@Override
-	public Set<ShearingOffer> searchOfferByFieldLocation(Field field) {
-		return shearingOfferIDAO.searchOfferByFieldLocation(field);
+	public Set<ShearingOffer> searchOfferByFieldLocation(Field field,
+			LocalDate startDate, LocalDate endDate) {
+		return shearingOfferIDAO.searchOfferByFieldLocation(field, startDate,
+				endDate);
 	}
 
 	@Override
@@ -67,7 +70,8 @@ public class ShearingOfferBusiness implements ShearingOfferIBusiness {
 	@Override
 	public Set<ShearingOffer> getInProgressShearingOffersOfConnectedUser(
 			User user) {
-		return shearingOfferIDAO.getInProgressShearingOffersOfConnectedUser(user);
+		return shearingOfferIDAO
+				.getInProgressShearingOffersOfConnectedUser(user);
 	}
 
 	@Override

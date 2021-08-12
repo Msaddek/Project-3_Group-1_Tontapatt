@@ -19,7 +19,8 @@ public class ShearingOfferDAO extends GenericDAO<ShearingOffer>
 		implements ShearingOfferIDAO {
 
 	@Override
-	public Set<ShearingOffer> searchOfferByFieldLocation(Field field) {
+	public Set<ShearingOffer> searchOfferByFieldLocation(Field field,
+			LocalDate startDate, LocalDate endDate) {
 		Set<ShearingOffer> shearingOffers = null;
 		LocalDateTime now = LocalDateTime.now();
 		String sqlQuery = "SELECT s.*, " + "z.*, "
@@ -29,10 +30,15 @@ public class ShearingOfferDAO extends GenericDAO<ShearingOffer>
 				+ "FROM shearing_offer s "
 				+ "INNER JOIN zip_code_city z ON s.zipCodeCity_id=z.id "
 				+ "INNER JOIN user u ON s.breeder_id=u.id "
-				+ "INNER JOIN race r ON s.race_id=r.id"
+				+ "INNER JOIN race r ON s.race_id=r.id "
+				+ "INNER JOIN service se ON s.id=se.shearingOffer_id "
 				+ "WHERE s.max_travel_dist>=CalcDistance(:fieldLatParam, :fieldLongParam, z.latitude, z.longitude) "
 				+ "AND s.withdrawal_date IS NULL "
-				+ "AND s.end_date>=:dateTimeNowParam";
+				+ "AND s.end_date>=:dateTimeNowParam "
+				+ "AND s.breeder!=:userParam "
+				+ "AND se.validation_date IS NOT NULL "
+				+ "AND :startDateParam NOT BETWEEN se.start_date AND se.end_date "
+				+ "AND :endDateParam NOT BETWEEN se.start_date AND se.end_date";
 		try {
 			shearingOffers = (Set<ShearingOffer>) em
 					.createNativeQuery(sqlQuery, ShearingOffer.class)
@@ -40,7 +46,10 @@ public class ShearingOfferDAO extends GenericDAO<ShearingOffer>
 							field.getZipCodeCity().getLatitude())
 					.setParameter("fieldLongParam",
 							field.getZipCodeCity().getLongitude())
-					.setParameter("dateTimeNowParam", now).getResultList();
+					.setParameter("dateTimeNowParam", now)
+					.setParameter("userParam", field.getOwner().getId())
+					.setParameter("startDateParam", startDate)
+					.setParameter("endDateParam", endDate).getResultList();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -61,7 +70,7 @@ public class ShearingOfferDAO extends GenericDAO<ShearingOffer>
 				shearingOffer
 						.setPhotos(new HashSet<>(em.createQuery(sqlQueryPhotos)
 								.setParameter("offerParam", shearingOffer)
-								.getFirstResult()));
+								.getResultList()));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -87,7 +96,7 @@ public class ShearingOfferDAO extends GenericDAO<ShearingOffer>
 				shearingOffer
 						.setPhotos(new HashSet<>(em.createQuery(sqlQueryPhotos)
 								.setParameter("offerParam", shearingOffer)
-								.getFirstResult()));
+								.getResultList()));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -114,7 +123,7 @@ public class ShearingOfferDAO extends GenericDAO<ShearingOffer>
 				shearingOffer
 						.setPhotos(new HashSet<>(em.createQuery(sqlQueryPhotos)
 								.setParameter("offerParam", shearingOffer)
-								.getFirstResult()));
+								.getResultList()));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
