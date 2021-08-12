@@ -44,7 +44,6 @@ public class OfferWithdrawalReasonBusiness
 
 	@Override
 	public List<OfferWithdrawalReason> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return offerWithdrawalReasonIDAO.getAll();
 	}
 }

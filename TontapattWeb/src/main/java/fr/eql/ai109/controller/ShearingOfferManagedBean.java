@@ -11,6 +11,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -27,6 +28,7 @@ import org.primefaces.model.file.UploadedFile;
 
 import fr.eql.ai109.ibusiness.ShearingOfferIBusiness;
 import fr.eql.ai109.tontapatt.entity.Field;
+import fr.eql.ai109.tontapatt.entity.FieldWithdrawalReason;
 import fr.eql.ai109.tontapatt.entity.OfferWithdrawalReason;
 import fr.eql.ai109.tontapatt.entity.Race;
 import fr.eql.ai109.tontapatt.entity.ShearingOffer;
@@ -105,6 +107,12 @@ public class ShearingOfferManagedBean implements Serializable {
 
 		return "/offerDetails.xhtml?faces-redirect=true";
 
+	}
+	
+	public String offerDetailedView(ShearingOffer shearingOffer) {
+		this.shearingOffer = shearingOffer;
+		return "/offerDetailedView.xhtml?faces-redirect=true";
+		
 	}
 
 	public String createOffer() {
@@ -251,6 +259,7 @@ public class ShearingOfferManagedBean implements Serializable {
 		init();
 		return "/offerParameters.xhtml?faces-redirect=true";
 	}
+
 
 	public String showOffersByFieldLocation(Field field, Species species,
 			LocalDate serviceStartDate, LocalDate serviceEndDate) {
