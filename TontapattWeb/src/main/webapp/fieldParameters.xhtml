@@ -23,51 +23,39 @@
 				<p>Gérer mes terrains</p>
 			</div>
 		</div>
-		<div class="table-box">
-			<div class="table-offer">
-				<table class="table table-hover">
-					<thead>
-						<tr>
-							<th scope="col">#</th>
-							<th scope="col">Photos</th>
-							<th scope="col">Nom</th>
-							<th scope="col">Ville</th>
-							<th scope="col">Surface</th>
-							<th scope="col">Rien!</th>
-
-						</tr>
-					</thead>
-					<tbody>
-
-						<c:forEach items="#{mbField.connectedUserFields}" var="field">
-							<tr>
-								<th scope="row"><h:form>
-										<b:commandButton value="#{field.id}"
-											action="#{mbField.fieldDetails(field)}" />
-									</h:form></th>
-								<td style="width: 300px; height: 200px;"><b:carousel
-										style="width:300px; height: 200px;" interval="2500">
-										<c:forEach items="#{field.photos}" var="photo">
-											<b:carouselItem>
-												<b:image value="resources/img/fields/#{photo.link}"
-													style="width: 100%; height: 200px;" />
-											</b:carouselItem>
-										</c:forEach>
-									</b:carousel></td>
-								<td>#{field.name}</td>
-								<td>#{field.zipCodeCity.name}</td>
-								<td>#{field.area}</td>
-								<td>"blablabla"</td>
-							</tr>
+		
+		
+		<c:forEach items="#{mbField.connectedUserFields}" var="field">
+		
+			<div class="box-parameters">
+				<div class="carousel-box">
+					<b:carousel class="carousel">
+						<c:forEach items="#{field.photos}" var="photo">
+							<b:carouselItem>
+								<b:image value="resources/img/fields/#{photo.link}" />
+							</b:carouselItem>
 						</c:forEach>
-
-
-					</tbody>
-				</table>
+					</b:carousel>
+				</div>
+				
+				<div class="wrap-image">
+				<p:commandLink action="#{mbField.fieldDetails()}">
+				<f:setPropertyActionListener value="#{field}" target="#{mbField.field}" />
+				<div class="description-box">
+					<div class="title-zone">
+					<div class="icon-parameters-box"><b:iconAwesome name="tree" size="lg" /></div>
+						<h1>#{field.name}</h1>
+					</div>
+					<div class="d-flex justify-content-between align-items-center mb-3">
+						<h4>#{field.zipCodeCity.name}</h4>
+					</div>
+					<div class="field-description">
+						<p>#{field.description.subSequence(0,10)}...</p>
+					</div>
+				</div>
+				</p:commandLink>
 			</div>
-		</div>
-		<c:forEach begin="1" end="5">
-			<span>10</span>
+	</div>
 		</c:forEach> </main>
 
 	</ui:define>
