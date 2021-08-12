@@ -20,7 +20,7 @@ public class ShearingOfferDAO extends GenericDAO<ShearingOffer>
 
 	@Override
 	public Set<ShearingOffer> searchOfferByFieldLocation(Field field,
-			LocalDate startDate, LocalDate endDate) {
+			LocalDate serviceStartDate, LocalDate serviceEndDate) {
 		Set<ShearingOffer> shearingOffers = null;
 		LocalDateTime now = LocalDateTime.now();
 		String sqlQuery = "SELECT s.*, " + "z.*, "
@@ -48,8 +48,9 @@ public class ShearingOfferDAO extends GenericDAO<ShearingOffer>
 							field.getZipCodeCity().getLongitude())
 					.setParameter("dateTimeNowParam", now)
 					.setParameter("userParam", field.getOwner().getId())
-					.setParameter("startDateParam", startDate)
-					.setParameter("endDateParam", endDate).getResultList();
+					.setParameter("startDateParam", serviceStartDate)
+					.setParameter("endDateParam", serviceEndDate)
+					.getResultList();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

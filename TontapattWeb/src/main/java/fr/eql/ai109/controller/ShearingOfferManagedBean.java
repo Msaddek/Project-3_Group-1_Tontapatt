@@ -100,9 +100,15 @@ public class ShearingOfferManagedBean implements Serializable {
 		photos = new HashSet<>();
 	}
 
-	public String offerDetails(ShearingOffer offer) {
-		this.shearingOffer = offer;
+	public String offerDetails() {
+
 		return "/offerDetails.xhtml?faces-redirect=true";
+
+	}
+
+	public String offerDetailedView(ShearingOffer shearingOffer) {
+		this.shearingOffer = shearingOffer;
+		return "/offerDetailedView.xhtml?faces-redirect=true";
 
 	}
 
@@ -262,8 +268,13 @@ public class ShearingOfferManagedBean implements Serializable {
 
 	public String showOffersByFieldLocation(Field selectedField,
 			LocalDate serviceStartDate, LocalDate serviceEndDate) {
+		shearingOfferSearchResult = new HashSet<ShearingOffer>();
 		shearingOfferSearchResult = business.searchOfferByFieldLocation(
 				selectedField, serviceStartDate, serviceStartDate);
+		for (ShearingOffer shearingOffer : shearingOfferSearchResult) {
+			System.out.println(
+					"--------------------------" + shearingOffer.toString());
+		}
 		return "/offerSearchPage.xhtml?faces-redirect=true";
 	}
 

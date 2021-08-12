@@ -35,8 +35,7 @@
 		<div class="container register">
 			<div class="row">
 				<div class="col-md-3 register-left">
-					<img
-						src="https://previews.123rf.com/images/paprika/paprika1706/paprika170600162/81004049-eco-logo-herbe-ic%C3%B4ne.jpg"
+					<img src="https://image.flaticon.com/icons/png/512/785/785136.png"
 						alt="un logo d'herbe" />
 					<h3>Quoi de neuf ?</h3>
 					<p>J'ai besoin d'une nouvelle coupe !</p>
@@ -45,11 +44,12 @@
 				<div class="col-md-9 register-right">
 					<div class="tab-content" id="myTabContent">
 
-						<h3 class="register-heading">Modifie ton terrain :</h3>
+						<h3 class="register-heading">Modifiez votre terrain :</h3>
 						<div class="row register-form">
 							<b:form method="post">
 								<div class="col-md-6">
 									<div class="form-group">
+										<label for="inpFieldName">Nom :</label>
 										<p:inputText id="inpName" value="#{mbField.name}"
 											placeholder="Nom du terrain" required="true"
 											requiredMessage="Vous devez entrer le nom du terrain">
@@ -60,6 +60,7 @@
 									</div>
 
 									<div class="form-group">
+										<label for="inpZipCode">Code postal :</label>
 										<p:inputText id="inpZipCode" value="#{mbZipCodeCity.zipCode}"
 											required="true" requiredMessage="Le code postal est requis"
 											validatorMessage="Le code postal n'est pas valide"
@@ -86,6 +87,7 @@
 									</div>
 
 									<div class="form-group">
+										<label for="inpDescription">Description :</label>
 										<b:inputTextarea id="inpDescription" required="true"
 											requiredMessage="Vous devez entrer la description de votre offre"
 											value="#{mbField.description}" rows="7" cols="80"
@@ -101,6 +103,7 @@
 
 								<div class="col-md-6">
 									<div class="form-group">
+										<label for="inpAdresse">Adresse :</label>
 										<p:inputText id="inpAdresse" value="#{mbField.address}"
 											required="true"
 											requiredMessage="Vous devez entrer une adresse"
@@ -111,6 +114,7 @@
 										<p:message id="adresseMessage" for="inpAdresse" />
 									</div>
 									<div class="form-group">
+										<label for="inpCity">Ville :</label><br />
 										<p:selectOneMenu id="inpCity" value="#{mbField.city}"
 											required="true"
 											requiredMessage="Vous devez choisir une ville"
@@ -125,7 +129,7 @@
 									</div>
 
 									<div class="form-group">
-										<br />
+										<label for="inpGrassHeight">Hauteur de l'herbe:</label><br />
 										<p:selectOneMenu id="inpGrassHeight"
 											value="#{mbField.grassHeight}" required="true"
 											requiredMessage="Vous devez choisir une hauteur d'herbe"
@@ -142,7 +146,7 @@
 									</div>
 
 									<div class="form-group">
-										<br />
+										<label for="inpFenceHeight">Hauteur de clôture:</label><br />
 										<p:selectOneMenu id="inpFenceHeight"
 											value="#{mbField.fenceHeight}" required="true"
 											requiredMessage="Vous devez choisir une hauteur de clôture"
@@ -159,7 +163,8 @@
 									</div>
 
 									<div class="form-group">
-										<br />
+										<label for="inpFlatnessPercentage">Pourcentage de
+											terrain plat:</label><br />
 										<p:selectOneMenu id="inpFlatnessPercentage"
 											value="#{mbField.flatnessPercentage}" required="true"
 											requiredMessage="Vous devez choisir un pourcentage de plat"

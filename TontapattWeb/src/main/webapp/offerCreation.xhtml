@@ -154,7 +154,7 @@
 											required="true"
 											requiredMessage="Vous devez choisir une espèce"
 											converter="entityConverter">
-											<f:selectItem itemLabel="Choisissez une espece" itemValue="" />
+											<f:selectItem itemLabel="Choisissez une espèce" itemValue="" />
 											<f:selectItems value="#{mbSpecies.allSpecies()}"
 												var="species" itemLabel="#{species.species}"
 												itemValue="#{species}" />
@@ -216,7 +216,7 @@
 								<div class="category-offer">
 									<p:inputNumber id="inpMaxDist"
 										value="#{mbShearingOffer.maxTravelDistance}" required="true"
-										requiredMessage="Il faut entrer la distance maximal que vous pouvez parcourir"
+										requiredMessage="Il faut entrer la distance maximale que vous pouvez parcourir"
 										validatorMessage="La distance doit être un nombre entier"
 										decimalPlaces="0" minValue="0"
 										placeholder="Distance max (en km)" />
@@ -246,7 +246,7 @@
 							<div class="categories-offer">
 
 								<br /> <label for="inpPhoto">Photos de l'offre :</label><br />
-								<p:fileUpload id="inpPhoto" label="Ajouter les photos"
+								<p:fileUpload id="inpPhoto" label="Ajoutez les photos"
 									required="true" listener="#{mbShearingOffer.uploadPhoto}"
 									mode="advanced" multiple="true" fileLimit="4"
 									requiredMessage="Vous devez ajouter des photos pour créer l'offre"

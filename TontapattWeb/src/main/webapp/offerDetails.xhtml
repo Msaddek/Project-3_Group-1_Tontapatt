@@ -7,8 +7,7 @@
 	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
 
 <f:metadata>
-	<f:viewAction
-		action="#{mbShearingOffer.initOfferParamForModification()}" />
+	<f:viewAction action="#{mbShearingOffer.initOfferParamForModification()}" />
 	<f:viewAction action="#{mbRace.initRaceParamForOfferModification()}" />
 	<f:viewAction action="#{mbRace.onSpeciesChange()}" />
 	<f:viewAction action="#{mbZipCodeCity.initCityOfSelectedOffer()}" />
@@ -29,7 +28,7 @@
 
 		<div class="title-page">
 			<div class="section-title">
-				<h2>Mes offres</h2>
+				<h2>Mon offre :</h2>
 				<p>#{mbShearingOffer.shearingOffer.name}</p>
 			</div>
 		</div>
@@ -47,34 +46,34 @@
 				<div class="col-md-9 register-right">
 					<div class="tab-content" id="myTabContent">
 
-						<h3 class="register-heading">Modifie ton offre :</h3>
+						<h3 class="register-heading">Modifiez votre offre :</h3>
 						<div class="row register-form">
-							<b:form method="post">
-								<div class="col-md-6">
-									<div class="form-group">
-										<p:inputText id="inpName" value="#{mbShearingOffer.name}"
-											placeholder="Nom de l'offre" required="true"
-											requiredMessage="Vous devez entrer le nom de l'offre">
-											<f:ajax update="inpName" />
-											<f:ajax update="nameMessage" />
-										</p:inputText>
-										<p:message id="nameMessage" for="inpName" />
-									</div>
+						<b:form method="post">
+							<div class="col-md-6">
+								<div class="form-group">
+									<p:inputText id="inpName" value="#{mbShearingOffer.name}"
+										placeholder="Nom de l'offre" required="true"
+										requiredMessage="Vous devez entrer le nom de l'offre">
+										<f:ajax update="inpName" />
+										<f:ajax update="nameMessage" />
+									</p:inputText>
+									<p:message id="nameMessage" for="inpName" />
+								</div>
 
-									<div class="form-group">
-										<p:inputText id="inpZipCode" value="#{mbZipCodeCity.zipCode}"
-											required="true" requiredMessage="Le code postal est requis"
-											validatorMessage="Le code postal n'est pas valide"
-											placeholder="Code postal *">
-											<f:validateRegex
-												pattern="^((0[1-9])|([1-8][0-9])|(9[0-8])|(2A)|(2B))[0-9]{3}$" />
-											<p:ajax listener="#{mbZipCodeCity.onZipCodeChange()}"
-												update="inpCity" />
-											<p:ajax update="inpZipCode" />
-											<p:ajax update="zipCodeMessage" />
-										</p:inputText>
-										<p:message id="zipCodeMessage" for="inpZipCode" />
-									</div>
+								<div class="form-group">
+									<p:inputText id="inpZipCode" value="#{mbZipCodeCity.zipCode}"
+										required="true" requiredMessage="Le code postal est requis"
+										validatorMessage="Le code postal n'est pas valide"
+										placeholder="Code postal *">
+										<f:validateRegex
+											pattern="^((0[1-9])|([1-8][0-9])|(9[0-8])|(2A)|(2B))[0-9]{3}$" />
+										<p:ajax listener="#{mbZipCodeCity.onZipCodeChange()}"
+											update="inpCity" />
+										<p:ajax update="inpZipCode" />
+										<p:ajax update="zipCodeMessage" />
+									</p:inputText>
+									<p:message id="zipCodeMessage" for="inpZipCode" />
+								</div>
 
 									<div class="form-group">
 										<p:inputNumber id="inpAnimalCount"
@@ -96,22 +95,21 @@
 											for="inpAnimalDailyPrice" />
 									</div>
 
-									<div class="form-group">
-										<p:calendar id="inpStartDate"
-											value="#{mbShearingOffer.startDate}" showIcon="true"
-											placeholder="Date de début" required="true"
-											requiredMessage="La date de début est requise"
-											monthNavigator="true" yearNavigator="true" navigator="true"
-											pattern="dd/MM/yyyy"
-											mindate="#{mbDate.minimumOfferStartDate}">
-											<p:ajax event="dateSelect" update="inpStartDate" />
-											<p:ajax event="dateSelect" update="startDateMessage" />
-											<p:ajax event="dateSelect"
-												listener="#{mbDate.minimumOfferEndDate(mbShearingOffer.startDate)}"
-												update="inpEndDate" />
-										</p:calendar>
-										<p:message id="startDateMessage" for="inpStartDate" />
-									</div>
+								<div class="form-group">
+									<p:calendar id="inpStartDate"
+										value="#{mbShearingOffer.startDate}" showIcon="true"
+										placeholder="Date de début" required="true"
+										requiredMessage="La date de début est requise"
+										monthNavigator="true" yearNavigator="true" navigator="true"
+										pattern="dd/MM/yyyy" mindate="#{mbDate.minimumOfferStartDate}">
+										<p:ajax event="dateSelect" update="inpStartDate" />
+										<p:ajax event="dateSelect" update="startDateMessage" />
+										<p:ajax event="dateSelect"
+											listener="#{mbDate.minimumOfferEndDate(mbShearingOffer.startDate)}"
+											update="inpEndDate" />
+									</p:calendar>
+									<p:message id="startDateMessage" for="inpStartDate" />
+								</div>
 
 									<div class="form-group"></div>
 
@@ -141,61 +139,60 @@
 										<p:message id="cityMessage" for="inpCity" />
 									</div>
 
-									<div class="form-group">
-										<br />
-										<p:selectOneMenu id="inpSpecies" value="#{mbRace.species}"
-											required="true"
-											requiredMessage="Vous devez choisir une espèce"
-											converter="entityConverter">
-											<f:selectItem itemLabel="Choisissez une espece" itemValue="" />
-											<f:selectItems value="#{mbSpecies.allSpecies()}"
-												var="species" itemLabel="#{species.species}"
-												itemValue="#{species}" />
-											<p:ajax listener="#{mbRace.onSpeciesChange()}"
-												update="inpRace" />
-											<p:ajax update="inpSpecies" />
-											<p:ajax update="speciesMessage" />
-											<p:ajax update="raceMessage" />
-										</p:selectOneMenu>
-										<p:message id="speciesMessage" for="inpSpecies" />
-									</div>
+								<div class="form-group">
+									<br />
+									<p:selectOneMenu id="inpSpecies" value="#{mbRace.species}"
+										required="true"
+										requiredMessage="Vous devez choisir une espèce"
+										converter="entityConverter">
+										<f:selectItem itemLabel="Choisissez une espèce" itemValue="" />
+										<f:selectItems value="#{mbSpecies.allSpecies()}" var="species"
+											itemLabel="#{species.species}" itemValue="#{species}" />
+										<p:ajax listener="#{mbRace.onSpeciesChange()}"
+											update="inpRace" />
+										<p:ajax update="inpSpecies" />
+										<p:ajax update="speciesMessage" />
+										<p:ajax update="raceMessage" />
+									</p:selectOneMenu>
+									<p:message id="speciesMessage" for="inpSpecies" />
+								</div>
 
-									<div class="form-group">
-										<br />
-										<p:selectOneMenu id="inpRace" value="#{mbShearingOffer.race}"
-											required="true" requiredMessage="Vous devez choisir une race"
-											converter="entityConverter">
-											<f:selectItem itemLabel="Choisissez une race" itemValue="" />
-											<f:selectItems value="#{mbRace.races}" var="race"
-												itemLabel="#{race.race}" itemValue="#{race}" />
-											<p:ajax update="inpRace" />
-											<p:ajax update="raceMessage" />
-										</p:selectOneMenu>
-										<p:message id="raceMessage" for="inpRace" />
-									</div>
+								<div class="form-group">
+									<br />
+									<p:selectOneMenu id="inpRace" value="#{mbShearingOffer.race}"
+										required="true" requiredMessage="Vous devez choisir une race"
+										converter="entityConverter">
+										<f:selectItem itemLabel="Choisissez une race" itemValue="" />
+										<f:selectItems value="#{mbRace.races}" var="race"
+											itemLabel="#{race.race}" itemValue="#{race}" />
+										<p:ajax update="inpRace" />
+										<p:ajax update="raceMessage" />
+									</p:selectOneMenu>
+									<p:message id="raceMessage" for="inpRace" />
+								</div>
 
-									<div class="form-group">
-										<br />
-										<p:calendar id="inpEndDate" value="#{mbShearingOffer.endDate}"
-											showIcon="true" placeholder="Date de fin" required="true"
-											requiredMessage="La date de fin est requise"
-											monthNavigator="true" yearNavigator="true" navigator="true"
-											pattern="dd/MM/yyyy" mindate="#{mbDate.minimumOfferEndDate}">
-											<p:ajax event="dateSelect" update="inpEndDate" />
-											<p:ajax event="dateSelect" update="endDateMessage" />
-										</p:calendar>
-										<p:message id="endDateMessage" for="inpEndDate" />
-									</div>
+								<div class="form-group">
+									<br />
+									<p:calendar id="inpEndDate" value="#{mbShearingOffer.endDate}"
+										showIcon="true" placeholder="Date de fin" required="true"
+										requiredMessage="La date de fin est requise"
+										monthNavigator="true" yearNavigator="true" navigator="true"
+										pattern="dd/MM/yyyy" mindate="#{mbDate.minimumOfferEndDate}">
+										<p:ajax event="dateSelect" update="inpEndDate" />
+										<p:ajax event="dateSelect" update="endDateMessage" />
+									</p:calendar>
+									<p:message id="endDateMessage" for="inpEndDate" />
+								</div>
 
-									<div class="form-group">
-										<p:inputNumber id="inpMaxDist"
-											value="#{mbShearingOffer.maxTravelDistance}" required="true"
-											requiredMessage="Il faut entrer la distance maximal que vous pouvez parcourir"
-											validatorMessage="La distance doit être un nombre entier"
-											decimalPlaces="0" minValue="0"
-											placeholder="Distance max (en km)" />
-										<p:message id="maxDistMessage" for="inpMaxDist" />
-									</div>
+								<div class="form-group">
+									<p:inputNumber id="inpMaxDist"
+										value="#{mbShearingOffer.maxTravelDistance}" required="true"
+										requiredMessage="Il faut entrer la distance maximale que vous pouvez parcourir"
+										validatorMessage="La distance doit être un nombre entier"
+										decimalPlaces="0" minValue="0"
+										placeholder="Distance max (en km)" />
+									<p:message id="maxDistMessage" for="inpMaxDist" />
+								</div>
 
 									<div class="form-group">
 										<b:inputTextarea id="inpDescription" required="true"
@@ -209,13 +206,13 @@
 										<b:message id="descriptionMessage" for="inpDescription" />
 									</div>
 
-									<b:commandButton class="get-started-btn" value="Enregistrer"
-										action="#{mbShearingOffer.updateOffer()}" />
+								<b:commandButton class="get-started-btn" value="Modifier"
+						action="#{mbShearingOffer.updateOffer()}" />
+						
+						
+							</div>
 
-
-								</div>
-
-							</b:form>
+				</b:form>
 						</div>
 
 					</div>

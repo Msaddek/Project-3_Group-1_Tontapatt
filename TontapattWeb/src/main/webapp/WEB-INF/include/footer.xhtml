@@ -40,13 +40,13 @@
               <li><i class="bx bx-chevron-right"></i> <a href="#">Poitevine</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#">Camargues</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#">Landais</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Mouton de Ouessant</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Moutons de Ouessant</a></li>
             </ul>
           </div>
 
           <div class="col-lg-4 col-md-6 footer-newsletter">
-            <h4>Rejoins notre Newsletter</h4>
-            <p>Reste au courant de toutes les nouveautés du site</p>
+            <h4>Rejoignez notre newsletter</h4>
+            <p>Soyez au courant de toutes les nouveautés du site</p>
             <form action="" method="post">
               <input type="email" name="email" /><input type="submit" value="S'inscrire" />
             </form>
@@ -67,6 +67,16 @@
         </div>
       </div>
     </div>
+    
+    <script>
+$(function () {
+  $(document).scroll(function () {
+    var $nav = $("header");
+    $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
+  });
+});
+</script>
+    
     
   	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   	<script src="resources/assets/js/purecounter.js"></script>

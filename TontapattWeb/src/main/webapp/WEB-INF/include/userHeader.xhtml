@@ -21,8 +21,8 @@
 
 		<li><a class="active" href="connectedPage.xhtml">Hey,
 				#{mbUser.user.firstName} !</a></li>
-		<li><a href="home.xhtml">Prestation</a></li>
-		<li><a href="home.xhtml">Nouveauté</a></li>
+		<li><a href="home.xhtml">Prestations</a></li>
+		<li><a href="home.xhtml">Nouveautés</a></li>
 
 	</ul>
 	<div style="display: none">
@@ -35,7 +35,8 @@
 			aria-expanded="false">
 
 			<div class="profilPicture">
-				<p:graphicImage class="img-profil" value="resources/img/users/#{mbUser.user.photo}"
+				<p:graphicImage class="img-profil"
+					value="resources/img/users/#{mbUser.user.photo}"
 					alt="No picture set"></p:graphicImage>
 			</div>
 
@@ -51,13 +52,13 @@
 			</div>
 			<div>
 				<a class="dropdown-item" href="userParameters.xhtml"> Mes
-					Paramètres</a>
+					paramètres</a>
 			</div>
 			<div class="dropdown-divider"></div>
 			<h:form>
 				<div class="disconnect-btn">
 					<p:commandButton styleClass="ui-button-danger ui-button-flat"
-						value="Deconnexion" action="#{mbUser.disconnect()}" />
+						value="Déconnexion" action="#{mbUser.disconnect()}" />
 				</div>
 			</h:form>
 
@@ -112,16 +113,17 @@
 			</a>
 		</div>
 	</div>
+
            <b:modal id="amodal">
       		<div class="search-background">
             <div class="modal-body">
               <div class="form-title text-center">
-                <h3>Dis nous ce qu'il te faut !</h3><br />
+                <h3>Dites-nous ce qu'il vous faut !</h3><br />
               </div>
               <div class="d-flex flex-column text-center">
                 <b:form id="SearchForm">
                   
-                               <label for="inpUserField">Choisis ton terrain :</label><br />
+                               <label for="inpUserField">Choisissez votre terrain :</label><br />
 							<p:selectOneMenu id="inpUserField" value="#{mbUser.category}"
 								required="true" converter="entityConverter"
 								requiredMessage="Séléctionnez un terrain" >
@@ -147,7 +149,7 @@
 							
 				<div class="search-dates">
                      <div class="search-date">
-						<label style="margin-right: 10px" for="inpStartDate">Date de debut :</label><br />
+						<label style="margin-right: 10px" for="inpStartDate">Date de début :</label><br />
 							<p:calendar id="inpStartDate" value="#{mbUser.birthDate}"
 								showIcon="true" required="true"
 								requiredMessage="La date de naissance est requise"
@@ -210,7 +212,7 @@
     <b:button id="closePop" value="Close" dismiss="modal" />
   </f:facet>
   </div>
-</b:modal> 
+</b:modal>
 
 </div>
 

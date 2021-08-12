@@ -11,7 +11,7 @@ public interface ShearingOfferIDAO extends GenericIDAO<ShearingOffer> {
 
 	Set<ShearingOffer> searchOfferByFieldLocation(Field field,
 			LocalDate startDate, LocalDate endDate);
-
+	
 	Set<ShearingOffer> getShearingOffersOfConnectedUser(User user);
 
 	Set<ShearingOffer> getExpiredShearingOffersOfConnectedUser(User user);
