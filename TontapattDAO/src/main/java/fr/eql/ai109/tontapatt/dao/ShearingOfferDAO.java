@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 
 import fr.eql.ai109.tontapatt.entity.Field;
 import fr.eql.ai109.tontapatt.entity.ShearingOffer;
+import fr.eql.ai109.tontapatt.entity.Species;
 import fr.eql.ai109.tontapatt.entity.User;
 import fr.eql.ai109.tontapatt.idao.ShearingOfferIDAO;
 
@@ -19,7 +20,7 @@ public class ShearingOfferDAO extends GenericDAO<ShearingOffer>
 		implements ShearingOfferIDAO {
 
 	@Override
-	public Set<ShearingOffer> searchOfferByFieldLocation(Field field) {
+	public Set<ShearingOffer> searchOfferByFieldLocation(Field field, Species species, LocalDate serviceStartDate, LocalDate serviceEndDate) {
 		Set<ShearingOffer> shearingOffers = null;
 		LocalDateTime now = LocalDateTime.now();
 		String sqlQuery = "SELECT s.*, " + "z.*, "
@@ -52,9 +53,17 @@ public class ShearingOfferDAO extends GenericDAO<ShearingOffer>
 		Set<ShearingOffer> shearingOffers = null;
 		String sqlQuery = "SELECT so FROM ShearingOffer so "
 				+ "WHERE so.breeder=:userParam AND so.withdrawalDate is NULL";
+		String sqlQueryPhotos = "SELECT op FROM ShearingOfferPhoto op WHERE "
+				+ "op.shearingOffer=:offerParam";
 		try {
 			shearingOffers = new HashSet<ShearingOffer>(em.createQuery(sqlQuery)
 					.setParameter("userParam", user).getResultList());
+			for (ShearingOffer shearingOffer : shearingOffers) {
+				shearingOffer
+						.setPhotos(new HashSet<>(em.createQuery(sqlQueryPhotos)
+								.setParameter("offerParam", shearingOffer)
+								.getResultList()));
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -69,10 +78,18 @@ public class ShearingOfferDAO extends GenericDAO<ShearingOffer>
 		String sqlQuery = "SELECT so FROM ShearingOffer so "
 				+ "WHERE so.breeder=:userParam AND so.withdrawalDate is NULL "
 				+ "AND so.endDate<:dateNowParam";
+		String sqlQueryPhotos = "SELECT op FROM ShearingOfferPhoto op WHERE "
+				+ "op.shearingOffer=:offerParam";
 		try {
-			shearingOffers = new HashSet<ShearingOffer>(em.createQuery(sqlQuery)
-					.setParameter("userParam", user)
-					.setParameter("dateNowParam", now).getResultList());
+			shearingOffers = new HashSet<ShearingOffer>(
+					em.createQuery(sqlQuery).setParameter("userParam", user)
+							.setParameter("dateNowParam", now).getResultList());
+			for (ShearingOffer shearingOffer : shearingOffers) {
+				shearingOffer
+						.setPhotos(new HashSet<>(em.createQuery(sqlQueryPhotos)
+								.setParameter("offerParam", shearingOffer)
+								.getResultList()));
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -84,17 +101,27 @@ public class ShearingOfferDAO extends GenericDAO<ShearingOffer>
 			User user) {
 		LocalDate now = LocalDate.now();
 		Set<ShearingOffer> shearingOffers = null;
-		String sqlQuery = "SELECT so FROM ShearingOffer so "
+		String sqlQueryShearingOffers = "SELECT so FROM ShearingOffer so "
 				+ "WHERE so.breeder=:userParam AND so.withdrawalDate is NULL "
 				+ "AND so.endDate>=:dateNowParam";
+		String sqlQueryPhotos = "SELECT op FROM ShearingOfferPhoto op WHERE "
+				+ "op.shearingOffer=:offerParam";
 		try {
-			shearingOffers = new HashSet<ShearingOffer>(em.createQuery(sqlQuery)
-					.setParameter("userParam", user)
-					.setParameter("dateNowParam", now).getResultList());
+			shearingOffers = new HashSet<ShearingOffer>(
+					em.createQuery(sqlQueryShearingOffers)
+							.setParameter("userParam", user)
+							.setParameter("dateNowParam", now).getResultList());
+			for (ShearingOffer shearingOffer : shearingOffers) {
+				shearingOffer
+						.setPhotos(new HashSet<>(em.createQuery(sqlQueryPhotos)
+								.setParameter("offerParam", shearingOffer)
+								.getResultList()));
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return shearingOffers;
 	}
+
 
 }
