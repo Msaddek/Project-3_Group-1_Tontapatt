@@ -10,7 +10,7 @@ import fr.eql.ai109.tontapatt.entity.User;
 public interface ShearingOfferIDAO extends GenericIDAO<ShearingOffer> {
 
 	Set<ShearingOffer> searchOfferByFieldLocation(Field field,
-			LocalDate startDate, LocalDate endDate);
+			LocalDate startDate, LocalDate endDate, Integer requiredAnimalCount);
 	
 	Set<ShearingOffer> getShearingOffersOfConnectedUser(User user);
 
