@@ -115,6 +115,15 @@ public class FieldManagedBean implements Serializable {
 
 	public String createField() {
 		String forward = "/fieldParameters.xhtml?faces-redirect=true";
+		if(photos.isEmpty()) {
+			String messageUploded = "Vous devez télécharger au moins une photo";
+			FacesMessage facesMessage = new FacesMessage(
+					FacesMessage.SEVERITY_ERROR, messageUploded,
+					messageUploded);
+			FacesContext.getCurrentInstance()
+					.addMessage("fieldRegistrationForm:inpPhoto", facesMessage);
+			return "/fielRegistration.xhtml?faces-redirect=false";
+		}
 
 		Field newField = new Field();
 
@@ -127,6 +136,7 @@ public class FieldManagedBean implements Serializable {
 		newField.setFlatnessPercentage(flatnessPercentage);
 		newField.setZipCodeCity(zipCodeCity);
 		newField.setOwner(connectedUser);
+		newField.setDescription(description);
 		field = fieldBusiness.add(newField);
 		System.out.println(field.getId());
 		for (VegetationComposition vc : vegetationCompositions) {
@@ -175,11 +185,11 @@ public class FieldManagedBean implements Serializable {
 					.addMessage("fieldRegistrationForm:inpPhoto", facesMessage);
 			e2.printStackTrace();
 		}
-		messageUploded = photos.size() + "/4 photos téléchargées";
+		messageUploded = photos.size() + "/4 photos téléchargée(s)";
 		FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,
 				messageUploded, messageUploded);
 		FacesContext.getCurrentInstance()
-				.addMessage("fieldRegistrationForm:photoMessage", facesMessage);
+				.addMessage("fieldRegistrationForm:inpPhoto", facesMessage);
 	}
 
 	private void copyFile(String fileName, InputStream in, String destination) {
@@ -250,7 +260,18 @@ public class FieldManagedBean implements Serializable {
 		field.setFieldWithdrawalReason(fieldWithdrawalReason);
 		field.setWithdrawalDate(LocalDateTime.now());
 		field = fieldBusiness.update(field);
+		init();
 		return "/fieldParameters.xhtml?faces-redirect=true";
+	}
+	
+	public void searchByName(String name) {
+		Set<Field> fields = new HashSet<>();
+		for (Field field : connectedUserFields) {
+			if(field.getName().contains(name)) {
+				fields.add(field);
+			}
+		}
+		connectedUserFields = fields;
 	}
 
 	public Field getField() {
