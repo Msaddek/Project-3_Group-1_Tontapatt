@@ -75,25 +75,25 @@
 									<p:message id="zipCodeMessage" for="inpZipCode" />
 								</div>
 
-								<div class="form-group">
-									<p:inputNumber id="inpAnimalCount"
-										value="#{mbShearingOffer.animalCount}"
-										placeholder="Nombre d'animaux" required="true"
-										requiredMessage="Il faut entrer le nombre d'animaux"
-										validatorMessage="Le nombre doit être un nombre entier positif"
-										decimalPlaces="0" minValue="0" />
-									<p:message id="animalCountMessage" for="inpAnimalCount" />
-								</div>
+									<div class="form-group">
+										<p:inputNumber id="inpAnimalCount"
+											value="#{mbShearingOffer.animalCount}"
+											placeholder="Nombre d'animaux" required="true"
+											requiredMessage="Il faut entrer le nombre d'animaux"
+											validatorMessage="Le nombre doit être un nombre entier positif"
+											decimalPlaces="0" minValue="0" />
+										<p:message id="animalCountMessage" for="inpAnimalCount" />
+									</div>
 
-								<div class="form-group">
-									<p:inputNumber id="inpAnimalDailyPrice"
-										value="#{mbShearingOffer.animalDailyPrice}" required="true"
-										requiredMessage="Il faut entrer un prix"
-										validatorMessage="Le nombre doit être un nombre positif"
-										decimalPlaces="2" minValue="0" placeholder="Prix (en €)" />
-									<p:message id="animalDailyPriceMessage"
-										for="inpAnimalDailyPrice" />
-								</div>
+									<div class="form-group">
+										<p:inputNumber id="inpAnimalDailyPrice"
+											value="#{mbShearingOffer.animalDailyPrice}" required="true"
+											requiredMessage="Il faut entrer un prix"
+											validatorMessage="Le nombre doit être un nombre positif"
+											decimalPlaces="2" minValue="0" placeholder="Prix (en €)" />
+										<p:message id="animalDailyPriceMessage"
+											for="inpAnimalDailyPrice" />
+									</div>
 
 								<div class="form-group">
 									<p:calendar id="inpStartDate"
@@ -111,32 +111,33 @@
 									<p:message id="startDateMessage" for="inpStartDate" />
 								</div>
 
-								<div class="form-group"></div>
+									<div class="form-group"></div>
 
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<p:inputText id="inpAdresse" value="#{mbShearingOffer.address}"
-										required="true"
-										requiredMessage="Vous devez entrer une adresse"
-										placeholder="Numéro et nom de rue">
-										<p:ajax update="inpAdresse" />
-										<p:ajax update="adresseMessage" />
-									</p:inputText>
-									<p:message id="adresseMessage" for="inpAdresse" />
 								</div>
-								<div class="form-group">
-									<p:selectOneMenu id="inpCity" value="#{mbShearingOffer.city}"
-										required="true" requiredMessage="Vous devez choisir une ville"
-										converter="entityConverter">
-										<f:selectItem itemLabel="Choisissez une ville" itemValue="" />
-										<f:selectItems value="#{mbZipCodeCity.cities}" var="city"
-											itemLabel="#{city.name}" itemValue="#{city}" />
-										<p:ajax update="inpCity" />
-										<p:ajax update="cityMessage" />
-									</p:selectOneMenu>
-									<p:message id="cityMessage" for="inpCity" />
-								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<p:inputText id="inpAdresse"
+											value="#{mbShearingOffer.address}" required="true"
+											requiredMessage="Vous devez entrer une adresse"
+											placeholder="Numéro et nom de rue">
+											<p:ajax update="inpAdresse" />
+											<p:ajax update="adresseMessage" />
+										</p:inputText>
+										<p:message id="adresseMessage" for="inpAdresse" />
+									</div>
+									<div class="form-group">
+										<p:selectOneMenu id="inpCity" value="#{mbShearingOffer.city}"
+											required="true"
+											requiredMessage="Vous devez choisir une ville"
+											converter="entityConverter">
+											<f:selectItem itemLabel="Choisissez une ville" itemValue="" />
+											<f:selectItems value="#{mbZipCodeCity.cities}" var="city"
+												itemLabel="#{city.name}" itemValue="#{city}" />
+											<p:ajax update="inpCity" />
+											<p:ajax update="cityMessage" />
+										</p:selectOneMenu>
+										<p:message id="cityMessage" for="inpCity" />
+									</div>
 
 								<div class="form-group">
 									<br />
@@ -193,13 +194,17 @@
 									<p:message id="maxDistMessage" for="inpMaxDist" />
 								</div>
 
-								<div class="form-group">
-									<h:inputTextarea id="inpDescription" required="true"
-										requiredMessage="Vous devez entrer la description de votre offre"
-										value="#{mbShearingOffer.description}" rows="7" cols="80"
-										counter="display" maxlength="500"
-										counterTemplate="{0} caractères restants." autoResize="false" />
-								</div>
+									<div class="form-group">
+										<b:inputTextarea id="inpDescription" required="true"
+											requiredMessage="Vous devez entrer la description de votre offre"
+											value="#{mbShearingOffer.description}" rows="7" cols="80"
+											counter="display" maxlength="255"
+											validatorMessage="La description doit comporter au moins 30 charactères"
+											counterTemplate="{0} caractères restants." autoResize="false">
+											<f:validateLength minimum="30" />
+										</b:inputTextarea>
+										<b:message id="descriptionMessage" for="inpDescription" />
+									</div>
 
 								<b:commandButton class="get-started-btn" value="Modifier"
 						action="#{mbShearingOffer.updateOffer()}" />
