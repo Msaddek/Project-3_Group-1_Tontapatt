@@ -21,61 +21,61 @@
 
 			<div class="section-title">
 				<h2>Offres</h2>
-				<p>Les offres correspondant à votre terrain :</p>
+				<p>Les offres correspondant à votre terrain
+					(#{mbShearingOffer.shearingOfferSearchResult.size()}) :</p>
 			</div>
 
 			<div class="row" data-aos="zoom-in" data-aos-delay="100">
-
-
+				<!-- METTRE CECI DANS UN UI REPEAT !! -->
 				<c:forEach items="#{mbShearingOffer.shearingOfferSearchResult}"
 					var="offer">
-
-					<div class="box-parameters">
-						<div class="carousel-box">
-							<b:carousel class="carousel">
-								<c:forEach items="#{offer.photos}" var="photo">
-									<b:carouselItem>
-										<b:image value="resources/img/offers/#{photo.link}" />
-									</b:carouselItem>
-								</c:forEach>
-							</b:carousel>
-						</div>
-
-						<div class="wrap-image">
-							<p:commandLink action="#{mbShearingOffer.offerDetails()}">
-								<f:setPropertyActionListener value="#{offer}"
-									target="#{mbShearingOffer.shearingOffer}" />
-								<div class="description-box">
-									<div class="title-zone">
-										<div class="icon-parameters-box">
-											<b:iconAwesome name="tree" size="lg" />
-										</div>
-										<h1>#{offer.name}</h1>
-									</div>
+					<!-- IL FAUT UTILISER <f:setPropertyActionListener value="#{offer}" target="#{mbService.offer}> 
+					DANS LE <p:commandLink> !!!!!! -->
+					<div
+						class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
+						<div class="offer-box">
+							<div class="course-item">
+								<img src="resources/assets/img/Solognot.jpg" class="img-fluid"
+									alt="..." />
+								<div class="course-content">
 									<div
 										class="d-flex justify-content-between align-items-center mb-3">
-										<h4>#{offer.zipCodeCity.name}</h4>
+										<h4>#{offer.race.race}</h4>
+
+										<p class="price">
+											18000
+											<b:iconAwesome name="eur" />
+										</p>
 									</div>
-									<div class="field-description">
-										<p>#{offer.description.subSequence(0,10)}...</p>
+									<p class="small mb-3">
+										<span class="badge badge-dark">#{offer.race.species.species}</span>
+									</p>
+									<br />
+									<h3>
+										<a href="course-details.html">#{offer.name}</a>
+									</h3>
+									<p>#{offer.description}</p>
+									<div
+										class="trainer d-flex justify-content-between align-items-center">
+										<div class="trainer-profile d-flex align-items-center">
+											<img src="resources/img/users/user.png" class="img-fluid"
+												alt="" /> <span>#{offer.breeder.firstName}</span>
+										</div>
+										<div class="trainer-rank d-flex align-items-center">
+											<i class="bx bx-user"></i>&nbsp;20 &nbsp;&nbsp; <i
+												class="bx bx-heart"></i>&nbsp;85
+										</div>
 									</div>
 								</div>
-							</p:commandLink>
-							<div>
-								<h:form>
-									<p:commandButton value="Voir"
-										action="#{mbShearingOffer.offerDetailedView(offer)}"
-										icon="pi pi-search"
-										styleClass="rounded-button ui-button-success ui-button-outlined" />
-								</h:form>
 							</div>
 						</div>
 					</div>
+
+					<!-- JUSQUE ICI -->
 				</c:forEach>
-				</div>
-				</div>
-				</section>
-				</main>
+			</div>
+		</div>
+		</section> </main>
 	</ui:define>
 
 </ui:composition>
