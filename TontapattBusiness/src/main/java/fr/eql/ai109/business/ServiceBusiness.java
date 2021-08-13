@@ -32,8 +32,7 @@ public class ServiceBusiness implements ServiceIBusiness {
 
 	@Override
 	public Service update(Service t) {
-		// TODO Auto-generated method stub
-		return null;
+		return serviceIDAO.update(t);
 	}
 
 	@Override
