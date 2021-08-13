@@ -21,8 +21,7 @@ public class ServiceBusiness implements ServiceIBusiness {
 
 	@Override
 	public Service add(Service t) {
-		// TODO Auto-generated method stub
-		return null;
+		return serviceIDAO.add(t);
 	}
 
 	@Override
