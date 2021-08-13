@@ -1667,3 +1667,21 @@ header.scrolled nav a {
 .icon-info-descr {
 	padding: 6px;
 }
+
+.category-description {
+	padding: 10px;
+	margin-left: 10px;
+}
+
+.tarification .list-group-item {
+	padding: 16px !important;
+}
+
+.tarification h4 {
+	font-weight: bold;
+}
+
+.tarification .text-muted {
+	font-size: 16px;
+	color: #5fcf80;
+}
