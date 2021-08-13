@@ -1,10 +1,12 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <ui:composition template="WEB-INF/template/userTemplate.xhtml">
 
@@ -14,65 +16,66 @@
 
 	<ui:define name="content">
 
-		<section id="popular-courses" class="courses">
+		<main> <section id="popular-courses" class="courses">
 		<div class="container" data-aos="fade-up">
 
 			<div class="section-title">
 				<h2>Offres</h2>
-				<p>Nos offres</p>
+				<p>Les offres correspondant à votre terrain :</p>
 			</div>
 
 			<div class="row" data-aos="zoom-in" data-aos-delay="100">
 
-				<!-- METTRE CECI DANS UN UI REPEAT !! -->
 
-				<div
-					class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
-					<div class="offer-box">
-						<div class="course-item">
-							<img src="resources/assets/img/Solognot.jpg" class="img-fluid"
-								alt="..." />
-							<div class="course-content">
-								<div
-									class="d-flex justify-content-between align-items-center mb-3">
-									<h4>Ovin</h4>
+				<c:forEach items="#{mbShearingOffer.shearingOfferSearchResult}"
+					var="offer">
 
-									<p class="price">
-										18000
-										<b:iconAwesome name="eur" />
-									</p>
-								</div>
-								<p class="small mb-3">
-									<span class="badge badge-dark">France, FR</span>
-								</p>
-								<br />
-								<h3>
-									<a href="course-details.html">MES BÊTES</a>
-								</h3>
-								<p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p>
-								<div
-									class="trainer d-flex justify-content-between align-items-center">
-									<div class="trainer-profile d-flex align-items-center">
-										<img src="resources/img/users/user.png" class="img-fluid"
-											alt="" /> <span>Brandon</span>
+					<div class="box-parameters">
+						<div class="carousel-box">
+							<b:carousel class="carousel">
+								<c:forEach items="#{offer.photos}" var="photo">
+									<b:carouselItem>
+										<b:image value="resources/img/offers/#{photo.link}" />
+									</b:carouselItem>
+								</c:forEach>
+							</b:carousel>
+						</div>
+
+						<div class="wrap-image">
+							<p:commandLink action="#{mbShearingOffer.offerDetails()}">
+								<f:setPropertyActionListener value="#{offer}"
+									target="#{mbShearingOffer.shearingOffer}" />
+								<div class="description-box">
+									<div class="title-zone">
+										<div class="icon-parameters-box">
+											<b:iconAwesome name="tree" size="lg" />
+										</div>
+										<h1>#{offer.name}</h1>
 									</div>
-									<div class="trainer-rank d-flex align-items-center">
-										<i class="bx bx-user"></i>&nbsp;20 &nbsp;&nbsp; <i
-											class="bx bx-heart"></i>&nbsp;85
+									<div
+										class="d-flex justify-content-between align-items-center mb-3">
+										<h4>#{offer.zipCodeCity.name}</h4>
+									</div>
+									<div class="field-description">
+										<p>#{offer.description.subSequence(0,10)}...</p>
 									</div>
 								</div>
+							</p:commandLink>
+							<div>
+								<h:form>
+									<p:commandButton value="Voir"
+										action="#{mbShearingOffer.offerDetailedView(offer)}"
+										icon="pi pi-search"
+										styleClass="rounded-button ui-button-success ui-button-outlined" />
+								</h:form>
 							</div>
 						</div>
 					</div>
+				</c:forEach>
 				</div>
-
-				<!-- JUSQUE ICI -->
-
-			</div>
-
-		</div>
-		</section>
-
+				</div>
+				</section>
+				</main>
 	</ui:define>
 
 </ui:composition>

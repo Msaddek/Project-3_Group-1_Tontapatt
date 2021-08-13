@@ -70,6 +70,9 @@ public class Service implements Serializable {
 	
 	@Column(name = "distance", nullable = false)
 	private Double distance;
+	
+	@Column(name = "invoice_number", nullable = false)
+	private String invoiceNumber;
 
 	@OneToMany(mappedBy = "service", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<Rating> ratings;
@@ -100,6 +103,10 @@ public class Service implements Serializable {
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id", nullable = false)
 	private ShearingOffer shearingOffer;
+	
+	@ManyToOne
+	@JoinColumn(referencedColumnName = "id", nullable = false)
+	private GrassHeight grassHeight;
 
 	public Service() {
 		super();
@@ -285,6 +292,14 @@ public class Service implements Serializable {
 		this.distance = distance;
 	}
 
+	public String getInvoiceNumber() {
+		return invoiceNumber;
+	}
+
+	public void setInvoiceNumber(String invoiceNumber) {
+		this.invoiceNumber = invoiceNumber;
+	}
+
 	public Set<Rating> getRatings() {
 		return ratings;
 	}
@@ -348,6 +363,14 @@ public class Service implements Serializable {
 
 	public void setShearingOffer(ShearingOffer shearingOffer) {
 		this.shearingOffer = shearingOffer;
+	}
+
+	public GrassHeight getGrassHeight() {
+		return grassHeight;
+	}
+
+	public void setGrassHeight(GrassHeight grassHeight) {
+		this.grassHeight = grassHeight;
 	}
 
 }

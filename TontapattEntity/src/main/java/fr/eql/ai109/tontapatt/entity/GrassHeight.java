@@ -30,7 +30,7 @@ public class GrassHeight implements Serializable {
 	@Column(name = "height", nullable = false)
 	private String height;
 	@OneToMany(mappedBy = "grassHeight", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private Set<Field> fields;
+	private Set<Service> services;
 
 	public GrassHeight() {
 		super();
@@ -74,12 +74,12 @@ public class GrassHeight implements Serializable {
 		this.height = height;
 	}
 
-	public Set<Field> getFields() {
-		return fields;
+	public Set<Service> getServices() {
+		return services;
 	}
 
-	public void setFields(Set<Field> fields) {
-		this.fields = fields;
+	public void setServices(Set<Service> services) {
+		this.services = services;
 	}
 
 }
