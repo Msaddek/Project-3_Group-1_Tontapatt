@@ -3,6 +3,7 @@ package fr.eql.ai109.controller;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
 import javax.annotation.PostConstruct;
@@ -14,6 +15,7 @@ import javax.faces.bean.SessionScoped;
 import fr.eql.ai109.ibusiness.ServiceIBusiness;
 import fr.eql.ai109.tontapatt.entity.CancellationReason;
 import fr.eql.ai109.tontapatt.entity.Field;
+import fr.eql.ai109.tontapatt.entity.GrassHeight;
 import fr.eql.ai109.tontapatt.entity.PaymentMethod;
 import fr.eql.ai109.tontapatt.entity.PrematureCancellationReason;
 import fr.eql.ai109.tontapatt.entity.RefusalReason;
@@ -47,6 +49,14 @@ public class ServiceManagedBean implements Serializable {
 	private Set<Service> connectedBreederServices;
 
 	private Set<Service> connectedOwnerServices;
+	
+	private Set<Service> connectUserPendingServices;
+	
+	private Set<Service> connectUserInProgressServices;
+	
+	private Set<Service> connectUserCancelledServices;
+	
+	private Set<Service> connectUserFinishedServices;
 
 	private LocalDate startDate;
 
@@ -81,11 +91,97 @@ public class ServiceManagedBean implements Serializable {
 	private RefusalReason refusalReason;
 
 	private ShearingOffer shearingOffer;
+	
+	private GrassHeight grassHeight;
 
 	@PostConstruct
 	public void init() {
 		connectedBreederServices = business.getAllByOfferBreeder(connectedUser);
 		connectedOwnerServices = business.getAllByFieldOwner(connectedUser);
+		connectUserCancelledServices = business.getAllCancelledServicesOfConnectedUser(connectedUser);
+		connectUserFinishedServices = business.getAllFinishedServicesOfConnectedUser(connectedUser);
+		connectUserInProgressServices = business.getAllInProgressServicesOfConnectedUser(connectedUser);
+		connectUserPendingServices = business.getAllPendingServicesOfConnectedUser(connectedUser);
+	}
+
+	public String createServiceRequest() {
+		String forward = "/services.xhtml?faces-redirect=true";
+		DateTimeFormatter formatter = DateTimeFormatter
+				.ofPattern("yyyy-MM-dd-HH-mm-ss-SS");
+		Service newService = new Service();
+		newService.setRequestDate(LocalDateTime.now());
+		newService.setStartDate(startDate);
+		newService.setEndDate(endDate);
+		newService.setShearingOffer(shearingOffer);
+		newService.setField(field);
+		newService.setDistance(shearingOffer.getDistance());
+		newService.setPrice(price);
+		newService.setPaymentMethod(paymentMethod);
+		newService.setGrassHeight(grassHeight);
+		newService.setInvoiceNumber(
+				"PRST-" + LocalDateTime.now().format(formatter));
+		service = business.add(newService);
+		init();
+		return forward;
+	}
+
+	public String validateServiceRequest() {
+		service.setValidationDate(LocalDateTime.now());
+		service = business.update(service);
+		init();
+		return "/serviceDetails.xhtml?faces-redirect=false";
+	}
+
+	public String cancelServiceRequest() {
+		service.setCancellationDate(LocalDateTime.now());
+		service.setCancellationReason(cancellationReason);
+		service = business.update(service);
+		init();
+		return "/serviceDetails.xhtml?faces-redirect=false";
+	}
+
+	public String refuseServiceRequest() {
+		service.setRefusalDate(LocalDateTime.now());
+		service.setRefusalReason(refusalReason);
+		service = business.update(service);
+		init();
+		return "/serviceDetails.xhtml?faces-redirect=false";
+	}
+
+	public String cancelServicePrematurely() {
+		service.setPrematureCancellationDate(LocalDateTime.now());
+		service.setPrematureCancellationReason(prematureCancellationReason);
+		service = business.update(service);
+		init();
+		return "/serviceDetails.xhtml?faces-redirect=false";
+	}
+
+	public String setupEquipment() {
+		service.setEquipmentSetupDate(LocalDateTime.now());
+		service = business.update(service);
+		init();
+		return "/serviceDetails.xhtml?faces-redirect=false";
+	}
+
+	public String uninstallEquipment() {
+		service.setEquipmentUninstallDate(LocalDateTime.now());
+		service = business.update(service);
+		init();
+		return "/serviceDetails.xhtml?faces-redirect=false";
+	}
+
+	public String setupHerd() {
+		service.setHerdSetupDate(LocalDateTime.now());
+		service = business.update(service);
+		init();
+		return "/serviceDetails.xhtml?faces-redirect=false";
+	}
+
+	public String uninstallHerd() {
+		service.setHerdUninstallDate(LocalDateTime.now());
+		service = business.update(service);
+		init();
+		return "/serviceDetails.xhtml?faces-redirect=false";
 	}
 
 	public User getConnectedUser() {
@@ -119,6 +215,42 @@ public class ServiceManagedBean implements Serializable {
 
 	public void setService(Service service) {
 		this.service = service;
+	}
+
+	public Set<Service> getConnectUserPendingServices() {
+		return connectUserPendingServices;
+	}
+
+	public void setConnectUserPendingServices(
+			Set<Service> connectUserPendingServices) {
+		this.connectUserPendingServices = connectUserPendingServices;
+	}
+
+	public Set<Service> getConnectUserInProgressServices() {
+		return connectUserInProgressServices;
+	}
+
+	public void setConnectUserInProgressServices(
+			Set<Service> connectUserInProgressServices) {
+		this.connectUserInProgressServices = connectUserInProgressServices;
+	}
+
+	public Set<Service> getConnectUserCancelledServices() {
+		return connectUserCancelledServices;
+	}
+
+	public void setConnectUserCancelledServices(
+			Set<Service> connectUserCancelledServices) {
+		this.connectUserCancelledServices = connectUserCancelledServices;
+	}
+
+	public Set<Service> getConnectUserFinishedServices() {
+		return connectUserFinishedServices;
+	}
+
+	public void setConnectUserFinishedServices(
+			Set<Service> connectUserFinishedServices) {
+		this.connectUserFinishedServices = connectUserFinishedServices;
 	}
 
 	public Set<Service> getConnectedBreederServices() {
@@ -275,6 +407,14 @@ public class ServiceManagedBean implements Serializable {
 
 	public void setShearingOffer(ShearingOffer shearingOffer) {
 		this.shearingOffer = shearingOffer;
+	}
+
+	public GrassHeight getGrassHeight() {
+		return grassHeight;
+	}
+
+	public void setGrassHeight(GrassHeight grassHeight) {
+		this.grassHeight = grassHeight;
 	}
 
 }
