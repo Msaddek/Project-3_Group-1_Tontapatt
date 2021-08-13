@@ -14,64 +14,196 @@
 
 	<ui:define name="content">
 
-		<section id="popular-courses" class="courses">
-		<div class="container" data-aos="fade-up">
-
+		<div class="title-page">
 			<div class="section-title">
-				<h2>Offres</h2>
-				<p>Nos offres</p>
+				<h2>Mes terrains</h2>
+				<p>Gérer mes terrains</p>
 			</div>
+		</div>
 
-			<div class="row" data-aos="zoom-in" data-aos-delay="100">
+		<main class="mt-5 pt-4">
+		<div class="container wow fadeIn">
 
-				
+			<!-- Heading -->
+			<div class="presta-zone">
+				<h1 class="my-5 h2 text-center">L'offre au top et qui est pas
+					cher</h1>
+				<h2 class="my-5 h2 text-center">PHOTO, Prénom</h2>
+				<h3 class="my-5 h2 text-center">Evaluation</h3>
+			</div>
+			<!--Grid row-->
+			<div class="row">
 
-				<div
-					class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
-					<div class="offer-box">
-						<div class="course-item">
-							<img src="resources/assets/img/Solognot.jpg" class="img-fluid"
-								alt="..." />
-							<div class="course-content">
-								<div
-									class="d-flex justify-content-between align-items-center mb-3">
-									<h4>Ovin</h4>
+				<!--Grid column-->
+				<div class="col-md-8 mb-4">
 
-									<p class="price">
-										18000
-										<b:iconAwesome name="eur" />
-									</p>
+					<!--Card-->
+					<div class="card">
+
+						<!--Grid row-->
+						<div class="row">
+
+							<div class="icon-info-presta">
+								<b:iconAwesome class="icon-info" name="envelope" size="2x" />
+								<div class="icon-info-descr">
+									<h4>Prise en charge</h4>
+									<p>Une fois votre demande envoyé, vous serez avertis par la
+										suite de la réponse du propriétaire.</p>
 								</div>
-								<p class="small mb-3">
-									<span class="badge badge-dark">France, FR</span>
-								</p>
-								<br />
-								<h3>
-									<a href="course-details.html">MES BÊTES</a>
-								</h3>
-								<p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p>
-								<div
-									class="trainer d-flex justify-content-between align-items-center">
-									<div class="trainer-profile d-flex align-items-center">
-										<img src="resources/img/users/user.png" class="img-fluid"
-											alt="" /> <span>Brandon</span>
-									</div>
-									<div class="trainer-rank d-flex align-items-center">
-										<i class="bx bx-user"></i>&nbsp;20 &nbsp;&nbsp; <i
-											class="bx bx-heart"></i>&nbsp;85
-									</div>
+							</div>
+
+
+						</div>
+
+						<div class="row">
+
+							<div class="icon-info-presta">
+								<b:iconAwesome class="icon-info" name="exclamation-circle"
+									size="2x" />
+								<div class="icon-info-descr">
+									<h4>Annulation</h4>
+									<p>Une fois votre demande valider, l'annulation peu
+										entrainer des frais. Renseignez-vous sur les condition
+										d'annulation.</p>
 								</div>
 							</div>
 						</div>
+
+						<div class="row">
+
+							<div class="icon-info-presta">
+								<b:iconAwesome class="icon-info" name="check" size="2x" />
+								<div class="icon-info-descr">
+									<h4>Enregistrement</h4>
+									<p>Assurez-vous que les coordonnées entrées correspondent
+										bien à votre demande.</p>
+								</div>
+							</div>
+						</div>
+
+						<hr />
+
+						<div class="row">
+							<div class="category-description">
+								<h2>Information</h2>
+							</div>
+						</div>
+
+						<div class="icon-info-presta">
+							<b:iconAwesome class="icon-info" name="info-circle" size="lg" />
+							<div class="icon-info-descr">
+								<h4>Race : Mouton de Ouessant</h4>
+							</div>
+						</div>
+
+						<div class="icon-info-presta">
+							<b:iconAwesome class="icon-info" name="info-circle" size="lg" />
+							<div class="icon-info-descr">
+								<h4>Espèce : Ovin</h4>
+							</div>
+						</div>
+
+						<div class="icon-info-presta">
+							<b:iconAwesome class="icon-info" name="info-circle" size="lg" />
+							<div class="icon-info-descr">
+								<h4>Couverture : 80km</h4>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="category-description">
+								<h2>Description</h2>
+							</div>
+						</div>
+						<hr class="mb-4" />
+
+						<div class="row">
+							<div class="category-description">
+								<h2>Photos</h2>
+							</div>
+						</div>
+
+						<hr />
+						<div class="row">
+							<div class="category-description">
+								<h2>Dates</h2>
+							</div>
+						</div>
+
+						<hr />
+
+						<div class="row">
+							<div class="category-description">
+								<h2>Evaluations</h2>
+							</div>
+						</div>
+
 					</div>
+					<!--/.Card-->
+
 				</div>
+				<!--Grid column-->
 
-				<!-- JUSQUE ICI -->
 
+				<div class="col-md-4 mb-4">
+
+					<!-- Heading -->
+					<div class="tarification">
+					<h3 class="d-flex justify-content-between align-items-center mb-3">
+						Tarification
+					</h3>
+
+					<!-- Cart -->
+					
+						<ul class="list-group mb-3 z-depth-1">
+							<li
+								class="list-group-item d-flex justify-content-between lh-condensed">
+								<div>
+									<h4 class="my-0">Tarif bêtes</h4>
+									<small class="text-muted">Calculez selon le prix d'un
+										animal par jour.</small>
+								</div> <span class="text-muted">12€</span>
+							</li>
+							<li
+								class="list-group-item d-flex justify-content-between lh-condensed">
+								<div>
+									<h4 class="my-0">Tarif distance</h4>
+									<small class="text-muted">Calculé selon la distance.</small>
+								</div> <span class="text-muted">8€</span>
+							</li>
+							<li
+								class="list-group-item d-flex justify-content-between lh-condensed">
+								<div>
+									<h4 class="my-0">Tarif interventions</h4>
+									<small class="text-muted">Calculé selon le nombre
+										d'intervention nécessaire.</small>
+								</div> <span class="text-muted">8€</span>
+							</li>
+							<li
+								class="list-group-item d-flex justify-content-between lh-condensed">
+								<div>
+									<h4 class="my-0">TVA</h4>
+									<small class="text-muted">20% du prix total.</small>
+								</div> <span class="text-muted">8€</span>
+							</li>
+							<li
+								class="list-group-item d-flex justify-content-between bg-light">
+								<div class="text-success">
+									<h4 class="my-0">Durée</h4>
+									<small>Durée de la prestation en jours.</small>
+								</div> <span class="text-success">8€</span>
+							</li>
+							<li class="list-group-item d-flex justify-content-between"><span>Total
+									(EUR)</span> <strong>1 000 000 €</strong></li>
+						</ul>
+					</div>
+					<!-- Cart -->
+
+				</div>
 			</div>
 
 		</div>
-		</section>
+		<!--Grid row--> </main>
 
 	</ui:define>
 
