@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Set;
 
 import javax.annotation.PostConstruct;
@@ -25,7 +26,7 @@ import fr.eql.ai109.tontapatt.entity.User;
 
 @ManagedBean(name = "mbService")
 @SessionScoped
-public class ServiceManagedBean implements Serializable {
+public class ServiceManagedBean implements Serializable, CalculationVariables {
 
 	/**
 	 * 
@@ -38,7 +39,6 @@ public class ServiceManagedBean implements Serializable {
 	@ManagedProperty(value = "#{mbUser.user}")
 	private User connectedUser;
 
-	@ManagedProperty(value = "#{mbField}")
 	private FieldManagedBean selectedFieldBean;
 
 	@ManagedProperty(value = "#{mbShearingOffer}")
@@ -49,13 +49,13 @@ public class ServiceManagedBean implements Serializable {
 	private Set<Service> connectedBreederServices;
 
 	private Set<Service> connectedOwnerServices;
-	
+
 	private Set<Service> connectUserPendingServices;
-	
+
 	private Set<Service> connectUserInProgressServices;
-	
+
 	private Set<Service> connectUserCancelledServices;
-	
+
 	private Set<Service> connectUserFinishedServices;
 
 	private LocalDate startDate;
@@ -74,6 +74,8 @@ public class ServiceManagedBean implements Serializable {
 
 	private Double price;
 
+	private Integer requiredAnimalCount;
+
 	private LocalDateTime refusalDate;
 
 	private LocalDateTime requestDate;
@@ -91,17 +93,21 @@ public class ServiceManagedBean implements Serializable {
 	private RefusalReason refusalReason;
 
 	private ShearingOffer shearingOffer;
-	
+
 	private GrassHeight grassHeight;
 
 	@PostConstruct
 	public void init() {
 		connectedBreederServices = business.getAllByOfferBreeder(connectedUser);
 		connectedOwnerServices = business.getAllByFieldOwner(connectedUser);
-		connectUserCancelledServices = business.getAllCancelledServicesOfConnectedUser(connectedUser);
-		connectUserFinishedServices = business.getAllFinishedServicesOfConnectedUser(connectedUser);
-		connectUserInProgressServices = business.getAllInProgressServicesOfConnectedUser(connectedUser);
-		connectUserPendingServices = business.getAllPendingServicesOfConnectedUser(connectedUser);
+		connectUserCancelledServices = business
+				.getAllCancelledServicesOfConnectedUser(connectedUser);
+		connectUserFinishedServices = business
+				.getAllFinishedServicesOfConnectedUser(connectedUser);
+		connectUserInProgressServices = business
+				.getAllInProgressServicesOfConnectedUser(connectedUser);
+		connectUserPendingServices = business
+				.getAllPendingServicesOfConnectedUser(connectedUser);
 	}
 
 	public String createServiceRequest() {
@@ -182,6 +188,13 @@ public class ServiceManagedBean implements Serializable {
 		service = business.update(service);
 		init();
 		return "/serviceDetails.xhtml?faces-redirect=false";
+	}
+
+	public Integer calculateRequiredAnimalNumber() {
+		requiredAnimalCount = (int) (field.getArea()
+				/ (ChronoUnit.DAYS.between(startDate, endDate)
+						* SURFACE_ANIMAL_JOUR));
+		return requiredAnimalCount;
 	}
 
 	public User getConnectedUser() {
@@ -334,6 +347,22 @@ public class ServiceManagedBean implements Serializable {
 
 	public void setPrice(Double price) {
 		this.price = price;
+	}
+
+	public Integer getRequiredAnimalCount() {
+		return requiredAnimalCount;
+	}
+
+	public void setRequiredAnimalCount(Integer requiredAnimalCount) {
+		this.requiredAnimalCount = requiredAnimalCount;
+	}
+
+	public ServiceIBusiness getBusiness() {
+		return business;
+	}
+
+	public void setBusiness(ServiceIBusiness business) {
+		this.business = business;
 	}
 
 	public LocalDateTime getRefusalDate() {
