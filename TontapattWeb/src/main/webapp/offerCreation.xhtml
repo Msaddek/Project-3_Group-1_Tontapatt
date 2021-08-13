@@ -229,11 +229,15 @@
 							<div class="categories-offer">
 								<h2>Description</h2>
 								<div class="category-offer">
-									<h:inputTextarea id="inpDescription" required="true"
+									<b:inputTextarea id="inpDescription" required="true"
 										requiredMessage="Vous devez entrer la description de votre offre"
 										value="#{mbShearingOffer.description}" rows="10" cols="80"
-										counter="display" maxlength="500"
-										counterTemplate="{0} caractères restants." autoResize="false" />
+										counter="display" maxlength="255"
+										validatorMessage="La description doit comporter au moins 30 charactères"
+										counterTemplate="{0} caractères restants." autoResize="false">
+										<f:validateLength minimum="30" />
+									</b:inputTextarea>
+									<b:message id="descriptionMessage" for="inpDescription" />
 								</div>
 							</div>
 						</div>
@@ -241,23 +245,26 @@
 						<div class="form-row m-b-55">
 							<div class="categories-offer">
 
-								<h2>Photos</h2>
+								<br /> <label for="inpPhoto">Photos de l'offre :</label><br />
 								<p:fileUpload id="inpPhoto" label="Ajoutez les photos"
-									listener="#{mbShearingOffer.uploadPhoto}" mode="advanced"
-									multiple="true" fileLimit="4" required="true"
-									requiredMessage="Vous devez ajouter des photos pour enregistrer l'offre"
+									required="true" listener="#{mbShearingOffer.uploadPhoto}"
+									mode="advanced" multiple="true" fileLimit="4"
+									requiredMessage="Vous devez ajouter des photos pour créer l'offre"
 									allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
 									invalidFileMessage="Le fichier doit être de type gif, jpe, jpeg ou png"
 									fileLimitMessage="Vous avez droit à 4 photos"
-									uploadLabel="Télécharger" cancelLabel="Annuler" />
-								<p:message id="photoMessage" for="inpPhoto" />
+									uploadLabel="Télécharger" cancelLabel="Annuler"
+									update="photoMessage">
+								</p:fileUpload>
+								<b:message id="photoMessage" for="inpPhoto" />
+
 							</div>
 						</div>
 
 						<div></div>
 
 						<div>
-							<b:commandButton class="get-started-btn" value="Enregistrer"
+							<b:commandButton class="get-started-btn" value="Valider"
 								action="#{mbShearingOffer.createOffer()}" />
 						</div>
 					</b:form>
