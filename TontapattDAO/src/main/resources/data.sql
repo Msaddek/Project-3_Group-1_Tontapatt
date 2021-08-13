@@ -32,7 +32,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `flatness_percentage` WRITE;
 /*!40000 ALTER TABLE `flatness_percentage` DISABLE KEYS */;
-INSERT INTO `flatness_percentage` VALUES (1,10%),(2,20%),(3,30%),(4,40%),(5,50%),(6,60%),(7,70%),(8,80%),(9,90%),(10,100%);
+INSERT INTO `flatness_percentage` VALUES (1,10),(2,20),(3,30),(4,40),(5,50),(6,60),(7,70),(8,80),(9,90),(10,100);
 /*!40000 ALTER TABLE `flatness_percentage` ENABLE KEYS */;
 UNLOCK TABLES;
 
