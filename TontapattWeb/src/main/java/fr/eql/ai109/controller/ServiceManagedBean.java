@@ -124,6 +124,7 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 		newService.setPrice(price);
 		newService.setPaymentMethod(paymentMethod);
 		newService.setGrassHeight(grassHeight);
+		newService.setRequiredAnimalCount(requiredAnimalCount);
 		newService.setInvoiceNumber(
 				"PRST-" + LocalDateTime.now().format(formatter));
 		service = business.add(newService);
