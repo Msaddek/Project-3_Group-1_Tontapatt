@@ -59,10 +59,6 @@ public class Field implements Serializable {
 	private Set<VegetationComposition> vegetationCompositions;
 
 	@ManyToOne
-	@JoinColumn(referencedColumnName = "id", nullable = false)
-	private GrassHeight grassHeight;
-
-	@ManyToOne
 	@JoinColumn(referencedColumnName = "id", nullable = true)
 	private FieldWithdrawalReason fieldWithdrawalReason;
 
@@ -181,14 +177,6 @@ public class Field implements Serializable {
 
 	public void setWithdrawalDate(LocalDateTime withdrawalDate) {
 		this.withdrawalDate = withdrawalDate;
-	}
-
-	public GrassHeight getGrassHeight() {
-		return grassHeight;
-	}
-
-	public void setGrassHeight(GrassHeight grassHeight) {
-		this.grassHeight = grassHeight;
 	}
 
 	public FieldWithdrawalReason getFieldWithdrawalReason() {
