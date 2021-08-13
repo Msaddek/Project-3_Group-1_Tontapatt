@@ -139,26 +139,6 @@
 
 						<div class="form-row">
 							<div class="categories-offer">
-								<h2>Hauteur de l'herbe</h2>
-								<p:selectOneMenu id="inpGrassHeight"
-									value="#{mbField.grassHeight}" required="true"
-									converter="entityConverter"
-									requiredMessage="Veuillez indiquer une hauteur d'herbe pour votre terrain">
-									<f:selectItem itemLabel="sélectionnez une hauteur d'herbe"
-										itemValue="" />
-									<f:selectItems value="#{mbGrassHeight.allGrassHeight()}"
-										var="grassHeight" itemLabel="#{grassHeight.height}"
-										itemValue="#{grassHeight}" />
-									<p:ajax update="grassHeightMessage" />
-								</p:selectOneMenu>
-								<br />
-								<p:message id="grassHeightMessage" for="inpGrassHeight" />
-							</div>
-						</div>
-
-
-						<div class="form-row">
-							<div class="categories-offer">
 								<h2>Hauteur de clôture</h2>
 								<p:selectOneMenu id="inpFenceHeight"
 									value="#{mbField.fenceHeight}" required="true"

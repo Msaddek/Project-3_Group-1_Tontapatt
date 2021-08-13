@@ -1,5 +1,6 @@
 package fr.eql.ai109.tontapatt.dao;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -34,6 +35,92 @@ public class ServiceDAO extends GenericDAO<Service> implements ServiceIDAO {
 			services = new HashSet<>(em.createQuery(
 					"SELECT s FROM Service s WHERE s.shearingOffer.breeder=:userParam")
 					.setParameter("userParam", connectedUser).getFirstResult());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return services;
+	}
+
+	@Override
+	public Set<Service> getAllCancelledServicesOfConnectedUser(
+			User connectedUser) {
+		Set<Service> services = null;
+		try {
+			services = new HashSet<>(em
+					.createQuery("SELECT s FROM Service s WHERE "
+							+ "s.shearingOffer.breeder=:userParam OR "
+							+ "s.field.owner=:userParam AND (s.refusalDate IS NOT NULL "
+							+ "OR s.cancellationDate IS NOT NULL OR "
+							+ "s.prematureCancellationDate IS NOT NULL) AND "
+							+ "s.requestDate IS NOT NULL")
+					.setParameter("userParam", connectedUser).getFirstResult());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return services;
+	}
+
+	@Override
+	public Set<Service> getAllFinishedServicesOfConnectedUser(
+			User connectedUser) {
+		Set<Service> services = null;
+		try {
+			services = new HashSet<>(em
+					.createQuery("SELECT s FROM Service s WHERE "
+							+ "s.shearingOffer.breeder=:userParam OR "
+							+ "s.field.owner=:userParam AND s.refusalDate IS NULL "
+							+ "AND s.cancellationDate IS NULL OR "
+							+ "s.prematureCancellationDate IS NULL AND "
+							+ "s.requestDate IS NOT NULL AND s.validationDate IS NOT "
+							+ "NULL AND s.endDate<=:dateNowParam")
+					.setParameter("userParam", connectedUser)
+					.setParameter("dateNowParam", LocalDate.now())
+					.getFirstResult());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return services;
+	}
+
+	@Override
+	public Set<Service> getAllInProgressServicesOfConnectedUser(
+			User connectedUser) {
+		Set<Service> services = null;
+		try {
+			services = new HashSet<>(em
+					.createQuery("SELECT s FROM Service s WHERE "
+							+ "s.shearingOffer.breeder=:userParam OR "
+							+ "s.field.owner=:userParam AND s.refusalDate IS NULL "
+							+ "AND s.cancellationDate IS NULL OR "
+							+ "s.prematureCancellationDate IS NULL AND "
+							+ "s.requestDate IS NOT NULL AND s.validationDate IS NOT "
+							+ "NULL AND :dateNowParam BETWEEN startDate AND "
+							+ "endDate")
+					.setParameter("userParam", connectedUser)
+					.setParameter("dateNowParam", LocalDate.now())
+					.getFirstResult());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return services;
+	}
+
+	@Override
+	public Set<Service> getAllPendingServicesOfConnectedUser(
+			User connectedUser) {
+		Set<Service> services = null;
+		try {
+			services = new HashSet<>(em
+					.createQuery("SELECT s FROM Service s WHERE "
+							+ "s.shearingOffer.breeder=:userParam OR "
+							+ "s.field.owner=:userParam AND s.refusalDate IS NULL "
+							+ "AND s.cancellationDate IS NULL OR "
+							+ "s.prematureCancellationDate IS NULL AND "
+							+ "s.requestDate IS NOT NULL AND s.validationDate IS "
+							+ "NULL")
+					.setParameter("userParam", connectedUser)
+					.setParameter("dateNowParam", LocalDate.now())
+					.getFirstResult());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

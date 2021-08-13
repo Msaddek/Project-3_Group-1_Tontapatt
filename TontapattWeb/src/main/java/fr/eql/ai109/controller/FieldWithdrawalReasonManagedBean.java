@@ -9,7 +9,6 @@ import javax.faces.bean.SessionScoped;
 
 import fr.eql.ai109.ibusiness.FieldWithdrawalReasonIBusiness;
 import fr.eql.ai109.tontapatt.entity.FieldWithdrawalReason;
-import fr.eql.ai109.tontapatt.entity.GrassHeight;
 
 @ManagedBean(name = "mbFieldWithdrawalReason")
 @SessionScoped
@@ -22,13 +21,13 @@ public class FieldWithdrawalReasonManagedBean implements Serializable {
 
 	@EJB
 	FieldWithdrawalReasonIBusiness business;
+	
 	private FieldWithdrawalReason fieldWithdrawalReason;
 
 	public List<FieldWithdrawalReason> allFieldWithdrawalReason() {
 		return business.getAll();
 	}
-	
-	
+
 	public FieldWithdrawalReason getFieldWithdrawalReason() {
 		return fieldWithdrawalReason;
 	}
