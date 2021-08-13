@@ -27,7 +27,7 @@ public class ServiceBusiness implements ServiceIBusiness {
 	@Override
 	public void delete(Service t) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -55,5 +55,31 @@ public class ServiceBusiness implements ServiceIBusiness {
 	@Override
 	public Set<Service> getAllByOfferBreeder(User connectedUser) {
 		return serviceIDAO.getAllByOfferBreeder(connectedUser);
+	}
+
+	@Override
+	public Set<Service> getAllCancelledServicesOfConnectedUser(
+			User connectedUser) {
+		return serviceIDAO
+				.getAllCancelledServicesOfConnectedUser(connectedUser);
+	}
+
+	@Override
+	public Set<Service> getAllFinishedServicesOfConnectedUser(
+			User connectedUser) {
+		return serviceIDAO.getAllFinishedServicesOfConnectedUser(connectedUser);
+	}
+
+	@Override
+	public Set<Service> getAllInProgressServicesOfConnectedUser(
+			User connectedUser) {
+		return serviceIDAO
+				.getAllInProgressServicesOfConnectedUser(connectedUser);
+	}
+
+	@Override
+	public Set<Service> getAllPendingServicesOfConnectedUser(
+			User connectedUser) {
+		return serviceIDAO.getAllPendingServicesOfConnectedUser(connectedUser);
 	}
 }
