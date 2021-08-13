@@ -1647,3 +1647,23 @@ header.scrolled nav a {
 .box-parameters:hover {
   transform: scale(1.2);
 }
+
+/* SELECTED OFFER */
+
+.icon-info-presta {
+	display: flex;
+	padding: 10px 10px 0px 10px;
+    margin-left: 10px;
+}
+
+.icon-info-presta h4 {
+	font-weight: bold;
+}
+
+.icon-info {
+	padding: 5px;
+}
+
+.icon-info-descr {
+	padding: 6px;
+}
