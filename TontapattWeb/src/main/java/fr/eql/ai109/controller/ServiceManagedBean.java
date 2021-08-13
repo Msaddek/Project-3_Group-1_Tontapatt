@@ -85,6 +85,8 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 	private CancellationReason cancellationReason;
 
 	private Field field;
+	
+	private ShearingOffer offer;
 
 	private PaymentMethod paymentMethod;
 
@@ -196,6 +198,10 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 				/ (ChronoUnit.DAYS.between(startDate, endDate)
 						* SURFACE_ANIMAL_JOUR));
 		return requiredAnimalCount;
+	}
+
+	public Double calculatePrice() {
+		return null;
 	}
 
 	public User getConnectedUser() {
@@ -404,6 +410,14 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 
 	public void setField(Field field) {
 		this.field = field;
+	}
+
+	public ShearingOffer getOffer() {
+		return offer;
+	}
+
+	public void setOffer(ShearingOffer offer) {
+		this.offer = offer;
 	}
 
 	public PaymentMethod getPaymentMethod() {
