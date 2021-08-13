@@ -119,7 +119,6 @@ public class ServiceDAO extends GenericDAO<Service> implements ServiceIDAO {
 							+ "s.requestDate IS NOT NULL AND s.validationDate IS "
 							+ "NULL")
 					.setParameter("userParam", connectedUser)
-					.setParameter("dateNowParam", LocalDate.now())
 					.getFirstResult());
 		} catch (Exception e) {
 			e.printStackTrace();
