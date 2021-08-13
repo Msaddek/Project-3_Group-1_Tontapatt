@@ -30,7 +30,6 @@ import fr.eql.ai109.tontapatt.entity.Field;
 import fr.eql.ai109.tontapatt.entity.FieldPhoto;
 import fr.eql.ai109.tontapatt.entity.FieldWithdrawalReason;
 import fr.eql.ai109.tontapatt.entity.FlatnessPercentage;
-import fr.eql.ai109.tontapatt.entity.GrassHeight;
 import fr.eql.ai109.tontapatt.entity.Service;
 import fr.eql.ai109.tontapatt.entity.User;
 import fr.eql.ai109.tontapatt.entity.VegetationComposition;
@@ -71,8 +70,6 @@ public class FieldManagedBean implements Serializable {
 
 	private Set<FieldPhoto> photos;
 
-	private GrassHeight grassHeight;
-
 	private FieldWithdrawalReason fieldWithdrawalReason;
 
 	private FenceHeight fenceHeight;
@@ -102,11 +99,10 @@ public class FieldManagedBean implements Serializable {
 	}
 
 	public String fieldDetails() {
-
 		return "/fieldUpdate.xhtml?faces-redirect=true";
 
 	}
-	
+
 	public String fieldDetailedView(Field field) {
 		this.field = field;
 		return "/fieldDetails.xhtml?faces-redirect=true";
@@ -115,7 +111,7 @@ public class FieldManagedBean implements Serializable {
 
 	public String createField() {
 		String forward = "/fieldParameters.xhtml?faces-redirect=true";
-		if(photos.isEmpty()) {
+		if (photos.isEmpty()) {
 			String messageUploded = "Vous devez télécharger au moins une photo";
 			FacesMessage facesMessage = new FacesMessage(
 					FacesMessage.SEVERITY_ERROR, messageUploded,
@@ -131,7 +127,6 @@ public class FieldManagedBean implements Serializable {
 		newField.setAddress(address);
 		newField.setArea(area);
 		newField.setAdditionDate(LocalDateTime.now());
-		newField.setGrassHeight(grassHeight);
 		newField.setFenceHeight(fenceHeight);
 		newField.setFlatnessPercentage(flatnessPercentage);
 		newField.setZipCodeCity(zipCodeCity);
@@ -220,7 +215,6 @@ public class FieldManagedBean implements Serializable {
 		zipCodeCity = null;
 		area = null;
 		description = null;
-		grassHeight = null;
 		fenceHeight = null;
 		flatnessPercentage = null;
 		additionDate = null;
@@ -236,7 +230,6 @@ public class FieldManagedBean implements Serializable {
 		zipCodeCity = field.getZipCodeCity();
 		area = field.getArea();
 		description = field.getDescription();
-		grassHeight = field.getGrassHeight();
 		fenceHeight = field.getFenceHeight();
 		flatnessPercentage = field.getFlatnessPercentage();
 		additionDate = field.getAdditionDate();
@@ -248,7 +241,6 @@ public class FieldManagedBean implements Serializable {
 		field.setZipCodeCity(zipCodeCity);
 		field.setDescription(description);
 		field.setArea(area);
-		field.setGrassHeight(grassHeight);
 		field.setFenceHeight(fenceHeight);
 		field.setFlatnessPercentage(flatnessPercentage);
 		field = fieldBusiness.update(field);
@@ -263,11 +255,11 @@ public class FieldManagedBean implements Serializable {
 		init();
 		return "/fieldParameters.xhtml?faces-redirect=true";
 	}
-	
+
 	public void searchByName(String name) {
 		Set<Field> fields = new HashSet<>();
 		for (Field field : connectedUserFields) {
-			if(field.getName().contains(name)) {
+			if (field.getName().contains(name)) {
 				fields.add(field);
 			}
 		}
@@ -336,14 +328,6 @@ public class FieldManagedBean implements Serializable {
 
 	public void setPhotos(Set<FieldPhoto> photos) {
 		this.photos = photos;
-	}
-
-	public GrassHeight getGrassHeight() {
-		return grassHeight;
-	}
-
-	public void setGrassHeight(GrassHeight grassHeight) {
-		this.grassHeight = grassHeight;
 	}
 
 	public FenceHeight getFenceHeight() {
