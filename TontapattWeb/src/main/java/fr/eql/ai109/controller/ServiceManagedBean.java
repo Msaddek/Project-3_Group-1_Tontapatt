@@ -111,6 +111,11 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 		connectUserPendingServices = business
 				.getAllPendingServicesOfConnectedUser(connectedUser);
 	}
+	
+	public String selectOffer() {
+		
+		return "/selectedOffer.xhtml?faces-redirect=true";
+	}
 
 	public String createServiceRequest() {
 		String forward = "/services.xhtml?faces-redirect=true";
