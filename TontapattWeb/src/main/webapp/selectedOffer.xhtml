@@ -265,7 +265,7 @@
 						 Date de prestation : Du #{mbService.startDate} au #{mbService.endDate} 
 					</div>
 					<div class="form-group">
-						 Prix : 5000 €
+						 Prix : #{mbService.calculatePrice()} €
 					</div>
 					<b:message for="inpPassword" />
 					<br />
