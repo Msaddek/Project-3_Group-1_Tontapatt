@@ -13,6 +13,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import fr.eql.ai109.ibusiness.ServiceIBusiness;
 import fr.eql.ai109.tontapatt.entity.CancellationReason;
 import fr.eql.ai109.tontapatt.entity.Field;
@@ -254,6 +257,17 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
         return priceWithoutVAT * VAT + priceWithoutVAT;
 
     }
+	
+	public String selectedFieldtAsJson() {
+		ObjectMapper mapper = new ObjectMapper();
+		String json = null;
+		try {
+			json = mapper.writeValueAsString(field);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return json;
+	}
 
 	public User getConnectedUser() {
 		return connectedUser;

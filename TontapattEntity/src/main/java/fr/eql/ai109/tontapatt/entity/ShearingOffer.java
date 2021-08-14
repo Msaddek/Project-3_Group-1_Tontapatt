@@ -18,6 +18,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "shearing_offer")
 public class ShearingOffer implements Serializable {
@@ -68,6 +70,7 @@ public class ShearingOffer implements Serializable {
 	@OneToMany(mappedBy = "shearingOffer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<ShearingOfferPhoto> photos;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "shearingOffer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<Service> services;
 

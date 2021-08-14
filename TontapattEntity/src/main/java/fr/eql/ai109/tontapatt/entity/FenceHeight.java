@@ -17,6 +17,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "fence_height")
 public class FenceHeight implements Serializable {
@@ -30,10 +32,15 @@ public class FenceHeight implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
+	
 	@Column(name = "height", nullable = false)
 	private String height;
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "fenceHeight", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<Field> fields;
+	
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "favorite_fence_height", joinColumns = @JoinColumn(name = "fence_id"), inverseJoinColumns = @JoinColumn(name = "species_id"))
 	private Set<Species> species;

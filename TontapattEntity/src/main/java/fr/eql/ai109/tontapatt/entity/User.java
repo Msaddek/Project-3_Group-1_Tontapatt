@@ -18,6 +18,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "user")
 public class User implements Serializable {
@@ -55,12 +57,16 @@ public class User implements Serializable {
 	private LocalDateTime unsubscriptionDate;
 	@Column(name = "photo", nullable = true)
 	private String photo;
+	@JsonIgnore
 	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<Field> fields;
+	@JsonIgnore
 	@OneToMany(mappedBy = "breeder", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<ShearingOffer> shearingOffers;
+	@JsonIgnore
 	@OneToMany(mappedBy = "evaluator", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<Rating> ratings;
+	@JsonIgnore
 	@OneToMany(mappedBy = "declarer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<Anomaly> anomalies;
 	@ManyToOne
