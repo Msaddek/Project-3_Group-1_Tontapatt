@@ -112,7 +112,7 @@
 				<div class="card-heading"></div>
 				<div class="card-body">
 					<h2 class="title">Inscription</h2>
-					<b:form id="subscriptionForm">
+					<b:form onsubmit="return ajaxpost()" id="subscriptionForm">
 
 						<div>
 							<div class="rs-select2 js-select-simple select--no-search">
@@ -314,18 +314,10 @@
 
 
 						<div class="p-t-20">
-							<b:commandButton class="btnSubscription" value="Valider"
+							<b:commandButton type="submit" class="btnSubscription" value="Valider"
 								action="#{mbUser.createUser()}" />
 						</div>
 
-						<button id="btnPopup" class="btnPopup">Afficher Popup</button>
-						<div id="overlay" class="overlay">
-							<div id="popup" class="popup">
-								<h2>
-									Exemple simple de popup <span id="btnClose" class="btnClose">&times;</span>
-								</h2>
-								</div>
-								</div>
 					</b:form>
 				</div>
 			</div>
@@ -333,7 +325,7 @@
 	</div>
 
 	<ui:include src="/WEB-INF/include/footer.xhtml"></ui:include>
-	<script src="resources/assets/js/popup.js"></script>
+	
 </h:body>
 
 </html>
