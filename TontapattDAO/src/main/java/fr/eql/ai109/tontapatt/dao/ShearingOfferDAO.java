@@ -33,7 +33,7 @@ public class ShearingOfferDAO extends GenericDAO<ShearingOffer>
 				+ "INNER JOIN race r ON s.race_id=r.id "
 				+ "LEFT JOIN service se ON s.id=se.shearingOffer_id "
 				+ "WHERE s.max_travel_dist>=CalcDistance(:fieldLatParam, :fieldLongParam, z.latitude, z.longitude) "
-				+ "AND s.animal_count>=:animalCountParam"
+				+ "AND s.animal_count>=:animalCountParam "
 				+ "AND s.withdrawal_date IS NULL "
 				+ "AND s.end_date>=:endDateParam "
 				+ "AND s.breeder_id!=:userParam "
