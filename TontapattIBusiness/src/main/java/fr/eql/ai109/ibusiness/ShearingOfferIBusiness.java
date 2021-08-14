@@ -11,7 +11,7 @@ public interface ShearingOfferIBusiness
 		extends GenericIBusiness<ShearingOffer> {
 
 	Set<ShearingOffer> searchOfferByFieldLocation(Field field,
-			LocalDate startDate, LocalDate endDate);
+			LocalDate startDate, LocalDate endDate, Integer requiredAnimalCount);
 
 	Set<ShearingOffer> getShearingOffersOfConnectedUser(User user);
 

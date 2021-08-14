@@ -267,10 +267,12 @@ public class ShearingOfferManagedBean implements Serializable {
 	}
 
 	public String showOffersByFieldLocation(Field selectedField,
-			LocalDate serviceStartDate, LocalDate serviceEndDate) {
+			LocalDate serviceStartDate, LocalDate serviceEndDate,
+			Integer requiredAnimalCount) {
 		shearingOfferSearchResult = new HashSet<ShearingOffer>();
 		shearingOfferSearchResult = business.searchOfferByFieldLocation(
-				selectedField, serviceStartDate, serviceStartDate);
+				selectedField, serviceStartDate, serviceStartDate,
+				requiredAnimalCount);
 		for (ShearingOffer shearingOffer : shearingOfferSearchResult) {
 			System.out.println(
 					"--------------------------" + shearingOffer.toString());

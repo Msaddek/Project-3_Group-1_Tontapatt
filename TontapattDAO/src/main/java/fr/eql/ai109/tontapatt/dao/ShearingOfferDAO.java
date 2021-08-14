@@ -19,33 +19,32 @@ public class ShearingOfferDAO extends GenericDAO<ShearingOffer>
 
 	@Override
 	public Set<ShearingOffer> searchOfferByFieldLocation(Field field,
-			LocalDate serviceStartDate, LocalDate serviceEndDate) {
+			LocalDate serviceStartDate, LocalDate serviceEndDate,
+			Integer requiredAnimalCount) {
 		Set<ShearingOffer> shearingOffers = null;
 		LocalDate now = LocalDate.now();
 		String sqlQueryPhotos = "SELECT op FROM ShearingOfferPhoto op WHERE "
 				+ "op.shearingOffer=:offerParam";
-		String sqlQuery = "SELECT s.*, " + "z.*, "
-				+ "u.*, "
-				+ "r.*, "
-				+ "CalcDistance(:fieldLatParam, :fieldLongParam, z.latitude, z.longitude) AS distance,  "
+		String sqlQuery = "SELECT s.*, z.*, u.*, r.*, "
+				+ "CalcDistance(:fieldLatParam, :fieldLongParam, z.latitude, z.longitude) AS distance "
 				+ "FROM shearing_offer s "
 				+ "INNER JOIN zip_code_city z ON s.zipCodeCity_id=z.id "
 				+ "INNER JOIN user u ON s.breeder_id=u.id "
 				+ "INNER JOIN race r ON s.race_id=r.id "
 				+ "LEFT JOIN service se ON s.id=se.shearingOffer_id "
 				+ "WHERE s.max_travel_dist>=CalcDistance(:fieldLatParam, :fieldLongParam, z.latitude, z.longitude) "
+				+ "AND s.animal_count>=:animalCountParam"
 				+ "AND s.withdrawal_date IS NULL "
 				+ "AND s.end_date>=:endDateParam "
 				+ "AND s.breeder_id!=:userParam "
 				+ "AND :startDateParam BETWEEN s.start_date AND s.end_date "
 				+ "AND :endDateParam BETWEEN s.start_date AND s.end_date "
-				+ "AND se.validation_date IS NOT NULL "
 				+ "AND se.validation_date IS NULL "
 				+ "OR (se.validation_date IS NOT NULL "
 				+ "AND :startDateParam NOT BETWEEN se.start_date AND se.end_date "
 				+ "AND :endDateParam NOT BETWEEN se.start_date AND se.end_date)";
 		try {
-			shearingOffers = (Set<ShearingOffer>) em
+			shearingOffers = (new HashSet<ShearingOffer>(em
 					.createNativeQuery(sqlQuery, ShearingOffer.class)
 					.setParameter("fieldLatParam",
 							field.getZipCodeCity().getLatitude())
@@ -54,7 +53,8 @@ public class ShearingOfferDAO extends GenericDAO<ShearingOffer>
 					.setParameter("userParam", field.getOwner().getId())
 					.setParameter("startDateParam", serviceStartDate)
 					.setParameter("endDateParam", serviceEndDate)
-					.getResultList();
+					.setParameter("animalCountParam", requiredAnimalCount)
+					.getResultList()));
 			for (ShearingOffer shearingOffer : shearingOffers) {
 				shearingOffer
 						.setPhotos(new HashSet<>(em.createQuery(sqlQueryPhotos)
