@@ -68,7 +68,8 @@
 
 
 				<div class="form-row m-b-55">
-					<div class="categories-offer">
+					<div class="categories-offer"
+						style="word-wrap:break-word">
 						<h2>Description :</h2>
 						<p>#{mbField.field.description}</p>
 					</div>
@@ -99,14 +100,15 @@
 
 				<div class="form-row">
 					<div class="categories-offer">
-					<h2>Types de végétation :</h2>
+						<h2>Types de végétation :</h2>
 						<label for="inpVegetationType"></label>
 						<ul>
 							<ui:repeat value="#{mbField.field.vegetationCompositions}"
 								var="vegeType">
 								<li>
-									<p>#{vegeType.vegetationType.vegetation} : #{vegeType.percentage} %</p>
-									
+									<p>#{vegeType.vegetationType.vegetation} :
+										#{vegeType.percentage} %</p>
+
 								</li>
 							</ui:repeat>
 						</ul>
