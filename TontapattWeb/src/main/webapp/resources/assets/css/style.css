@@ -1762,3 +1762,16 @@ header.scrolled nav a {
     width: 350px;
     border-radius: 0%;
 }
+
+.box-photo-result:hover {
+	transform: scale(2);
+}
+
+.recap-box .form-group {
+	padding: 13px;
+}
+
+.logo-payment {
+	display: flex;
+	margin-left: 30px;
+}

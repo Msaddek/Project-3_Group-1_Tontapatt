@@ -228,7 +228,8 @@
 								<div class="text-success">
 									<h4 class="my-0">Durée</h4>
 									<small>Durée de la prestation en jours.</small>
-								</div> <span class="text-success">#{mbService.calculateServiceNumberOfDays()} jours</span>
+								</div> <span class="text-success">#{mbService.calculateServiceNumberOfDays()}
+									jours</span>
 							</li>
 							<li class="list-group-item d-flex justify-content-between"><span>Total
 									(EUR)</span> <strong>#{mbService.calculatePrice()}</strong></li>
@@ -236,50 +237,91 @@
 					</div>
 					<!-- Cart -->
 
-						<button type="button" class="get-started-btn" data-toggle="modal"
-							data-target="#ReservationModal">Réserver</button>
+					<button type="button" class="get-started-btn" data-toggle="modal"
+						data-target="#reservationModal">Payement</button>
 
 				</div>
 			</div>
 
 		</div>
 		<!--Grid row--> </main>
-	
-	<b:modal id="ReservationModal" closable="false" close-on-escape="false"
-		backdrop="false">
 
-		<div class="modal-body">
-			<div class="form-title text-center">
-				<h3>Récapitulatif</h3>
-				<br />
-			</div>
-			<div class="d-flex flex-column text-center">
-				<b:form id="loginForm">
-					<div class="form-group">
-						 Terrain concerné : #{mbService.field.name}
-					</div>
-					<div class="form-group">
-						 Offre sélectionnée : #{mbService.offer.name}
-					</div>
-					<div class="form-group">
-						 Date de prestation : Du #{mbService.startDate} au #{mbService.endDate} 
-					</div>
-					<div class="form-group">
-						 Prix : #{mbService.calculatePrice()} €
-					</div>
-					<b:message for="inpPassword" />
+		<b:modal id="reservationModal" closable="false"
+			close-on-escape="false" backdrop="false">
+
+			<div class="modal-body">
+				<div class="form-title text-center">
+					<h1>Récapitulatif</h1>
 					<br />
-					<b:commandButton class="btnLogin" value="Confirmer"
-						action="#{mbService.createService()}" />
+					<hr />
+				</div>
+				<div class="d-flex flex-column text-center">
+					<b:form id="RecapForm">
+						<div class="recap-box">
+							<div class="form-group">
+								<h3>
+									<strong>Terrain concerné : #{mbService.field.name}</strong>
+								</h3>
+							</div>
 
-				</b:form>
+							<div class="form-group">
+
+								<h3>
+									<strong> Offre sélectionnée : #{mbService.offer.name}
+									</strong>
+								</h3>
+							</div>
+							<div class="form-group">
+								<h3>
+									<strong> Date de prestation : Du
+										#{mbService.startDate} au #{mbService.endDate} </strong>
+								</h3>
+							</div>
+							<div class="form-group">
+								<h3 style="color: red;">
+									<strong> Prix : #{mbService.calculatePrice()} € </strong>
+								</h3>
+							</div>
+
+						</div>
+						<hr />
+
+						<div class="form-title text-center">
+							<h1>Payement</h1>
+							<br />
+						</div>
+
+						<div clas="payment-box">
+							<div class="logo-payment">
+								
+									<img src="https://i.imgur.com/28akQFX.jpg" width="200px"
+										height="60px" />
+							
+								
+									<img src="https://i.imgur.com/5QFsx7K.jpg" width="200px"
+										height="60px" />
+								
+							</div>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="checkbox" value=""
+								id="defaultCheck1" /> <label class="form-check-label"
+								for="defaultCheck1"> J'ai lu et j'accepte les conditions
+								qui m'engagent à respecter les termes du contrat. </label>
+						</div>
+
+						<br />
+						<b:commandButton class="btnLogin" value="Confirmer"
+							action="#{mbService.createServiceRequest()}" />
+
+					</b:form>
+				</div>
 			</div>
-		</div>
 
-		<f:facet name="footer">
-			<b:button id="close" value="Close" dismiss="modal" />
-		</f:facet>
-	</b:modal>
+			<f:facet name="footer">
+				<b:button id="close" value="Close" dismiss="modal" />
+			</f:facet>
+		</b:modal>
 
 
 	</ui:define>
