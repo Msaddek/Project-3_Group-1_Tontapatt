@@ -16,68 +16,69 @@
 		<a class="titleT" href="home.xhtml"><img
 			src="resources/assets/img/logoTontapatt.png" alt="logoTontapatt" /></a>
 	</div>
+	<div class="map-div">
+		<nav id="navbar" class="navbar order-last order-lg-0">
+		<ul>
 
-	<nav id="navbar" class="navbar order-last order-lg-0">
-	<ul>
+			<li><a class="active" href="connectedPage.xhtml">Hey,
+					#{mbUser.user.firstName} !</a></li>
+			<li><a href="home.xhtml">Prestations</a></li>
+			<li><a href="home.xhtml">Nouveautés</a></li>
 
-		<li><a class="active" href="connectedPage.xhtml">Hey,
-				#{mbUser.user.firstName} !</a></li>
-		<li><a href="home.xhtml">Prestations</a></li>
-		<li><a href="home.xhtml">Nouveautés</a></li>
+		</ul>
+		<div style="display: none">
+			<b:dropButton value="">
+			</b:dropButton>
+		</div>
+		<div class="dropdown">
+			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+				role="button" data-toggle="dropdown" aria-haspopup="true"
+				aria-expanded="false">
 
-	</ul>
-	<div style="display: none">
-		<b:dropButton value="">
-		</b:dropButton>
-	</div>
-	<div class="dropdown">
-		<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-			role="button" data-toggle="dropdown" aria-haspopup="true"
-			aria-expanded="false">
-
-			<div class="profilPicture">
-				<p:graphicImage class="img-profil"
-					value="resources/img/users/#{mbUser.user.photo}"
-					alt="No picture set"></p:graphicImage>
-			</div>
-
-		</a>
-		<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-			<div>
-				<a class="dropdown-item" href="offerParameters.xhtml"> Mes
-					offres</a>
-			</div>
-			<div>
-				<a class="dropdown-item" href="fieldParameters.xhtml"> Mes
-					terrains</a>
-			</div>
-			<div>
-				<a class="dropdown-item" href="userParameters.xhtml"> Mes
-					paramètres</a>
-			</div>
-			<div class="dropdown-divider"></div>
-			<h:form>
-				<div class="disconnect-btn">
-					<p:commandButton styleClass="ui-button-danger ui-button-flat"
-						value="Déconnexion" action="#{mbUser.disconnect()}" />
+				<div class="profilPicture">
+					<p:graphicImage class="img-profil"
+						value="resources/img/users/#{mbUser.user.photo}"
+						alt="No picture set"></p:graphicImage>
 				</div>
-			</h:form>
+
+			</a>
+			<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+				<div>
+					<a class="dropdown-item" href="offerParameters.xhtml"> Mes
+						offres</a>
+				</div>
+				<div>
+					<a class="dropdown-item" href="fieldParameters.xhtml"> Mes
+						terrains</a>
+				</div>
+				<div>
+					<a class="dropdown-item" href="userParameters.xhtml"> Mes
+						paramètres</a>
+				</div>
+				<div class="dropdown-divider"></div>
+				<h:form>
+					<div class="disconnect-btn">
+						<p:commandButton styleClass="ui-button-danger ui-button-flat"
+							value="Déconnexion" action="#{mbUser.disconnect()}" />
+					</div>
+				</h:form>
+
+			</div>
 
 		</div>
 
+		</nav>
 	</div>
-
-	</nav>
 
 </div>
 
 </header>
 
-<section>
-	
-<div id="mapid"></div>
 
-</section>
+	
+<section id="mapid"></section>
+
+
 
 
 </html>
