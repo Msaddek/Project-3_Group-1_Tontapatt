@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Set;
 
 import javax.annotation.PostConstruct;
@@ -25,7 +26,7 @@ import fr.eql.ai109.tontapatt.entity.User;
 
 @ManagedBean(name = "mbService")
 @SessionScoped
-public class ServiceManagedBean implements Serializable {
+public class ServiceManagedBean implements Serializable, CalculationVariables {
 
 	/**
 	 * 
@@ -38,7 +39,6 @@ public class ServiceManagedBean implements Serializable {
 	@ManagedProperty(value = "#{mbUser.user}")
 	private User connectedUser;
 
-	@ManagedProperty(value = "#{mbField}")
 	private FieldManagedBean selectedFieldBean;
 
 	@ManagedProperty(value = "#{mbShearingOffer}")
@@ -49,13 +49,13 @@ public class ServiceManagedBean implements Serializable {
 	private Set<Service> connectedBreederServices;
 
 	private Set<Service> connectedOwnerServices;
-	
+
 	private Set<Service> connectUserPendingServices;
-	
+
 	private Set<Service> connectUserInProgressServices;
-	
+
 	private Set<Service> connectUserCancelledServices;
-	
+
 	private Set<Service> connectUserFinishedServices;
 
 	private LocalDate startDate;
@@ -74,6 +74,8 @@ public class ServiceManagedBean implements Serializable {
 
 	private Double price;
 
+	private Integer requiredAnimalCount;
+
 	private LocalDateTime refusalDate;
 
 	private LocalDateTime requestDate;
@@ -84,6 +86,8 @@ public class ServiceManagedBean implements Serializable {
 
 	private Field field;
 
+	private ShearingOffer offer;
+
 	private PaymentMethod paymentMethod;
 
 	private PrematureCancellationReason prematureCancellationReason;
@@ -91,17 +95,26 @@ public class ServiceManagedBean implements Serializable {
 	private RefusalReason refusalReason;
 
 	private ShearingOffer shearingOffer;
-	
+
 	private GrassHeight grassHeight;
 
 	@PostConstruct
 	public void init() {
 		connectedBreederServices = business.getAllByOfferBreeder(connectedUser);
 		connectedOwnerServices = business.getAllByFieldOwner(connectedUser);
-		connectUserCancelledServices = business.getAllCancelledServicesOfConnectedUser(connectedUser);
-		connectUserFinishedServices = business.getAllFinishedServicesOfConnectedUser(connectedUser);
-		connectUserInProgressServices = business.getAllInProgressServicesOfConnectedUser(connectedUser);
-		connectUserPendingServices = business.getAllPendingServicesOfConnectedUser(connectedUser);
+		connectUserCancelledServices = business
+				.getAllCancelledServicesOfConnectedUser(connectedUser);
+		connectUserFinishedServices = business
+				.getAllFinishedServicesOfConnectedUser(connectedUser);
+		connectUserInProgressServices = business
+				.getAllInProgressServicesOfConnectedUser(connectedUser);
+		connectUserPendingServices = business
+				.getAllPendingServicesOfConnectedUser(connectedUser);
+	}
+	
+	public String selectOffer() {
+		
+		return "/selectedOffer.xhtml?faces-redirect=true";
 	}
 
 	public String createServiceRequest() {
@@ -118,6 +131,7 @@ public class ServiceManagedBean implements Serializable {
 		newService.setPrice(price);
 		newService.setPaymentMethod(paymentMethod);
 		newService.setGrassHeight(grassHeight);
+		newService.setRequiredAnimalCount(requiredAnimalCount);
 		newService.setInvoiceNumber(
 				"PRST-" + LocalDateTime.now().format(formatter));
 		service = business.add(newService);
@@ -183,6 +197,55 @@ public class ServiceManagedBean implements Serializable {
 		init();
 		return "/serviceDetails.xhtml?faces-redirect=false";
 	}
+
+	public Long calculateServiceNumberOfDays() {
+		return ChronoUnit.DAYS.between(startDate, endDate);
+	}
+
+	public Integer calculateRequiredAnimalNumber() {
+        requiredAnimalCount = (int) (field.getArea()
+                / (calculateServiceNumberOfDays() * SURFACE_ANIMAL_JOUR));
+        return requiredAnimalCount;
+    }
+
+	public Double calculateTotalAnimalPrice() {
+		return calculateServiceNumberOfDays() * requiredAnimalCount
+				* offer.getAnimalDailyPrice();
+	}
+
+	public Double calculateTravelDistancePrice() {
+		return offer.getDistance() * TRUCK_CONSUMPTION_PRICE * 2;
+	}
+
+	public Double calculateInterventionPrice() {
+		Integer interventionsNumber = (int) (calculateServiceNumberOfDays()
+				/ 2);
+		return offer.getDistance() * 2 * CAR_CONSUPTION_PRICE
+				* interventionsNumber;
+	}
+
+	public Double calculateVATPrice() {
+		return (calculateTotalAnimalPrice() + calculateTravelDistancePrice()
+				+ calculateInterventionPrice()) * VAT;
+	}
+
+	public Double calculatePrice() {
+		price = calculateTotalAnimalPrice() + calculateTravelDistancePrice()
+		+ calculateInterventionPrice() + calculateVATPrice();
+		return price;
+	}
+	
+	public Double calculatePriceForOfferList(ShearingOffer shearingOffer) {
+        Integer interventionsNumber = (int) (calculateServiceNumberOfDays()
+                / 2);
+        Double priceWithoutVAT = (calculateServiceNumberOfDays()
+                * requiredAnimalCount * shearingOffer.getAnimalDailyPrice())
+                + (shearingOffer.getDistance() * TRUCK_CONSUMPTION_PRICE * 2)
+                + (shearingOffer.getDistance() * 2 * CAR_CONSUPTION_PRICE
+                        * interventionsNumber);
+        return priceWithoutVAT * VAT + priceWithoutVAT;
+
+    }
 
 	public User getConnectedUser() {
 		return connectedUser;
@@ -336,6 +399,22 @@ public class ServiceManagedBean implements Serializable {
 		this.price = price;
 	}
 
+	public Integer getRequiredAnimalCount() {
+		return requiredAnimalCount;
+	}
+
+	public void setRequiredAnimalCount(Integer requiredAnimalCount) {
+		this.requiredAnimalCount = requiredAnimalCount;
+	}
+
+	public ServiceIBusiness getBusiness() {
+		return business;
+	}
+
+	public void setBusiness(ServiceIBusiness business) {
+		this.business = business;
+	}
+
 	public LocalDateTime getRefusalDate() {
 		return refusalDate;
 	}
@@ -374,6 +453,14 @@ public class ServiceManagedBean implements Serializable {
 
 	public void setField(Field field) {
 		this.field = field;
+	}
+
+	public ShearingOffer getOffer() {
+		return offer;
+	}
+
+	public void setOffer(ShearingOffer offer) {
+		this.offer = offer;
 	}
 
 	public PaymentMethod getPaymentMethod() {

@@ -70,7 +70,7 @@
 											<p:ajax event="dateSelect" update="inpStartDate" />
 											<p:ajax event="dateSelect" update="startDateMessage" />
 											<p:ajax event="dateSelect"
-												listener="#{mbDate.minimumOfferEndDate(mbShearingOffer.startDate)}"
+												listener="#{mbDate.calculateMinimumOfferEndDate(mbShearingOffer.startDate)}"
 												update="inpEndDate" />
 										</p:calendar>
 										<p:message id="startDateMessage" for="inpStartDate" />

@@ -62,6 +62,7 @@ public class ShearingOffer implements Serializable {
 	@Column(name = "withdrawal_date", nullable = true)
 	private LocalDateTime withdrawalDate;
 
+	@Column(name = "distance", nullable = true, insertable = false, updatable = false)
 	private Double distance;
 
 	@OneToMany(mappedBy = "shearingOffer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
