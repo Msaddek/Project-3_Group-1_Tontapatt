@@ -111,6 +111,12 @@ INSERT INTO `shearing_offer` (id, address, animal_count, animal_daily_price, cre
 /*!40000 ALTER TABLE `shearing_offer` ENABLE KEYS */;
 UNLOCK TABLES;
 
+LOCK TABLES `offer_withdrawal_reason` WRITE;
+/*!40000 ALTER TABLE `offer_withdrawal_reason` DISABLE KEYS */;
+INSERT INTO `offer_withdrawal_reason` VALUES (1,'J\'ai vendu mon troupeau'),(2,'Je ne souhaite plus participer à l\'éco-pâturage'),(3,'Cessation d\'activité d\'élevage'),(4,'Autre');
+/*!40000 ALTER TABLE `offer_withdrawal_reason` ENABLE KEYS */;
+UNLOCK TABLES;
+
 SET GLOBAL log_bin_trust_function_creators = 1;
 USE `tontapatt_db`;
 DROP function IF EXISTS `CalcDistance`;
