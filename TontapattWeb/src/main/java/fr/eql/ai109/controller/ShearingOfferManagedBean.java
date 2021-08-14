@@ -25,6 +25,9 @@ import javax.faces.context.FacesContext;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import fr.eql.ai109.ibusiness.ShearingOfferIBusiness;
 import fr.eql.ai109.tontapatt.entity.Field;
 import fr.eql.ai109.tontapatt.entity.OfferWithdrawalReason;
@@ -288,6 +291,17 @@ public class ShearingOfferManagedBean implements Serializable {
 					"--------------------------" + shearingOffer.toString());
 		}
 		return "/offerSearchPage.xhtml?faces-redirect=true";
+	}
+	
+	public String searchResultAsJson() {
+		ObjectMapper mapper = new ObjectMapper();
+		String json = null;
+		try {
+			json = mapper.writeValueAsString(shearingOfferSearchResult);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return json;
 	}
 
 	public ShearingOffer getShearingOffer() {
