@@ -85,7 +85,7 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 	private CancellationReason cancellationReason;
 
 	private Field field;
-	
+
 	private ShearingOffer offer;
 
 	private PaymentMethod paymentMethod;
@@ -110,6 +110,11 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 				.getAllInProgressServicesOfConnectedUser(connectedUser);
 		connectUserPendingServices = business
 				.getAllPendingServicesOfConnectedUser(connectedUser);
+	}
+	
+	public String selectOffer() {
+		
+		return "/selectedOffer.xhtml?faces-redirect=true";
 	}
 
 	public String createServiceRequest() {
@@ -193,15 +198,41 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 		return "/serviceDetails.xhtml?faces-redirect=false";
 	}
 
+	public Long calculateServiceNumberOfDays() {
+		return ChronoUnit.DAYS.between(startDate, endDate);
+	}
+
 	public Integer calculateRequiredAnimalNumber() {
 		requiredAnimalCount = (int) (field.getArea()
-				/ (ChronoUnit.DAYS.between(startDate, endDate)
-						* SURFACE_ANIMAL_JOUR));
+				/ calculateServiceNumberOfDays() * SURFACE_ANIMAL_JOUR);
 		return requiredAnimalCount;
 	}
 
+	public Double calculateTotalAnimalPrice() {
+		return calculateServiceNumberOfDays() * requiredAnimalCount
+				* offer.getAnimalDailyPrice();
+	}
+
+	public Double calculateTravelDistancePrice() {
+		return offer.getDistance() * TRUCK_CONSUMPTION_PRICE * 2;
+	}
+
+	public Double calculateInterventionPrice() {
+		Integer interventionsNumber = (int) (calculateServiceNumberOfDays()
+				/ 2);
+		return offer.getDistance() * 2 * CAR_CONSUPTION_PRICE
+				* interventionsNumber;
+	}
+
+	public Double calculateVATPrice() {
+		return (calculateTotalAnimalPrice() + calculateTravelDistancePrice()
+				+ calculateInterventionPrice()) * VAT;
+	}
+
 	public Double calculatePrice() {
-		return null;
+		price = calculateTotalAnimalPrice() + calculateTravelDistancePrice()
+		+ calculateInterventionPrice() + calculateVATPrice();
+		return price;
 	}
 
 	public User getConnectedUser() {

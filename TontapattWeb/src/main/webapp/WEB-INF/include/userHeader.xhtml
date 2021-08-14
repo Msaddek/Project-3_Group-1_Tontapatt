@@ -188,9 +188,9 @@
 							<div class="search-animal">
 								<label for="inpSpecies">Espèce :</label><br />
 								<b:selectOneMenu id="inpSpecies" value="#{mbSpecies.species}"
-									required="true" converter="entityConverter"
-									requiredMessage="Séléctionnez un service">
-									<f:selectItem itemLabel="Séléctionnez une espèce" itemValue="" />
+									required="false" requiredMessage="Séléctionnez une espèce">
+									<f:selectItem itemLabel="Séléctionnez une espèce" itemValue="#{null}"
+										noSelectionOption="true" />
 									<f:selectItems value="#{mbSpecies.allSpecies()}" var="species"
 										itemLabel="#{species.species}" itemValue="#{species}" />
 								</b:selectOneMenu>
@@ -219,7 +219,10 @@
 						<br />
 						<b:commandButton class="btnLogin" value="Rechercher"
 							action="#{mbShearingOffer.showOffersByFieldLocation(
-							mbService.field,mbService.startDate,mbService.endDate,mbService.calculateRequiredAnimalNumber())}" />
+							mbService.field, 
+							mbService.startDate,mbService.endDate, 
+							mbService.calculateRequiredAnimalNumber(), 
+							mbSpecies.species)}" />
 
 					</b:form>
 				</div>

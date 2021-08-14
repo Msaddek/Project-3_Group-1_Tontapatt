@@ -26,9 +26,16 @@
 
 			<!-- Heading -->
 			<div class="presta-zone">
-				<h1 class="my-5 h2 text-center">L'offre au top et qui est pas
-					cher</h1>
-				<h2 class="my-5 h2 text-center">PHOTO, Prénom</h2>
+				<h1 class="my-5 h1 text-center">#{mbService.offer.name}</h1>
+				<h2 class="my-5 h2 text-center">
+					<div class="profilPicture">
+						<p:graphicImage class="img-profil"
+							value="resources/img/users/#{mbUser.user.photo}"
+							alt="No picture set"></p:graphicImage>
+						#{mbService.offer.breeder.firstName}
+					</div>
+
+				</h2>
 				<h3 class="my-5 h2 text-center">Evaluation</h3>
 			</div>
 			<!--Grid row-->
@@ -92,14 +99,14 @@
 						<div class="icon-info-presta">
 							<b:iconAwesome class="icon-info" name="info-circle" size="lg" />
 							<div class="icon-info-descr">
-								<h4>Race : Mouton de Ouessant</h4>
+								<h4>Race : #{mbService.offer.race.race}</h4>
 							</div>
 						</div>
 
 						<div class="icon-info-presta">
 							<b:iconAwesome class="icon-info" name="info-circle" size="lg" />
 							<div class="icon-info-descr">
-								<h4>Espèce : Ovin</h4>
+								<h4>Espèce : #{mbService.offer.race.species.species}</h4>
 							</div>
 						</div>
 
@@ -109,10 +116,16 @@
 								<h4>Couverture : 80km</h4>
 							</div>
 						</div>
-
+						<hr />
 						<div class="row">
 							<div class="category-description">
 								<h2>Description</h2>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="icon-info-presta">
+								<p>#{mbService.offer.description}</p>
 							</div>
 						</div>
 						<hr class="mb-4" />
@@ -123,10 +136,36 @@
 							</div>
 						</div>
 
+						<div class="images-result-box">
+							<ui:repeat var="photo" value="#{mbService.offer.photos}">
+								<div class="box-photo-result">
+									<img src="resources/img/offers/#{photo.link}"
+										alt="resultat-offre" class="img-fluid" />
+								</div>
+
+							</ui:repeat>
+						</div>
+
+
 						<hr />
 						<div class="row">
 							<div class="category-description">
 								<h2>Dates</h2>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="box-calendar">
+								<div class="calendar-offer">
+									<label>Date de début</label>
+									<p:calendar id="inline" value="#{mbService.startDate}"
+										mode="inline" disabled="true" />
+								</div>
+								<div class="calendar-offer">
+									<label>Date de fin</label>
+									<p:calendar id="inline2" value="#{mbService.endDate}"
+										mode="inline" disabled="true" />
+								</div>
 							</div>
 						</div>
 
@@ -137,7 +176,6 @@
 								<h2>Evaluations</h2>
 							</div>
 						</div>
-
 					</div>
 					<!--/.Card-->
 
@@ -149,12 +187,11 @@
 
 					<!-- Heading -->
 					<div class="tarification">
-					<h3 class="d-flex justify-content-between align-items-center mb-3">
-						Tarification
-					</h3>
+						<h3 class="d-flex justify-content-between align-items-center mb-3">
+							Tarification</h3>
 
-					<!-- Cart -->
-					
+						<!-- Cart -->
+
 						<ul class="list-group mb-3 z-depth-1">
 							<li
 								class="list-group-item d-flex justify-content-between lh-condensed">
