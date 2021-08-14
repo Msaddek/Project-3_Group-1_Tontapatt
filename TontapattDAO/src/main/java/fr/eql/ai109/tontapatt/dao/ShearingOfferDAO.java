@@ -26,7 +26,12 @@ public class ShearingOfferDAO extends GenericDAO<ShearingOffer>
 		LocalDate now = LocalDate.now();
 		String sqlQueryPhotos = "SELECT op FROM ShearingOfferPhoto op WHERE "
 				+ "op.shearingOffer=:offerParam";
-		String sqlQuery = "SELECT s.*, z.*, u.*, r.*, "
+		String sqlQuery = "SELECT s.id, s.address, s.animal_count, "
+				+ "s.animal_daily_price, s.creation_date, s.description, "
+				+ "s.end_date, s.start_date, s.max_travel_dist, s.name, "
+				+ "s.start_date, s.withdrawal_date, s.breeder_id, "
+				+ "s.offerWithdrawalReason_id, s.race_id, s.zipCodeCity_id, "
+				+ "z.*, u.*, r.*, "
 				+ "CalcDistance(:fieldLatParam, :fieldLongParam, z.latitude, z.longitude) AS distance "
 				+ "FROM shearing_offer s "
 				+ "INNER JOIN zip_code_city z ON s.zipCodeCity_id=z.id "
@@ -76,7 +81,12 @@ public class ShearingOfferDAO extends GenericDAO<ShearingOffer>
 		LocalDate now = LocalDate.now();
 		String sqlQueryPhotos = "SELECT op FROM ShearingOfferPhoto op WHERE "
 				+ "op.shearingOffer=:offerParam";
-		String sqlQuery = "SELECT s.*, z.*, u.*, r.*, "
+		String sqlQuery = "SELECT s.id, s.address, s.animal_count, "
+				+ "s.animal_daily_price, s.creation_date, s.description, "
+				+ "s.end_date, s.start_date, s.max_travel_dist, s.name, "
+				+ "s.start_date, s.withdrawal_date, s.breeder_id, "
+				+ "s.offerWithdrawalReason_id, s.race_id, s.zipCodeCity_id, "
+				+ "z.*, u.*, r.*, "
 				+ "CalcDistance(:fieldLatParam, :fieldLongParam, z.latitude, z.longitude) AS distance "
 				+ "FROM shearing_offer s "
 				+ "INNER JOIN zip_code_city z ON s.zipCodeCity_id=z.id "
