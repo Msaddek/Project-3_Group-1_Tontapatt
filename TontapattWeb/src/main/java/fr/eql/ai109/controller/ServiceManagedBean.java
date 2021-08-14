@@ -124,11 +124,19 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 		Service newService = new Service();
 		newService.setRequestDate(LocalDateTime.now());
 		newService.setStartDate(startDate);
+		System.out.println("--------------- Debut : " +startDate);
 		newService.setEndDate(endDate);
-		newService.setShearingOffer(shearingOffer);
+		System.out.println("--------------- fin : " +endDate);
+		newService.setShearingOffer(offer);
+		System.out.println("--------------- offre : " +offer);
 		newService.setField(field);
-		newService.setDistance(shearingOffer.getDistance());
+		System.out.println("--------------- terrain : " +field);
+		newService.setDistance(offer.getDistance());
+		System.out.println("--------------- distance : " +offer.getDistance());
+		System.out.println("--------------- prix : " + price);
 		newService.setPrice(price);
+		
+		
 		newService.setPaymentMethod(paymentMethod);
 		newService.setGrassHeight(grassHeight);
 		newService.setRequiredAnimalCount(requiredAnimalCount);
