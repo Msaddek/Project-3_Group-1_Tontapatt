@@ -31,6 +31,7 @@ import fr.eql.ai109.tontapatt.entity.OfferWithdrawalReason;
 import fr.eql.ai109.tontapatt.entity.Race;
 import fr.eql.ai109.tontapatt.entity.ShearingOffer;
 import fr.eql.ai109.tontapatt.entity.ShearingOfferPhoto;
+import fr.eql.ai109.tontapatt.entity.Species;
 import fr.eql.ai109.tontapatt.entity.User;
 import fr.eql.ai109.tontapatt.entity.ZipCodeCity;
 
@@ -268,11 +269,20 @@ public class ShearingOfferManagedBean implements Serializable {
 
 	public String showOffersByFieldLocation(Field selectedField,
 			LocalDate serviceStartDate, LocalDate serviceEndDate,
-			Integer requiredAnimalCount) {
+			Integer requiredAnimalCount, Species selectedSpecies) {
+		System.out.println("species****************" + selectedSpecies);
+		System.out.println(requiredAnimalCount + "++++++++++++++++++++++++");
 		shearingOfferSearchResult = new HashSet<ShearingOffer>();
-		shearingOfferSearchResult = business.searchOfferByFieldLocation(
-				selectedField, serviceStartDate, serviceStartDate,
-				requiredAnimalCount);
+		if (selectedSpecies == null) {
+			shearingOfferSearchResult = business.searchOfferByFieldLocation(
+					selectedField, serviceStartDate, serviceStartDate,
+					requiredAnimalCount);
+		} else {
+			shearingOfferSearchResult = business
+					.searchOfferByFieldLocationAndSpecies(selectedField,
+							serviceStartDate, serviceEndDate,
+							requiredAnimalCount, selectedSpecies);
+		}
 		for (ShearingOffer shearingOffer : shearingOfferSearchResult) {
 			System.out.println(
 					"--------------------------" + shearingOffer.toString());
