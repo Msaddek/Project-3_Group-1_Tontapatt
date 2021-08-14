@@ -67,12 +67,15 @@ public class Service implements Serializable {
 
 	@Column(name = "price", nullable = false)
 	private Double price;
-	
+
 	@Column(name = "distance", nullable = false)
 	private Double distance;
-	
+
 	@Column(name = "invoice_number", nullable = false)
 	private String invoiceNumber;
+
+	@Column(name = "required_animal_count", nullable = false)
+	private Integer requiredAnimalCount;
 
 	@OneToMany(mappedBy = "service", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<Rating> ratings;
@@ -103,7 +106,7 @@ public class Service implements Serializable {
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id", nullable = false)
 	private ShearingOffer shearingOffer;
-	
+
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id", nullable = false)
 	private GrassHeight grassHeight;
@@ -116,8 +119,8 @@ public class Service implements Serializable {
 	public int hashCode() {
 		return Objects.hash(cancellationDate, endDate, equipmentSetupDate,
 				equipmentUninstallDate, herdSetupDate, herdUninstallDate,
-				prematureCancellationDate, price, distance, refusalDate, requestDate,
-				startDate, validationDate);
+				prematureCancellationDate, price, distance, refusalDate,
+				requestDate, startDate, validationDate);
 	}
 
 	@Override
@@ -298,6 +301,14 @@ public class Service implements Serializable {
 
 	public void setInvoiceNumber(String invoiceNumber) {
 		this.invoiceNumber = invoiceNumber;
+	}
+
+	public Integer getRequiredAnimalCount() {
+		return requiredAnimalCount;
+	}
+
+	public void setRequiredAnimalCount(Integer requiredAnimalCount) {
+		this.requiredAnimalCount = requiredAnimalCount;
 	}
 
 	public Set<Rating> getRatings() {

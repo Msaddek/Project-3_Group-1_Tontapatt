@@ -21,15 +21,18 @@ public class DateManagedBean implements Serializable {
 
 	private LocalDate minimumOfferStartDate = LocalDate.now();
 
-	private LocalDate minimumOfferEndDate = LocalDate.now();
+	private LocalDate minimumOfferEndDate;
 	
 	private LocalDate minimumServiceStartDate = LocalDate.now().plusDays(3);
 	
-	private LocalDate minimumServiceEndDate = minimumServiceStartDate.plusDays(1);
+	private LocalDate minimumServiceEndDate;
 
-	public void minimumOfferEndDate(LocalDate startDate) {
+	public void calculateMinimumOfferEndDate(LocalDate startDate) {
 
 		minimumOfferEndDate = startDate.plusDays(1);
+	}
+	public void calculateMinimumServiceEndDate(LocalDate startDate) {
+		minimumServiceEndDate = startDate.plusDays(1);
 	}
 
 	public LocalDate getMaximumAgeDate() {
