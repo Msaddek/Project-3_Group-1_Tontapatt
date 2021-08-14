@@ -1750,3 +1750,15 @@ header.scrolled nav a {
 .result-box:hover {
 	transform: scale(1.1);
 }
+
+.result-box:hover h3 {
+	color: #5fcf80;
+}
+
+.course-item .img-responsive, .thumbnail>img, .thumbnail a>img,
+ .carousel-inner>.item>img, .carousel-inner>.item>a>img {
+    display: block;
+    height: 250px;
+    width: 350px;
+    border-radius: 0%;
+}
