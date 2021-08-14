@@ -43,7 +43,6 @@ public class PaymentMethodBusiness implements PaymentMethodIBusiness {
 
 	@Override
 	public List<PaymentMethod> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return paymentMethodIDAO.getAll();
 	}
 }
