@@ -1795,3 +1795,16 @@ header.scrolled nav a {
 	font-size: 16px;
 	color: #5fcf80;
 }
+
+.box-calendar {
+	display: flex;
+	justify-content: center;
+}
+
+.calendar-offer {
+	padding: 20px;
+}
+
+.ui-datepicker-inline {
+	font-size: 1em !important;
+}
