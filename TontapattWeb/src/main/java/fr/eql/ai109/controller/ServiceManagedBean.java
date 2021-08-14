@@ -203,10 +203,10 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 	}
 
 	public Integer calculateRequiredAnimalNumber() {
-		requiredAnimalCount = (int) (field.getArea()
-				/ calculateServiceNumberOfDays() * SURFACE_ANIMAL_JOUR);
-		return requiredAnimalCount;
-	}
+        requiredAnimalCount = (int) (field.getArea()
+                / (calculateServiceNumberOfDays() * SURFACE_ANIMAL_JOUR));
+        return requiredAnimalCount;
+    }
 
 	public Double calculateTotalAnimalPrice() {
 		return calculateServiceNumberOfDays() * requiredAnimalCount
@@ -234,6 +234,18 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 		+ calculateInterventionPrice() + calculateVATPrice();
 		return price;
 	}
+	
+	public Double calculatePriceForOfferList(ShearingOffer shearingOffer) {
+        Integer interventionsNumber = (int) (calculateServiceNumberOfDays()
+                / 2);
+        Double priceWithoutVAT = (calculateServiceNumberOfDays()
+                * requiredAnimalCount * shearingOffer.getAnimalDailyPrice())
+                + (shearingOffer.getDistance() * TRUCK_CONSUMPTION_PRICE * 2)
+                + (shearingOffer.getDistance() * 2 * CAR_CONSUPTION_PRICE
+                        * interventionsNumber);
+        return priceWithoutVAT * VAT + priceWithoutVAT;
+
+    }
 
 	public User getConnectedUser() {
 		return connectedUser;
