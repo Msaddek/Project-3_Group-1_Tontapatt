@@ -935,87 +935,21 @@ section {
 	background: #3ac162;
 }
 
-@
--webkit-keyframes animate-loading { 0% {
-	transform: rotate(0deg);
+@-webkit-keyframes animate-loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
-
-100
-
-
-
-
-%
-{
-transform
-
-
-
-
-:
-
-
-
-
-rotate
-
-
-(
-
-
-
-
-360deg
-
-
-
-
-)
-
-
-;
-}
-}
-@
-keyframes animate-loading { 0% {
-	transform: rotate(0deg);
-}
-
-100
-
-
-
-
-%
-{
-transform
-
-
-
-
-:
-
-
-
-
-rotate
-
-
-(
-
-
-
-
-360deg
-
-
-
-
-)
-
-
-;
-}
+@keyframes animate-loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /*--------------------------------------------------------------
@@ -1570,64 +1504,15 @@ img {
 	animation: mover 1s infinite alternate;
 }
 
-@
--webkit-keyframes mover { 0% {
-	transform: translateY(0);
+@-webkit-keyframes mover {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-20px); }
+}
+@keyframes mover {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-20px); }
 }
 
-100
-
-
-%
-{
-transform
-
-
-:
-
-
-translateY
-(
-
-
--20px
-
-
-)
-;
-
-
-}
-}
-@
-keyframes mover { 0% {
-	transform: translateY(0);
-}
-
-100
-
-
-%
-{
-transform
-
-
-:
-
-
-translateY
-(
-
-
--20px
-
-
-)
-;
-
-
-}
-}
 .register-left p {
 	font-weight: lighter;
 	padding: 12%;
@@ -1792,7 +1677,7 @@ header.scrolled nav a {
 }
 
 .tarification .text-muted {
-	font-size: 16px;
+	font-size: 13px;
 	color: #5fcf80;
 }
 
@@ -1807,4 +1692,61 @@ header.scrolled nav a {
 
 .ui-datepicker-inline {
 	font-size: 1em !important;
+}
+
+.presta-zone h1 {
+	font-size: 35px !important;
+	font-weight: bold !important;
+}
+
+.box-photo-result {
+	width: 250px;
+	height: auto;
+	padding: 0px 10px
+}
+
+.images-result-box {
+	display: flex;
+	padding: 15px;
+}
+
+.box-photo-result img:onclick {
+	width: 500px;
+	height: 500px;
+}
+
+
+.box-photo-result .img-fluid {
+	max-width: 100%;
+    height: 100%;
+}
+
+.ui-datepicker .ui-datepicker-calendar td a.ui-state-active {
+    background: #5fcf80 !important;
+    color: black !important;
+    font-weight: bold !important;
+}
+
+/* Offer Search page */
+.result-box a {
+	color: black !important;
+	font-size: 14px;
+	text-decoration: solid !important;
+}
+
+.result-box a:hover {
+	color: green !important;
+	text-decoration: none !important;
+}
+
+.search-result-box a:-webkit-any-link {
+	text-decoration: solid !important;
+}
+
+.search-result-box h3 {
+	color: black;
+}
+
+.result-box:hover {
+	transform: scale(1.1);
 }
