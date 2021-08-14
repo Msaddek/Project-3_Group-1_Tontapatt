@@ -15,6 +15,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "species")
 public class Species implements Serializable {
@@ -28,14 +30,23 @@ public class Species implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
+	
 	@Column(name = "species", nullable = false)
 	private String species;
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "species", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<Race> races;
+	
+	@JsonIgnore
 	@ManyToMany(mappedBy = "species")
 	Set<FenceHeight> fenceHeights;
+	
+	@JsonIgnore
 	@ManyToMany(mappedBy = "species")
 	Set<FlatnessPercentage> flatnessPercentages;
+	
+	@JsonIgnore
 	@ManyToMany(mappedBy = "species")
 	Set<VegetationType> vegetationTypes;
 
