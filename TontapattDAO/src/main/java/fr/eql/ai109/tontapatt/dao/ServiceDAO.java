@@ -21,7 +21,7 @@ public class ServiceDAO extends GenericDAO<Service> implements ServiceIDAO {
 		try {
 			services = new HashSet<>(em.createQuery(
 					"SELECT s FROM Service s WHERE s.field.owner=:userParam")
-					.setParameter("userParam", connectedUser).getFirstResult());
+					.setParameter("userParam", connectedUser).getResultList());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -34,7 +34,7 @@ public class ServiceDAO extends GenericDAO<Service> implements ServiceIDAO {
 		try {
 			services = new HashSet<>(em.createQuery(
 					"SELECT s FROM Service s WHERE s.shearingOffer.breeder=:userParam")
-					.setParameter("userParam", connectedUser).getFirstResult());
+					.setParameter("userParam", connectedUser).getResultList());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -48,12 +48,12 @@ public class ServiceDAO extends GenericDAO<Service> implements ServiceIDAO {
 		try {
 			services = new HashSet<>(em
 					.createQuery("SELECT s FROM Service s WHERE "
-							+ "s.shearingOffer.breeder=:userParam OR "
-							+ "s.field.owner=:userParam AND (s.refusalDate IS NOT NULL "
+							+ "(s.shearingOffer.breeder=:userParam OR "
+							+ "s.field.owner=:userParam) AND (s.refusalDate IS NOT NULL "
 							+ "OR s.cancellationDate IS NOT NULL OR "
 							+ "s.prematureCancellationDate IS NOT NULL) AND "
 							+ "s.requestDate IS NOT NULL")
-					.setParameter("userParam", connectedUser).getFirstResult());
+					.setParameter("userParam", connectedUser).getResultList());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -67,17 +67,20 @@ public class ServiceDAO extends GenericDAO<Service> implements ServiceIDAO {
 		try {
 			services = new HashSet<>(em
 					.createQuery("SELECT s FROM Service s WHERE "
-							+ "s.shearingOffer.breeder=:userParam OR "
-							+ "s.field.owner=:userParam AND s.refusalDate IS NULL "
-							+ "AND s.cancellationDate IS NULL OR "
+							+ "(s.shearingOffer.breeder=:userParam OR "
+							+ "s.field.owner=:userParam) AND s.refusalDate IS NULL "
+							+ "AND s.cancellationDate IS NULL AND "
 							+ "s.prematureCancellationDate IS NULL AND "
 							+ "s.requestDate IS NOT NULL AND s.validationDate IS NOT "
 							+ "NULL AND s.endDate<=:dateNowParam")
 					.setParameter("userParam", connectedUser)
 					.setParameter("dateNowParam", LocalDate.now())
-					.getFirstResult());
+					.getResultList());
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		for (Service service : services) {
+			System.out.println("----------------------------- service " + service.toString());
 		}
 		return services;
 	}
@@ -89,18 +92,22 @@ public class ServiceDAO extends GenericDAO<Service> implements ServiceIDAO {
 		try {
 			services = new HashSet<>(em
 					.createQuery("SELECT s FROM Service s WHERE "
-							+ "s.shearingOffer.breeder=:userParam OR "
-							+ "s.field.owner=:userParam AND s.refusalDate IS NULL "
-							+ "AND s.cancellationDate IS NULL OR "
+							+ "(s.shearingOffer.breeder=:userParam OR "
+							+ "s.field.owner=:userParam) AND s.refusalDate IS NULL "
+							+ "AND s.cancellationDate IS NULL AND "
 							+ "s.prematureCancellationDate IS NULL AND "
 							+ "s.requestDate IS NOT NULL AND s.validationDate IS NOT "
 							+ "NULL AND :dateNowParam BETWEEN startDate AND "
 							+ "endDate")
 					.setParameter("userParam", connectedUser)
 					.setParameter("dateNowParam", LocalDate.now())
-					.getFirstResult());
+					.getResultList());
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		
+		for (Service service : services) {
+			System.out.println("----------------------------- service " + service.toString());
 		}
 		return services;
 	}
@@ -112,17 +119,21 @@ public class ServiceDAO extends GenericDAO<Service> implements ServiceIDAO {
 		try {
 			services = new HashSet<>(em
 					.createQuery("SELECT s FROM Service s WHERE "
-							+ "s.shearingOffer.breeder=:userParam OR "
-							+ "s.field.owner=:userParam AND s.refusalDate IS NULL "
+							+ "(s.shearingOffer.breeder=:userParam OR "
+							+ "s.field.owner=:userParam) AND s.refusalDate IS NULL "
 							+ "AND s.cancellationDate IS NULL OR "
 							+ "s.prematureCancellationDate IS NULL AND "
 							+ "s.requestDate IS NOT NULL AND s.validationDate IS "
 							+ "NULL")
 					.setParameter("userParam", connectedUser)
-					.getFirstResult());
+					.getResultList());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		for (Service service : services) {
+			System.out.println("----------------------------- service " + service.toString());
+		}
+		
 		return services;
 	}
 
