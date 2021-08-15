@@ -114,9 +114,9 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 		connectUserPendingServices = business
 				.getAllPendingServicesOfConnectedUser(connectedUser);
 	}
-	
+
 	public String selectOffer() {
-		
+
 		return "/selectedOffer.xhtml?faces-redirect=true";
 	}
 	
@@ -128,7 +128,7 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 	public String createServiceRequest() {
 		String forward = "/services.xhtml?faces-redirect=true";
 		DateTimeFormatter formatter = DateTimeFormatter
-				.ofPattern("yyyy-MM-dd-HH-mm-ss-SS");
+				.ofPattern("yyyyMMddHHmmssSS");
 		Service newService = new Service();
 		newService.setRequestDate(LocalDateTime.now());
 		newService.setStartDate(startDate);
@@ -137,8 +137,7 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 		newService.setField(field);
 		newService.setDistance(offer.getDistance());
 		newService.setPrice(price);
-		
-		
+
 		newService.setPaymentMethod(paymentMethod);
 		newService.setGrassHeight(grassHeight);
 		newService.setRequiredAnimalCount(requiredAnimalCount);
@@ -153,7 +152,7 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 		service.setValidationDate(LocalDateTime.now());
 		service = business.update(service);
 		init();
-		return "/serviceDetails.xhtml?faces-redirect=false";
+		return "/selectedService.xhtml?faces-redirect=true";
 	}
 
 	public String cancelServiceRequest() {
@@ -161,7 +160,7 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 		service.setCancellationReason(cancellationReason);
 		service = business.update(service);
 		init();
-		return "/serviceDetails.xhtml?faces-redirect=false";
+		return "/selectedService.xhtml?faces-redirect=true";
 	}
 
 	public String refuseServiceRequest() {
@@ -169,7 +168,7 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 		service.setRefusalReason(refusalReason);
 		service = business.update(service);
 		init();
-		return "/serviceDetails.xhtml?faces-redirect=false";
+		return "/selectedService.xhtml?faces-redirect=true";
 	}
 
 	public String cancelServicePrematurely() {
@@ -177,35 +176,35 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 		service.setPrematureCancellationReason(prematureCancellationReason);
 		service = business.update(service);
 		init();
-		return "/serviceDetails.xhtml?faces-redirect=false";
+		return "/selectedService.xhtml?faces-redirect=true";
 	}
 
 	public String setupEquipment() {
 		service.setEquipmentSetupDate(LocalDateTime.now());
 		service = business.update(service);
 		init();
-		return "/serviceDetails.xhtml?faces-redirect=false";
+		return "/selectedService.xhtml?faces-redirect=true";
 	}
 
 	public String uninstallEquipment() {
 		service.setEquipmentUninstallDate(LocalDateTime.now());
 		service = business.update(service);
 		init();
-		return "/serviceDetails.xhtml?faces-redirect=false";
+		return "/selectedService.xhtml?faces-redirect=true";
 	}
 
 	public String setupHerd() {
 		service.setHerdSetupDate(LocalDateTime.now());
 		service = business.update(service);
 		init();
-		return "/serviceDetails.xhtml?faces-redirect=false";
+		return "/selectedService.xhtml?faces-redirect=true";
 	}
 
 	public String uninstallHerd() {
 		service.setHerdUninstallDate(LocalDateTime.now());
 		service = business.update(service);
 		init();
-		return "/serviceDetails.xhtml?faces-redirect=false";
+		return "/selectedService.xhtml?faces-redirect=true";
 	}
 
 	public Long calculateServiceNumberOfDays() {
@@ -213,10 +212,10 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 	}
 
 	public Integer calculateRequiredAnimalNumber() {
-        requiredAnimalCount = (int) (field.getArea()
-                / (calculateServiceNumberOfDays() * SURFACE_ANIMAL_JOUR));
-        return requiredAnimalCount;
-    }
+		requiredAnimalCount = (int) (field.getArea()
+				/ (calculateServiceNumberOfDays() * SURFACE_ANIMAL_JOUR));
+		return requiredAnimalCount;
+	}
 
 	public Double calculateTotalAnimalPrice() {
 		return calculateServiceNumberOfDays() * requiredAnimalCount
@@ -241,22 +240,22 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 
 	public Double calculatePrice() {
 		price = calculateTotalAnimalPrice() + calculateTravelDistancePrice()
-		+ calculateInterventionPrice() + calculateVATPrice();
+				+ calculateInterventionPrice() + calculateVATPrice();
 		return price;
 	}
-	
-	public Double calculatePriceForOfferList(ShearingOffer shearingOffer) {
-        Integer interventionsNumber = (int) (calculateServiceNumberOfDays()
-                / 2);
-        Double priceWithoutVAT = (calculateServiceNumberOfDays()
-                * requiredAnimalCount * shearingOffer.getAnimalDailyPrice())
-                + (shearingOffer.getDistance() * TRUCK_CONSUMPTION_PRICE * 2)
-                + (shearingOffer.getDistance() * 2 * CAR_CONSUPTION_PRICE
-                        * interventionsNumber);
-        return priceWithoutVAT * VAT + priceWithoutVAT;
 
-    }
-	
+	public Double calculatePriceForOfferList(ShearingOffer shearingOffer) {
+		Integer interventionsNumber = (int) (calculateServiceNumberOfDays()
+				/ 2);
+		Double priceWithoutVAT = (calculateServiceNumberOfDays()
+				* requiredAnimalCount * shearingOffer.getAnimalDailyPrice())
+				+ (shearingOffer.getDistance() * TRUCK_CONSUMPTION_PRICE * 2)
+				+ (shearingOffer.getDistance() * 2 * CAR_CONSUPTION_PRICE
+						* interventionsNumber);
+		return priceWithoutVAT * VAT + priceWithoutVAT;
+
+	}
+
 	public String selectedFieldtAsJson() {
 		ObjectMapper mapper = new ObjectMapper();
 		String json = null;
@@ -266,6 +265,20 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 			e.printStackTrace();
 		}
 		return json;
+	}
+
+	public Integer newPendingService() {
+		return business.getAllPendingServicesOfConnectedBreeder(connectedUser)
+				.size();
+	}
+
+	public String notificationVisibility() {
+		if (business.getAllPendingServicesOfConnectedBreeder(connectedUser)
+				.isEmpty()) {
+			return "notification-hidden";
+		} else {
+			return "notification-visible";
+		}
 	}
 
 	public User getConnectedUser() {

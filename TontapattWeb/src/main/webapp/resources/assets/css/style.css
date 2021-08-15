@@ -250,6 +250,45 @@ h1, h2, h3, h4, h5, h6 {
 	color: #5fcf80 !important;
 }
 
+.navbar .notification-hidden {
+	visibility: hidden !important;
+	border-radius: 50% !important;
+    background-color: red !important;
+    position: relative;
+    font-size: 9px !important;
+    top: -9px;
+    right: 2px;
+}
+
+.navbar .notification-visible {
+	visibility: visible !important;
+    border-radius: 50% !important;
+    background-color: red !important;
+    position: relative;
+    font-size: 9px !important;
+    top: -9px;
+    right: 2px;
+}
+
+#notification-visible {
+	visibility: visible !important;
+    border-radius: 50% !important;
+    background-color: red !important;
+    position: relative;
+    top: -60px;
+    right: -137px;
+    font-size: 10px !important;
+}
+
+#notification-hidden {
+	visibility: hidden !important;
+    border-radius: 50% !important;
+    background-color: red !important;
+    position: relative;
+    top: -60px;
+    right: -137px;
+    font-size: 10px !important;
+}
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
