@@ -26,4 +26,6 @@ public interface ShearingOfferIDAO extends GenericIDAO<ShearingOffer> {
 
 	Set<ShearingOffer> getAllWithPhotos();
 
+	Set<ShearingOffer> getLastThreeByUser(User connectedUser);
+
 }
