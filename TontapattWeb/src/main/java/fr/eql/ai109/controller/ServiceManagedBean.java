@@ -120,8 +120,8 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 		return "/selectedOffer.xhtml?faces-redirect=true";
 	}
 	
-	public String selectService(Service selectedService) {
-		service = selectedService;
+	public String selectService() {
+
 		return "/selectedService.xhtml?faces-redirect=true";
 	}
 
