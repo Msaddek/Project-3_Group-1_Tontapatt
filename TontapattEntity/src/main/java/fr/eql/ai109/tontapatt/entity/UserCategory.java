@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "user_category")
 public class UserCategory implements Serializable {
@@ -29,6 +31,7 @@ public class UserCategory implements Serializable {
 	private Integer id;
 	@Column(name = "category", nullable = false)
 	private String category;
+	@JsonIgnore
 	@OneToMany(mappedBy = "userCategory", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<User> users;
 

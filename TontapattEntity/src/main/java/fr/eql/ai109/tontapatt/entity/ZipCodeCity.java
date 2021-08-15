@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "zip_code_city")
 public class ZipCodeCity implements Serializable {
@@ -40,12 +42,15 @@ public class ZipCodeCity implements Serializable {
 	@Column(name = "latitude", nullable = false)
 	private Double latitude;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "zipCodeCity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<User> users;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "zipCodeCity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<Field> fields;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "zipCodeCity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<ShearingOffer> shearingOffers;
 

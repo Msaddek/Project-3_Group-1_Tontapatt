@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "race")
 public class Race implements Serializable {
@@ -29,10 +31,14 @@ public class Race implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
+	
 	@Column(name = "race", nullable = false)
 	private String race;
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "race", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<ShearingOffer> shearingOffers;
+	
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id", nullable = false)
 	private Species species;
