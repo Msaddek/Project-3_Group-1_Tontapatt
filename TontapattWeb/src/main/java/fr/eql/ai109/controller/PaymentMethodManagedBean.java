@@ -1,6 +1,7 @@
 package fr.eql.ai109.controller;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -20,7 +21,15 @@ public class PaymentMethodManagedBean implements Serializable {
 
 	@EJB
 	PaymentMethodIBusiness business;
+	
 	private PaymentMethod paymentMethod;
+	
+	private List<PaymentMethod> paymentMethods;
+	
+	public List<PaymentMethod> allPaymentMethods(){
+		paymentMethods = business.getAll();
+		return paymentMethods;
+	}
 
 	public PaymentMethod getPaymentMethod() {
 		return paymentMethod;
