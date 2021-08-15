@@ -117,8 +117,11 @@ public class ServiceDAO extends GenericDAO<Service> implements ServiceIDAO {
 							+ "AND s.cancellationDate IS NULL AND "
 							+ "s.prematureCancellationDate IS NULL AND "
 							+ "s.requestDate IS NOT NULL AND s.validationDate IS "
-							+ "NULL")
+							+ "NULL OR(s.validationDate IS NOT NULL AND "
+							+ ":dateNowParam NOT BETWEEN s.startDate AND "
+							+ "s.endDate)")
 					.setParameter("userParam", connectedUser)
+					.setParameter("dateNowParam", LocalDate.now())
 					.getResultList());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -139,8 +142,7 @@ public class ServiceDAO extends GenericDAO<Service> implements ServiceIDAO {
 							+ "s.prematureCancellationDate IS NULL AND "
 							+ "s.requestDate IS NOT NULL AND s.validationDate IS "
 							+ "NULL")
-					.setParameter("userParam", connectedUser)
-					.getResultList());
+					.setParameter("userParam", connectedUser).getResultList());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
