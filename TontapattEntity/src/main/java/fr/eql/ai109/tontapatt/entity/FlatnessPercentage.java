@@ -17,6 +17,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "flatness_percentage")
 public class FlatnessPercentage implements Serializable {
@@ -30,10 +32,15 @@ public class FlatnessPercentage implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
+	
 	@Column(name = "percentage", nullable = false)
 	private Integer percentage;
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "flatnessPercentage", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<Field> fields;
+	
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "favorite_flatness", joinColumns = @JoinColumn(name = "flatness_percentage_id"), inverseJoinColumns = @JoinColumn(name = "species_id"))
 	private Set<Species> species;

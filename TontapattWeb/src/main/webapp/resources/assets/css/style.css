@@ -146,6 +146,11 @@ h1, h2, h3, h4, h5, h6 {
 	position: relative;
 }
 
+
+#headerU .map-div .navbar a, .map-div .navbar a:focus {
+	color: black !important;
+}
+
 #headerU .navbar a, .navbar a:focus {
 	display: flex;
 	align-items: center;
@@ -338,6 +343,19 @@ h1, h2, h3, h4, h5, h6 {
 	height: 50vh;
 	background: url("../img/nature.jpg") top center;
 	background-size: cover;
+	position: relative;
+}
+
+#heroM {
+	width: 100%;
+	height: 50vh;
+	background-size: cover;
+	position: relative;
+}
+
+#mapid {
+	width: 100%;
+	height: 50vh;
 	position: relative;
 }
 

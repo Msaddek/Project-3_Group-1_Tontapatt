@@ -8,7 +8,8 @@
 	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
-<ui:composition template="WEB-INF/template/userTemplate.xhtml">
+<ui:composition
+	template="WEB-INF/template/userOfferSearchTemplate.xhtml">
 
 	<ui:define name="head">
 		<title>Nos offres</title>
@@ -29,7 +30,7 @@
 
 				<c:forEach items="#{mbShearingOffer.shearingOfferSearchResult}"
 					var="offer">
-					
+
 					<div
 						class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
 						<div class="result-box">
@@ -53,8 +54,7 @@
 													<h4>#{offer.race.race}</h4>
 
 													<p class="price">
-														#{mbService.calculatePriceForOfferList(offer) } €
-													</p>
+														#{mbService.calculatePriceForOfferList(offer) } €</p>
 												</div>
 												<p class="small mb-3">
 													<span class="badge badge-dark">#{offer.race.species.species}</span>
@@ -86,8 +86,48 @@
 		</div>
 
 		</section> </main>
-	</ui:define>
 
+		<script>
+		var field = #{mbService.selectedFieldtAsJson()}
+		var mymap = L.map('mapid').setView([field.zipCodeCity.latitude, field.zipCodeCity.longitude], 8);
+        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaGFqam91anRpIiwiYSI6ImNrc2MzNTRvczBjc2YydnFrZHRwdzZmc20ifQ.Z4qyHk4NtUctoB_uDmjHPA', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            maxZoom: 18,
+            id: 'mapbox/streets-v11',
+            tileSize: 512,
+            zoomOffset: -1,
+            accessToken: 'your.mapbox.access.token'
+        }).addTo(mymap);
+        
+        var fieldIcon = L.icon({
+    		iconUrl: 'resources/img/grass.png',
+
+    		iconSize:     [48, 79.1], // size of the icon
+    		shadowSize:   [50, 64], // size of the shadow
+    		iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+    		popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+		});
+		
+		var breederIcon = L.icon({
+    		iconUrl: 'resources/img/breeder.png',
+
+    		iconSize:     [48, 55], // size of the icon
+    		shadowSize:   [50, 64], // size of the shadow
+    		iconAnchor:   [22, 55], // point of the icon which will correspond to marker's location
+    		popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+		});
+		var markerField = L.marker([field.zipCodeCity.latitude, field.zipCodeCity.longitude], {icon: fieldIcon}).addTo(mymap).bindPopup("Mon terrain");
+        
+        var offers = #{mbShearingOffer.searchResultAsJson()}
+        console.log(offers);
+        for (var i = 0; i &lt; offers.length; i++) {
+    		var offer = offers[i];
+    		var marker = L.marker([offer.zipCodeCity.latitude, offer.zipCodeCity.longitude], {icon: breederIcon})
+    		.addTo(mymap).bindPopup("<b>"+offer.name+"</b><p>"+offer.zipCodeCity.name+", FR</p>");
+
+		}
+	</script>
+	</ui:define>
 </ui:composition>
 
 </html>

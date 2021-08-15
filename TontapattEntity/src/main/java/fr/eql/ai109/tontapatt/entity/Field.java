@@ -17,6 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "field")
 public class Field implements Serializable {
@@ -49,12 +51,15 @@ public class Field implements Serializable {
 	@Column(name = "withdrawal_date", nullable = true)
 	private LocalDateTime withdrawalDate;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "field", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<Service> services;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "field", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<FieldPhoto> photos;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "field", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<VegetationComposition> vegetationCompositions;
 
