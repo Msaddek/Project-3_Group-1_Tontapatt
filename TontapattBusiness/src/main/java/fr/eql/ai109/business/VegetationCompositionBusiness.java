@@ -4,10 +4,10 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
+
 import fr.eql.ai109.ibusiness.VegetationCompositionIBusiness;
 import fr.eql.ai109.tontapatt.entity.VegetationComposition;
 import fr.eql.ai109.tontapatt.idao.VegetationCompositionIDAO;
-
 
 @Remote(VegetationCompositionIBusiness.class)
 @Stateless
@@ -15,8 +15,7 @@ public class VegetationCompositionBusiness implements VegetationCompositionIBusi
 
 	@EJB
 	private VegetationCompositionIDAO vegetationCompositionIDAO;
-	
-	
+
 	@Override
 	public VegetationComposition add(VegetationComposition t) {
 		
@@ -26,7 +25,7 @@ public class VegetationCompositionBusiness implements VegetationCompositionIBusi
 	@Override
 	public void delete(VegetationComposition t) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override

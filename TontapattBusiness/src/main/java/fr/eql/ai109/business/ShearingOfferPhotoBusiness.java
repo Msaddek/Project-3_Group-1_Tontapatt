@@ -1,12 +1,14 @@
 package fr.eql.ai109.business;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
 import fr.eql.ai109.ibusiness.ShearingOfferPhotoIBusiness;
+import fr.eql.ai109.tontapatt.entity.ShearingOffer;
 import fr.eql.ai109.tontapatt.entity.ShearingOfferPhoto;
 import fr.eql.ai109.tontapatt.idao.ShearingOfferPhotoIDAO;
 
@@ -43,6 +45,12 @@ public class ShearingOfferPhotoBusiness implements ShearingOfferPhotoIBusiness {
 
 	@Override
 	public List<ShearingOfferPhoto> getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Set<ShearingOfferPhoto> findPhotosByShearingOffer(ShearingOffer shearingOffer) {
 		// TODO Auto-generated method stub
 		return null;
 	}

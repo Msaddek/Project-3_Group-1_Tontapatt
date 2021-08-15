@@ -102,6 +102,10 @@ public class ServiceDAO extends GenericDAO<Service> implements ServiceIDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		for (Service service : services) {
+			System.out.println("----------------------------- en cours " + service.toString());
+		}
 		return services;
 	}
 
@@ -111,20 +115,23 @@ public class ServiceDAO extends GenericDAO<Service> implements ServiceIDAO {
 		Set<Service> services = null;
 		try {
 			services = new HashSet<>(em
-					.createQuery("SELECT s FROM Service s WHERE "
-							+ "(s.shearingOffer.breeder=:userParam OR "
-							+ "s.field.owner=:userParam) AND s.refusalDate IS NULL "
-							+ "AND s.cancellationDate IS NULL AND "
-							+ "s.prematureCancellationDate IS NULL AND "
-							+ "s.requestDate IS NOT NULL AND s.validationDate IS "
-							+ "NULL OR(s.validationDate IS NOT NULL AND "
-							+ ":dateNowParam NOT BETWEEN s.startDate AND "
-							+ "s.endDate)")
-					.setParameter("userParam", connectedUser)
-					.setParameter("dateNowParam", LocalDate.now())
-					.getResultList());
+                    .createQuery("SELECT s FROM Service s WHERE "
+                            + "(s.shearingOffer.breeder=:userParam OR "
+                            + "s.field.owner=:userParam) AND s.refusalDate IS NULL "
+                            + "AND s.cancellationDate IS NULL AND "
+                            + "s.prematureCancellationDate IS NULL AND "
+                            + "s.requestDate IS NOT NULL AND s.validationDate IS "
+                            + "NULL OR(s.validationDate IS NOT NULL AND "
+                            + ":dateNowParam NOT BETWEEN s.startDate AND "
+                            + "s.endDate)")
+                    .setParameter("userParam", connectedUser)
+                    .setParameter("dateNowParam", LocalDate.now())
+                    .getResultList());
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		for (Service service : services) {
+			System.out.println("----------------------------- en attente " + service.toString());
 		}
 		return services;
 	}
@@ -145,6 +152,9 @@ public class ServiceDAO extends GenericDAO<Service> implements ServiceIDAO {
 					.setParameter("userParam", connectedUser).getResultList());
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		for (Service service : services) {
+			System.out.println("----------------------------- en attente " + service.toString());
 		}
 		return services;
 	}
