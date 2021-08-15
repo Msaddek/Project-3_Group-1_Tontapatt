@@ -35,4 +35,24 @@ public class FieldDAO extends GenericDAO<Field> implements FieldIDAO {
 		return fields;
 	}
 
+	@Override
+	public Set<Field> getAllWithPhotos() {
+		Set<Field> fields = null;
+		try {
+			fields = new HashSet<>(em.createQuery(
+					"SELECT f from Field f").getResultList());
+			for (Field field : fields) {
+				field.setVegetationCompositions(new HashSet<>(em.createQuery(
+						"SELECT vc FROM VegetationComposition vc WHERE vc.field=:fieldParam")
+						.setParameter("fieldParam", field).getResultList()));
+				field.setPhotos(new HashSet<>(em.createQuery(
+						"SELECT fp FROM FieldPhoto fp WHERE fp.field=:fieldParam")
+						.setParameter("fieldParam", field).getResultList()));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return fields;
+	}
+
 }
