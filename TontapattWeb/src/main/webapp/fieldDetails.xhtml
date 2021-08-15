@@ -68,7 +68,8 @@
 
 
 				<div class="form-row m-b-55">
-					<div class="categories-offer">
+					<div class="categories-offer"
+						style="word-wrap:break-word">
 						<h2>Description :</h2>
 						<p>#{mbField.field.description}</p>
 					</div>
@@ -99,14 +100,15 @@
 
 				<div class="form-row">
 					<div class="categories-offer">
-					<h2>Types de végétation :</h2>
+						<h2>Types de végétation :</h2>
 						<label for="inpVegetationType"></label>
 						<ul>
 							<ui:repeat value="#{mbField.field.vegetationCompositions}"
 								var="vegeType">
 								<li>
-									<p>#{vegeType.vegetationType.vegetation} : #{vegeType.percentage} %</p>
-									
+									<p>#{vegeType.vegetationType.vegetation} :
+										#{vegeType.percentage} %</p>
+
 								</li>
 							</ui:repeat>
 						</ul>
@@ -131,17 +133,17 @@
 				<h:form>
 					<div>
 						<button type="button" class="get-started-btn" data-toggle="modal"
-							data-target="#delmodal">Supprimer mon terrain</button>
+							data-target="#suppmodal">Supprimer mon terrain</button>
 					</div>
 				</h:form>
 			</div>
 		</div>
-		<b:modal id="delmodal" closable="true" close-on-escape="false"
+		<b:modal id="suppmodal" closable="true" close-on-escape="false"
 			backdrop="false">
 
 			<div class="modal-body">
 				<div class="form-title text-center">
-					<h3>Etes vous sûr de vouloir supprimer cette offre ? Si oui,
+					<h3>Etes vous sûr de vouloir supprimer ce terrain ? Si oui,
 						veuillez sélectionner une raison dans le menu déroulant ci-dessous
 						:</h3>
 					<br />
@@ -149,26 +151,26 @@
 				<div class="d-flex flex-column text-center">
 					<b:form id="suppForm">
 						<div class="rs-select2 js-select-simple select--no-search">
-							<br /> <label for="inpOfferWithdrawalReason">Raison :</label><br />
-							<b:selectOneMenu id="inpOfferWithdrawalReason"
-								value="#{mbShearingOffer.offerWithdrawalReason}" required="true"
+							<br /> <label for="inpFieldWithdrawalReason">Raison :</label><br />
+							<b:selectOneMenu id="inpFieldWithdrawalReason"
+								value="#{mbField.fieldWithdrawalReason}" required="true"
 								converter="entityConverter"
 								requiredMessage="Veuillez sélectionner une raison">
 								<f:selectItem itemLabel="sélectionnez la raison" itemValue="" />
 								<f:selectItems
-									value="#{mbOfferWithdrawalReason.allOfferWithdrawalReason()}"
-									var="reason" itemLabel="#{reason.reason}" itemValue="#{reason}" />
-								<p:ajax update="offerWithdrawalReasonMessage" />
+									value="#{mbFieldWithdrawalReason.allFieldWithdrawalReason()}"
+									var="reason" itemLabel="#{reason.withdrawalReason}" itemValue="#{reason}" />
+								<p:ajax update="fieldWithdrawalReasonMessage" />
 							</b:selectOneMenu>
 							<br />
-							<b:message id="offerWithdrawalReasonMessage"
-								for="inpOfferWithdrawalReason" />
+							<b:message id="fieldWithdrawalReasonMessage"
+								for="inpFieldWithdrawalReason" />
 						</div>
 						<br />
 						<div class="p-t-20">
 							<b:commandButton class="get-started-btn"
 								value="Confirmer la suppression"
-								action="#{mbShearingOffer.withdrawOffer()}" />
+								action="#{mbField.withdrawField()}" />
 						</div>
 
 					</b:form>
