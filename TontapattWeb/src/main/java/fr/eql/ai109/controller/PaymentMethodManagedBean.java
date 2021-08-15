@@ -28,6 +28,7 @@ public class PaymentMethodManagedBean implements Serializable {
 	
 	public List<PaymentMethod> allPaymentMethods(){
 		paymentMethods = business.getAll();
+		
 		return paymentMethods;
 	}
 
