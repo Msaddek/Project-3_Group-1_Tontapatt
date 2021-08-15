@@ -1827,3 +1827,63 @@ header.scrolled nav a {
 .som-payment .form-control {
 	width: 60%;
 }
+
+/* SERVICES PAGE */
+
+.user-services-box .nav {
+	justify-content: center !important ;
+    font-weight: bold !important ;
+    font-size: 25px !important;
+    font-family: cursive !important;
+    padding: 15px;
+}
+
+.user-services-box .nav > li {
+	margin: 0 50px;
+}
+
+.user-services-box .nav-link {
+	 color: black !important;
+}
+
+.user-services-box .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #5fcf80 !important;
+    background-color: white !important;
+}
+
+.user-services-box .tab-content>.active {
+    display: block;
+    justify-content: center;
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px;
+}
+
+.user-services-box .fade {
+	opacity: 1;
+}
+
+.user-services-box tbody, td, tfoot, th, thead, tr {
+	cursor: pointer !important;
+}
+
+#dark-badge{
+	background-color: black;
+}
+
+#blue-badge{
+	background-color: blue;
+}
+
+#green-badge{
+	background-color: green;
+}
+
+#red-badge{
+	background-color: red;
+}
+
+#yellow-badge{
+	background-color: orange;
+	color: black;
+}
