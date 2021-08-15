@@ -18,5 +18,7 @@ public interface ServiceIBusiness extends GenericIBusiness<Service> {
 	Set<Service> getAllInProgressServicesOfConnectedUser(User connectedUser);
 
 	Set<Service> getAllPendingServicesOfConnectedUser(User connectedUser);
+	
+	Set<Service> getAllPendingServicesOfConnectedBreeder(User connectedUser);
 
 }
