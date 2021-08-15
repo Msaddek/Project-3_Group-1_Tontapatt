@@ -67,6 +67,7 @@ public class ShearingOffer implements Serializable {
 	@Column(name = "distance", nullable = true, insertable = false, updatable = false)
 	private Double distance;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "shearingOffer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<ShearingOfferPhoto> photos;
 
