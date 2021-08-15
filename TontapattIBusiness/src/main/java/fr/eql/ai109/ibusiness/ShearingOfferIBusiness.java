@@ -27,4 +27,6 @@ public interface ShearingOfferIBusiness
 
 	ShearingOffer createShearingOffer(ShearingOffer shearingOffer);
 
+	Set<ShearingOffer> getAllWithPhotos();
+
 }

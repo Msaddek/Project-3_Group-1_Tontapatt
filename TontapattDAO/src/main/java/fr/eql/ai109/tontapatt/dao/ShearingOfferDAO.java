@@ -72,7 +72,7 @@ public class ShearingOfferDAO extends GenericDAO<ShearingOffer>
 		}
 		return shearingOffers;
 	}
-	
+
 	@Override
 	public Set<ShearingOffer> searchOfferByFieldLocationAndSpecies(Field field,
 			LocalDate serviceStartDate, LocalDate serviceEndDate,
@@ -193,6 +193,27 @@ public class ShearingOfferDAO extends GenericDAO<ShearingOffer>
 					em.createQuery(sqlQueryShearingOffers)
 							.setParameter("userParam", user)
 							.setParameter("dateNowParam", now).getResultList());
+			for (ShearingOffer shearingOffer : shearingOffers) {
+				shearingOffer
+						.setPhotos(new HashSet<>(em.createQuery(sqlQueryPhotos)
+								.setParameter("offerParam", shearingOffer)
+								.getResultList()));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return shearingOffers;
+	}
+
+	@Override
+	public Set<ShearingOffer> getAllWithPhotos() {
+		Set<ShearingOffer> shearingOffers = null;
+		String sqlQueryShearingOffers = "SELECT s FROM ShearingOffer s";
+		String sqlQueryPhotos = "SELECT op FROM ShearingOfferPhoto op WHERE "
+				+ "op.shearingOffer=:offerParam";
+		try {
+			shearingOffers = new HashSet<ShearingOffer>(
+					em.createQuery(sqlQueryShearingOffers).getResultList());
 			for (ShearingOffer shearingOffer : shearingOffers) {
 				shearingOffer
 						.setPhotos(new HashSet<>(em.createQuery(sqlQueryPhotos)
