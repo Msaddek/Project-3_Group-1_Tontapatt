@@ -95,4 +95,9 @@ public class ShearingOfferBusiness implements ShearingOfferIBusiness {
 		return shearingOfferIDAO.getAllWithPhotos();
 	}
 
+	@Override
+	public Set<ShearingOffer> getLastThreeByUser(User connectedUser) {
+		return shearingOfferIDAO.getLastThreeByUser(connectedUser);
+	}
+
 }
