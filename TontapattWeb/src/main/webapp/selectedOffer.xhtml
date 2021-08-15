@@ -261,7 +261,7 @@
 					<!-- Cart -->
 
 					<button type="button" class="get-started-btn" data-toggle="modal"
-						data-target="#reservationModal">Payement</button>
+						data-target="#reservationModal">Paiement</button>
 
 				</div>
 			</div>
@@ -323,18 +323,19 @@
 
 							</div>
 							<div class="form-group">
-								<label for="inpPaymentMethod">Moyen de paiement :</label> <br />
-								<p:selectOneMenu id="inpPaymentMethod"
-									value="#{mbService.paymentMethod}" required="true"
-									converter="entityConverter"
-									requiredMessage="Séléctionnez un moyen de paiement">
-									<f:selectItem itemLabel="Séléctionnez une moyen de paiment"
-										itemValue="" />
-									<f:selectItems value="#{mbPaymentMethod.allPaymentMethods()}"
-										var="payment" itemLabel="#{method.payment}"
-										itemValue="#{payment}" />
-								</p:selectOneMenu>
-								<br />
+
+								<div class="som-payment">
+									<b:selectOneMenu id="inpPaymentMethod"
+										value="#{mbService.paymentMethod}" required="true"
+										converter="entityConverter"
+										requiredMessage="Séléctionnez un moyen de paiement">
+										<f:selectItem itemLabel="Séléctionnez une moyen de paiment"
+											itemValue="" />
+										<f:selectItems value="#{mbPaymentMethod.allPaymentMethods()}"
+											var="method" itemLabel="#{method.payment}"
+											itemValue="#{method}" />
+									</b:selectOneMenu>
+								</div>
 								<b:message id="paymentMethodMessage" for="inpPaymentMethod" />
 							</div>
 
@@ -345,7 +346,8 @@
 							</div>
 							<div class="form-group">
 								<input type="text" class="form-control"
-									placeholder="Numéro de carte" aria-label="Username"
+									placeholder="&#xf09d; Numéro de carte"
+									style="font-family: Arial, FontAwesome" aria-label="Username"
 									aria-describedby="basic-addon1" />
 							</div>
 
@@ -353,12 +355,15 @@
 								<div class="cvc-date">
 									<div id="expiration-carte">
 										<input type="text" class="form-control"
-											placeholder="Expiration" aria-label="Username"
+											placeholder="&#xf073; Expiration"
+											style="font-family: Arial, FontAwesome" aria-label="Username"
 											aria-describedby="basic-addon1" />
 									</div>
 									<div id="cvc">
-										<input type="text" class="form-control" placeholder="CVC"
-											aria-label="Username" aria-describedby="basic-addon1" />
+										<input type="text" class="form-control"
+											placeholder="&#xf023; CVC"
+											style="font-family: Arial, FontAwesome" aria-label="Username"
+											aria-describedby="basic-addon1" />
 									</div>
 								</div>
 							</div>
