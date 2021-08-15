@@ -46,8 +46,7 @@ public class ShearingOfferBusiness implements ShearingOfferIBusiness {
 
 	@Override
 	public List<ShearingOffer> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return shearingOfferIDAO.getAll();
 	}
 
 	@Override
@@ -89,6 +88,11 @@ public class ShearingOfferBusiness implements ShearingOfferIBusiness {
 		return shearingOfferIDAO.searchOfferByFieldLocationAndSpecies(field,
 				serviceStartDate, serviceEndDate, requiredAnimalCount,
 				selectedSpecies);
+	}
+
+	@Override
+	public Set<ShearingOffer> getAllWithPhotos() {
+		return shearingOfferIDAO.getAllWithPhotos();
 	}
 
 }

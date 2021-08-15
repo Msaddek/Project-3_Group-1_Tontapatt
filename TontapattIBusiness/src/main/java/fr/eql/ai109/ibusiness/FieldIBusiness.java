@@ -9,4 +9,6 @@ public interface FieldIBusiness extends GenericIBusiness<Field> {
 	
 	Set<Field> getFieldsOfConnectedUser(User user);
 
+	Set<Field> getAllWithPhotos();
+
 }

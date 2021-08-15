@@ -24,4 +24,6 @@ public interface ShearingOfferIDAO extends GenericIDAO<ShearingOffer> {
 
 	Set<ShearingOffer> getInProgressShearingOffersOfConnectedUser(User user);
 
+	Set<ShearingOffer> getAllWithPhotos();
+
 }
