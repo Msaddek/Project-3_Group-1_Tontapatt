@@ -114,12 +114,12 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 		connectUserPendingServices = business
 				.getAllPendingServicesOfConnectedUser(connectedUser);
 	}
-	
+
 	public String selectOffer() {
-		
+
 		return "/selectedOffer.xhtml?faces-redirect=true";
 	}
-	
+
 	public String selectService() {
 
 		return "/selectedService.xhtml?faces-redirect=true";
@@ -137,8 +137,8 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 		newService.setField(field);
 		newService.setDistance(offer.getDistance());
 		newService.setPrice(price);
-		
-		
+
+
 		newService.setPaymentMethod(paymentMethod);
 		newService.setGrassHeight(grassHeight);
 		newService.setRequiredAnimalCount(requiredAnimalCount);
@@ -211,12 +211,16 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 	public Long calculateServiceNumberOfDays() {
 		return ChronoUnit.DAYS.between(startDate, endDate);
 	}
+	
+	public Long calculateServiceNumberOfDaysByService() {
+		return ChronoUnit.DAYS.between(service.getStartDate(), service.getEndDate());
+	}
 
 	public Integer calculateRequiredAnimalNumber() {
-        requiredAnimalCount = (int) (field.getArea()
-                / (calculateServiceNumberOfDays() * SURFACE_ANIMAL_JOUR));
-        return requiredAnimalCount;
-    }
+		requiredAnimalCount = (int) (field.getArea()
+				/ (calculateServiceNumberOfDays() * SURFACE_ANIMAL_JOUR));
+		return requiredAnimalCount;
+	}
 
 	public Double calculateTotalAnimalPrice() {
 		return calculateServiceNumberOfDays() * requiredAnimalCount
@@ -236,7 +240,7 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 
 	public Double calculateVATPrice() {
 		return (calculateTotalAnimalPrice() + calculateTravelDistancePrice()
-				+ calculateInterventionPrice()) * VAT;
+		+ calculateInterventionPrice()) * VAT;
 	}
 
 	public Double calculatePrice() {
@@ -244,19 +248,19 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 		+ calculateInterventionPrice() + calculateVATPrice();
 		return price;
 	}
-	
-	public Double calculatePriceForOfferList(ShearingOffer shearingOffer) {
-        Integer interventionsNumber = (int) (calculateServiceNumberOfDays()
-                / 2);
-        Double priceWithoutVAT = (calculateServiceNumberOfDays()
-                * requiredAnimalCount * shearingOffer.getAnimalDailyPrice())
-                + (shearingOffer.getDistance() * TRUCK_CONSUMPTION_PRICE * 2)
-                + (shearingOffer.getDistance() * 2 * CAR_CONSUPTION_PRICE
-                        * interventionsNumber);
-        return priceWithoutVAT * VAT + priceWithoutVAT;
 
-    }
-	
+	public Double calculatePriceForOfferList(ShearingOffer shearingOffer) {
+		Integer interventionsNumber = (int) (calculateServiceNumberOfDays()
+				/ 2);
+		Double priceWithoutVAT = (calculateServiceNumberOfDays()
+				* requiredAnimalCount * shearingOffer.getAnimalDailyPrice())
+				+ (shearingOffer.getDistance() * TRUCK_CONSUMPTION_PRICE * 2)
+				+ (shearingOffer.getDistance() * 2 * CAR_CONSUPTION_PRICE
+						* interventionsNumber);
+		return priceWithoutVAT * VAT + priceWithoutVAT;
+
+	}
+
 	public String selectedFieldtAsJson() {
 		ObjectMapper mapper = new ObjectMapper();
 		String json = null;
@@ -266,6 +270,24 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 			e.printStackTrace();
 		}
 		return json;
+	}
+	
+	public String serviceState() {
+		if (connectUserPendingServices.contains(service)) {
+			if(service.getValidationDate() != null) {
+				return "Acceptée";
+			}
+			else {
+				return "En attente";
+			}
+		}else if (connectUserInProgressServices.contains(service)) {
+			return "En cours";
+		}else if (connectUserFinishedServices.contains(service)) {
+			return "Terminée";
+		}else if (connectUserCancelledServices.contains(service)) {
+			return "Annulée";
+		}
+		return "Pas de status";
 	}
 
 	public User getConnectedUser() {
