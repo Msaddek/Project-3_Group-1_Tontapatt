@@ -8,9 +8,10 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
 import fr.eql.ai109.ibusiness.RatingIBusiness;
+import fr.eql.ai109.tontapatt.entity.Field;
 import fr.eql.ai109.tontapatt.entity.Rating;
+import fr.eql.ai109.tontapatt.entity.Service;
 import fr.eql.ai109.tontapatt.entity.ShearingOffer;
-import fr.eql.ai109.tontapatt.entity.User;
 import fr.eql.ai109.tontapatt.idao.RatingIDAO;
 
 @Remote(RatingIBusiness.class)
@@ -22,8 +23,7 @@ public class RatingBusiness implements RatingIBusiness {
 
 	@Override
 	public Rating add(Rating t) {
-		// TODO Auto-generated method stub
-		return null;
+		return ratingIDAO.add(t);
 	}
 
 	@Override
@@ -51,7 +51,17 @@ public class RatingBusiness implements RatingIBusiness {
 	}
 
 	@Override
-	public Set<Rating> getAllBySearingOffer(ShearingOffer selectedOffer, User connectedUser) {
-		return ratingIDAO.getAllBySearingOffer(selectedOffer, connectedUser);
+	public Set<Rating> getAllByShearingOffer(ShearingOffer selectedOffer) {
+		return ratingIDAO.getAllByShearingOffer(selectedOffer);
+	}
+
+	@Override
+	public Set<Rating> getAllByField(Field selectedField) {
+		return ratingIDAO.getAllByField(selectedField);
+	}
+
+	@Override
+	public Set<Rating> getAllbyService(Service selectedService) {
+		return ratingIDAO.getAllbyService(selectedService);
 	}
 }
