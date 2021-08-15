@@ -82,4 +82,11 @@ public class ServiceBusiness implements ServiceIBusiness {
 			User connectedUser) {
 		return serviceIDAO.getAllPendingServicesOfConnectedUser(connectedUser);
 	}
+
+	@Override
+	public Set<Service> getAllPendingServicesOfConnectedBreeder(
+			User connectedUser) {
+		return serviceIDAO
+				.getAllPendingServicesOfConnectedBreeder(connectedUser);
+	}
 }

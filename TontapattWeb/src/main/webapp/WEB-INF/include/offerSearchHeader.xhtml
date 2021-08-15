@@ -22,7 +22,9 @@
 
 			<li><a class="active" href="connectedPage.xhtml">Hey,
 					#{mbUser.user.firstName} !</a></li>
-			<li><a href="home.xhtml">Prestations</a></li>
+			<li><a href="services.xhtml">Prestations<span
+				class="badge badge-pill badge-danger #{mbService.notificationVisibility()}">
+				#{mbService.newPendingService()}</span></a></li>
 			<li><a href="home.xhtml">Nouveautés</a></li>
 
 		</ul>

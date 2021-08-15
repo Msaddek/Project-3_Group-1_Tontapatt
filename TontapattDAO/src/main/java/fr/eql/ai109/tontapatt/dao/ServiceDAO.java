@@ -79,7 +79,6 @@ public class ServiceDAO extends GenericDAO<Service> implements ServiceIDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return services;
 	}
 
@@ -134,7 +133,29 @@ public class ServiceDAO extends GenericDAO<Service> implements ServiceIDAO {
 		for (Service service : services) {
 			System.out.println("----------------------------- en attente " + service.toString());
 		}
-		
+		return services;
+	}
+
+	@Override
+	public Set<Service> getAllPendingServicesOfConnectedBreeder(
+			User connectedUser) {
+		Set<Service> services = null;
+		try {
+			services = new HashSet<>(em
+					.createQuery("SELECT s FROM Service s WHERE "
+							+ "s.shearingOffer.breeder=:userParam "
+							+ "AND s.refusalDate IS NULL "
+							+ "AND s.cancellationDate IS NULL AND "
+							+ "s.prematureCancellationDate IS NULL AND "
+							+ "s.requestDate IS NOT NULL AND s.validationDate IS "
+							+ "NULL")
+					.setParameter("userParam", connectedUser).getResultList());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		for (Service service : services) {
+			System.out.println("----------------------------- en attente " + service.toString());
+		}
 		return services;
 	}
 

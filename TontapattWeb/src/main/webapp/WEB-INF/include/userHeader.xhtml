@@ -22,7 +22,9 @@
 
 		<li><a class="active" href="connectedPage.xhtml">Hey,
 				#{mbUser.user.firstName} !</a></li>
-		<li><a href="services.xhtml">Prestations</a></li>
+		<li><a href="services.xhtml">Prestations<span
+				class="badge badge-pill badge-danger #{mbService.notificationVisibility()}">
+				#{mbService.newPendingService()}</span></a></li>
 		<li><a href="home.xhtml">Nouveautés</a></li>
 
 	</ul>
@@ -189,8 +191,8 @@
 								<label for="inpSpecies">Espèce :</label><br />
 								<b:selectOneMenu id="inpSpecies" value="#{mbSpecies.species}"
 									required="false" requiredMessage="Séléctionnez une espèce">
-									<f:selectItem itemLabel="Séléctionnez une espèce" itemValue="#{null}"
-										noSelectionOption="true" />
+									<f:selectItem itemLabel="Séléctionnez une espèce"
+										itemValue="#{null}" noSelectionOption="true" />
 									<f:selectItems value="#{mbSpecies.allSpecies()}" var="species"
 										itemLabel="#{species.species}" itemValue="#{species}" />
 								</b:selectOneMenu>
