@@ -28,5 +28,7 @@ public interface ShearingOfferIBusiness
 	ShearingOffer createShearingOffer(ShearingOffer shearingOffer);
 
 	Set<ShearingOffer> getAllWithPhotos();
+	
+	Set<ShearingOffer> getLastThreeByUser(User connectedUser);
 
 }
