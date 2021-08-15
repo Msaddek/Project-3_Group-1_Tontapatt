@@ -1792,4 +1792,34 @@ header.scrolled nav a {
 .logo-payment {
 	display: flex;
 	margin-left: 30px;
+	padding: 10px 0px;
+}
+
+.cvc-date {
+	display:flex;
+}
+
+.payment-box .form-group .form-control {
+	width: 50%;
+}
+
+#expiration-carte {
+	padding-right: 15px;
+}
+
+.cvc-date .form-control {
+	width: 80%;
+}
+
+#cvc .form-control {
+	width: 50%;
+}
+
+.group-info {
+	padding-right: 20px;
+}
+
+.box-group-information {
+	display: flex;
+	flex-direction: row;
 }

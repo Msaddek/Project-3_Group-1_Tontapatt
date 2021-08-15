@@ -32,11 +32,10 @@
 						<p:graphicImage class="img-profil"
 							value="resources/img/users/#{mbUser.user.photo}"
 							alt="No picture set"></p:graphicImage>
-						#{mbService.offer.breeder.firstName}
+						#{mbService.offer.breeder.firstName}, Evaluation
 					</div>
 
 				</h2>
-				<h3 class="my-5 h2 text-center">Evaluation</h3>
 			</div>
 			<!--Grid row-->
 			<div class="row">
@@ -96,26 +95,50 @@
 							</div>
 						</div>
 
+						<div class="box-group-information">
+							<div class="group-info">
+								<div class="icon-info-presta">
+									<b:iconAwesome class="icon-info" name="info-circle" size="lg" />
+									<div class="icon-info-descr">
+										<h4>Race : #{mbService.offer.race.race}</h4>
+									</div>
+								</div>
+
+								<div class="icon-info-presta">
+									<br />
+									<b:iconAwesome class="icon-info" name="info-circle" size="lg" />
+									<div class="icon-info-descr">
+										<h4>Nombre d'animaux: #{mbService.requiredAnimalCount}</h4>
+									</div>
+								</div>
+							</div>
+							<div class="group-info">
+								<div class="icon-info-presta">
+									<b:iconAwesome class="icon-info" name="info-circle" size="lg" />
+									<div class="icon-info-descr">
+										<h4>Espèce : #{mbService.offer.race.species.species}</h4>
+									</div>
+								</div>
+
+								<div class="icon-info-presta">
+									<br />
+									<b:iconAwesome class="icon-info" name="info-circle" size="lg" />
+									<div class="icon-info-descr">
+										<h4>Couverture : #{mbService.offer.maxTravelDist} Km</h4>
+									</div>
+								</div>
+							</div>
+						</div>
 						<div class="icon-info-presta">
+							<br />
 							<b:iconAwesome class="icon-info" name="info-circle" size="lg" />
 							<div class="icon-info-descr">
-								<h4>Race : #{mbService.offer.race.race}</h4>
+								<h4>Le responsable du troupeau s'engage à passer au minimum
+									un jour sur deux afin d'assurer le bon déroulement de la
+									prestation.</h4>
 							</div>
 						</div>
 
-						<div class="icon-info-presta">
-							<b:iconAwesome class="icon-info" name="info-circle" size="lg" />
-							<div class="icon-info-descr">
-								<h4>Espèce : #{mbService.offer.race.species.species}</h4>
-							</div>
-						</div>
-
-						<div class="icon-info-presta">
-							<b:iconAwesome class="icon-info" name="info-circle" size="lg" />
-							<div class="icon-info-descr">
-								<h4>Couverture : 80km</h4>
-							</div>
-						</div>
 						<hr />
 						<div class="row">
 							<div class="category-description">
@@ -293,14 +316,51 @@
 
 						<div clas="payment-box">
 							<div class="logo-payment">
-								
-									<img src="https://i.imgur.com/28akQFX.jpg" width="200px"
-										height="60px" />
-							
-								
-									<img src="https://i.imgur.com/5QFsx7K.jpg" width="200px"
-										height="60px" />
-								
+
+								<img src="https://i.imgur.com/28akQFX.jpg" width="200px"
+									height="60px" /> <img src="https://i.imgur.com/5QFsx7K.jpg"
+									width="200px" height="60px" />
+
+							</div>
+							<div class="form-group">
+								<label for="inpPaymentMethod">Moyen de paiement :</label> <br />
+								<p:selectOneMenu id="inpPaymentMethod"
+									value="#{mbService.paymentMethod}" required="true"
+									converter="entityConverter"
+									requiredMessage="Séléctionnez un moyen de paiement">
+									<f:selectItem itemLabel="Séléctionnez une moyen de paiment"
+										itemValue="" />
+									<f:selectItems value="#{mbPaymentMethod.allPaymentMethods()}"
+										var="payment" itemLabel="#{method.payment}"
+										itemValue="#{payment}" />
+								</p:selectOneMenu>
+								<br />
+								<b:message id="paymentMethodMessage" for="inpPaymentMethod" />
+							</div>
+
+							<div class="form-group">
+								<input type="text" class="form-control"
+									placeholder="Nom sur la carte" aria-label="Username"
+									aria-describedby="basic-addon1" />
+							</div>
+							<div class="form-group">
+								<input type="text" class="form-control"
+									placeholder="Numéro de carte" aria-label="Username"
+									aria-describedby="basic-addon1" />
+							</div>
+
+							<div class="form-group">
+								<div class="cvc-date">
+									<div id="expiration-carte">
+										<input type="text" class="form-control"
+											placeholder="Expiration" aria-label="Username"
+											aria-describedby="basic-addon1" />
+									</div>
+									<div id="cvc">
+										<input type="text" class="form-control" placeholder="CVC"
+											aria-label="Username" aria-describedby="basic-addon1" />
+									</div>
+								</div>
 							</div>
 						</div>
 						<div class="form-check">
