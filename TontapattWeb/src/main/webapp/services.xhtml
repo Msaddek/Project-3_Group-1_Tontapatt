@@ -41,7 +41,9 @@
 					<button class="nav-link" id="pills-profile-tab"
 						data-bs-toggle="pill" data-bs-target="#pills-profile"
 						type="button" role="tab" aria-controls="pills-profile"
-						aria-selected="false">En attente</button>
+						aria-selected="false">En attente</button><span id="#{mbService.notificationVisibility()}"
+				class="badge badge-pill badge-danger #{mbService.notificationVisibility()}">
+				#{mbService.newPendingService()}</span>
 				</li>
 				<li class="nav-item" role="presentation">
 					<button class="nav-link" id="pills-contact-tab"
