@@ -1,6 +1,7 @@
 package fr.eql.ai109.controller;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 import javax.ejb.EJB;
@@ -9,7 +10,9 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import fr.eql.ai109.ibusiness.RatingIBusiness;
+import fr.eql.ai109.tontapatt.entity.Field;
 import fr.eql.ai109.tontapatt.entity.Rating;
+import fr.eql.ai109.tontapatt.entity.Service;
 import fr.eql.ai109.tontapatt.entity.ShearingOffer;
 import fr.eql.ai109.tontapatt.entity.User;
 
@@ -24,7 +27,7 @@ public class RatingManagedBean implements Serializable {
 
 	@EJB
 	RatingIBusiness business;
-	
+
 	@ManagedProperty(value = "#{mbUser.user}")
 	private User connectedUser;
 
@@ -34,10 +37,40 @@ public class RatingManagedBean implements Serializable {
 
 	private Set<Rating> fieldRatings;
 
-	public void recoverAllShearingOfferRatings(ShearingOffer selectedOffer) {
-		shearingOfferRatings = business.getAllBySearingOffer(selectedOffer, connectedUser);
+	public String feedback;
+
+	private LocalDateTime rating_date;
+
+	private Integer ratingLevel;
+
+	private Service selectedService;
+
+	public String rateService() {
+		String forward = "/selectedService.xhtml?faces-redirect=true";
+		Rating newRating = new Rating();
+		newRating.setFeedback(feedback);
+		newRating.setEvaluator(connectedUser);
+		newRating.setService(selectedService);
+		newRating.setRatingLevel(ratingLevel);
+		newRating.setRatingDate(LocalDateTime.now());
+		rating = business.add(newRating);
+		return forward;
 	}
-	
+
+	public Set<Rating> allRatingsByService() {
+		return business.getAllbyService(selectedService);
+	}
+
+	public Set<Rating> recoverAllShearingOfferRatings(
+			ShearingOffer selectedOffer) {
+		return shearingOfferRatings = business
+				.getAllByShearingOffer(selectedOffer);
+	}
+
+	public Set<Rating> recoverAllFieldRatings(Field selectedField) {
+		return fieldRatings = business.getAllByField(selectedField);
+	}
+
 	public User getConnectedUser() {
 		return connectedUser;
 	}
@@ -68,6 +101,38 @@ public class RatingManagedBean implements Serializable {
 
 	public void setFieldRatings(Set<Rating> fieldRatings) {
 		this.fieldRatings = fieldRatings;
+	}
+
+	public String getFeedback() {
+		return feedback;
+	}
+
+	public void setFeedback(String feedback) {
+		this.feedback = feedback;
+	}
+
+	public LocalDateTime getRating_date() {
+		return rating_date;
+	}
+
+	public void setRating_date(LocalDateTime rating_date) {
+		this.rating_date = rating_date;
+	}
+
+	public Integer getRatingLevel() {
+		return ratingLevel;
+	}
+
+	public void setRatingLevel(Integer ratingLevel) {
+		this.ratingLevel = ratingLevel;
+	}
+
+	public Service getSelectedService() {
+		return selectedService;
+	}
+
+	public void setSelectedService(Service selectedService) {
+		this.selectedService = selectedService;
 	}
 
 }
