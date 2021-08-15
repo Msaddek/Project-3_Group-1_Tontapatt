@@ -1863,10 +1863,6 @@ header.scrolled nav a {
 	opacity: 1;
 }
 
-.user-services-box tbody, td, tfoot, th, thead, tr {
-	cursor: pointer !important;
-}
-
 #dark-badge{
 	background-color: black;
 }
@@ -1886,4 +1882,11 @@ header.scrolled nav a {
 #yellow-badge{
 	background-color: orange;
 	color: black;
+}
+
+.prestation-redirect {
+	color: #5fcf80 !important;
+	font-weight: bold !important;
+	font-size: 16px !important;
+	text-decoration: solid;
 }

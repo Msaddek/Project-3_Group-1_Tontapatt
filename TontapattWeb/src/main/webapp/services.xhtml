@@ -64,8 +64,7 @@
 						<div class="table-offer">
 							<table class="table table-hover">
 								<thead>
-									<tr
-										onclick="window.location='/TontapattWeb#{mbService.selectService(service)}';">
+									<tr>
 										<th scope="col">Rôle</th>
 										<th scope="col">Numéro</th>
 										<th scope="col">Début</th>
@@ -115,8 +114,7 @@
 						<div class="table-offer">
 							<table class="table table-hover">
 								<thead>
-									<tr
-										onclick="window.location='/TontapattWeb#{mbService.selectService(service)}';">
+									<tr>
 										<th scope="col">Rôle</th>
 										<th scope="col">Numéro</th>
 										<th scope="col">Début</th>
@@ -134,9 +132,8 @@
 
 
 
-										<tr
-											onclick="window.location='/TontapattWeb#{mbService.selectService(service)}';">
-
+										
+										<tr>
 
 											<th scope="row"><ui:fragment
 													rendered="#{service.field.owner eq mbUser.user}">
@@ -146,16 +143,21 @@
 													<span class="badge badge-pill badge-dark">Eleveur</span>
 												</ui:fragment></th>
 
-											<td>#{service.invoiceNumber}</td>
+											<td>
+											<p:commandLink class="prestation-redirect" action="#{mbService.selectService()}">
+											<f:setPropertyActionListener value="#{service}"
+											target="#{mbService.service}" />
+											#{service.invoiceNumber}
+											</p:commandLink></td>
 											<td>#{service.startDate}</td>
 											<td>#{service.endDate}</td>
 											<td>#{service.field.name}</td>
 											<td>#{service.shearingOffer.name}</td>
 											<td>#{service.price} €</td>
 											<td><span class="badge badge-pill badge-warning"
-												id="yellow-badge">En attente</span></td>
-
+												id="yellow-badge">#{service.validationDate eq null ? "En attente" : "Acceptée"}</span></td>
 										</tr>
+
 
 									</ui:repeat>
 
@@ -189,8 +191,7 @@
 
 									<ui:repeat value="#{mbService.connectUserFinishedServices}"
 										var="service">
-										<tr
-											onclick="window.location='/TontapattWeb#{mbService.selectService(service)}';">
+										<tr>
 											<th scope="row"><ui:fragment
 													rendered="#{service.field.owner eq mbUser.user}">
 													<span class="badge badge-pill badge-dark" id="dark-badge">Proprietaire</span>
