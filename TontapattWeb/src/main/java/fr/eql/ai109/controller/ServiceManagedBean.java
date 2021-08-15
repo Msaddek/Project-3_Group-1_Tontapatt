@@ -119,6 +119,11 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 		
 		return "/selectedOffer.xhtml?faces-redirect=true";
 	}
+	
+	public String selectService(Service selectedService) {
+		service = selectedService;
+		return "/selectedService.xhtml?faces-redirect=true";
+	}
 
 	public String createServiceRequest() {
 		String forward = "/services.xhtml?faces-redirect=true";
