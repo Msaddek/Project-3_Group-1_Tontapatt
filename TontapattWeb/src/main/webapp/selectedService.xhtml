@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+
+<ui:composition template="WEB-INF/template/userTemplate.xhtml">
+
+	<ui:define name="head">
+		<title>Recherche</title>
+	</ui:define>
+
+	<ui:define name="content">
+
+		<div class="title-page">
+			<div class="section-title">
+				<h2>Mes terrains</h2>
+				<p>Réservation</p>
+			</div>
+		</div>
+
+				<h1>#{mbService.service.invoiceNumber}</h1>
+	</ui:define>
+
+</ui:composition>
+
+</html>
