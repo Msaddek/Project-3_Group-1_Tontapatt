@@ -54,4 +54,9 @@ public class FieldBusiness implements FieldIBusiness {
 		return fieldIDAO.getFieldsOfConnectedUser(user);
 	}
 
+	@Override
+	public Set<Field> getAllWithPhotos() {
+		return fieldIDAO.getAllWithPhotos();
+	}
+
 }
