@@ -32,11 +32,10 @@
 						<p:graphicImage class="img-profil"
 							value="resources/img/users/#{mbUser.user.photo}"
 							alt="No picture set"></p:graphicImage>
-						#{mbService.offer.breeder.firstName}
+						#{mbService.offer.breeder.firstName}, Evaluation
 					</div>
 
 				</h2>
-				<h3 class="my-5 h2 text-center">Evaluation</h3>
 			</div>
 			<!--Grid row-->
 			<div class="row">
@@ -96,26 +95,50 @@
 							</div>
 						</div>
 
+						<div class="box-group-information">
+							<div class="group-info">
+								<div class="icon-info-presta">
+									<b:iconAwesome class="icon-info" name="info-circle" size="lg" />
+									<div class="icon-info-descr">
+										<h4>Race : #{mbService.offer.race.race}</h4>
+									</div>
+								</div>
+
+								<div class="icon-info-presta">
+									<br />
+									<b:iconAwesome class="icon-info" name="info-circle" size="lg" />
+									<div class="icon-info-descr">
+										<h4>Nombre d'animaux: #{mbService.requiredAnimalCount}</h4>
+									</div>
+								</div>
+							</div>
+							<div class="group-info">
+								<div class="icon-info-presta">
+									<b:iconAwesome class="icon-info" name="info-circle" size="lg" />
+									<div class="icon-info-descr">
+										<h4>Espèce : #{mbService.offer.race.species.species}</h4>
+									</div>
+								</div>
+
+								<div class="icon-info-presta">
+									<br />
+									<b:iconAwesome class="icon-info" name="info-circle" size="lg" />
+									<div class="icon-info-descr">
+										<h4>Couverture : #{mbService.offer.maxTravelDist} Km</h4>
+									</div>
+								</div>
+							</div>
+						</div>
 						<div class="icon-info-presta">
+							<br />
 							<b:iconAwesome class="icon-info" name="info-circle" size="lg" />
 							<div class="icon-info-descr">
-								<h4>Race : #{mbService.offer.race.race}</h4>
+								<h4>Le responsable du troupeau s'engage à passer au minimum
+									un jour sur deux afin d'assurer le bon déroulement de la
+									prestation.</h4>
 							</div>
 						</div>
 
-						<div class="icon-info-presta">
-							<b:iconAwesome class="icon-info" name="info-circle" size="lg" />
-							<div class="icon-info-descr">
-								<h4>Espèce : #{mbService.offer.race.species.species}</h4>
-							</div>
-						</div>
-
-						<div class="icon-info-presta">
-							<b:iconAwesome class="icon-info" name="info-circle" size="lg" />
-							<div class="icon-info-descr">
-								<h4>Couverture : 80km</h4>
-							</div>
-						</div>
 						<hr />
 						<div class="row">
 							<div class="category-description">
@@ -228,7 +251,8 @@
 								<div class="text-success">
 									<h4 class="my-0">Durée</h4>
 									<small>Durée de la prestation en jours.</small>
-								</div> <span class="text-success">#{mbService.calculateServiceNumberOfDays()} jours</span>
+								</div> <span class="text-success">#{mbService.calculateServiceNumberOfDays()}
+									jours</span>
 							</li>
 							<li class="list-group-item d-flex justify-content-between"><span>Total
 									(EUR)</span> <strong>#{mbService.calculatePrice()}</strong></li>
@@ -236,50 +260,133 @@
 					</div>
 					<!-- Cart -->
 
-						<button type="button" class="get-started-btn" data-toggle="modal"
-							data-target="#ReservationModal">Réserver</button>
+					<button type="button" class="get-started-btn" data-toggle="modal"
+						data-target="#reservationModal">Paiement</button>
 
 				</div>
 			</div>
 
 		</div>
 		<!--Grid row--> </main>
-	
-	<b:modal id="ReservationModal" closable="false" close-on-escape="false"
-		backdrop="false">
 
-		<div class="modal-body">
-			<div class="form-title text-center">
-				<h3>Récapitulatif</h3>
-				<br />
-			</div>
-			<div class="d-flex flex-column text-center">
-				<b:form id="loginForm">
-					<div class="form-group">
-						 Terrain concerné : #{mbService.field.name}
-					</div>
-					<div class="form-group">
-						 Offre sélectionnée : #{mbService.offer.name}
-					</div>
-					<div class="form-group">
-						 Date de prestation : Du #{mbService.startDate} au #{mbService.endDate} 
-					</div>
-					<div class="form-group">
-						 Prix : #{mbService.calculatePrice()} €
-					</div>
-					<b:message for="inpPassword" />
+		<b:modal id="reservationModal" closable="false"
+			close-on-escape="false" backdrop="false">
+
+			<div class="modal-body">
+				<div class="form-title text-center">
+					<h1>Récapitulatif</h1>
 					<br />
-					<b:commandButton class="btnLogin" value="Confirmer"
-						action="#{mbService.createService()}" />
+					<hr />
+				</div>
+				<div class="d-flex flex-column text-center">
+					<b:form id="RecapForm">
+						<div class="recap-box">
+							<div class="form-group">
+								<h3>
+									<strong>Terrain concerné : #{mbService.field.name}</strong>
+								</h3>
+							</div>
 
-				</b:form>
+							<div class="form-group">
+
+								<h3>
+									<strong> Offre sélectionnée : #{mbService.offer.name}
+									</strong>
+								</h3>
+							</div>
+							<div class="form-group">
+								<h3>
+									<strong> Date de prestation : Du
+										#{mbService.startDate} au #{mbService.endDate} </strong>
+								</h3>
+							</div>
+							<div class="form-group">
+								<h3 style="color: red;">
+									<strong> Prix : #{mbService.calculatePrice()} € </strong>
+								</h3>
+							</div>
+
+						</div>
+						<hr />
+
+						<div class="form-title text-center">
+							<h1>Payement</h1>
+							<br />
+						</div>
+
+						<div clas="payment-box">
+							<div class="logo-payment">
+
+								<img src="https://i.imgur.com/28akQFX.jpg" width="200px"
+									height="60px" /> <img src="https://i.imgur.com/5QFsx7K.jpg"
+									width="200px" height="60px" />
+
+							</div>
+							<div class="form-group">
+
+								<div class="som-payment">
+									<b:selectOneMenu id="inpPaymentMethod"
+										value="#{mbService.paymentMethod}" required="true"
+										converter="entityConverter"
+										requiredMessage="Séléctionnez un moyen de paiement">
+										<f:selectItem itemLabel="Séléctionnez une moyen de paiment"
+											itemValue="" />
+										<f:selectItems value="#{mbPaymentMethod.allPaymentMethods()}"
+											var="method" itemLabel="#{method.payment}"
+											itemValue="#{method}" />
+									</b:selectOneMenu>
+								</div>
+								<b:message id="paymentMethodMessage" for="inpPaymentMethod" />
+							</div>
+
+							<div class="form-group">
+								<input type="text" class="form-control"
+									placeholder="Nom sur la carte" aria-label="Username"
+									aria-describedby="basic-addon1" />
+							</div>
+							<div class="form-group">
+								<input type="text" class="form-control"
+									placeholder="&#xf09d; Numéro de carte"
+									style="font-family: Arial, FontAwesome" aria-label="Username"
+									aria-describedby="basic-addon1" />
+							</div>
+
+							<div class="form-group">
+								<div class="cvc-date">
+									<div id="expiration-carte">
+										<input type="text" class="form-control"
+											placeholder="&#xf073; Expiration"
+											style="font-family: Arial, FontAwesome" aria-label="Username"
+											aria-describedby="basic-addon1" />
+									</div>
+									<div id="cvc">
+										<input type="text" class="form-control"
+											placeholder="&#xf023; CVC"
+											style="font-family: Arial, FontAwesome" aria-label="Username"
+											aria-describedby="basic-addon1" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="checkbox" value=""
+								id="defaultCheck1" /> <label class="form-check-label"
+								for="defaultCheck1"> J'ai lu et j'accepte les conditions
+								qui m'engagent à respecter les termes du contrat. </label>
+						</div>
+
+						<br />
+						<b:commandButton class="btnLogin" value="Confirmer"
+							action="#{mbService.createServiceRequest()}" />
+
+					</b:form>
+				</div>
 			</div>
-		</div>
 
-		<f:facet name="footer">
-			<b:button id="close" value="Close" dismiss="modal" />
-		</f:facet>
-	</b:modal>
+			<f:facet name="footer">
+				<b:button id="close" value="Close" dismiss="modal" />
+			</f:facet>
+		</b:modal>
 
 
 	</ui:define>
