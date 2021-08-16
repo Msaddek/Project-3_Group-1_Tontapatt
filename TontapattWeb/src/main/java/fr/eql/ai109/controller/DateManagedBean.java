@@ -2,6 +2,8 @@ package fr.eql.ai109.controller;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -33,6 +35,18 @@ public class DateManagedBean implements Serializable {
 	}
 	public void calculateMinimumServiceEndDate(LocalDate startDate) {
 		minimumServiceEndDate = startDate.plusDays(1);
+	}
+	
+	public String localDateTimeFormatter(LocalDateTime localDateTime) {
+        DateTimeFormatter formatter = DateTimeFormatter
+                .ofPattern("dd/MM/yyyy");
+        return localDateTime.format(formatter);
+    }
+	
+	public String localDateTimeFormatterWithHour(LocalDateTime localDateTime) {
+		DateTimeFormatter formatter = DateTimeFormatter
+                .ofPattern("dd/MM/yyyy HH:mm");
+        return localDateTime.format(formatter);
 	}
 
 	public LocalDate getMaximumAgeDate() {

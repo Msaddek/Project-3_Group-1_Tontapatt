@@ -232,13 +232,39 @@ public class ShearingOfferDAO extends GenericDAO<ShearingOffer>
 		LocalDate now = LocalDate.now();
 		String sqlQueryShearingOffers = "SELECT so FROM ShearingOffer so "
 				+ "WHERE so.breeder=:userParam AND so.withdrawalDate is NULL "
-				+ "AND so.endDate>=:dateNowParam AND ORDER BY so.id DESC";
+				+ "AND so.endDate>=:dateNowParam ORDER BY so.id DESC";
 		String sqlQueryPhotos = "SELECT op FROM ShearingOfferPhoto op WHERE "
 				+ "op.shearingOffer=:offerParam";
 		try {
 			shearingOffers = new HashSet<ShearingOffer>(
 					em.createQuery(sqlQueryShearingOffers)
 							.setParameter("userParam", connectedUser)
+							.setParameter("dateNowParam", now).setMaxResults(3)
+							.getResultList());
+			for (ShearingOffer shearingOffer : shearingOffers) {
+				shearingOffer
+						.setPhotos(new HashSet<>(em.createQuery(sqlQueryPhotos)
+								.setParameter("offerParam", shearingOffer)
+								.getResultList()));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return shearingOffers;
+	}
+
+	@Override
+	public Set<ShearingOffer> getLastThree() {
+		Set<ShearingOffer> shearingOffers = null;
+		LocalDate now = LocalDate.now();
+		String sqlQueryShearingOffers = "SELECT so FROM ShearingOffer so "
+				+ "WHERE so.withdrawalDate is NULL "
+				+ "AND so.endDate>=:dateNowParam ORDER BY so.id DESC";
+		String sqlQueryPhotos = "SELECT op FROM ShearingOfferPhoto op WHERE "
+				+ "op.shearingOffer=:offerParam";
+		try {
+			shearingOffers = new HashSet<ShearingOffer>(
+					em.createQuery(sqlQueryShearingOffers)
 							.setParameter("dateNowParam", now).setMaxResults(3)
 							.getResultList());
 			for (ShearingOffer shearingOffer : shearingOffers) {
