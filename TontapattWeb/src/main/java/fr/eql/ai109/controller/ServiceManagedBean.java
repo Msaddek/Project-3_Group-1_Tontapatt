@@ -119,7 +119,7 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 
 		return "/selectedOffer.xhtml?faces-redirect=true";
 	}
-	
+
 	public String selectService() {
 
 		return "/selectedService.xhtml?faces-redirect=true";
@@ -152,7 +152,7 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 		service.setValidationDate(LocalDateTime.now());
 		service = business.update(service);
 		init();
-		return "/selectedService.xhtml?faces-redirect=true";
+		return "/selectedService.xhtml?faces-redirect=false";
 	}
 
 	public String cancelServiceRequest() {
@@ -160,7 +160,7 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 		service.setCancellationReason(cancellationReason);
 		service = business.update(service);
 		init();
-		return "/selectedService.xhtml?faces-redirect=true";
+		return "/selectedService.xhtml?faces-redirect=false";
 	}
 
 	public String refuseServiceRequest() {
@@ -168,7 +168,7 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 		service.setRefusalReason(refusalReason);
 		service = business.update(service);
 		init();
-		return "/selectedService.xhtml?faces-redirect=true";
+		return "/selectedService.xhtml?faces-redirect=false";
 	}
 
 	public String cancelServicePrematurely() {
@@ -176,39 +176,43 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 		service.setPrematureCancellationReason(prematureCancellationReason);
 		service = business.update(service);
 		init();
-		return "/selectedService.xhtml?faces-redirect=true";
+		return "/selectedService.xhtml?faces-redirect=false";
 	}
 
 	public String setupEquipment() {
 		service.setEquipmentSetupDate(LocalDateTime.now());
 		service = business.update(service);
 		init();
-		return "/selectedService.xhtml?faces-redirect=true";
+		return "/selectedService.xhtml?faces-redirect=false";
 	}
 
 	public String uninstallEquipment() {
 		service.setEquipmentUninstallDate(LocalDateTime.now());
 		service = business.update(service);
 		init();
-		return "/selectedService.xhtml?faces-redirect=true";
+		return "/selectedService.xhtml?faces-redirect=false";
 	}
 
 	public String setupHerd() {
 		service.setHerdSetupDate(LocalDateTime.now());
 		service = business.update(service);
 		init();
-		return "/selectedService.xhtml?faces-redirect=true";
+		return "/selectedService.xhtml?faces-redirect=false";
 	}
 
 	public String uninstallHerd() {
 		service.setHerdUninstallDate(LocalDateTime.now());
 		service = business.update(service);
 		init();
-		return "/selectedService.xhtml?faces-redirect=true";
+		return "/selectedService.xhtml?faces-redirect=false";
 	}
 
 	public Long calculateServiceNumberOfDays() {
 		return ChronoUnit.DAYS.between(startDate, endDate);
+	}
+	
+	public Long calculateServiceNumberOfDaysByService() {
+		return ChronoUnit.DAYS.between(service.getStartDate(), service.getEndDate());
 	}
 
 	public Integer calculateRequiredAnimalNumber() {
@@ -235,7 +239,7 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 
 	public Double calculateVATPrice() {
 		return (calculateTotalAnimalPrice() + calculateTravelDistancePrice()
-				+ calculateInterventionPrice()) * VAT;
+		+ calculateInterventionPrice()) * VAT;
 	}
 
 	public Double calculatePrice() {
@@ -265,6 +269,24 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 			e.printStackTrace();
 		}
 		return json;
+	}
+	
+	public String serviceState() {
+		if (connectUserPendingServices.contains(service)) {
+			if(service.getValidationDate() != null) {
+				return "Acceptée";
+			}
+			else {
+				return "En attente";
+			}
+		}else if (connectUserInProgressServices.contains(service)) {
+			return "En cours";
+		}else if (connectUserFinishedServices.contains(service)) {
+			return "Terminée";
+		}else if (connectUserCancelledServices.contains(service)) {
+			return "Annulée";
+		}
+		return "Pas de status";
 	}
 
 	public Integer newPendingService() {

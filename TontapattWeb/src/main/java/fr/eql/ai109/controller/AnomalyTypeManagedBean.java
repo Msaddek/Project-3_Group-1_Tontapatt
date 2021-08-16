@@ -1,16 +1,17 @@
 package fr.eql.ai109.controller;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
 import fr.eql.ai109.ibusiness.AnomalyTypeIBusiness;
 import fr.eql.ai109.tontapatt.entity.AnomalyType;
 
 @ManagedBean(name = "mbAnomalyType")
-@SessionScoped
+@ViewScoped
 public class AnomalyTypeManagedBean implements Serializable {
 
 	/**
@@ -20,7 +21,14 @@ public class AnomalyTypeManagedBean implements Serializable {
 
 	@EJB
 	AnomalyTypeIBusiness business;
+	
 	private AnomalyType anomalyType;
+	
+	private List<AnomalyType> anomalyTypes;
+	
+	public List<AnomalyType> allAnomalyTypes(){
+		return business.getAll();
+	}
 
 	public AnomalyType getAnomalyType() {
 		return anomalyType;
@@ -28,6 +36,14 @@ public class AnomalyTypeManagedBean implements Serializable {
 
 	public void setAnomalyType(AnomalyType anomalyType) {
 		this.anomalyType = anomalyType;
+	}
+
+	public List<AnomalyType> getAnomalyTypes() {
+		return anomalyTypes;
+	}
+
+	public void setAnomalyTypes(List<AnomalyType> anomalyTypes) {
+		this.anomalyTypes = anomalyTypes;
 	}
 
 }
