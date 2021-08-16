@@ -43,7 +43,6 @@ public class CancellationReasonBusiness implements CancellationReasonIBusiness {
 
 	@Override
 	public List<CancellationReason> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return cancellationReasonIDAO.getAll();
 	}
 }
