@@ -1929,3 +1929,9 @@ header.scrolled nav a {
 	font-size: 16px !important;
 	text-decoration: solid;
 }
+
+#btnAnomalie {
+	background-color: orange;
+    width: fit-content;
+    margin: 0 auto;
+}

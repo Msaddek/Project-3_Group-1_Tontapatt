@@ -228,15 +228,95 @@
 								<h2>Anomalies</h2>
 							</div>
 						</div>
+
+
+						<button type="button" class="get-started-btn" data-toggle="modal"
+							data-target="#anomalieModal" id="btnAnomalie">Nouvelle
+							anomalie</button>
+
+						<div class="row">
+
+							<div class="table-box">
+								<div class="table-offer">
+									<table class="table table-dark table-striped">
+										<thead>
+											<tr>
+												<th scope="col">Numéro</th>
+												<th scope="col">Déclarant</th>
+												<th scope="col">Date d'émission</th>
+												<th scope="col">Type</th>
+												<th scope="col">Status</th>
+											</tr>
+										</thead>
+										<tbody>
+
+
+											<tr>
+												<th scope="row">ANM215405</th>
+												<td>21/10/2021</td>
+												<td>Vous</td>
+												<td>Animal évadé</td>
+												<td>Réglée</td>
+
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
 					</div>
 					<!--/.Card-->
 
 				</div>
 				<!--Grid column-->
 
+
+
 			</div>
 		</div>
-		</main>
+
+		<b:modal id="anomalieModal" closable="false" close-on-escape="false"
+			backdrop="false">
+
+			<div class="modal-body">
+				<div class="form-title text-center">
+					<h3>Déclarer une anomalie</h3>
+					<br />
+				</div>
+				<div class="d-flex flex-column text-center">
+					<b:form id="loginForm">
+						<div class="form-group">
+							<b:selectOneMenu id="inpUserField" value="#{mbService.field}"
+								required="true" converter="entityConverter"
+								requiredMessage="Séléctionnez un type">
+								<f:selectItem itemLabel="Séléctionnez un type" itemValue="" />
+								<f:selectItems value="#{mbField.connectedUserFields}"
+									var="field" itemLabel="#{field.name}" itemValue="#{field}" />
+
+							</b:selectOneMenu>
+						</div>
+						<div class="form-group">
+							<b:inputTextarea placeholder="Décrivez le plus précisement possible votre anomalie"
+								value="" 
+								>
+								
+							</b:inputTextarea>
+						</div>
+
+					</b:form>
+				</div>
+			</div>
+			<div class="modal-footer d-flex justify-content-center">
+				<div class="signup-section">
+
+					<h4></h4>
+				</div>
+			</div>
+
+			<f:facet name="footer">
+				<b:button id="close" value="Fermer" dismiss="modal" />
+			</f:facet>
+		</b:modal> </main>
 
 	</ui:define>
 
