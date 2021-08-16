@@ -44,7 +44,6 @@ public class PrematureCancellationReasonBusiness
 
 	@Override
 	public List<PrematureCancellationReason> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return prematureCancellationReasonerviceIDAO.getAll();
 	}
 }
