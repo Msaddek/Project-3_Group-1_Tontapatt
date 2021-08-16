@@ -26,27 +26,27 @@ public class Anomaly implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
-	
+
 	@Column(name = "creation_date", nullable = false)
 	private LocalDateTime creationDate;
-	
+
 	@Column(name = "description", nullable = false)
 	private String description;
-	
+
 	@Column(name = "end_date", nullable = true)
 	private LocalDateTime endDate;
-	
+
 	@Column(name = "anomaly_number", nullable = false)
-	private Integer anomalyNumber;
-	
+	private String anomalyNumber;
+
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id", nullable = false)
 	private Service service;
-	
+
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id", nullable = false)
 	private User declarer;
-	
+
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id", nullable = false)
 	private AnomalyType anomalyType;
@@ -119,11 +119,11 @@ public class Anomaly implements Serializable {
 		this.endDate = endDate;
 	}
 
-	public Integer getAnomalyNumber() {
+	public String getAnomalyNumber() {
 		return anomalyNumber;
 	}
 
-	public void setAnomalyNumber(Integer anomalyNumber) {
+	public void setAnomalyNumber(String anomalyNumber) {
 		this.anomalyNumber = anomalyNumber;
 	}
 
