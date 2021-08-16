@@ -121,8 +121,12 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 	}
 
 	public String selectService() {
+		
+		if(service.getField().getOwner().equals(connectedUser)) {
+			return "/selectedServiceOwner.xhtml?faces-redirect=true";
+		}
 
-		return "/selectedService.xhtml?faces-redirect=true";
+		return "/selectedServiceBreeder.xhtml?faces-redirect=true";
 	}
 
 	public String createServiceRequest() {
@@ -302,6 +306,17 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 			return "notification-visible";
 		}
 	}
+	
+	public String anomalyCreationButton() {
+        switch (serviceState()) {
+        case "Acceptée":
+            return "false";
+        case "En cours":
+            return "false";
+        default:
+            return "true";
+        }
+    }
 
 	public User getConnectedUser() {
 		return connectedUser;

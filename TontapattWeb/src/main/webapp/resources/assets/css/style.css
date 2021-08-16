@@ -1617,13 +1617,21 @@ header.scrolled nav a {
 
 /* OFFER PARAMETERS */
 .box-parameters {
-	width: 750px;
+	width: 600px;
 	height: 200px;
 	margin: 0 auto;
 	display: flex;
 	padding: 15px;
-	margin-bottom: 20px;
-	border-bottom: 1px solid #eef0ef;
+}
+
+.box-all-offer-user .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: black;
+    background-color: white;
+}
+
+.box-all-offer-user {
+	padding-left: 80px;
+    border-right: 1px solid #eef0ef;
 }
 
 .carousel-box {
@@ -1815,9 +1823,8 @@ header.scrolled nav a {
 .course-item .img-responsive, .thumbnail>img, .thumbnail a>img,
  .carousel-inner>.item>img, .carousel-inner>.item>a>img {
     display: block;
-    height: 250px;
-    width: 350px;
-    border-radius: 0%;
+    height: auto;
+    width: auto;
 }
 
 .box-photo-result:hover {
@@ -1928,4 +1935,14 @@ header.scrolled nav a {
 	font-weight: bold !important;
 	font-size: 16px !important;
 	text-decoration: solid;
+}
+
+#btnAnomalie {
+	background-color: orange;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.fade {
+	opacity: 1 !important;
 }
