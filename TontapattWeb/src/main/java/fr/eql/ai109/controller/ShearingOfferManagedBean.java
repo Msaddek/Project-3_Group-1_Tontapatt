@@ -151,7 +151,6 @@ public class ShearingOfferManagedBean implements Serializable {
 	}
 
 	public void uploadPhoto(FileUploadEvent event) {
-		System.out.println("connected user " + connectedUser.getId());
 		URL url = null;
 		String destination = null;
 		String messageUploded = null;
