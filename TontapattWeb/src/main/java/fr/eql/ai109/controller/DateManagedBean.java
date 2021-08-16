@@ -42,6 +42,12 @@ public class DateManagedBean implements Serializable {
                 .ofPattern("dd/MM/yyyy");
         return localDateTime.format(formatter);
     }
+	
+	public String localDateTimeFormatterWithHour(LocalDateTime localDateTime) {
+		DateTimeFormatter formatter = DateTimeFormatter
+                .ofPattern("dd/MM/yyyy HH:mm");
+        return localDateTime.format(formatter);
+	}
 
 	public LocalDate getMaximumAgeDate() {
 		return maximumAgeDate;
