@@ -25,72 +25,84 @@
 			</div>
 		</div>
 
-<div class="d-flex align-items-start">
+		<div class="d-flex align-items-start">
+			<div class="box-all-offer-user">
+				<div class="nav flex-column nav-pills me-3" id="v-pills-tab"
+					role="tablist" aria-orientation="vertical">
 
-		<div class="nav flex-column nav-pills me-3" id="v-pills-tab"
-			role="tablist" aria-orientation="vertical">
-			
-			<c:forEach items="#{mbShearingOffer.connectedUserOffers}" var="offer">
-				<button class="nav-link active" id="v-pills-#{offer.id}-tab"
-					data-bs-toggle="pill" data-bs-target="#v-pills-#{offer.id}"
-					type="button" role="tab" aria-controls="v-pills-#{offer.id}"
-					aria-selected="true">
+					<c:forEach items="#{mbShearingOffer.connectedUserOffers}"
+						var="offer">
 
-					<div class="box-parameters">
-						<div class="carousel-box">
-							<b:carousel class="carousel">
-								<c:forEach items="#{offer.photos}" var="photo">
-									<b:carouselItem>
-										<b:image value="resources/img/offers/#{photo.link}" />
-									</b:carouselItem>
-								</c:forEach>
-							</b:carousel>
-						</div>
+						<button class="nav-link" id="v-pills-box#{offer.id}-tab"
+							data-bs-toggle="pill" data-bs-target="#v-pills-box#{offer.id}"
+							type="button" role="tab" aria-controls="v-pills-box#{offer.id}"
+							aria-selected="true">
 
-						<div class="wrap-image">
-							
-								<div class="description-box">
-									<div class="title-zone">
-										<div class="icon-parameters-box">
-											<b:iconAwesome name="tree" size="lg" />
-										</div>
-										<h1>#{offer.name}</h1>
-									</div>
-									<div
-										class="d-flex justify-content-between align-items-center mb-3">
-										<h4>#{offer.zipCodeCity.name}</h4>
-									</div>
-									<div class="field-description">
-										<p>#{offer.description.subSequence(0,10)}...</p>
-									</div>
+							<div class="box-parameters">
+								<div class="carousel-box">
+									<b:carousel class="carousel">
+										<c:forEach items="#{offer.photos}" var="photo">
+											<b:carouselItem>
+												<b:image value="resources/img/offers/#{photo.link}" />
+											</b:carouselItem>
+										</c:forEach>
+									</b:carousel>
 								</div>
-							
-						
-							<br />
 
-						</div>
+								<div class="wrap-image">
 
-					</div>
+									<div class="description-box">
+										<div class="title-zone">
+											<div class="icon-parameters-box">
+												<b:iconAwesome name="tree" size="lg" />
+											</div>
+											<h1>#{offer.name}</h1>
+										</div>
+										<div
+											class="d-flex justify-content-between align-items-center mb-3">
+											<h4>#{offer.zipCodeCity.name}</h4>
+										</div>
+										<div class="field-description">
+											<p>#{offer.description.subSequence(0,10)}...</p>
+										</div>
+									</div>
 
 
+									<br />
+
+								</div>
+
+							</div>
+
+							<hr />
 
 
-				</button>
-			</c:forEach>
-		</div>
+						</button>
 
-
-		<div class="tab-content" id="v-pills-tabContent">
-
-			<c:forEach items="#{mbShearingOffer.connectedUserOffers}" var="offer">
-				<div class="tab-pane fade" id="v-pills-#{offer.id}" role="tabpanel"
-					aria-labelledby="v-pills-#{offer.id}-tab">
-					<h1>#{offer.name} hello</h1>
+					</c:forEach>
 				</div>
-			</c:forEach>
-		</div>
+			</div>
 
-</div>
+			<div class="tab-content" id="v-pills-tabContent">
+
+				<c:forEach items="#{mbShearingOffer.connectedUserOffers}"
+					var="offer">
+					<div class="tab-pane fade" id="v-pills-box#{offer.id}"
+						role="tabpanel" aria-labelledby="v-pills-box#{offer.id}-tab">
+
+						
+							
+								<div style="margin: 0 auto;">
+									<h1>#{offer.name}</h1>
+								</div>
+								<hr />
+							
+					
+					</div>
+				</c:forEach>
+			</div>
+
+		</div>
 	</ui:define>
 
 </ui:composition>
