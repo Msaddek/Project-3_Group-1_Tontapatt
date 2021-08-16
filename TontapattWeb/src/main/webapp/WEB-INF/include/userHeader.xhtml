@@ -139,21 +139,6 @@
 						<b:message id="inpUserFieldMessage" for="inpUserField" />
 						<br />
 
-
-						<label for="inpServiceType">Type de service :</label>
-						<br />
-						<p:selectOneMenu id="inpServiceType" value="#{mbUser.category}"
-							required="false" converter="entityConverter"
-							requiredMessage="Séléctionnez un service">
-							<f:selectItem itemLabel="Séléctionnez un service" itemValue="" />
-							<f:selectItems value="#{mbUserCategory.allCategories()}"
-								var="category" itemLabel="#{category.category}"
-								itemValue="#{category}" />
-						</p:selectOneMenu>
-						<br />
-						<b:message id="userServiceTypeMessage" for="inpServiceType" />
-						<br />
-
 						<div class="search-dates">
 							<div class="search-date">
 								<label style="margin-right: 10px" for="inpStartDate">Date
