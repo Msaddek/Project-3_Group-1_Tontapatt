@@ -43,7 +43,6 @@ public class RefusalReasonBusiness implements RefusalReasonIBusiness {
 
 	@Override
 	public List<RefusalReason> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return refusalReasonIDAO.getAll();
 	}
 }
