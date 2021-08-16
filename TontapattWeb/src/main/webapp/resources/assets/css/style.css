@@ -1411,6 +1411,7 @@ img {
 	max-width: 100%;
 	margin-bottom: 1rem;
 	background-color: transparent;
+	border: 1px solid;
 }
 
 /* CREATION OFFRE */
@@ -2002,4 +2003,51 @@ header.scrolled nav a {
 
 .fade {
 	opacity: 1 !important;
+}
+
+/* TABLEAU DE BORD */
+
+.section-title-user h2 {
+	font-size: 14px;
+	font-weight: 500;
+	padding: 0;
+	line-height: 1px;
+	margin: 0 0 5px 0;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	color: #aaaaaa;
+	font-family: "Poppins", sans-serif;
+}
+
+.section-title-user h2::after {
+	content: "";
+	width: 120px;
+	height: 1px;
+	display: inline-block;
+	background: #9ae1af;
+	margin: 4px 10px;
+}
+
+.section-title-user p {
+	margin: 0;
+	margin: 0;
+	font-size: 25px;
+	font-weight: 700;
+	text-transform: uppercase;
+	font-family: "Poppins", sans-serif;
+	color: #37423b;
+}
+
+.course-item .img-responsive, .thumbnail>img, .thumbnail a>img, .carousel-inner>.item>img, .carousel-inner>.item>a>img {
+	border-radius: 0px;
+}
+
+.offre-img-block .course-item {
+	width: 380px;
+}
+
+.offre-img-block .course-item .img-responsive, .thumbnail>img, .thumbnail a>img, .carousel-inner>.item>img, .carousel-inner>.item>a>img {
+    display: block;
+    height: 300px !important;
+    width: 100%;
 }
