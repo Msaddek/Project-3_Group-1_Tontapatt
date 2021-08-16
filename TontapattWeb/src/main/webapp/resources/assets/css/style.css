@@ -2043,3 +2043,11 @@ header.scrolled nav a {
 	height:180px;
 }
 
+.scroller {
+  overflow: scroll;
+    scroll-behavior: smooth;
+    height: 500px;
+    overflow-x: hidden;
+}
+
+
