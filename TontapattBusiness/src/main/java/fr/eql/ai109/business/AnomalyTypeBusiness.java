@@ -43,7 +43,6 @@ public class AnomalyTypeBusiness implements AnomalyTypeIBusiness {
 
 	@Override
 	public List<AnomalyType> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return anomalyTypeIDAO.getAll();
 	}
 }
