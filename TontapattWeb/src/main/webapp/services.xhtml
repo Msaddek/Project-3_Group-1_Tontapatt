@@ -94,7 +94,7 @@
 											<td>#{service.endDate}</td>
 											<td>#{service.field.name}</td>
 											<td>#{service.shearingOffer.name}</td>
-											<td>#{service.price} €</td>
+											<td>#{mbService.formatPrice(service.price)} €</td>
 											<td><span class="badge badge-pill badge-primary"
 												id="blue-badge">En cours</span></td>
 
@@ -151,7 +151,7 @@
 											<td>#{service.endDate}</td>
 											<td>#{service.field.name}</td>
 											<td>#{service.shearingOffer.name}</td>
-											<td>#{service.price} €</td>
+											<td>#{mbService.formatPrice(service.price)} €</td>
 											<td><span class="badge badge-pill badge-warning"
 												id="yellow-badge">#{service.validationDate eq null ? "En attente" : "Acceptée"}</span></td>
 										</tr>
@@ -200,7 +200,7 @@
 											<td>#{service.endDate}</td>
 											<td>#{service.field.name}</td>
 											<td>#{service.shearingOffer.name}</td>
-											<td>#{service.price} €</td>
+											<td>#{mbService.formatPrice(service.price)} €</td>
 											<td><span class="badge badge-pill badge-success"
 												id="green-badge">Terminée</span></td>
 
@@ -250,7 +250,7 @@
 											<td>#{service.endDate}</td>
 											<td>#{service.field.name}</td>
 											<td>#{service.shearingOffer.name}</td>
-											<td>#{service.price} €</td>
+											<td>#{mbService.formatPrice(service.price)} €</td>
 											<td><span class="badge badge-pill badge-danger"
 												id="red-badge">Annulée</span></td>
 
