@@ -41,9 +41,10 @@
 					<button class="nav-link" id="pills-profile-tab"
 						data-bs-toggle="pill" data-bs-target="#pills-profile"
 						type="button" role="tab" aria-controls="pills-profile"
-						aria-selected="false">En attente</button><span id="#{mbService.notificationVisibility()}"
-				class="badge badge-pill badge-danger #{mbService.notificationVisibility()}">
-				#{mbService.newPendingService()}</span>
+						aria-selected="false">En attente</button>
+					<span id="#{mbService.notificationVisibility()}"
+					class="badge badge-pill badge-danger #{mbService.notificationVisibility()}">
+						#{mbService.newPendingService()}</span>
 				</li>
 				<li class="nav-item" role="presentation">
 					<button class="nav-link" id="pills-contact-tab"
@@ -89,7 +90,12 @@
 													rendered="#{service.shearingOffer.breeder eq mbUser.user}">
 													<span class="badge badge-pill badge-dark">Eleveur</span>
 												</ui:fragment></th>
-											<td>#{service.invoiceNumber}</td>
+											<td><p:commandLink class="prestation-redirect"
+													action="#{mbService.selectService()}">
+													<f:setPropertyActionListener value="#{service}"
+														target="#{mbService.service}" />
+											#{service.invoiceNumber}
+											</p:commandLink></td>
 											<td>#{service.startDate}</td>
 											<td>#{service.endDate}</td>
 											<td>#{service.field.name}</td>
@@ -141,10 +147,10 @@
 													<span class="badge badge-pill badge-dark">Eleveur</span>
 												</ui:fragment></th>
 
-											<td>
-											<p:commandLink class="prestation-redirect" action="#{mbService.selectService()}">
-											<f:setPropertyActionListener value="#{service}"
-											target="#{mbService.service}" />
+											<td><p:commandLink class="prestation-redirect"
+													action="#{mbService.selectService()}">
+													<f:setPropertyActionListener value="#{service}"
+														target="#{mbService.service}" />
 											#{service.invoiceNumber}
 											</p:commandLink></td>
 											<td>#{service.startDate}</td>
@@ -153,7 +159,11 @@
 											<td>#{service.shearingOffer.name}</td>
 											<td>#{mbService.formatPrice(service.price)} €</td>
 											<td><span class="badge badge-pill badge-warning"
-												id="yellow-badge">#{service.validationDate eq null ? "En attente" : "Acceptée"}</span></td>
+												id="yellow-badge">#{service.validationDate eq null ?
+													"En attente" : "Acceptée"}</span><span
+												id="#{mbService.notificationVisibilitySingular(service)}-singular"
+												class="badge badge-pill badge-danger #{mbService.notificationVisibilitySingular(service)}"> </span>
+											</td>
 										</tr>
 
 
@@ -195,7 +205,12 @@
 													rendered="#{service.shearingOffer.breeder eq mbUser.user}">
 													<span class="badge badge-pill badge-dark">Eleveur</span>
 												</ui:fragment></th>
-											<td>#{service.invoiceNumber}</td>
+											<td><p:commandLink class="prestation-redirect"
+													action="#{mbService.selectService()}">
+													<f:setPropertyActionListener value="#{service}"
+														target="#{mbService.service}" />
+											#{service.invoiceNumber}
+											</p:commandLink></td>
 											<td>#{service.startDate}</td>
 											<td>#{service.endDate}</td>
 											<td>#{service.field.name}</td>
@@ -245,7 +260,12 @@
 													rendered="#{service.shearingOffer.breeder eq mbUser.user}">
 													<span class="badge badge-pill badge-dark">Eleveur</span>
 												</ui:fragment></th>
-											<td>#{service.invoiceNumber}</td>
+											<td><p:commandLink class="prestation-redirect"
+													action="#{mbService.selectService()}">
+													<f:setPropertyActionListener value="#{service}"
+														target="#{mbService.service}" />
+											#{service.invoiceNumber}
+											</p:commandLink></td>
 											<td>#{service.startDate}</td>
 											<td>#{service.endDate}</td>
 											<td>#{service.field.name}</td>
