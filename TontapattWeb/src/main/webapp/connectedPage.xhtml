@@ -141,16 +141,14 @@
 
 					<div
 						class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
-						<div class="result-box">
-							<div class="offer-box">
-								<div class="course-item">
-									<b:carousel class="carousel">
-										<c:forEach items="#{offer.photos}" var="photo">
-											<b:carouselItem>
-												<b:image value="resources/img/offers/#{photo.link}" />
-											</b:carouselItem>
-										</c:forEach>
-									</b:carousel>
+						<div class="course-item">
+							<b:carousel class="carousel">
+								<c:forEach items="#{offer.photos}" var="photo">
+									<b:carouselItem>
+										<b:image value="resources/img/offers/#{photo.link}" />
+									</b:carouselItem>
+								</c:forEach>
+							</b:carousel>
 
 									<div class="search-result-box">
 										<div class="course-content">
@@ -171,7 +169,7 @@
 														alt="" /> <span>#{offer.breeder.firstName}</span>
 												</div>
 												<div class="trainer-rank d-flex align-items-center">
-													 <span></span>
+													 <span>#{offer.zipCodeCity.name}</span>
 												</div>
 											</div>
 										</div>

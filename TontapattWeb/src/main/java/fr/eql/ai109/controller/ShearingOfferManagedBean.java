@@ -305,6 +305,17 @@ public class ShearingOfferManagedBean implements Serializable {
 		return json;
 	}
 	
+	public String connectedUserOffersAsJson() {
+		ObjectMapper mapper = new ObjectMapper();
+		String json = null;
+		try {
+			json = mapper.writeValueAsString(connectedUserOffers);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return json;
+	}
+	
 	public Set<ShearingOffer> allShearingOffersWithPhotos(){
 		return business.getAllWithPhotos();
 	}
