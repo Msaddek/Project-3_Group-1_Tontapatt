@@ -305,8 +305,8 @@ public class ShearingOfferManagedBean implements Serializable {
 		return json;
 	}
 	
-	public List<ShearingOffer> allShearingOffers(){
-		return business.getAll();
+	public Set<ShearingOffer> allShearingOffersWithPhotos(){
+		return business.getAllWithPhotos();
 	}
 
 	public Set<ShearingOffer> lastThreeShearingOffers(){
