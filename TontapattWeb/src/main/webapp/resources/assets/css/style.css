@@ -383,6 +383,7 @@ h1, h2, h3, h4, h5, h6 {
 	background: url("../img/nature.jpg") top center;
 	background-size: cover;
 	position: relative;
+	box-shadow: 1px 1px 30px black;
 }
 
 #heroM {
@@ -490,6 +491,7 @@ h1, h2, h3, h4, h5, h6 {
 	background: url("../img/natureF.jpg") top center;
 	background-size: cover;
 	position: relative;
+	box-shadow: 1px 1px 30px black;
 }
 
 #heroF:before {
@@ -574,6 +576,7 @@ h1, h2, h3, h4, h5, h6 {
 	background: url("../img/natureO.jpg") top center;
 	background-size: cover;
 	position: relative;
+	box-shadow: 1px 1px 30px black;
 }
 
 #heroO:before {
