@@ -1,6 +1,7 @@
 package fr.eql.ai109.controller;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -116,16 +117,13 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 	}
 
 	public String selectOffer() {
-
 		return "/selectedOffer.xhtml?faces-redirect=true";
 	}
 
 	public String selectService() {
-		
-		if(service.getField().getOwner().equals(connectedUser)) {
+		if (service.getField().getOwner().equals(connectedUser)) {
 			return "/selectedServiceOwner.xhtml?faces-redirect=true";
 		}
-
 		return "/selectedServiceBreeder.xhtml?faces-redirect=true";
 	}
 
@@ -178,6 +176,12 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 	public String cancelServicePrematurely() {
 		service.setPrematureCancellationDate(LocalDateTime.now());
 		service.setPrematureCancellationReason(prematureCancellationReason);
+		if (service.getEquipmentSetupDate() != null) {
+			service.setEquipmentUninstallDate(LocalDateTime.now());
+		}
+		if (service.getHerdSetupDate() != null) {
+			service.setHerdUninstallDate(LocalDateTime.now());
+		}
 		service = business.update(service);
 		init();
 		return "/selectedService.xhtml?faces-redirect=false";
@@ -214,9 +218,10 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 	public Long calculateServiceNumberOfDays() {
 		return ChronoUnit.DAYS.between(startDate, endDate);
 	}
-	
+
 	public Long calculateServiceNumberOfDaysByService() {
-		return ChronoUnit.DAYS.between(service.getStartDate(), service.getEndDate());
+		return ChronoUnit.DAYS.between(service.getStartDate(),
+				service.getEndDate());
 	}
 
 	public Integer calculateRequiredAnimalNumber() {
@@ -243,7 +248,7 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 
 	public Double calculateVATPrice() {
 		return (calculateTotalAnimalPrice() + calculateTravelDistancePrice()
-		+ calculateInterventionPrice()) * VAT;
+				+ calculateInterventionPrice()) * VAT;
 	}
 
 	public Double calculatePrice() {
@@ -275,19 +280,23 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 		return json;
 	}
 	
+	public String formatPrice(Double calculculatedPrice) {
+		DecimalFormat df=new DecimalFormat("#.##");
+		return df.format(calculculatedPrice);
+	}
+
 	public String serviceState() {
 		if (connectUserPendingServices.contains(service)) {
-			if(service.getValidationDate() != null) {
+			if (service.getValidationDate() != null) {
 				return "Acceptée";
-			}
-			else {
+			} else {
 				return "En attente";
 			}
-		}else if (connectUserInProgressServices.contains(service)) {
+		} else if (connectUserInProgressServices.contains(service)) {
 			return "En cours";
-		}else if (connectUserFinishedServices.contains(service)) {
+		} else if (connectUserFinishedServices.contains(service)) {
 			return "Terminée";
-		}else if (connectUserCancelledServices.contains(service)) {
+		} else if (connectUserCancelledServices.contains(service)) {
 			return "Annulée";
 		}
 		return "Pas de status";
@@ -306,17 +315,65 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 			return "notification-visible";
 		}
 	}
-	
+
 	public String anomalyCreationButton() {
-        switch (serviceState()) {
-        case "Acceptée":
-            return "false";
-        case "En cours":
-            return "false";
-        default:
-            return "true";
-        }
-    }
+		switch (serviceState()) {
+		case "Acceptée":
+			return "false";
+		case "En cours":
+			return "false";
+		default:
+			return "true";
+		}
+	}
+
+	public String validateRefuseCancelServiceRequestButton() {
+		if (serviceState() == "En attente") {
+			return "false";
+		}
+		return "true";
+	}
+
+	public String cancelServicePrematurelyButton() {
+		if (serviceState() == "Acceptée" || serviceState() == "En cours") {
+			return "false";
+		}
+		return "true";
+	}
+
+	public String equipmentSetupButton() {
+		if (serviceState() == "En cours"
+				&& service.getEquipmentSetupDate() == null) {
+			return "false";
+		}
+		return "true";
+	}
+
+	public String herdSetupButton() {
+		if (serviceState() == "En cours"
+				&& service.getEquipmentSetupDate() != null
+				&& service.getHerdSetupDate() == null) {
+			return "false";
+		}
+		return "true";
+	}
+
+	public String equipmentUninstallButton() {
+		if (serviceState() == "Terminée"
+				&& service.getEquipmentSetupDate() != null
+				&& service.getEquipmentUninstallDate() == null) {
+			return "false";
+		}
+		return "true";
+	}
+
+	public String herdUnistallButton() {
+		if (serviceState() == "Terminée" && service.getHerdSetupDate() != null
+				&& service.getHerdUninstallDate() == null) {
+			return "false";
+		}
+		return "true";
+	}
 
 	public User getConnectedUser() {
 		return connectedUser;
