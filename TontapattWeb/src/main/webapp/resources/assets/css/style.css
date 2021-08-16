@@ -1616,6 +1616,15 @@ header.scrolled nav a {
 }
 
 /* OFFER PARAMETERS */
+#map-box-offer{
+	padding: 50px;
+    width: 800px;
+    height: 500px;
+    box-shadow: 1px 1px 1px 1px black;
+    margin: 0 150px;
+    border-radius: 1%;
+    margin-bottom: 50px;
+}
 .box-parameters {
 	width: 600px;
 	height: 200px;
@@ -1624,9 +1633,19 @@ header.scrolled nav a {
 	padding: 15px;
 }
 
+.box-parameters .course-item .img-responsive, .thumbnail>img, .thumbnail a>img, .carousel-inner>.item>img, .carousel-inner>.item>a>img {
+    display: block;
+    height: 150px !important;
+    width: 100%;
+}
+.nav-box-offer .nav-link {
+	color: black !important;
+}
+
 .box-all-offer-user .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
-    color: black;
+    color: #5fcf80 !important;
     background-color: white;
+    transform: scale(1.1);
 }
 
 .box-all-offer-user {
@@ -1695,20 +1714,58 @@ header.scrolled nav a {
 	padding-right: 15px;
 }
 
-.box-parameters a {
-	color: black !important;
-	font-size: 14px;
-}
-
-.box-parameters a:hover {
-	color: green !important;
-	text-decoration: solid;
-}
-
 .box-parameters:hover {
 	transform: scale(1.2);
 }
 
+.one-element-offer {
+	padding: 15px;
+    margin: 0 auto;
+}
+
+.two-element-offer {
+	display: flex;
+}
+
+.box-colonne-offer {
+	display: flex;
+	flex-direction: column;
+	margin-top: 40px;
+}
+
+.title-presentation-offer {
+	text-align: center;
+}
+.title-presentation-offer h1 {
+	font-size: 30px !important;
+	font-weight: bold;
+	color: #5fcf80;
+}
+
+.box-presentation-offer {
+	padding: 50px;
+	width: 800px;
+	height: 500px;
+	box-shadow: 1px 1px 1px 1px black;
+    margin: 0 150px;
+    border-radius: 1%;
+    margin-bottom: 50px;
+}
+
+.box-colonne-offer .ui-button.ui-button-text-only .ui-button-text {
+	font-size: 16px;
+}
+
+.box-colonne-offer .ui-button.ui-button-success, body .ui-splitbutton.ui-button-success > .ui-button {
+	width: 20%;
+	margin: 0 auto;
+    margin-top: 20px;
+    background-color: #5fcf80;
+}
+
+.one-element-offer h3 {
+	font-size: 25px !important;
+}
 /* SELECTED OFFER */
 .icon-info-presta {
 	display: flex;
@@ -1823,8 +1880,8 @@ header.scrolled nav a {
 .course-item .img-responsive, .thumbnail>img, .thumbnail a>img,
  .carousel-inner>.item>img, .carousel-inner>.item>a>img {
     display: block;
-    height: auto;
-    width: auto;
+    height: 100%;
+    width: 100%;
 }
 
 .box-photo-result:hover {
