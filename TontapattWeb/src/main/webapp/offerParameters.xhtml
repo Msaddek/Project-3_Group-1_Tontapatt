@@ -38,7 +38,9 @@
 								<div class="carousel-box">
 									<b:carousel class="carousel">
 										<b:carouselItem>
+										<div class="reglage-picture-param">
 											<b:image value="resources/img/carte.jpg" />
+											</div>
 										</b:carouselItem>
 									</b:carousel>
 								</div>
@@ -77,7 +79,9 @@
 										<b:carousel class="carousel">
 											<c:forEach items="#{offer.photos}" var="photo">
 												<b:carouselItem>
-													<b:image value="resources/img/offers/#{photo.link}" />
+													<div class="reglage-picture-param">
+														<b:image value="resources/img/offers/#{photo.link}" />
+													</div>
 												</b:carouselItem>
 											</c:forEach>
 										</b:carousel>
@@ -169,8 +173,7 @@
 									</div>
 
 									<p:commandButton action="#{mbShearingOffer.offerDetails()}"
-										 styleClass="rounded-button ui-button-success"
-										value="Modifier">
+										styleClass="rounded-button ui-button-success" value="Modifier">
 										<f:setPropertyActionListener value="#{offer}"
 											target="#{mbShearingOffer.shearingOffer}" />
 									</p:commandButton>

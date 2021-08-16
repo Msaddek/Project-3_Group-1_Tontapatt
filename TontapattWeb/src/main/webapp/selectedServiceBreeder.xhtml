@@ -5,7 +5,6 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
-	
 
 <ui:composition template="WEB-INF/template/userTemplate.xhtml">
 
@@ -43,7 +42,7 @@
 
 								<div class="row">
 									<div class="category-description">
-										<h2>Informations principales</h2>
+										<h2>Infos principal</h2>
 									</div>
 								</div>
 
@@ -53,7 +52,7 @@
 									<b:iconAwesome class="icon-info" name="info-circle" size="lg" />
 									<div class="icon-info-descr">
 										<h4>Vous êtes : #{mbService.service.field.owner eq
-											mbUser.user ? "Propriétaire de terrain" : "Prestataire"}</h4>
+											mbUser.user ? "Proprietaire de terrain" : "Prestataire"}</h4>
 									</div>
 								</div>
 
@@ -69,7 +68,7 @@
 									<br />
 									<b:iconAwesome class="icon-info" name="info-circle" size="lg" />
 									<div class="icon-info-descr">
-										<h4>Terrain concerné: #{mbService.service.field.name}</h4>
+										<h4>Terrain concérnée: #{mbService.service.field.name}</h4>
 									</div>
 								</div>
 
@@ -166,7 +165,7 @@
 										<div class="icon-info-presta">
 											<b:iconAwesome class="icon-info" name="info-circle" size="lg" />
 											<div class="icon-info-descr">
-												<h4>Propriétaire : #{mbService.service.field.owner eq
+												<h4>Proprietaire : #{mbService.service.field.owner eq
 													mbUser.user ? "Vous" :
 													mbService.service.field.owner.firstName }</h4>
 											</div>
@@ -235,17 +234,62 @@
 						<div class="col-md-6 mb-4">
 
 							<ui:fragment
-								rendered="#{mbService.validateRefuseCancelServiceRequestButton() eq 'false'}">
+								rendered="#{mbService.breederServiceManagementSection() eq 'false'}">
 								<div class="card">
 									<div class="row">
 										<div class="category-description">
-											<h2>Gérer ma demande</h2>
+											<h2>Gérer mon installation</h2>
 										</div>
 									</div>
 
-									<button value="Accepter la demande" class="get-started-btn"
-										data-target="#cancellationModal" data-toggle="modal"
-										id="btnCancel">Annuler la demande</button>
+									<ui:fragment
+										rendered="#{mbService.validateRefuseCancelServiceRequestButton() eq 'false'}">
+										<p:commandButton value="Accepter la demande"
+											styleClass="rounded-button ui-button-warning"
+											action="#{mbService.validateServiceRequest()}"
+											id="btnValidateRequest" />
+
+										<button value="Refuser la demande" class="get-started-btn"
+											data-target="#refuseModal" data-toggle="modal"
+											id="btnRefuseRequest">Refuser la demande</button>
+									</ui:fragment>
+
+									<ui:fragment
+										rendered="#{mbService.cancelServicePrematurelyButton() eq 'false'}">
+										<button value="Annuler la prestation" class="get-started-btn"
+											data-target="#prematureCancelModal" data-toggle="modal"
+											id="btnPrematureCancellation">Annuler la prestation</button>
+									</ui:fragment>
+
+									<ui:fragment
+										rendered="#{mbService.equipmentSetupButton() eq 'false'}">
+										<p:commandButton value="Installer le matériel"
+											styleClass="rounded-button ui-button-warning"
+											action="#{mbService.setupEquipment()}" id="btnEquipmentSetup" />
+									</ui:fragment>
+
+									<ui:fragment
+										rendered="#{mbService.equipmentUninstallButton() eq 'false'}">
+										<p:commandButton value="Désinstaller le matériel"
+											styleClass="rounded-button ui-button-warning"
+											action="#{mbService.uninstallEquipment()}"
+											id="btnEquipmentUninstall" />
+									</ui:fragment>
+
+									<ui:fragment
+										rendered="#{mbService.herdSetupButton() eq 'false'}">
+										<p:commandButton value="Installer le troupeau"
+											class="get-started-btn" action="#{mbService.setupHerd()}"
+											id="btnHerdSetup" />
+									</ui:fragment>
+
+									<ui:fragment
+										rendered="#{mbService.herdUnistallButton() eq 'false'}">
+										<p:commandButton value="Désinstaller le troupeau"
+											styleClass="rounded-button ui-button-warning"
+											action="#{mbService.uninstallHerd()}" id="btnHerdUninstall" />
+									</ui:fragment>
+
 								</div>
 							</ui:fragment>
 
@@ -296,15 +340,12 @@
 								</div>
 							</div>
 						</div>
-
 					</div>
 				</div>
 			</div>
 		</div>
 
-
 		<b:modal id="anomalieModal">
-
 			<div class="modal-body">
 				<div class="form-title text-center">
 					<h3>Déclarer une anomalie</h3>
@@ -344,31 +385,29 @@
 			<f:facet name="footer">
 				<b:button id="close" value="Fermer" dismiss="modal" />
 			</f:facet>
-		</b:modal> <b:modal id="cancellationModal">
+		</b:modal> <b:modal id="refuseModal">
 
 			<div class="modal-body">
 				<div class="form-title text-center">
-					<h3>Annuler la demande de tonte</h3>
+					<h3>Refuser la demande de tonte</h3>
 					<br />
 				</div>
 				<div class="d-flex flex-column text-center">
-					<b:form id="cancellationModalForm">
+					<b:form id="refusalModalForm">
 						<div class="form-group">
-							<b:selectOneMenu id="inpCancellationReason"
-								value="#{mbService.cancellationReason}" required="true"
+							<b:selectOneMenu id="inpRefusalReason"
+								value="#{mbService.refusalReason}" required="true"
 								converter="entityConverter"
 								requiredMessage="Vous devez séléctionner la raison">
 								<f:selectItem itemLabel="Séléctionnez une raison" itemValue="" />
-								<f:selectItems
-									value="#{mbCancellationReason.allCancellationReasons()}"
+								<f:selectItems value="#{mbRefusalReason.allRefusalReasons()}"
 									var="reason" itemLabel="#{reason.reason}" itemValue="#{reason}" />
 
 							</b:selectOneMenu>
-							<b:message id="cancellationReasonMessage"
-								for="inpCancellationReason" />
+							<b:message id="refusalReasonMessage" for="inpRefusalReason" />
 						</div>
-						<b:commandButton value="Annuler la demadne"
-							action="#{mbService.cancelServiceRequest()}" />
+						<b:commandButton value="Refuser la demadne"
+							action="#{mbService.refuseServiceRequest()}" />
 					</b:form>
 				</div>
 			</div>
@@ -380,7 +419,46 @@
 			</div>
 
 			<f:facet name="footer">
-				<b:button id="closeCancellationModal" value="Fermer" dismiss="modal" />
+				<b:button id="closeRefusalModal" value="Fermer" dismiss="modal" />
+			</f:facet>
+		</b:modal> <b:modal id="prematureCancelModal">
+
+			<div class="modal-body">
+				<div class="form-title text-center">
+					<h3>Annuler prématurement la demande de tonte</h3>
+					<br />
+				</div>
+				<div class="d-flex flex-column text-center">
+					<b:form id="prematureCancellationModalForm">
+						<div class="form-group">
+							<b:selectOneMenu id="inpPrematureCancellationReason"
+								value="#{mbService.prematureCancellationReason}" required="true"
+								converter="entityConverter"
+								requiredMessage="Vous devez séléctionner la raison">
+								<f:selectItem itemLabel="Séléctionnez une raison" itemValue="" />
+								<f:selectItems
+									value="#{mbPrematureCancellationReason.allPrematureCancellationReasons()}"
+									var="reason" itemLabel="#{reason.reason}" itemValue="#{reason}" />
+
+							</b:selectOneMenu>
+							<b:message id="prematureCancellationReasonReasonMessage"
+								for="inpPrematureCancellationReason" />
+						</div>
+						<b:commandButton value="Refuser la demadne"
+							action="#{mbService.cancelServicePrematurely()}" />
+					</b:form>
+				</div>
+			</div>
+			<div class="modal-footer d-flex justify-content-center">
+				<div class="signup-section">
+
+					<h4></h4>
+				</div>
+			</div>
+
+			<f:facet name="footer">
+				<b:button id="closePrematureCancelModal" value="Fermer"
+					dismiss="modal" />
 			</f:facet>
 		</b:modal> </main>
 

@@ -39,7 +39,9 @@
 									<b:carousel class="carousel">
 										<c:forEach items="#{offer.photos}" var="photo">
 											<b:carouselItem>
-												<b:image value="resources/img/offers/#{photo.link}" />
+												<div class="photo-reglage">
+													<b:image value="resources/img/offers/#{photo.link}" />
+												</div>
 											</b:carouselItem>
 										</c:forEach>
 									</b:carousel>
@@ -54,7 +56,7 @@
 													<h4>#{offer.race.race}</h4>
 
 													<p class="price">
-														#{mbService.calculatePriceForOfferList(offer) } €</p>
+														#{mbService.formatPrice(mbService.calculatePriceForOfferList(offer))} €</p>
 												</div>
 												<p class="small mb-3">
 													<span class="badge badge-dark">#{offer.race.species.species}</span>
