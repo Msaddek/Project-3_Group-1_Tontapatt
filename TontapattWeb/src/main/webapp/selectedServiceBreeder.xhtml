@@ -232,70 +232,67 @@
 						<!--Grid column-->
 
 						<div class="col-md-6 mb-4">
-						
-						<div class="card">
-								<div class="row">
-									<div class="category-description">
-										<h2>Gérer mon installation</h2>
+
+							<ui:fragment
+								rendered="#{mbService.breederServiceManagementSection() eq 'false'}">
+								<div class="card">
+									<div class="row">
+										<div class="category-description">
+											<h2>Gérer mon installation</h2>
+										</div>
 									</div>
+
+									<ui:fragment
+										rendered="#{mbService.validateRefuseCancelServiceRequestButton() eq 'false'}">
+										<p:commandButton value="Accepter la demande"
+											styleClass="rounded-button ui-button-warning"
+											action="#{mbService.validateServiceRequest()}"
+											id="btnValidateRequest" />
+
+										<button value="Refuser la demande" class="get-started-btn"
+											data-target="#refuseModal" data-toggle="modal"
+											id="btnRefuseRequest">Refuser la demande</button>
+									</ui:fragment>
+
+									<ui:fragment
+										rendered="#{mbService.cancelServicePrematurelyButton() eq 'false'}">
+										<button value="Annuler la prestation" class="get-started-btn"
+											data-target="#prematureCancelModal" data-toggle="modal"
+											id="btnPrematureCancellation">Annuler la prestation</button>
+									</ui:fragment>
+
+									<ui:fragment
+										rendered="#{mbService.equipmentSetupButton() eq 'false'}">
+										<p:commandButton value="Installer le matériel"
+											styleClass="rounded-button ui-button-warning"
+											action="#{mbService.setupEquipment()}" id="btnEquipmentSetup" />
+									</ui:fragment>
+
+									<ui:fragment
+										rendered="#{mbService.equipmentUninstallButton() eq 'false'}">
+										<p:commandButton value="Désinstaller le matériel"
+											styleClass="rounded-button ui-button-warning"
+											action="#{mbService.uninstallEquipment()}"
+											id="btnEquipmentUninstall" />
+									</ui:fragment>
+
+									<ui:fragment
+										rendered="#{mbService.herdSetupButton() eq 'false'}">
+										<p:commandButton value="Installer le troupeau"
+											class="get-started-btn" action="#{mbService.setupHerd()}"
+											id="btnHerdSetup" />
+									</ui:fragment>
+
+									<ui:fragment
+										rendered="#{mbService.herdUnistallButton() eq 'false'}">
+										<p:commandButton value="Désinstaller le troupeau"
+											styleClass="rounded-button ui-button-warning"
+											action="#{mbService.uninstallHerd()}" id="btnHerdUninstall" />
+									</ui:fragment>
+
 								</div>
+							</ui:fragment>
 
-								<ui:fragment
-									rendered="#{mbService.validateRefuseCancelServiceRequestButton() eq 'false'}">
-									<button value="Accepter la demande" class="get-started-btn"
-										onclick="#{mbService.validateServiceRequest()}"
-										id="btnValidateRequest">Accepter la demande</button>
-								</ui:fragment>
-
-								<ui:fragment
-									rendered="#{mbService.validateRefuseCancelServiceRequestButton() eq 'false'}">
-									<button value="Refuser la demande" class="get-started-btn"
-										data-target="#refuseModal" data-toggle="modal"
-										id="btnRefuseRequest">Refuser la demande</button>
-								</ui:fragment>
-
-								<ui:fragment
-									rendered="#{mbService.cancelServicePrematurelyButton() eq 'false'}">
-									<button value="Installer le matériel" class="get-started-btn"
-										data-target="#prematureCancelModal" data-toggle="modal"
-										id="btnPrematureCancellation">Installer le matériel</button>
-								</ui:fragment>
-
-								<ui:fragment
-									rendered="#{mbService.equipmentSetupButton() eq 'false'}">
-									<button value="Installer le matériel" class="get-started-btn"
-										onclick="#{mbService.setupEquipment()}" id="btnEquipmentSetup">Installer
-										le matériel</button>
-								</ui:fragment>
-
-								<ui:fragment
-									rendered="#{mbService.equipmentSetupButton() eq 'false'}">
-									<button value="Installer le matériel" class="get-started-btn"
-										onclick="#{mbService.setupEquipment()}" id="btnEquipmentSetup">Installer
-										le matériel</button>
-								</ui:fragment>
-								<ui:fragment
-									rendered="#{mbService.equipmentUninstallButton() eq 'false'}">
-									<button value="Désinstaller le matériel"
-										class="get-started-btn"
-										onclick="#{mbService.uninstallEquipment()}"
-										id="btnEquipmentUninstall">Désinstaller le matériel</button>
-								</ui:fragment>
-								<ui:fragment
-									rendered="#{mbService.herdSetupButton() eq 'false'}">
-									<button value="Installer le troupeau" class="get-started-btn"
-										onclick="#{mbService.setupHerd()}" id="btnHerdSetup">Installer
-										le troupeau</button>
-								</ui:fragment>
-								<ui:fragment
-									rendered="#{mbService.herdUnistallButton() eq 'false'}">
-									<button value="Désinstaller le troupeau"
-										class="get-started-btn" onclick="#{mbService.uninstallHerd()}"
-										id="btnHerdUninstall">Désinstaller le troupeau</button>
-								</ui:fragment>
-
-							</div>
-						
 							<div class="card">
 								<div class="row">
 									<div class="category-description">
@@ -348,50 +345,6 @@
 			</div>
 		</div>
 
-
-		<b:modal id="anomalieModal">
-
-			<div class="modal-body">
-				<div class="form-title text-center">
-					<h3>Déclarer une anomalie</h3>
-					<br />
-				</div>
-				<div class="d-flex flex-column text-center">
-					<b:form id="loginForm">
-						<div class="form-group">
-							<b:selectOneMenu id="inpAnomalyType"
-								value="#{mbAnomaly.anomalyType}" required="true"
-								converter="entityConverter"
-								requiredMessage="Vous devez séléctionner un type">
-								<f:selectItem itemLabel="Séléctionnez un type" itemValue="" />
-								<f:selectItems value="#{mbAnomalyType.allAnomalyTypes()}"
-									var="type" itemLabel="#{type.type}" itemValue="#{type}" />
-							</b:selectOneMenu>
-						</div>
-						<div class="form-group">
-							<b:inputTextarea
-								placeholder="Décrivez le plus précisement possible votre anomalie"
-								value="#{mbAnomaly.description}">
-
-							</b:inputTextarea>
-						</div>
-						<b:commandButton value="Annuler la demadne"
-							action="#{mbAnomaly.declareAnomaly(mbService.service)}" />
-					</b:form>
-				</div>
-			</div>
-			<div class="modal-footer d-flex justify-content-center">
-				<div class="signup-section">
-
-					<h4></h4>
-				</div>
-			</div>
-
-			<f:facet name="footer">
-				<b:button id="close" value="Fermer" dismiss="modal" />
-			</f:facet>
-		</b:modal>
-		
 		<b:modal id="anomalieModal">
 			<div class="modal-body">
 				<div class="form-title text-center">
@@ -432,9 +385,7 @@
 			<f:facet name="footer">
 				<b:button id="close" value="Fermer" dismiss="modal" />
 			</f:facet>
-		</b:modal> 
-		
-		<b:modal id="refuseModal">
+		</b:modal> <b:modal id="refuseModal">
 
 			<div class="modal-body">
 				<div class="form-title text-center">
@@ -449,13 +400,11 @@
 								converter="entityConverter"
 								requiredMessage="Vous devez séléctionner la raison">
 								<f:selectItem itemLabel="Séléctionnez une raison" itemValue="" />
-								<f:selectItems
-									value="#{mbRefusalReason.allRefusalReasons()}"
+								<f:selectItems value="#{mbRefusalReason.allRefusalReasons()}"
 									var="reason" itemLabel="#{reason.reason}" itemValue="#{reason}" />
 
 							</b:selectOneMenu>
-							<b:message id="refusalReasonMessage"
-								for="inpRefusalReason" />
+							<b:message id="refusalReasonMessage" for="inpRefusalReason" />
 						</div>
 						<b:commandButton value="Refuser la demadne"
 							action="#{mbService.refuseServiceRequest()}" />
@@ -472,9 +421,7 @@
 			<f:facet name="footer">
 				<b:button id="closeRefusalModal" value="Fermer" dismiss="modal" />
 			</f:facet>
-		</b:modal>
-		
-		<b:modal id="prematureCancelModal">
+		</b:modal> <b:modal id="prematureCancelModal">
 
 			<div class="modal-body">
 				<div class="form-title text-center">
@@ -510,11 +457,10 @@
 			</div>
 
 			<f:facet name="footer">
-				<b:button id="closePrematureCancelModal" value="Fermer" dismiss="modal" />
+				<b:button id="closePrematureCancelModal" value="Fermer"
+					dismiss="modal" />
 			</f:facet>
-		</b:modal>
-		
-		</main>
+		</b:modal> </main>
 
 
 	</ui:define>
