@@ -31,7 +31,9 @@
 					<b:carousel class="carousel">
 						<c:forEach items="#{field.photos}" var="photo">
 							<b:carouselItem>
+							<div class="reglage-picture-param">
 								<b:image value="resources/img/fields/#{photo.link}" />
+							</div>
 							</b:carouselItem>
 						</c:forEach>
 					</b:carousel>

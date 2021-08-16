@@ -39,7 +39,9 @@
 									<b:carousel class="carousel">
 										<c:forEach items="#{offer.photos}" var="photo">
 											<b:carouselItem>
-												<b:image value="resources/img/offers/#{photo.link}" />
+												<div class="photo-reglage">
+													<b:image value="resources/img/offers/#{photo.link}" />
+												</div>
 											</b:carouselItem>
 										</c:forEach>
 									</b:carousel>
