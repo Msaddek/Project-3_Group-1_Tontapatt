@@ -60,13 +60,17 @@ INSERT INTO `premature_cancellation_reason` VALUES (1,'Mauvaise entente avec le 
 /*!40000 ALTER TABLE `premature_cancellation_reason` ENABLE KEYS */;
 UNLOCK TABLES;
 
+LOCK TABLES `cancellation_reason` WRITE;
+/*!40000 ALTER TABLE `cancellation_reason` DISABLE KEYS */;
+INSERT INTO `cancellation_reason` VALUES (1,'Attente trop longue de la réponse de l\'éleveur'),(2,'Je préfère une autre offre de tonte'),(3,'Je ne suis plus intéressé par cette offre'),(4,'J\'ai décidé de tondre ma pelouse moi-même'),(5,'Autre');
+/*!40000 ALTER TABLE `cancellation_reason` ENABLE KEYS */;
+UNLOCK TABLES;
+
 LOCK TABLES `unsubscription_reason` WRITE;
 /*!40000 ALTER TABLE `unsubscription_reason` DISABLE KEYS */;
 INSERT INTO `unsubscription_reason` VALUES (1,'Je ne souhaite plus être impliqué avec Tontapatt'),(2,'Je suis client d\'une autre entreprise d\'éco-pâturage'),(3,'Autre');
 /*!40000 ALTER TABLE `unsubscription_reason` ENABLE KEYS */;
 UNLOCK TABLES;
-
-
 
 LOCK TABLES `anomaly_type` WRITE;
 /*!40000 ALTER TABLE `anomaly_type` DISABLE KEYS */;
