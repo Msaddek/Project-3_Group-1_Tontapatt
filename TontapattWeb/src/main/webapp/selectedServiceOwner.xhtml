@@ -232,6 +232,22 @@
 						<!--Grid column-->
 
 						<div class="col-md-6 mb-4">
+
+							<ui:fragment
+								rendered="#{mbService.validateRefuseCancelServiceRequestButton() eq 'false'}">
+								<div class="card">
+									<div class="row">
+										<div class="category-description">
+											<h2>Gérer ma demande</h2>
+										</div>
+									</div>
+
+									<button value="Accepter la demande" class="get-started-btn"
+										data-target="#cancellationModal" data-toggle="modal"
+										id="btnCancel">Annuler la demande</button>
+								</div>
+							</ui:fragment>
+
 							<div class="card">
 								<div class="row">
 									<div class="category-description">
@@ -244,7 +260,7 @@
 									rendered="#{mbService.anomalyCreationButton() eq 'false'}">
 									<button value="Nouvelle anomalie" class="get-started-btn"
 										data-target="#anomalieModal" data-toggle="modal"
-										id="btnAnomalie">Nouvelle anomalie</button>
+										id="btnAnomaly">Nouvelle anomalie</button>
 								</ui:fragment>
 
 								<div class="row">
@@ -296,23 +312,24 @@
 				<div class="d-flex flex-column text-center">
 					<b:form id="loginForm">
 						<div class="form-group">
-							<b:selectOneMenu id="inpUserField" value="#{mbService.field}"
-								required="true" converter="entityConverter"
-								requiredMessage="Séléctionnez un type">
+							<b:selectOneMenu id="inpAnomalyType"
+								value="#{mbAnomaly.anomalyType}" required="true"
+								converter="entityConverter"
+								requiredMessage="Vous devez séléctionner un type">
 								<f:selectItem itemLabel="Séléctionnez un type" itemValue="" />
-								<f:selectItems value="#{mbField.connectedUserFields}"
-									var="field" itemLabel="#{field.name}" itemValue="#{field}" />
-
+								<f:selectItems value="#{mbAnomalyType.allAnomalyTypes()}"
+									var="type" itemLabel="#{type.type}" itemValue="#{type}" />
 							</b:selectOneMenu>
 						</div>
 						<div class="form-group">
 							<b:inputTextarea
 								placeholder="Décrivez le plus précisement possible votre anomalie"
-								value="">
+								value="#{mbAnomaly.description}">
 
 							</b:inputTextarea>
 						</div>
-
+						<b:commandButton value="Annuler la demadne"
+							action="#{mbAnomaly.declareAnomaly(mbService.service)}" />
 					</b:form>
 				</div>
 			</div>
@@ -325,6 +342,44 @@
 
 			<f:facet name="footer">
 				<b:button id="close" value="Fermer" dismiss="modal" />
+			</f:facet>
+		</b:modal> <b:modal id="cancellationModal">
+
+			<div class="modal-body">
+				<div class="form-title text-center">
+					<h3>Annuler la demande de tonte</h3>
+					<br />
+				</div>
+				<div class="d-flex flex-column text-center">
+					<b:form id="cancellationModalForm">
+						<div class="form-group">
+							<b:selectOneMenu id="inpCancellationReason"
+								value="#{mbService.cancellationReason}" required="true"
+								converter="entityConverter"
+								requiredMessage="Vous devez séléctionner la raison">
+								<f:selectItem itemLabel="Séléctionnez une raison" itemValue="" />
+								<f:selectItems
+									value="#{mbCancellationReason.allCancellationReasons()}"
+									var="reason" itemLabel="#{reason.reason}" itemValue="#{reason}" />
+
+							</b:selectOneMenu>
+							<b:message id="cancellationReasonMessage"
+								for="inpCancellationReason" />
+						</div>
+						<b:commandButton value="Annuler la demadne"
+							action="#{mbService.cancelServiceRequest()}" />
+					</b:form>
+				</div>
+			</div>
+			<div class="modal-footer d-flex justify-content-center">
+				<div class="signup-section">
+
+					<h4></h4>
+				</div>
+			</div>
+
+			<f:facet name="footer">
+				<b:button id="closeCancellationModal" value="Fermer" dismiss="modal" />
 			</f:facet>
 		</b:modal> </main>
 
