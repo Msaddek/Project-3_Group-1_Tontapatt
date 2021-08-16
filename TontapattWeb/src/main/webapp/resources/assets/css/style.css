@@ -1937,7 +1937,15 @@ header.scrolled nav a {
 	text-decoration: solid;
 }
 
-#btnAnomalie {
+#btnAnomaly, 
+#btnHerdUninstall, 
+#btnHerdSetup, 
+#btnEquipmentUninstall, 
+#btnEquipmentSetup
+#btnPrematureCancellation,
+#btnRefuseRequest,
+#btnValidateRequest,
+#btnCancel {
 	background-color: orange;
     width: fit-content;
     margin: 0 auto;
