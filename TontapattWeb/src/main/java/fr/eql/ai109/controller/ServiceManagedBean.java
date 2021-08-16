@@ -43,11 +43,6 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 	@ManagedProperty(value = "#{mbUser.user}")
 	private User connectedUser;
 
-	private FieldManagedBean selectedFieldBean;
-
-	@ManagedProperty(value = "#{mbShearingOffer}")
-	private ShearingOfferManagedBean selectedOfferBean;
-
 	private Service service;
 
 	private Set<Service> connectedBreederServices;
@@ -154,7 +149,7 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 		service.setValidationDate(LocalDateTime.now());
 		service = business.update(service);
 		init();
-		return "/selectedService.xhtml?faces-redirect=false";
+		return selectService();
 	}
 
 	public String cancelServiceRequest() {
@@ -162,7 +157,7 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 		service.setCancellationReason(cancellationReason);
 		service = business.update(service);
 		init();
-		return "/selectedService.xhtml?faces-redirect=false";
+		return selectService();
 	}
 
 	public String refuseServiceRequest() {
@@ -170,7 +165,7 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 		service.setRefusalReason(refusalReason);
 		service = business.update(service);
 		init();
-		return "/selectedService.xhtml?faces-redirect=false";
+		return selectService();
 	}
 
 	public String cancelServicePrematurely() {
@@ -184,35 +179,35 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 		}
 		service = business.update(service);
 		init();
-		return "/selectedService.xhtml?faces-redirect=false";
+		return selectService();
 	}
 
 	public String setupEquipment() {
 		service.setEquipmentSetupDate(LocalDateTime.now());
 		service = business.update(service);
 		init();
-		return "/selectedService.xhtml?faces-redirect=false";
+		return selectService();
 	}
 
 	public String uninstallEquipment() {
 		service.setEquipmentUninstallDate(LocalDateTime.now());
 		service = business.update(service);
 		init();
-		return "/selectedService.xhtml?faces-redirect=false";
+		return selectService();
 	}
 
 	public String setupHerd() {
 		service.setHerdSetupDate(LocalDateTime.now());
 		service = business.update(service);
 		init();
-		return "/selectedService.xhtml?faces-redirect=false";
+		return selectService();
 	}
 
 	public String uninstallHerd() {
 		service.setHerdUninstallDate(LocalDateTime.now());
 		service = business.update(service);
 		init();
-		return "/selectedService.xhtml?faces-redirect=false";
+		return selectService();
 	}
 
 	public Long calculateServiceNumberOfDays() {
@@ -279,9 +274,9 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 		}
 		return json;
 	}
-	
+
 	public String formatPrice(Double calculculatedPrice) {
-		DecimalFormat df=new DecimalFormat("#.##");
+		DecimalFormat df = new DecimalFormat("#.##");
 		return df.format(calculculatedPrice);
 	}
 
@@ -316,6 +311,14 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 		}
 	}
 
+	public String notificationVisibilitySingular(Service selecService) {
+		if (selecService.getValidationDate() != null) {
+			return "notification-hidden";
+		} else {
+			return "notification-visible";
+		}
+	}
+
 	public String anomalyCreationButton() {
 		switch (serviceState()) {
 		case "Acceptée":
@@ -327,22 +330,30 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 		}
 	}
 
+	public String breederServiceManagementSection() {
+		if (serviceState().equals("Annulée")) {
+			return "true";
+		}
+		return "false";
+	}
+
 	public String validateRefuseCancelServiceRequestButton() {
-		if (serviceState() == "En attente") {
+		if (serviceState().equals("En attente")) {
 			return "false";
 		}
 		return "true";
 	}
 
 	public String cancelServicePrematurelyButton() {
-		if (serviceState() == "Acceptée" || serviceState() == "En cours") {
+		if (serviceState().equals("Acceptée")
+				|| serviceState().equals("En cours")) {
 			return "false";
 		}
 		return "true";
 	}
 
 	public String equipmentSetupButton() {
-		if (serviceState() == "En cours"
+		if (serviceState().equals("En cours")
 				&& service.getEquipmentSetupDate() == null) {
 			return "false";
 		}
@@ -350,7 +361,7 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 	}
 
 	public String herdSetupButton() {
-		if (serviceState() == "En cours"
+		if (serviceState().equals("En cours")
 				&& service.getEquipmentSetupDate() != null
 				&& service.getHerdSetupDate() == null) {
 			return "false";
@@ -359,7 +370,9 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 	}
 
 	public String equipmentUninstallButton() {
-		if (serviceState() == "Terminée"
+		if (((serviceState().equals("En cours")
+				&& service.getEndDate().equals(LocalDate.now()))
+				|| serviceState().equals("Terminée"))
 				&& service.getEquipmentSetupDate() != null
 				&& service.getEquipmentUninstallDate() == null) {
 			return "false";
@@ -368,7 +381,10 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 	}
 
 	public String herdUnistallButton() {
-		if (serviceState() == "Terminée" && service.getHerdSetupDate() != null
+		if (((serviceState().equals("En cours")
+				&& service.getEndDate().equals(LocalDate.now()))
+				|| serviceState().equals("Terminée"))
+				&& service.getHerdSetupDate() != null
 				&& service.getHerdUninstallDate() == null) {
 			return "false";
 		}
@@ -381,23 +397,6 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 
 	public void setConnectedUser(User connectedUser) {
 		this.connectedUser = connectedUser;
-	}
-
-	public FieldManagedBean getSelectedFieldBean() {
-		return selectedFieldBean;
-	}
-
-	public void setSelectedFieldBean(FieldManagedBean selectedFieldBean) {
-		this.selectedFieldBean = selectedFieldBean;
-	}
-
-	public ShearingOfferManagedBean getSelectedOfferBean() {
-		return selectedOfferBean;
-	}
-
-	public void setSelectedOfferBean(
-			ShearingOfferManagedBean selectedOfferBean) {
-		this.selectedOfferBean = selectedOfferBean;
 	}
 
 	public Service getService() {
