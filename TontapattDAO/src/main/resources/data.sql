@@ -62,7 +62,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `cancellation_reason` WRITE;
 /*!40000 ALTER TABLE `cancellation_reason` DISABLE KEYS */;
-INSERT INTO `cancellation_reason` VALUES (1,'Mauvaise entente avec le client'),(2,'Service non satisfaisant'),(3,'Incident lié à l\'insécurité sur le terrain'),(4,'Le terrain n\'est plus en état pour pratiquer l\'éco-paturâge'),(5,'Autre');
+INSERT INTO `cancellation_reason` VALUES (1,'Attente trop longue de la réponse de l\'éleveur'),(2,'Je préfère une autre offre de tonte'),(3,'Je ne suis plus intéressé par cette offre'),(4,'J\'ai décidé de tondre ma pelouse moi-même'),(5,'Autre');
 /*!40000 ALTER TABLE `cancellation_reason` ENABLE KEYS */;
 UNLOCK TABLES;
 
