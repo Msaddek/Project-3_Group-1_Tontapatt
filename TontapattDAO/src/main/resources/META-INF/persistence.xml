@@ -45,6 +45,7 @@
 				value="org.hibernate.dialect.MySQL8Dialect" />
 			<property name="javax.persistence.sql-load-script-source"
 				value="data.sql" />
+			<property name="hibernate.hbm2ddl.charset_name" value="UTF-8"/>
 		</properties>
 	</persistence-unit>
 
