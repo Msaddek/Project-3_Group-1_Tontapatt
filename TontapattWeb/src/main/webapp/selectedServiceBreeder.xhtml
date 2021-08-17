@@ -9,7 +9,8 @@
 <ui:composition template="WEB-INF/template/userTemplate.xhtml">
 
 	<ui:define name="head">
-		<title>Recherche</title>
+		<title>Mes prestations</title>
+		<link rel="icon" href="resources/img/favicon.ico" />
 	</ui:define>
 
 	<ui:define name="content">
@@ -238,65 +239,86 @@
 								<div class="card">
 									<div class="row">
 										<div class="category-description">
-											<h2>Gérer mon installation</h2>
+											<h2>
+												Gestions
+												<b:iconAwesome name="cog" />
+											</h2>
 										</div>
 									</div>
 
 									<ui:fragment
 										rendered="#{mbService.validateRefuseCancelServiceRequestButton() eq 'false'}">
-										<p:commandButton value="Accepter la demande"
-											styleClass="rounded-button ui-button-warning"
-											action="#{mbService.validateServiceRequest()}"
-											id="btnValidateRequest" />
-
-										<button value="Refuser la demande" class="get-started-btn"
-											data-target="#refuseModal" data-toggle="modal"
-											id="btnRefuseRequest">Refuser la demande</button>
+										<div class="btn-breeder">
+											<p:commandButton value="Accepter la demande"
+												styleClass="rounded-button ui-button-warning"
+												action="#{mbService.validateServiceRequest()}"
+												id="btnValidateRequest" />
+										</div>
+										<div class="btn-breeder">
+											<button value="Refuser la demande" class="get-started-btn"
+												data-target="#refuseModal" data-toggle="modal"
+												id="btnRefuseRequest">Refuser la demande</button>
+										</div>
 									</ui:fragment>
 
 									<ui:fragment
 										rendered="#{mbService.cancelServicePrematurelyButton() eq 'false'}">
-										<button value="Annuler la prestation" class="get-started-btn"
-											data-target="#prematureCancelModal" data-toggle="modal"
-											id="btnPrematureCancellation">Annuler la prestation</button>
+										<div class="btn-breeder">
+											<button value="Annuler la prestation" class="get-started-btn"
+												data-target="#prematureCancelModal" data-toggle="modal"
+												id="btnPrematureCancellation" style="background-color: red;">Annuler
+												la prestation</button>
+										</div>
 									</ui:fragment>
 
 									<ui:fragment
 										rendered="#{mbService.equipmentSetupButton() eq 'false'}">
-										<p:commandButton value="Installer le matériel"
-											styleClass="rounded-button ui-button-warning"
-											action="#{mbService.setupEquipment()}" id="btnEquipmentSetup" />
+										<div class="btn-breeder">
+											<p:commandButton value="Installer le matériel"
+												styleClass="rounded-button ui-button-warning"
+												action="#{mbService.setupEquipment()}"
+												id="btnEquipmentSetup" />
+										</div>
 									</ui:fragment>
 
 									<ui:fragment
 										rendered="#{mbService.equipmentUninstallButton() eq 'false'}">
-										<p:commandButton value="Désinstaller le matériel"
-											styleClass="rounded-button ui-button-warning"
-											action="#{mbService.uninstallEquipment()}"
-											id="btnEquipmentUninstall" />
+										<div class="btn-breeder">
+											<p:commandButton value="Désinstaller le matériel"
+												styleClass="rounded-button ui-button-warning"
+												action="#{mbService.uninstallEquipment()}"
+												id="btnEquipmentUninstall" />
+										</div>
 									</ui:fragment>
 
 									<ui:fragment
 										rendered="#{mbService.herdSetupButton() eq 'false'}">
-										<p:commandButton value="Installer le troupeau"
-											class="get-started-btn" action="#{mbService.setupHerd()}"
-											id="btnHerdSetup" />
+										<div class="btn-breeder">
+											<p:commandButton value="Installer le troupeau"
+												styleClass="rounded-button ui-button-warning"
+												action="#{mbService.setupHerd()}" id="btnHerdSetup" />
+										</div>
 									</ui:fragment>
 
 									<ui:fragment
 										rendered="#{mbService.herdUnistallButton() eq 'false'}">
-										<p:commandButton value="Désinstaller le troupeau"
-											styleClass="rounded-button ui-button-warning"
-											action="#{mbService.uninstallHerd()}" id="btnHerdUninstall" />
+										<div class="btn-breeder">
+											<p:commandButton value="Désinstaller le troupeau"
+												styleClass="rounded-button ui-button-warning"
+												action="#{mbService.uninstallHerd()}" id="btnHerdUninstall" />
+										</div>
 									</ui:fragment>
 
 								</div>
 							</ui:fragment>
 
-							<div class="card">
+							<div class="card" style="border-top: none;">
 								<div class="row">
 									<div class="category-description">
-										<h2>Anomalies</h2>
+										<h2>
+											Anomalies
+											<b:iconAwesome name="bell" />
+										</h2>
 									</div>
 								</div>
 
@@ -324,20 +346,98 @@
 												</thead>
 												<tbody>
 
+													<ui:repeat var="anomaly"
+														value="#{mbAnomaly.allAnonomaliesByService(mbService.service)}">
 
-													<tr>
-														<th scope="row">ANM215405</th>
-														<td>21/10/2021</td>
-														<td>Vous</td>
-														<td>Animal évadé</td>
-														<td>Réglée</td>
+														<tr>
+															<th scope="row"><p:commandLink
+																	value="#{anomaly.anomalyNumber}" type="button"
+																	action="#{mbAnomaly.selectAnomaly(anomaly)}"
+																	update="idAnomaly">
 
-													</tr>
+																</p:commandLink></th>
+															<td>#{mbDate.localDateTimeFormatterWithHour(anomaly.creationDate)}</td>
+															<td>#{anomaly.declarer.firstName}</td>
+															<td>#{anomaly.anomalyType.type}</td>
+															<ui:fragment rendered="#{anomaly.endDate == null}">
+																<td>En cours <b:iconAwesome name="cog" spin="true" /></td>
+															</ui:fragment>
+															<ui:fragment rendered="#{anomaly.endDate != null}">
+																<td>Réglée <b:iconAwesome name="check" /></td>
+															</ui:fragment>
+
+														</tr>
+													</ui:repeat>
 												</tbody>
 											</table>
 										</div>
 									</div>
 								</div>
+
+
+								<ui:fragment
+									rendered="#{mbService.serviceRatingSection() eq 'false'}">
+									<hr />
+									<div class="row">
+										<div class="category-description">
+											<h2>
+												Evaluation
+												<b:iconAwesome name="graduation-cap" />
+											</h2>
+										</div>
+
+										<ui:fragment
+											rendered="#{mbRating.ratingFormVisibility(mbService.service) eq 'false'}">
+
+											<b:form>
+												<div class="rating-form-box">
+
+													<div class="rating-form">
+														<p:rating value="#{mbRating.ratingLevel}" />
+													</div>
+													<div class="rating-form">
+														<p:inputTextarea
+															placeholder="Laissez un avis sur le déroulement de la prestation"
+															value="#{mbRating.feedback}" maxlength="255" rows="6"
+															cols="50">
+														</p:inputTextarea>
+													</div>
+													<div class="rating-form">
+														<b:commandButton class="get-started-btn" value="Evaluer"
+															action="#{mbRating.rateService(mbService.service)}" />
+
+													</div>
+												</div>
+											</b:form>
+
+										</ui:fragment>
+										<ui:fragment
+											rendered="#{mbRating.ratingFormVisibility(mbService.service) eq 'true'}">
+											<div class="rating-form-box">
+												<ui:repeat var="rating"
+													value="#{mbRating.allRatingsByService(mbService.service)}">
+													<div class="rating-form">
+														<b:label
+															value="#{rating.evaluator eq mbUser.user ? 'Votre note :' : 'Note reçu : '}" />
+													</div>
+													<div class="rating-form">
+														<p:rating value="#{rating.ratingLevel}" readonly="true" />
+													</div>
+													<div class="rating-form">
+														<p:inputTextarea
+															placeholder="Laissez un avis sur le déroulement de la prestation"
+															value="#{rating.feedback}" maxlength="255" rows="6"
+															cols="50" disabled="true">
+														</p:inputTextarea>
+													</div>
+												</ui:repeat>
+											</div>
+										</ui:fragment>
+									</div>
+
+								</ui:fragment>
+
+
 							</div>
 						</div>
 					</div>
@@ -370,7 +470,7 @@
 
 							</b:inputTextarea>
 						</div>
-						<b:commandButton value="Annuler la demadne"
+						<b:commandButton value="Déclarer anomalie"
 							action="#{mbAnomaly.declareAnomaly(mbService.service)}" />
 					</b:form>
 				</div>
@@ -460,7 +560,26 @@
 				<b:button id="closePrematureCancelModal" value="Fermer"
 					dismiss="modal" />
 			</f:facet>
-		</b:modal> </main>
+		</b:modal> <p:dialog header="N° #{mbAnomaly.anomaly.anomalyNumber}"
+			widgetVar="dlg1" height="500px" width="700px" modal="true"
+			id="idAnomaly">
+			<b:inputText value="#{mbAnomaly.anomaly.anomalyType.type}"
+				disabled="true" />
+			<p:inputTextarea
+				placeholder="Laissez un avis sur le déroulement de la prestation"
+				value="#{mbAnomaly.anomaly.description}" maxlength="255" rows="6"
+				cols="50" disabled="true">
+			</p:inputTextarea>
+			<ui:fragment
+				rendered="#{mbAnomaly.anomaly.declarer ne mbUser.user and mbAnomaly.anomaly.endDate eq null}">
+
+				<b:form>
+					<b:commandButton class="get-started-btn"
+						action="#{mbAnomaly.closeAnomaly(mbService.service)}"
+						value="Régler" />
+				</b:form>
+			</ui:fragment>
+		</p:dialog> </main>
 
 
 	</ui:define>

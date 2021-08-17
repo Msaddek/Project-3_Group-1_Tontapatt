@@ -46,31 +46,31 @@ public class AnomalyManagedBean implements Serializable {
 	private String description;
 
 	public String declareAnomaly(Service selectedService) {
-		DateTimeFormatter formatter = DateTimeFormatter
-				.ofPattern("yyyyMMddHHmmssSS");
-		Anomaly newAnomaly = new Anomaly();
-		newAnomaly.setAnomalyNumber(
-				"ANO-" + LocalDateTime.now().format(formatter));
-		newAnomaly.setDeclarer(connectedUser);
-		newAnomaly.setService(selectedService);
-		newAnomaly.setCreationDate(LocalDateTime.now());
-		newAnomaly.setDescription(description);
-		newAnomaly.setAnomalyType(anomalyType);
-		anomaly = business.add(newAnomaly);
-		if (selectedService.getField().getOwner().equals(connectedUser)) {
-			return "/selectedServiceOwner.xhtml?faces-redirect=true";
-		}
-		return "/selectedServiceBreeder.xhtml?faces-redirect=true";
-	}
+        DateTimeFormatter formatter = DateTimeFormatter
+                .ofPattern("yyyyMMddHHmmssSS");
+        Anomaly newAnomaly = new Anomaly();
+        newAnomaly.setAnomalyNumber(
+                "ANO-" + LocalDateTime.now().format(formatter));
+        newAnomaly.setDeclarer(connectedUser);
+        newAnomaly.setService(selectedService);
+        newAnomaly.setCreationDate(LocalDateTime.now());
+        newAnomaly.setDescription(description);
+        newAnomaly.setAnomalyType(anomalyType);
+        anomaly = business.add(newAnomaly);
+        if (selectedService.getField().getOwner().equals(connectedUser)) {
+            return "/selectedServiceOwner.xhtml?faces-redirect=true";
+        }
+        return "/selectedServiceBreeder.xhtml?faces-redirect=true";
+    }
 
 	public String closeAnomaly(Service selectedService) {
-		anomaly.setEndDate(LocalDateTime.now());
-		anomaly = business.update(anomaly);
-		if (selectedService.getField().getOwner().equals(connectedUser)) {
-			return "/selectedServiceOwner.xhtml?faces-redirect=true";
-		}
-		return "/selectedServiceBreeder.xhtml?faces-redirect=true";
-	}
+        anomaly.setEndDate(LocalDateTime.now());
+        anomaly = business.update(anomaly);
+        if (selectedService.getField().getOwner().equals(connectedUser)) {
+            return "/selectedServiceOwner.xhtml?faces-redirect=true";
+        }
+        return "/selectedServiceBreeder.xhtml?faces-redirect=true";
+    }
 	
 	public void selectAnomaly(Anomaly selectedAnomaly) {
 		anomaly = selectedAnomaly;

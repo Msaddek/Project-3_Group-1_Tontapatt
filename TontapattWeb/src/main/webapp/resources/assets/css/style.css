@@ -14,6 +14,10 @@ body {
 	font-size: 14px;
 }
 
+body .ui-selectonemenu {
+	width: 200px;
+}
+
 a {
 	color: #5fcf80;
 	text-decoration: none;
@@ -2025,12 +2029,24 @@ header.scrolled nav a {
 #btnRefuseRequest,
 #btnValidateRequest,
 #btnCancel {
-	background-color: orange;
     width: fit-content;
     margin: 0 auto;
     color: white !important;
     font-size: 16px !important;
 }
+
+#btnAnomaly {
+	background-color: orange;
+}
+
+#btnHerdUninstall,
+#btnHerdSetup, 
+#btnEquipmentUninstall, 
+#btnEquipmentSetup {
+	background-color: green;
+	border-color: green;
+}
+
 
 .fade {
 	opacity: 1 !important;
@@ -2100,6 +2116,50 @@ header.scrolled nav a {
 
 #eval {
 	margin-right: 2px;
+}
+
+.btn-breeder {
+	padding: 10px;
+	margin: 0 auto;
+}
+
+.btn-breeder .ui-button.ui-button-text-only .ui-button-text {
+	margin: 2px 23px;
+	font-size: 17px;
+}
+
+.rating-form .ui-rating .ui-rating-star-on a {
+	font-size: 5rem;
+	color: gold;
+	
+}
+
+.rating-form .ui-rating .ui-rating-star a {
+	font-size: 3rem;
+	margin: 15px;
+}
+
+.rating-form .ui-rating .ui-rating-star a:hover {
+	color:gold !important;
+}
+
+.rating-form {
+	text-align: center;
+	margin: 0 auto;
+	padding: 10px;
+}
+
+.rating-form-box {
+	display: flex;
+	flex-direction: column;
+}
+
+.rating-form .ui-inputfield {
+	font-size: 16px;
+}
+
+.rating-form .ui-rating .ui-rating-cancel {
+	display: none !important;
 }
 
 .scroller {
