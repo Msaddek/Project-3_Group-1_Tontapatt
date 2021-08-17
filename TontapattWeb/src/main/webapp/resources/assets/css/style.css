@@ -2109,6 +2109,41 @@ header.scrolled nav a {
 	margin: 2px 23px;
 	font-size: 17px;
 }
+
+.rating-form .ui-rating .ui-rating-star-on a {
+	font-size: 5rem;
+	color: gold;
+	
+}
+
+.rating-form .ui-rating .ui-rating-star a {
+	font-size: 3rem;
+	margin: 15px;
+}
+
+.rating-form .ui-rating .ui-rating-star a:hover {
+	color:gold !important;
+}
+
+.rating-form {
+	text-align: center;
+	margin: 0 auto;
+	padding: 10px;
+}
+
+.rating-form-box {
+	display: flex;
+	flex-direction: column;
+}
+
+.rating-form .ui-inputfield {
+	font-size: 16px;
+}
+
+.rating-form .ui-rating .ui-rating-cancel {
+	display: none !important;
+}
+
 .scroller {
  
     height: 800px;
