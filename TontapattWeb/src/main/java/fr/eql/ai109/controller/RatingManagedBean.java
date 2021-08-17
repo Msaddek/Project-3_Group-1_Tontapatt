@@ -44,10 +44,9 @@ public class RatingManagedBean implements Serializable {
 
 	private Integer ratingLevel;
 
-	private Service selectedService;
+	private Service service;
 
-	public String rateService() {
-		String forward = "/selectedService.xhtml?faces-redirect=true";
+	public String rateService(Service selectedService) {
 		Rating newRating = new Rating();
 		newRating.setFeedback(feedback);
 		newRating.setEvaluator(connectedUser);
@@ -55,10 +54,13 @@ public class RatingManagedBean implements Serializable {
 		newRating.setRatingLevel(ratingLevel);
 		newRating.setRatingDate(LocalDateTime.now());
 		rating = business.add(newRating);
-		return forward;
+		if (selectedService.getField().getOwner().equals(connectedUser)) {
+			return "/selectedServiceOwner.xhtml?faces-redirect=true";
+		}
+		return "/selectedServiceBreeder.xhtml?faces-redirect=true";
 	}
 
-	public Set<Rating> allRatingsByService() {
+	public Set<Rating> allRatingsByService(Service selectedService) {
 		return business.getAllbyService(selectedService);
 	}
 
@@ -67,7 +69,7 @@ public class RatingManagedBean implements Serializable {
 		return shearingOfferRatings = business
 				.getAllByShearingOffer(selectedOffer);
 	}
-	
+
 	public String ratingOfShearingOffer(ShearingOffer selectedOffer) {
 		Double offerRating = 0.0;
 		shearingOfferRatings = recoverAllShearingOfferRatings(selectedOffer);
@@ -76,13 +78,14 @@ public class RatingManagedBean implements Serializable {
 		}
 		offerRating = offerRating / shearingOfferRatings.size();
 		DecimalFormat df = new DecimalFormat("#.#");
-		
+
 		return ((offerRating).isNaN() ? "0" : df.format(offerRating));
 	}
+
 	public Set<Rating> recoverAllFieldRatings(Field selectedField) {
 		return fieldRatings = business.getAllByField(selectedField);
 	}
-	
+
 	public String ratingOfField(Field selectedField) {
 		Double fieldRating = 0.0;
 		fieldRatings = recoverAllFieldRatings(selectedField);
@@ -91,7 +94,16 @@ public class RatingManagedBean implements Serializable {
 		}
 		fieldRating = fieldRating / fieldRatings.size();
 		DecimalFormat df = new DecimalFormat("#.#");
-		return df.format(fieldRating).toString();
+		return df.format(fieldRating);
+	}
+
+	public String ratingFormVisibility(Service selectedService) {
+		for (Rating r : allRatingsByService(selectedService)) {
+			if(r.getEvaluator().equals(connectedUser)) {
+				return "true";
+			}
+		}
+		return "false";
 	}
 
 	public User getConnectedUser() {
@@ -150,12 +162,12 @@ public class RatingManagedBean implements Serializable {
 		this.ratingLevel = ratingLevel;
 	}
 
-	public Service getSelectedService() {
-		return selectedService;
+	public Service getService() {
+		return service;
 	}
 
-	public void setSelectedService(Service selectedService) {
-		this.selectedService = selectedService;
+	public void setService(Service service) {
+		this.service = service;
 	}
 
 }
