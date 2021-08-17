@@ -26,6 +26,8 @@
 		</div>
 		<div class="nav-box-offer">
 			<div class="d-flex align-items-start">
+			
+			<div class="scroller">
 				<div class="box-all-offer-user">
 					<div class="nav flex-column nav-pills me-3" id="v-pills-tab"
 						role="tablist" aria-orientation="vertical">
@@ -117,12 +119,12 @@
 					</div>
 				</div>
 
-
+</div>
 				<div class="tab-content" id="v-pills-tabContent">
 
 					<div class="tab-pane fade show active" id="v-pills-map"
 						role="tabpanel" aria-labelledby="v-pills-map-tab">
-						<div id="map-box-offer"></div>
+						<div id="map-box-field"></div>
 					</div>
 
 					<c:forEach items="#{mbField.connectedUserFields}" var="field">
@@ -199,9 +201,9 @@
 		var fieldIcon = L.icon({
     		iconUrl: 'resources/img/grass.png',
 
-    		iconSize:     [48, 55], // size of the icon
+    		iconSize:     [48, 79.1], // size of the icon
     		shadowSize:   [50, 64], // size of the shadow
-    		iconAnchor:   [22, 55], // point of the icon which will correspond to marker's location
+    		iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
     		popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
 		});
         

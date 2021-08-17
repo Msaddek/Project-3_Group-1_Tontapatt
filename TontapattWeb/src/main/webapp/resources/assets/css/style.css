@@ -1652,6 +1652,17 @@ header.scrolled nav a {
     border-radius: 1%;
     margin-bottom: 50px;
 }
+
+#map-box-field{
+	padding: 50px;
+    width: 800px;
+    height: 500px;
+    box-shadow: 1px 1px 1px 1px black;
+    margin: 0 150px;
+    border-radius: 1%;
+    margin-bottom: 50px;
+}
+
 .box-parameters {
 	width: 600px;
 	height: 200px;
