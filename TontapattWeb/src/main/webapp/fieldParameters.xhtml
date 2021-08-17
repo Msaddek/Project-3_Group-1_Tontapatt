@@ -140,7 +140,7 @@
 								<div class="box-colonne-offer">
 
 									<div class="one-element-offer">
-										<h3>#{field.description}</h3>
+										<h3 style="word-wrap: break-word">#{field.description}</h3>
 									</div>
 
 
@@ -175,23 +175,24 @@
 											</h3>
 										</div>
 									</div>
-
-									<p:commandButton action="#{mbField.fieldDetails()}"
-										styleClass="rounded-button ui-button-success" value="Modifier">
-										<f:setPropertyActionListener value="#{field}"
-											target="#{mbField.field}" />
-									</p:commandButton>
-
-
-
-
-									<h:form>
-										<div>
-											<button type="button" class="get-started-btn"
-												data-toggle="modal" data-target="#suppmodal">Supprimer
-												mon terrain</button>
-										</div>
-									</h:form>
+									<div class="two-element-offer">
+										
+											<p:commandButton action="#{mbField.fieldDetails()}"
+												styleClass="rounded-button ui-button-success"
+												value="Modifier">
+												<f:setPropertyActionListener value="#{field}"
+													target="#{mbField.field}" />
+											</p:commandButton>
+						
+											<h:form>
+												<div>
+													<button type="button" class="supp-field-btn"
+														data-toggle="modal" data-target="#suppmodal">Supprimer
+													</button>
+												</div>
+											</h:form>
+									
+									</div>
 								</div>
 							</div>
 

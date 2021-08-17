@@ -192,6 +192,20 @@ h1, h2, h3, h4, h5, h6 {
 	margin-bottom: 20px
 }
 
+.supp-field-btn {
+	margin-left: 22px;
+	background: #cf5f69;
+	color: #fff;
+	border-radius: 50px;
+	padding: 8px 25px;
+	white-space: nowrap;
+	transition: 0.3s;
+	font-size: 14px;
+	display: inline-block;
+	border: none;
+	margin-bottom: 20px
+}
+
 .get-started-btn:hover {
 	background: #3ac162;
 	color: #fff;
