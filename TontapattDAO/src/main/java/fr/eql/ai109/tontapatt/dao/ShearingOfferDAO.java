@@ -225,7 +225,7 @@ public class ShearingOfferDAO extends GenericDAO<ShearingOffer>
 		}
 		return shearingOffers;
 	}
-
+	
 	@Override
 	public Set<ShearingOffer> getLastThreeByUser(User connectedUser) {
 		Set<ShearingOffer> shearingOffers = null;
