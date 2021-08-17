@@ -101,10 +101,10 @@ public class ShearingOfferDAO extends GenericDAO<ShearingOffer>
 				+ "AND r.species_id=:speciesParam "
 				+ "AND :startDateParam BETWEEN s.start_date AND s.end_date "
 				+ "AND :endDateParam BETWEEN s.start_date AND s.end_date "
-				+ "AND se.validation_date IS NULL "
+				+ "AND (se.validation_date IS NULL "
 				+ "OR (se.validation_date IS NOT NULL "
 				+ "AND :startDateParam NOT BETWEEN se.start_date AND se.end_date "
-				+ "AND :endDateParam NOT BETWEEN se.start_date AND se.end_date)";
+				+ "AND :endDateParam NOT BETWEEN se.start_date AND se.end_date))";
 		try {
 			shearingOffers = (new HashSet<ShearingOffer>(em
 					.createNativeQuery(sqlQuery, ShearingOffer.class)
