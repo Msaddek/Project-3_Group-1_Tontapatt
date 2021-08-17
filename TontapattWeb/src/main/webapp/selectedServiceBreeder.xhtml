@@ -9,7 +9,8 @@
 <ui:composition template="WEB-INF/template/userTemplate.xhtml">
 
 	<ui:define name="head">
-		<title>Recherche</title>
+		<title>Mes prestations</title>
+		 <link rel="icon" href="resources/img/favicon.ico"/>
 	</ui:define>
 
 	<ui:define name="content">
@@ -244,21 +245,26 @@
 
 									<ui:fragment
 										rendered="#{mbService.validateRefuseCancelServiceRequestButton() eq 'false'}">
+										<div class="icon-info-presta">
 										<p:commandButton value="Accepter la demande"
 											styleClass="rounded-button ui-button-warning"
 											action="#{mbService.validateServiceRequest()}"
 											id="btnValidateRequest" />
-
+									</div>
+									<div class="icon-info-presta">
 										<button value="Refuser la demande" class="get-started-btn"
 											data-target="#refuseModal" data-toggle="modal"
 											id="btnRefuseRequest">Refuser la demande</button>
+											</div>
 									</ui:fragment>
 
 									<ui:fragment
 										rendered="#{mbService.cancelServicePrematurelyButton() eq 'false'}">
+										<div class="icon-info-presta">
 										<button value="Annuler la prestation" class="get-started-btn"
 											data-target="#prematureCancelModal" data-toggle="modal"
 											id="btnPrematureCancellation">Annuler la prestation</button>
+											</div>
 									</ui:fragment>
 
 									<ui:fragment
@@ -270,24 +276,30 @@
 
 									<ui:fragment
 										rendered="#{mbService.equipmentUninstallButton() eq 'false'}">
+										<div class="icon-info-presta">
 										<p:commandButton value="Désinstaller le matériel"
 											styleClass="rounded-button ui-button-warning"
 											action="#{mbService.uninstallEquipment()}"
 											id="btnEquipmentUninstall" />
+											</div>
 									</ui:fragment>
 
 									<ui:fragment
 										rendered="#{mbService.herdSetupButton() eq 'false'}">
+										<div class="icon-info-presta">
 										<p:commandButton value="Installer le troupeau"
 											class="get-started-btn" action="#{mbService.setupHerd()}"
 											id="btnHerdSetup" />
+											</div>
 									</ui:fragment>
 
 									<ui:fragment
 										rendered="#{mbService.herdUnistallButton() eq 'false'}">
+										<div class="icon-info-presta">
 										<p:commandButton value="Désinstaller le troupeau"
 											styleClass="rounded-button ui-button-warning"
 											action="#{mbService.uninstallHerd()}" id="btnHerdUninstall" />
+											</div>
 									</ui:fragment>
 
 								</div>
