@@ -1649,6 +1649,14 @@ header.scrolled nav a {
     position: absolute !important;
     top: 51%;
 }
+
+#map-box-field{
+	width: 100%;
+    height: 957px;
+    position: absolute !important;
+    top: 51%;   
+}
+
 .box-parameters {
 	width: 600px;
 	height: 200px;
@@ -1757,6 +1765,16 @@ header.scrolled nav a {
 	padding: 50px;
 	width: 800px;
 	height: 500px;
+	box-shadow: 1px 1px 1px 1px black;
+    margin: 0 150px;
+    border-radius: 1%;
+    margin-bottom: 50px;
+}
+
+.box-presentation-field {
+	padding: 50px;
+	width: 800px;
+	height: 700px;
 	box-shadow: 1px 1px 1px 1px black;
     margin: 0 150px;
     border-radius: 1%;

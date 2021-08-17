@@ -1,3 +1,4 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -9,71 +10,212 @@
 
 <ui:composition template="WEB-INF/template/userFieldTemplate.xhtml">
 
+
+
 	<ui:define name="head">
 		<title>Mes terrains</title>
+
 	</ui:define>
 
 	<ui:define name="content">
-
-		<main>
 		<div class="title-page">
 			<div class="section-title">
 				<h2>Mes terrains</h2>
 				<p>Gérer mes terrains</p>
 			</div>
 		</div>
+		<div class="nav-box-offer">
+			<div class="d-flex align-items-start">
+			
+			<div class="scroller">
+				<div class="box-all-offer-user">
+					<div class="nav flex-column nav-pills me-3" id="v-pills-tab"
+						role="tablist" aria-orientation="vertical">
 
+						<button class="nav-link active" id="v-pills-map-tab"
+							data-bs-toggle="pill" data-bs-target="#v-pills-map" type="button"
+							role="tab" aria-controls="v-pills-map" aria-selected="true">
 
-		<c:forEach items="#{mbField.connectedUserFields}" var="field">
-
-			<div class="box-parameters">
-				<div class="carousel-box">
-					<b:carousel class="carousel">
-						<c:forEach items="#{field.photos}" var="photo">
-							<b:carouselItem>
-							<div class="reglage-picture-param">
-								<b:image value="resources/img/fields/#{photo.link}" />
-							</div>
-							</b:carouselItem>
-						</c:forEach>
-					</b:carousel>
-				</div>
-
-				<div class="wrap-image">
-					<p:commandLink action="#{mbField.fieldDetails()}">
-						<f:setPropertyActionListener value="#{field}"
-							target="#{mbField.field}" />
-						<div class="description-box">
-							<div class="title-zone">
-								<div class="icon-parameters-box">
-									<b:iconAwesome name="tree" size="lg" />
+							<div class="box-parameters">
+								<div class="carousel-box">
+									<b:carousel class="carousel">
+										<b:carouselItem>
+											<div class="reglage-picture-param">
+												<b:image value="resources/img/carte.jpg" />
+											</div>
+										</b:carouselItem>
+									</b:carousel>
 								</div>
-								<h1>#{field.name}</h1>
-							</div>
-							<div
-								class="d-flex justify-content-between align-items-center mb-3">
-								<h4>#{field.zipCodeCity.name}</h4>
-							</div>
-							<div class="field-description">
-								<p>#{field.description.subSequence(0,10)}...</p>
-							</div>
-						</div>
 
-					</p:commandLink>
-					<div>
-						<h:form>
-							<p:commandButton value="Voir"
-								action="#{mbField.fieldDetailedView(field)}" icon="pi pi-search"
-								styleClass="rounded-button ui-button-success ui-button-outlined" />
-						</h:form>
+								<div class="wrap-image">
+
+									<div class="description-box">
+										<div class="title-zone">
+											<div class="icon-parameters-box">
+												<b:iconAwesome name="globe" size="lg" />
+											</div>
+											<h1>Carte</h1>
+										</div>
+
+										<div class="field-description">
+											<p>Tous mes terrains</p>
+										</div>
+									</div>
+
+								</div>
+
+							</div>
+							<hr />
+						</button>
+
+						<c:forEach items="#{mbField.connectedUserFields}" var="field">
+
+							<button class="nav-link" id="v-pills-box#{field.id}-tab"
+								data-bs-toggle="pill" data-bs-target="#v-pills-box#{field.id}"
+								type="button" role="tab" aria-controls="v-pills-box#{field.id}"
+								aria-selected="true">
+
+								<div class="box-parameters">
+									<div class="carousel-box">
+										<b:carousel class="carousel">
+											<c:forEach items="#{field.photos}" var="photo">
+												<b:carouselItem>
+													<div class="reglage-picture-param">
+														<b:image value="resources/img/fields/#{photo.link}" />
+												</div>
+												</b:carouselItem>
+											</c:forEach>
+										</b:carousel>
+									</div>
+
+									<div class="wrap-image">
+
+										<div class="description-box">
+											<div class="title-zone">
+												<div class="icon-parameters-box">
+													<b:iconAwesome name="map-marker" size="lg" />
+												</div>
+												<h1>#{field.name}</h1>
+											</div>
+											<div
+												class="d-flex justify-content-between align-items-center mb-3">
+												<h4>#{field.zipCodeCity.name}</h4>
+											</div>
+											<div class="field-description">
+												<p>#{field.description.subSequence(0,10)}...</p>
+											</div>
+										</div>
+
+										<br />
+									</div>
+
+								</div>
+
+								<hr />
+
+
+							</button>
+						</c:forEach>
 					</div>
 				</div>
+
+</div>
+				<div class="tab-content" id="v-pills-tabContent">
+
+					<div class="tab-pane fade show active" id="v-pills-map"
+						role="tabpanel" aria-labelledby="v-pills-map-tab">
+						<div id="map-box-field"></div>
+					</div>
+
+					<c:forEach items="#{mbField.connectedUserFields}" var="field">
+						<div class="tab-pane fade" id="v-pills-box#{field.id}"
+							role="tabpanel" aria-labelledby="v-pills-box#{field.id}-tab">
+
+							<div class="box-presentation-field">
+								<div class="title-presentation-offer">
+									<h1>#{field.name}</h1>
+								</div>
+
+								<div class="box-colonne-offer">
+									
+										<div class="one-element-offer">
+											<h3>#{field.description}</h3>
+										</div>
+
+									
+									<div class="two-element-offer">
+										<div class="one-element-offer">
+											<h3>Superficie : #{field.area} hectares</h3>
+										</div>
+										<div class="one-element-offer">
+											<h3>À #{field.zipCodeCity.name}</h3>
+										</div>
+									</div>
+									
+									<div class="two-element-offer">
+										<div class="one-element-offer">
+											<h3>Hauteur de clôture : #{field.fenceHeight.height}</h3>
+										</div>
+										<div class="one-element-offer">
+											<h3>Pourcentage de terrain plat :</h3>
+											<h3>#{field.flatnessPercentage.percentage} %</h3>
+										</div>
+									</div>
+									<div class="one-element-offer">
+										<div class="one-element-offer">
+											<h3>Types de végétation :
+											<c:forEach items="#{field.vegetationCompositions}"
+												var="vegeType">
+
+												<p>#{vegeType.vegetationType.vegetation} :
+													#{vegeType.percentage} %</p>
+											</c:forEach>
+											</h3>
+										</div>
+									</div>
+
+									<p:commandButton action="#{mbField.fieldDetails()}"
+										styleClass="rounded-button ui-button-success" value="Modifier">
+										<f:setPropertyActionListener value="#{field}"
+											target="#{mbField.field}" />
+									</p:commandButton>
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
 			</div>
-		</c:forEach> </main>
-		<br />
-		<br />
-		<br />
-		<br />
+		</div>
+
+		<script>
+				var fieldMap = L.map('map-box-field').setView([46.2276, 2.2137], 6);
+        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaGFqam91anRpIiwiYSI6ImNrc2MzNTRvczBjc2YydnFrZHRwdzZmc20ifQ.Z4qyHk4NtUctoB_uDmjHPA', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            maxZoom: 18,
+            id: 'mapbox/streets-v11',
+            tileSize: 512,
+            zoomOffset: -1,
+            accessToken: 'your.mapbox.access.token'
+        }).addTo(fieldMap);
+		
+		var fieldIcon = L.icon({
+    		iconUrl: 'resources/img/grass.png',
+
+    		iconSize:     [48, 79.1], // size of the icon
+    		shadowSize:   [50, 64], // size of the shadow
+    		iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+    		popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+		});
+        
+        var fields = #{mbField.connectedUserFieldsAsJson()}
+        console.log(fields);
+        for (var i = 0; i &lt; fields.length; i++) {
+    		var field = fields[i];
+    		var marker = L.marker([field.zipCodeCity.latitude, field.zipCodeCity.longitude], {icon: fieldIcon})
+    		.addTo(fieldMap).bindPopup("<b>"+field.name+"</b><p>"+field.zipCodeCity.name+", FR</p>");
+		}
+	</script>
+
 	</ui:define>
 
 

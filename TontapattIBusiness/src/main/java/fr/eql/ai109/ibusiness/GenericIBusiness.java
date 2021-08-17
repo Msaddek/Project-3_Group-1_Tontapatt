@@ -1,6 +1,9 @@
 package fr.eql.ai109.ibusiness;
 
 import java.util.List;
+;
+
+
 
 public interface GenericIBusiness<T> {
 	
@@ -9,5 +12,6 @@ public interface GenericIBusiness<T> {
 	T update(T t);
 	T getById(int i);
 	List<T> getAll();
+	//Set<ShearingOffer> getAllWithPhotosLimited();
 
 }
