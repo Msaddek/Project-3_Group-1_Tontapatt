@@ -180,9 +180,64 @@
 										<f:setPropertyActionListener value="#{offer}"
 											target="#{mbShearingOffer.shearingOffer}" />
 									</p:commandButton>
+
+									<h:form>
+										<div>
+											<button type="button" class="supp-field-btn"
+												data-toggle="modal" data-target="#delmodal">Supprimer
+											</button>
+										</div>
+									</h:form>
+
 								</div>
 							</div>
 						</div>
+						<b:modal id="delmodal" closable="true" close-on-escape="false"
+							backdrop="false">
+
+							<div class="modal-body">
+								<div class="form-title text-center">
+									<h3>Etes vous sûr de vouloir supprimer cette offre ? Si
+										oui, veuillez sélectionner une raison dans le menu déroulant
+										ci-dessous :</h3>
+									<br />
+								</div>
+								<div class="d-flex flex-column text-center">
+									<b:form id="suppForm">
+										<div class="rs-select2 js-select-simple select--no-search">
+											<br /> <label for="inpOfferWithdrawalReason">Raison
+												:</label><br />
+											<b:selectOneMenu id="inpOfferWithdrawalReason"
+												value="#{mbShearingOffer.offerWithdrawalReason}"
+												required="true" converter="entityConverter"
+												requiredMessage="Veuillez sélectionner une raison">
+												<f:selectItem itemLabel="sélectionnez la raison"
+													itemValue="" />
+												<f:selectItems
+													value="#{mbOfferWithdrawalReason.allOfferWithdrawalReason()}"
+													var="reason" itemLabel="#{reason.reason}"
+													itemValue="#{reason}" />
+												<p:ajax update="offerWithdrawalReasonMessage" />
+											</b:selectOneMenu>
+											<br />
+											<b:message id="offerWithdrawalReasonMessage"
+												for="inpOfferWithdrawalReason" />
+										</div>
+										<br />
+										<div class="p-t-20">
+											<b:commandButton class="supp-field-btn"
+												value="Confirmer la suppression"
+												action="#{mbShearingOffer.withdrawOffer(offer)}" />
+										</div>
+
+									</b:form>
+								</div>
+							</div>
+							<f:facet name="footer">
+								<b:button id="closePop" value="Close" dismiss="modal" />
+							</f:facet>
+						</b:modal>
+
 					</c:forEach>
 				</div>
 			</div>
