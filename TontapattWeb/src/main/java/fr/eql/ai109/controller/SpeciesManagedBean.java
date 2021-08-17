@@ -6,12 +6,13 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
 import fr.eql.ai109.ibusiness.SpeciesIBusiness;
 import fr.eql.ai109.tontapatt.entity.Species;
 
 @ManagedBean(name = "mbSpecies")
-@SessionScoped
+@ViewScoped
 public class SpeciesManagedBean implements Serializable {
 
 	/**
