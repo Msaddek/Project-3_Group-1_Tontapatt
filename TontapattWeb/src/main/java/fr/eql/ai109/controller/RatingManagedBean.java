@@ -1,6 +1,7 @@
 package fr.eql.ai109.controller;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -66,9 +67,31 @@ public class RatingManagedBean implements Serializable {
 		return shearingOfferRatings = business
 				.getAllByShearingOffer(selectedOffer);
 	}
+	
+	public String ratingOfShearingOffer(ShearingOffer selectedOffer) {
+		Double offerRating = 0.0;
+		shearingOfferRatings = recoverAllShearingOfferRatings(selectedOffer);
+		for (Rating r : shearingOfferRatings) {
+			offerRating += r.getRatingLevel();
+		}
+		offerRating = offerRating / shearingOfferRatings.size();
+		DecimalFormat df = new DecimalFormat("#.#");
+		return df.format(offerRating);
+	}
 
 	public Set<Rating> recoverAllFieldRatings(Field selectedField) {
 		return fieldRatings = business.getAllByField(selectedField);
+	}
+	
+	public String ratingOfField(Field selectedField) {
+		Double fieldRating = 0.0;
+		fieldRatings = recoverAllFieldRatings(selectedField);
+		for (Rating r : shearingOfferRatings) {
+			fieldRating += r.getRatingLevel();
+		}
+		fieldRating = fieldRating / fieldRatings.size();
+		DecimalFormat df = new DecimalFormat("#.#");
+		return df.format(fieldRating);
 	}
 
 	public User getConnectedUser() {

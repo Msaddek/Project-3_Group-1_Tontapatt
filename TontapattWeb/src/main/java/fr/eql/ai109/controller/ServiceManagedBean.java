@@ -390,6 +390,13 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 		}
 		return "true";
 	}
+	
+	public String serviceRatingSection() {
+		if(serviceState().equals("Terminée")) {
+			return "false";
+		}
+		return "true";
+	}
 
 	public User getConnectedUser() {
 		return connectedUser;
