@@ -96,6 +96,7 @@ public class FieldManagedBean implements Serializable {
 				.getFieldsOfConnectedUser(connectedUser);
 		photos = new HashSet<>();
 		vegetationCompositions = new HashSet<>();
+		System.out.println(connectedUser);
 	}
 
 	public String fieldDetails() {

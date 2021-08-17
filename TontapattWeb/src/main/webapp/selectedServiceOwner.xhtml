@@ -10,7 +10,8 @@
 <ui:composition template="WEB-INF/template/userTemplate.xhtml">
 
 	<ui:define name="head">
-		<title>Recherche</title>
+		<title>Mes prestations</title>
+		 <link rel="icon" href="resources/img/favicon.ico"/>
 	</ui:define>
 
 	<ui:define name="content">
@@ -242,10 +243,11 @@
 											<h2>Gérer ma demande</h2>
 										</div>
 									</div>
-
+							<div class="icon-info-presta">
 									<button value="Accepter la demande" class="get-started-btn"
 										data-target="#cancellationModal" data-toggle="modal"
 										id="btnCancel">Annuler la demande</button>
+							</div>
 								</div>
 							</ui:fragment>
 
@@ -259,9 +261,11 @@
 
 								<ui:fragment
 									rendered="#{mbService.anomalyCreationButton() eq 'false'}">
+									<div class="icon-info-presta">
 									<button value="Nouvelle anomalie" class="get-started-btn"
 										data-target="#anomalieModal" data-toggle="modal"
 										id="btnAnomaly">Nouvelle anomalie</button>
+										</div>
 								</ui:fragment>
 
 								<div class="row">
