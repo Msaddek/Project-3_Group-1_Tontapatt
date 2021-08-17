@@ -196,14 +196,16 @@ h1, h2, h3, h4, h5, h6 {
 	margin-left: 22px;
 	background: #cf5f69;
 	color: #fff;
-	border-radius: 50px;
-	padding: 8px 25px;
+	border-radius:50px;
+	padding: 6px 29px;
 	white-space: nowrap;
 	transition: 0.3s;
 	font-size: 14px;
 	display: inline-block;
-	border: none;
-	margin-bottom: 20px
+	border: 1px solid #d81c2e;
+	margin-top: 15px;
+    outline: 0 none;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;	
 }
 
 .get-started-btn:hover {
