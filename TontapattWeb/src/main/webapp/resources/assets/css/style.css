@@ -1763,6 +1763,16 @@ header.scrolled nav a {
     margin-bottom: 50px;
 }
 
+.box-presentation-field {
+	padding: 50px;
+	width: 800px;
+	height: 700px;
+	box-shadow: 1px 1px 1px 1px black;
+    margin: 0 150px;
+    border-radius: 1%;
+    margin-bottom: 50px;
+}
+
 .box-colonne-offer .ui-button.ui-button-text-only .ui-button-text {
 	font-size: 16px;
 }
