@@ -76,9 +76,9 @@ public class RatingManagedBean implements Serializable {
 		}
 		offerRating = offerRating / shearingOfferRatings.size();
 		DecimalFormat df = new DecimalFormat("#.#");
-		return df.format(offerRating);
+		
+		return ((offerRating).isNaN() ? "0" : df.format(offerRating));
 	}
-
 	public Set<Rating> recoverAllFieldRatings(Field selectedField) {
 		return fieldRatings = business.getAllByField(selectedField);
 	}
@@ -91,7 +91,7 @@ public class RatingManagedBean implements Serializable {
 		}
 		fieldRating = fieldRating / fieldRatings.size();
 		DecimalFormat df = new DecimalFormat("#.#");
-		return df.format(fieldRating);
+		return df.format(fieldRating).toString();
 	}
 
 	public User getConnectedUser() {
