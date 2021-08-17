@@ -311,13 +311,14 @@ public class ServiceManagedBean implements Serializable, CalculationVariables {
 		}
 	}
 
-	public String notificationVisibilitySingular(Service selecService) {
-		if (selecService.getValidationDate() != null) {
-			return "notification-hidden";
-		} else {
-			return "notification-visible";
-		}
-	}
+	public String notificationVisibilitySingular(Service selectedService) {
+        if (selectedService.getValidationDate() != null || !selectedService
+                .getShearingOffer().getBreeder().equals(connectedUser)) {
+            return "notification-hidden";
+        } else {
+            return "notification-visible";
+        }
+    }
 
 	public String anomalyCreationButton() {
 		switch (serviceState()) {
