@@ -22,7 +22,7 @@ public class RatingDAO extends GenericDAO<Rating> implements RatingIDAO {
 		String sqlQuery = "SELECT r FROM Rating r WHERE "
 				+ "r.service.shearingOffer=:offerParam AND r.evaluator!=:userParam";
 		try {
-			ratings = new HashSet<>(em.createNamedQuery(sqlQuery)
+			ratings = new HashSet<>(em.createQuery(sqlQuery)
 					.setParameter("offerParam", selectedOffer)
 					.setParameter("userParam", selectedOffer.getBreeder())
 					.getResultList());
@@ -38,7 +38,7 @@ public class RatingDAO extends GenericDAO<Rating> implements RatingIDAO {
 		String sqlQuery = "SELECT r FROM Rating r WHERE "
 				+ "r.service.field=:fieldParam AND r.evaluator!=:userParam";
 		try {
-			ratings = new HashSet<>(em.createNamedQuery(sqlQuery)
+			ratings = new HashSet<>(em.createQuery(sqlQuery)
 					.setParameter("fieldParam", selectedField)
 					.setParameter("userParam", selectedField.getOwner())
 					.getResultList());
@@ -54,7 +54,7 @@ public class RatingDAO extends GenericDAO<Rating> implements RatingIDAO {
 		String sqlQuery = "SELECT r FROM Rating r WHERE "
 				+ "r.service=:serviceParam";
 		try {
-			ratings = new HashSet<>(em.createNamedQuery(sqlQuery)
+			ratings = new HashSet<>(em.createQuery(sqlQuery)
 					.setParameter("serviceParam", selectedService)
 					.getResultList());
 		} catch (Exception e) {

@@ -12,7 +12,8 @@
 	template="WEB-INF/template/userOfferSearchTemplate.xhtml">
 
 	<ui:define name="head">
-		<title>Nos offres</title>
+		<title>Recherche</title>
+		 <link rel="icon" href="resources/img/favicon.ico"/>
 	</ui:define>
 
 	<ui:define name="content">
@@ -56,7 +57,8 @@
 													<h4>#{offer.race.race}</h4>
 
 													<p class="price">
-														#{mbService.formatPrice(mbService.calculatePriceForOfferList(offer))} €</p>
+														#{mbService.formatPrice(mbService.calculatePriceForOfferList(offer))}
+														€</p>
 												</div>
 												<p class="small mb-3">
 													<span class="badge badge-dark">#{offer.race.species.species}</span>
@@ -71,8 +73,9 @@
 															alt="" /> <span>#{offer.breeder.firstName}</span>
 													</div>
 													<div class="trainer-rank d-flex align-items-center">
-														<i class="bx bx-user"></i>&nbsp;20 &nbsp;&nbsp; <i
-															class="bx bx-heart"></i>&nbsp;85
+														<span id="eval">#{mbRating.ratingOfShearingOffer(offer)}</span>
+														<span id="evaluation"><i class="fa fa-star" style="color:gold"> </i></span>
+														<span id="evaluation">(#{mbRating.shearingOfferRatings.size()})</span>
 													</div>
 												</div>
 											</div>

@@ -10,7 +10,8 @@
 <ui:composition template="WEB-INF/template/userTemplate.xhtml">
 
 	<ui:define name="head">
-		<title>Identification</title>
+		<title>Nos offres</title>
+		 <link rel="icon" href="resources/img/favicon.ico"/>
 	</ui:define>
 
 	<ui:define name="content">
@@ -65,8 +66,9 @@
 														alt="" /> <span>#{offer.breeder.firstName}</span>
 												</div>
 												<div class="trainer-rank d-flex align-items-center">
-													<i class="bx bx-user"></i>&nbsp;20 &nbsp;&nbsp; <i
-														class="bx bx-heart"></i>&nbsp;85
+													<span id="eval">#{mbRating.ratingOfShearingOffer(offer)}</span>
+													<span id="evaluation"><i class="fa fa-star"
+														style="color: gold"> </i></span> <span id="evaluation">(#{mbRating.shearingOfferRatings.size()})</span>
 												</div>
 											</div>
 										</div>

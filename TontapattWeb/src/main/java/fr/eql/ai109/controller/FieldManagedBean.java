@@ -24,6 +24,9 @@ import javax.faces.context.FacesContext;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import fr.eql.ai109.ibusiness.FieldIBusiness;
 import fr.eql.ai109.tontapatt.entity.FenceHeight;
 import fr.eql.ai109.tontapatt.entity.Field;
@@ -96,6 +99,7 @@ public class FieldManagedBean implements Serializable {
 				.getFieldsOfConnectedUser(connectedUser);
 		photos = new HashSet<>();
 		vegetationCompositions = new HashSet<>();
+		System.out.println(connectedUser);
 	}
 
 	public String fieldDetails() {
@@ -264,6 +268,17 @@ public class FieldManagedBean implements Serializable {
 			}
 		}
 		connectedUserFields = fields;
+	}
+	
+	public String connectedUserFieldsAsJson() {
+		ObjectMapper mapper = new ObjectMapper();
+		String json = null;
+		try {
+			json = mapper.writeValueAsString(connectedUserFields);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return json;
 	}
 
 	public Field getField() {

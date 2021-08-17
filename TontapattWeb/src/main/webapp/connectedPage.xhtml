@@ -16,7 +16,8 @@
 <ui:composition template="WEB-INF/template/userTemplate.xhtml">
 
 	<ui:define name="head">
-		<title>Identification</title>
+		<title>Accueil</title>
+		 <link rel="icon" href="resources/img/favicon.ico"/>
 	</ui:define>
 
 	<ui:define name="content">
@@ -177,9 +178,9 @@
 								<b:carousel class="carousel">
 									<c:forEach items="#{offer.photos}" var="photo">
 										<b:carouselItem>
-										<div class="photo-reglage">
-											<b:image value="resources/img/offers/#{photo.link}" />
-										</div>
+											<div class="photo-reglage">
+												<b:image value="resources/img/offers/#{photo.link}" />
+											</div>
 										</b:carouselItem>
 									</c:forEach>
 								</b:carousel>
@@ -203,7 +204,9 @@
 													alt="" /> <span>#{offer.breeder.firstName}</span>
 											</div>
 											<div class="trainer-rank d-flex align-items-center">
-												<span>#{offer.zipCodeCity.name}</span>
+												<span id="eval">#{mbRating.ratingOfShearingOffer(offer)}</span>
+												<span id="evaluation"><i class="fa fa-star"
+													style="color: gold"> </i></span> <span id="evaluation">(#{mbRating.shearingOfferRatings.size()})</span>
 											</div>
 										</div>
 									</div>
