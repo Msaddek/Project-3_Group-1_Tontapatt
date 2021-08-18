@@ -2417,6 +2417,11 @@ header.scrolled nav a {
     margin-left: 30px;
 }
 
+.dialog-element {
+	padding: 10px;
+	text-align: center;
+}
+
 .form-btn .ui-commandlink:hover, .form-btn .ui-link:hover {
     color: white; 
     text-decoration: solid;

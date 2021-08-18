@@ -78,8 +78,16 @@
 								<div class="icon-info-presta">
 									<b:iconAwesome class="icon-info" name="info-circle" size="lg" />
 									<div class="icon-info-descr">
-										<h4>Offre concernée :
-											#{mbService.service.shearingOffer.name}</h4>
+										<h4>Offre: #{mbService.service.shearingOffer.name}</h4>
+									</div>
+								</div>
+
+								<div class="icon-info-presta">
+									<br />
+									<b:iconAwesome class="icon-info" name="info-circle" size="lg" />
+									<div class="icon-info-descr">
+										<h4>Longueur d'herbe:
+											#{mbService.service.grassHeight.height}</h4>
 									</div>
 								</div>
 
@@ -279,7 +287,7 @@
 														<th scope="col">Déclarant</th>
 														<th scope="col">Date d'émission</th>
 														<th scope="col">Type</th>
-														<th scope="col">Status</th>
+														<th scope="col">Statut</th>
 													</tr>
 												</thead>
 												<tbody>
@@ -291,7 +299,8 @@
 															<th scope="row"><p:commandLink
 																	value="#{anomaly.anomalyNumber}" type="button"
 																	action="#{mbAnomaly.selectAnomaly(anomaly)}"
-																	update="idAnomaly">
+																	update="idAnomaly"
+																	style="font-size: 12px; color: #5fcf80">
 
 																</p:commandLink></th>
 															<td>#{mbDate.localDateTimeFormatterWithHour(anomaly.creationDate)}</td>
@@ -466,21 +475,28 @@
 			<f:facet name="footer">
 				<b:button id="closeCancellationModal" value="Fermer" dismiss="modal" />
 			</f:facet>
-		</b:modal> <p:dialog header="N° #{mbAnomaly.anomaly.anomalyNumber}" widgetVar="dlg1" height="500px"
-			width="700px" modal="true" id="idAnomaly">
-			<b:inputText value="#{mbAnomaly.anomaly.anomalyType.type}" disabled="true"/>
-				<p:inputTextarea
-					placeholder="Laissez un avis sur le déroulement de la prestation"
-					value="#{mbAnomaly.anomaly.description}" maxlength="255" rows="6" cols="50"
-					disabled="true">
+		</b:modal> <p:dialog header="N° #{mbAnomaly.anomaly.anomalyNumber}"
+			widgetVar="dlg1" height="300px" width="700px" modal="true"
+			id="idAnomaly">
+
+			<div class="dialog-element">
+				<b:inputText value="#{mbAnomaly.anomaly.anomalyType.type}"
+					disabled="true" />
+			</div>
+			<div class="dialog-element">
+				<p:inputTextarea value="#{mbAnomaly.anomaly.description}"
+					maxlength="255" rows="6" cols="100" disabled="true">
 				</p:inputTextarea>
+			</div>
 			<ui:fragment
 				rendered="#{mbAnomaly.anomaly.declarer ne mbUser.user and mbAnomaly.anomaly.endDate eq null}">
-				
+
 				<b:form>
-					<b:commandButton class="get-started-btn"
-						action="#{mbAnomaly.closeAnomaly(mbService.service)}"
-						value="Régler" />
+					<div class="dialog-element">
+						<b:commandButton class="get-started-btn"
+							action="#{mbAnomaly.closeAnomaly(mbService.service)}"
+							value="Régler" />
+					</div>
 				</b:form>
 			</ui:fragment>
 		</p:dialog> </main>
