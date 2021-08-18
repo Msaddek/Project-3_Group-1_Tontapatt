@@ -59,7 +59,10 @@
 											</div>
 
 											<div class="field-description">
-												<p>Toutes mes offres</p>
+												<div class="text-description">
+													<p>Crée et paramètre tes offres afin de faire découvrir
+														à tes voisins l'expérience Tontapatt !</p>
+												</div>
 											</div>
 										</div>
 
@@ -104,7 +107,9 @@
 													<h4>#{offer.zipCodeCity.name}</h4>
 												</div>
 												<div class="field-description">
-													<p>#{offer.description.subSequence(0,10)}...</p>
+												<div class="text-description">
+													<p>#{offer.description}</p>
+													</div>
 												</div>
 											</div>
 
@@ -136,50 +141,97 @@
 						<div class="tab-pane fade" id="v-pills-box#{offer.id}"
 							role="tabpanel" aria-labelledby="v-pills-box#{offer.id}-tab">
 
-							<div class="box-presentation-offer">
-								<div class="title-presentation-offer">
-									<h1>#{offer.name}</h1>
-								</div>
+							<div class="contain-box">
+								<div id="booking" class="section">
+									<div class="section-center">
+										<div class="container">
+											<div class="row">
+												<div class="booking-form">
+													<form>
+														<div class="form-group">
+															<h1 id="htitre">#{offer.name}</h1>
+														</div>
 
-								<div class="box-colonne-offer">
-									<div class="two-element-offer">
-										<div class="one-element-offer">
-											<h3>#{offer.race.species.species}</h3>
-										</div>
-										<div class="one-element-offer">
-											<h3>#{offer.race.race}</h3>
-										</div>
-									</div>
-									<div class="two-element-offer">
-										<div class="one-element-offer">
-											<h3>#{offer.animalCount} animaux</h3>
-										</div>
-										<div class="one-element-offer">
-											<h3>#{offer.animalDailyPrice} €/jour</h3>
-										</div>
-									</div>
-									<div class="two-element-offer">
-										<div class="one-element-offer">
-											<h3>Du #{offer.startDate}</h3>
-										</div>
-										<div class="one-element-offer">
-											<h3>Au #{offer.endDate}</h3>
-										</div>
-									</div>
-									<div class="two-element-offer">
-										<div class="one-element-offer">
-											<h3>À #{offer.zipCodeCity.name}</h3>
-										</div>
-										<div class="one-element-offer">
-											<h3>Jusqu'à #{offer.maxTravelDist} Km</h3>
-										</div>
-									</div>
+														<div class="row">
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label>Espèce</label>
+																	<h3 id="htitre">#{offer.race.species.species}</h3>
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label>Race</label>
+																	<h3 id="htitre">#{offer.race.race}</h3>
+																</div>
+															</div>
+														</div>
 
-									<p:commandButton action="#{mbShearingOffer.offerDetails()}"
-										styleClass="rounded-button ui-button-success" value="Modifier">
-										<f:setPropertyActionListener value="#{offer}"
-											target="#{mbShearingOffer.shearingOffer}" />
-									</p:commandButton>
+														<div class="row">
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label>Troupeau</label>
+																	<h3 id="htitre">#{offer.animalCount} bêtes</h3>
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label>Prix par jour</label>
+																	<h3 id="htitre">#{offer.animalDailyPrice} €</h3>
+																</div>
+															</div>
+														</div>
+
+														<div class="row">
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label>Commence le</label>
+																	<h3 id="htitre">#{offer.startDate}</h3>
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label>Expire le</label>
+																	<h3 id="htitre">#{offer.endDate}</h3>
+																</div>
+															</div>
+														</div>
+
+														<div class="row">
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label>Ville</label>
+																	<h3 id="htitre">#{offer.zipCodeCity.name}</h3>
+
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label>Rayon</label>
+																	<h3 id="htitre">Jusqu'à #{offer.maxTravelDist} Km</h3>
+
+																</div>
+															</div>
+														</div>
+
+														<div class="form-group">
+															<label>Description</label>
+															<h3 id="htitre">#{offer.description} Km</h3>
+														</div>
+
+														<div class="form-btn">
+															<p:commandButton
+																action="#{mbShearingOffer.offerDetails()}"
+																class="get-started-btn" value="Modifier">
+																<f:setPropertyActionListener value="#{offer}"
+																	target="#{mbShearingOffer.shearingOffer}" />
+															</p:commandButton>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
