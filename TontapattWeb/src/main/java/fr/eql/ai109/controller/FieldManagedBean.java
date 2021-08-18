@@ -99,7 +99,7 @@ public class FieldManagedBean implements Serializable {
 				.getFieldsOfConnectedUser(connectedUser);
 		photos = new HashSet<>();
 		vegetationCompositions = new HashSet<>();
-		System.out.println(connectedUser);
+		System.out.println("utilisateur---------------------------" + connectedUser);
 	}
 
 	public String fieldDetails() {
