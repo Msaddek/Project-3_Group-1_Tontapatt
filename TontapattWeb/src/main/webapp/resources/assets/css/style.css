@@ -1664,10 +1664,10 @@ header.scrolled nav a {
 
 /* OFFER PARAMETERS */
 #map-box-offer{
-	width: 100%;
-    height: 957px;
-    position: absolute !important;
-    top: 51%;
+	    width: 758px;
+    height: 550px;
+    position: relative;
+    margin: 0 auto;
 }
 
 #map-box-field{
@@ -1678,7 +1678,7 @@ header.scrolled nav a {
 }
 
 .box-parameters {
-	width: 600px;
+	width: 700px;
 	height: 200px;
 	margin: 0 auto;
 	display: flex;
@@ -1692,7 +1692,6 @@ header.scrolled nav a {
 .box-all-offer-user .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
     color: #5fcf80 !important;
     background-color: white;
-    transform: scale(1.1);
 }
 
 .box-all-offer-user {
@@ -2216,11 +2215,21 @@ header.scrolled nav a {
 	background-size: cover;
 	background-position: center;
 	width: 1200px;
-	bottom: 158px;
+	bottom: 50px;
 }
 
 .text-description {
 	width: 290px;
+}
+
+.form-btn .ui-button {
+	background: #5fcf80;
+	border: 1px solid black;
+}
+
+.form-btn .ui-button:hover {
+	background: green;
+	border: green;
 }
 
 .contain-box #booking::before {
