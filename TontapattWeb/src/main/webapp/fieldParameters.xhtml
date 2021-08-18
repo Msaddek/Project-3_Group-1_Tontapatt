@@ -96,15 +96,14 @@
 													<div class="icon-parameters-box">
 														<b:iconAwesome name="map-marker" size="lg" />
 													</div>
-													<h1>#{field.name}</h1>
+													<h1>#{field.name.length() &lt; 20 ? field.name :
+														(field.name.subSequence(0, 19).concat("...")) }</h1>
 												</div>
 												<div
 													class="d-flex justify-content-between align-items-center mb-3">
 													<h4>#{field.zipCodeCity.name}</h4>
 												</div>
-												<div class="field-description">
-													<p>#{field.description.subSequence(0,10)}...</p>
-												</div>
+												<div class="field-description"></div>
 											</div>
 
 											<br />
@@ -125,73 +124,110 @@
 
 					<div class="tab-pane fade show active" id="v-pills-map"
 						role="tabpanel" aria-labelledby="v-pills-map-tab">
-						<div id="map-box-field"></div>
+						<div class="contain-box">
+							<div id="booking" class="section">
+								<div class="section-center">
+									<div class="container">
+										<div class="row">
+
+											<div id="map-box-field"></div>
+
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 
 					<c:forEach items="#{mbField.connectedUserFields}" var="field">
 						<div class="tab-pane fade" id="v-pills-box#{field.id}"
 							role="tabpanel" aria-labelledby="v-pills-box#{field.id}-tab">
 
-							<div class="box-presentation-field">
-								<div class="title-presentation-offer">
-									<h1>#{field.name}</h1>
-								</div>
+							<div class="contain-box">
+								<div id="booking" class="section">
+									<div class="section-center">
+										<div class="container">
+											<div class="row">
+												<div class="booking-form">
 
-								<div class="box-colonne-offer">
+													<div class="form-group">
+														<h1 id="htitre">#{field.name}</h1>
+													</div>
 
-									<div class="one-element-offer">
-										<h3 style="word-wrap: break-word">#{field.description}</h3>
-									</div>
+													<div class="row">
+														<div class="col-md-6">
+															<div class="form-group">
+																<label>Superficie (en m²)</label>
+																<h3 id="htitre">#{field.area}</h3>
+															</div>
+														</div>
+														<div class="col-md-6">
+															<div class="form-group">
+																<label>Ville</label>
+																<h3 id="htitre">#{field.zipCodeCity.name}</h3>
+															</div>
+														</div>
+													</div>
+
+													<div class="row">
+														<div class="col-md-6">
+															<div class="form-group">
+																<label>Hauteur de clôture</label>
+																<h3 id="htitre">#{field.fenceHeight.height}</h3>
+															</div>
+														</div>
+														<div class="col-md-6">
+															<div class="form-group">
+																<label>Pourcentage de terrain plat</label>
+																<h3 id="htitre">#{field.flatnessPercentage.percentage}
+																	%</h3>
+															</div>
+														</div>
+													</div>
+
+													<div class="row">
+														<label>Végétations et pourcentages</label>
+														<c:forEach items="#{field.vegetationCompositions}"
+															var="vegeType">
+															<div class="col-md-6">
+																<div class="form-group">
+																	<h3 id="htitre">#{vegeType.vegetationType.vegetation}</h3>
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="form-group">
+																	<h3 id="htitre">#{vegeType.percentage} %</h3>
+																</div>
+															</div>
+														</c:forEach>
+													</div>
 
 
-									<div class="two-element-offer">
-										<div class="one-element-offer">
-											<h3>Superficie : #{field.area} hectares</h3>
-										</div>
-										<div class="one-element-offer">
-											<h3>À #{field.zipCodeCity.name}</h3>
-										</div>
-									</div>
+													<div class="form-group">
+														<label>Description</label>
+														<h3 id="htitre">#{field.description}</h3>
+													</div>
 
-									<div class="two-element-offer">
-										<div class="one-element-offer">
-											<h3>Hauteur de clôture : #{field.fenceHeight.height}</h3>
-										</div>
-										<div class="one-element-offer">
-											<h3>Pourcentage de terrain plat :</h3>
-											<h3>#{field.flatnessPercentage.percentage} %</h3>
-										</div>
-									</div>
-									<div class="one-element-offer">
-										<div class="one-element-offer">
-											<h3>
-												Types de végétation :
-												<c:forEach items="#{field.vegetationCompositions}"
-													var="vegeType">
-
-													<p>#{vegeType.vegetationType.vegetation} :
-														#{vegeType.percentage} %</p>
-												</c:forEach>
-											</h3>
-										</div>
-									</div>
-									<div class="two-element-offer">
-										
-											<p:commandButton action="#{mbField.fieldDetails()}"
+													<div class="form-btn">
+													
+														<p:commandButton action="#{mbField.fieldDetails()}"
 												styleClass="rounded-button ui-button-success"
-												value="Modifier">
+																class="get-started-btn" value="Modifier">
 												<f:setPropertyActionListener value="#{field}"
 													target="#{mbField.field}" />
 											</p:commandButton>
-						
-											<h:form>
-												<div>
-													<button type="button" class="supp-field-btn"
+											
+											<button type="button" class="supp-field-btn"
 														data-toggle="modal" data-target="#suppmodal">Supprimer
 													</button>
+						
+													
+													</div>
+
 												</div>
-											</h:form>
-									
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -256,7 +292,7 @@
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaGFqam91anRpIiwiYSI6ImNrc2MzNTRvczBjc2YydnFrZHRwdzZmc20ifQ.Z4qyHk4NtUctoB_uDmjHPA', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
             maxZoom: 18,
-            id: 'mapbox/streets-v11',
+             id: 'mapbox/dark-v10',
             tileSize: 512,
             zoomOffset: -1,
             accessToken: 'your.mapbox.access.token'
