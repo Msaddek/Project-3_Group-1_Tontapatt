@@ -16,7 +16,6 @@ public abstract class GenericDAO<T> implements GenericIDAO<T> {
 	public T add(T t) {
 		try {
 			em.persist(t);
-			System.out.println("terrain ajoute");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
