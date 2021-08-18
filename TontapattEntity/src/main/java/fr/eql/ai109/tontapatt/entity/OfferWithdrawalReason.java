@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "offer_withdrawal_reason")
 public class OfferWithdrawalReason implements Serializable {
@@ -29,6 +31,7 @@ public class OfferWithdrawalReason implements Serializable {
 	private Integer id;
 	@Column(name = "reason", nullable = false)
 	private String reason;
+	@JsonIgnore
 	@OneToMany(mappedBy = "offerWithdrawalReason", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<ShearingOffer> shearingOffers;
 

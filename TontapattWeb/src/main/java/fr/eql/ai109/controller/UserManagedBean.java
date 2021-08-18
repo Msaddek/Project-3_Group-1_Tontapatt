@@ -200,7 +200,7 @@ public class UserManagedBean implements Serializable {
 					.addMessage("updateUserForm:inpPhoto", facesMessage);
 			e.printStackTrace();
 		}
-		messageUploded = "Télécharge fait!";
+		messageUploded = "Téléchargement fait!";
 		FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,
 				messageUploded, messageUploded);
 		FacesContext.getCurrentInstance()

@@ -23,6 +23,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import org.primefaces.PrimeFaces;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
 
@@ -263,12 +264,19 @@ public class ShearingOfferManagedBean implements Serializable {
 	}
 
 	public String withdrawOffer() {
-		shearingOffer.setWithdrawalDate(LocalDateTime.now());
-		shearingOffer.setOfferWithdrawalReason(offerWithdrawalReason);
-		shearingOffer = business.update(shearingOffer);
-		init();
-		return "/offerParameters.xhtml?faces-redirect=true";
-	}
+        shearingOffer.setWithdrawalDate(LocalDateTime.now());
+        shearingOffer.setOfferWithdrawalReason(offerWithdrawalReason);
+        shearingOffer = business.update(shearingOffer);
+        init();
+        return "/offerParameters.xhtml?faces-redirect=true";
+    }
+	
+	public void selectShearingOffer(ShearingOffer selectedOffer) {
+        shearingOffer = selectedOffer;
+        offerWithdrawalReason = null;
+        PrimeFaces current = PrimeFaces.current();
+        current.executeScript("PF('withdrawOffer').show();");
+    }
 
 	public String showOffersByFieldLocation(Field selectedField,
 			LocalDate serviceStartDate, LocalDate serviceEndDate,

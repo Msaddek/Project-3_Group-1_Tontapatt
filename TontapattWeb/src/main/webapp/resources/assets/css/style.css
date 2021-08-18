@@ -196,6 +196,22 @@ h1, h2, h3, h4, h5, h6 {
 	margin-bottom: 20px
 }
 
+.supp-field-btn {
+	margin-left: 22px;
+	background: #cf5f69;
+	color: #fff;
+	border-radius:50px;
+	padding: 6px 29px;
+	white-space: nowrap;
+	transition: 0.3s;
+	font-size: 14px;
+	display: inline-block;
+	border: 1px solid #d81c2e;
+	margin-top: 15px;
+    outline: 0 none;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;	
+}
+
 .get-started-btn:hover {
 	background: #3ac162;
 	color: #fff;
@@ -1648,21 +1664,21 @@ header.scrolled nav a {
 
 /* OFFER PARAMETERS */
 #map-box-offer{
-	width: 100%;
-    height: 957px;
-    position: absolute !important;
-    top: 51%;
+	    width: 758px;
+    height: 550px;
+    position: relative;
+    margin: 0 auto;
 }
 
 #map-box-field{
-	width: 100%;
-    height: 957px;
-    position: absolute !important;
-    top: 51%;   
+		    width: 758px;
+    height: 550px;
+    position: relative;
+    margin: 0 auto;  
 }
 
 .box-parameters {
-	width: 600px;
+	width: 700px;
 	height: 200px;
 	margin: 0 auto;
 	display: flex;
@@ -1676,7 +1692,6 @@ header.scrolled nav a {
 .box-all-offer-user .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
     color: #5fcf80 !important;
     background-color: white;
-    transform: scale(1.1);
 }
 
 .box-all-offer-user {
@@ -1707,7 +1722,6 @@ header.scrolled nav a {
 	padding: 7px 14px;
 	color: #fff;
 	margin: 0;
-	border-radius: 10%;
 	margin-top: 10px;
 }
 
@@ -2047,7 +2061,6 @@ header.scrolled nav a {
 	border-color: green;
 }
 
-
 .fade {
 	opacity: 1 !important;
 }
@@ -2116,6 +2129,18 @@ header.scrolled nav a {
 
 #eval {
 	margin-right: 2px;
+}
+
+.offer-field-map{
+	text-align:center;	
+}
+.offer-map{
+	margin:50px 50px 50px 50px;
+	border: 2px solid steelblue;
+}
+.field-map{
+	margin:50px 50px 50px 50px;
+	border: 2px solid steelblue;
 }
 
 .btn-breeder {
@@ -2194,6 +2219,17 @@ header.scrolled nav a {
 
 .text-description {
 	width: 290px;
+}
+
+.form-btn .ui-button {
+	background: #5fcf80;
+	border: 1px solid black;
+	font-size: 15px;
+}
+
+.form-btn .ui-button:hover {
+	background: green;
+	border: green;
 }
 
 .contain-box #booking::before {
@@ -2356,6 +2392,45 @@ header.scrolled nav a {
 	border-radius: 0px;
 	width: 100%;
 	border: none;
+}
+
+.form-btn .supp-field-btn {
+	border-radius: 0px !important;
+	padding: 11px 29px !important;
+}
+
+.map-logo {
+	transform: scale(0.05);
+    top: -6vh;
+    position: absolute;
+    z-index: 9;
+    left: 8vh;
+    filter: invert(90%) sepia(100%) saturate(0%) hue-rotate(91deg) brightness(105%) contrast(103%);
+}
+
+.form-btn .ui-commandlink, .form-btn .ui-link {
+	padding: 13px 25px;
+    background-color: red;
+    color: white;
+    border-radius: 5%;
+    font-size: 15px;
+    margin-left: 30px;
+}
+
+.dialog-element {
+	padding: 10px;
+	text-align: center;
+}
+
+.form-btn .ui-commandlink:hover, .form-btn .ui-link:hover {
+    color: white; 
+    text-decoration: solid;
+    background-color: darkred;
+}
+
+.supp-field-btn:hover {
+	background-color: red;
+	color: white;
 }
 
 .scroller {

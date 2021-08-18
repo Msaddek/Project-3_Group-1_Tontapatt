@@ -10,7 +10,7 @@
 
 	<ui:define name="head">
 		<title>Réservation</title>
-		 <link rel="icon" href="resources/img/favicon.ico"/>
+		<link rel="icon" href="resources/img/favicon.ico" />
 	</ui:define>
 
 	<ui:define name="content">
@@ -33,7 +33,8 @@
 						<p:graphicImage class="img-profil"
 							value="resources/img/users/#{mbUser.user.photo}"
 							alt="No picture set"></p:graphicImage>
-						#{mbService.offer.breeder.firstName}, Evaluation
+						#{mbService.offer.breeder.firstName},
+						#{mbRating.ratingOfShearingOffer(mbService.offer)}
 					</div>
 
 				</h2>
@@ -199,6 +200,15 @@
 							<div class="category-description">
 								<h2>Evaluations</h2>
 							</div>
+
+							<ui:repeat var="rating"
+								value="#{recoverAllShearingOfferRatings(mbService.offer)}">
+								<div class="row">
+									<label>#{rating.evaluator.firstName}</label>
+									<h2>#{rating.ratingLevel}</h2>
+								</div>
+							</ui:repeat>
+
 						</div>
 					</div>
 					<!--/.Card-->
@@ -303,7 +313,8 @@
 							</div>
 							<div class="form-group">
 								<h3 style="color: red;">
-									<strong> Prix : #{mbService.formatPrice(mbService.calculatePrice())} € </strong>
+									<strong> Prix :
+										#{mbService.formatPrice(mbService.calculatePrice())} € </strong>
 								</h3>
 							</div>
 
