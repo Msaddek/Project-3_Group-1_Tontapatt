@@ -85,9 +85,19 @@ Suivez les differentes phases du projet sur notre Trello
 
 ### Participants au projet
 
-<p align="center"><img src="https://github-readme-stats.vercel.app/api?username=hajjoujti&theme=blue-white"/></p>
-<p align="center"><img src="https://github-readme-stats.vercel.app/api?username=Msaddek&theme=blue-white"</p>
-<p align="center"><img src="https://github-readme-stats.vercel.app/api?username=cjessica34&theme=blue-white"</p>
-<p align="center"><img src="https://github-readme-stats.vercel.app/api?username=fguyont&theme=blue-white"</p>
-<p align="center"><img src="https://github-readme-stats.vercel.app/api?username=soufyaned&theme=blue-white"</p>
+<p align="center"><a href="https://github.com/cjessica34"><img src="https://img.shields.io/github/followers/cjessica34?label=follow%20cjessica34&style=social"/></a></p>
+<p align="center"><img src="https://github-readme-stats.vercel.app/api?username=cjessica34&theme=blue-white"</p><br/>
+
+<p align="center"><a href="https://github.com/fguyont"><img src="https://img.shields.io/github/followers/fguyont?label=follow%20fguyont&style=social"/></a></p>
+<p align="center"><img src="https://github-readme-stats.vercel.app/api?username=fguyont&theme=blue-white"</p><br/>
+
+<p align="center"><a href="https://github.com/hajjoujti"><img src="https://img.shields.io/github/followers/hajjoujti?label=follow%20hajjoujti&style=social"/></a></p>
+<p align="center"><img src="https://github-readme-stats.vercel.app/api?username=hajjoujti&theme=blue-white"/></p><br/>
+
+<p align="center"><a href="https://github.com/Msaddek"><img src="https://img.shields.io/github/followers/Msaddek?label=follow%20Msaddek&style=social"/></a></p>
+<p align="center"><img src="https://github-readme-stats.vercel.app/api?username=Msaddek&theme=blue-white"</p><br/>
+
+<p align="center"><a href="https://github.com/soufyaned"><img src="https://img.shields.io/github/followers/soufyaned?label=follow%20soufyaned&style=social"/></a></p>
+<p align="center"><img src="https://github-readme-stats.vercel.app/api?username=soufyaned&theme=blue-white"</p><br/>
+
 <p align="center"><img src="https://contributor-overtime-api.apiseven.com/contributors-svg?chart=contributorOverTime&repo=hajjoujti/Project-3_Group-1_Tontapatt"</p>
