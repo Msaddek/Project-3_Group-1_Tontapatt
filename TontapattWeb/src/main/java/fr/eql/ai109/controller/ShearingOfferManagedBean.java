@@ -262,10 +262,10 @@ public class ShearingOfferManagedBean implements Serializable {
 		return "/offerParameters.xhtml?faces-redirect=true";
 	}
 
-	public String withdrawOffer() {
-		shearingOffer.setWithdrawalDate(LocalDateTime.now());
-		shearingOffer.setOfferWithdrawalReason(offerWithdrawalReason);
-		shearingOffer = business.update(shearingOffer);
+	public String withdrawOffer(ShearingOffer selectedShearingOffer) {
+		selectedShearingOffer.setWithdrawalDate(LocalDateTime.now());
+		selectedShearingOffer.setOfferWithdrawalReason(offerWithdrawalReason);
+		selectedShearingOffer = business.update(selectedShearingOffer);
 		init();
 		return "/offerParameters.xhtml?faces-redirect=true";
 	}

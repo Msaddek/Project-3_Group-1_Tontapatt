@@ -196,6 +196,22 @@ h1, h2, h3, h4, h5, h6 {
 	margin-bottom: 20px
 }
 
+.supp-field-btn {
+	margin-left: 22px;
+	background: #cf5f69;
+	color: #fff;
+	border-radius:50px;
+	padding: 6px 29px;
+	white-space: nowrap;
+	transition: 0.3s;
+	font-size: 14px;
+	display: inline-block;
+	border: 1px solid #d81c2e;
+	margin-top: 15px;
+    outline: 0 none;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;	
+}
+
 .get-started-btn:hover {
 	background: #3ac162;
 	color: #fff;
@@ -2047,7 +2063,6 @@ header.scrolled nav a {
 	border-color: green;
 }
 
-
 .fade {
 	opacity: 1 !important;
 }
@@ -2116,6 +2131,18 @@ header.scrolled nav a {
 
 #eval {
 	margin-right: 2px;
+}
+
+.offer-field-map{
+	text-align:center;	
+}
+.offer-map{
+	margin:50px 50px 50px 50px;
+	border: 2px solid steelblue;
+}
+.field-map{
+	margin:50px 50px 50px 50px;
+	border: 2px solid steelblue;
 }
 
 .btn-breeder {
@@ -2357,6 +2384,7 @@ header.scrolled nav a {
 	width: 100%;
 	border: none;
 }
+
 
 .scroller {
  
