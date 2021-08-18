@@ -21,6 +21,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import org.primefaces.PrimeFaces;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
 
@@ -34,6 +35,7 @@ import fr.eql.ai109.tontapatt.entity.FieldPhoto;
 import fr.eql.ai109.tontapatt.entity.FieldWithdrawalReason;
 import fr.eql.ai109.tontapatt.entity.FlatnessPercentage;
 import fr.eql.ai109.tontapatt.entity.Service;
+import fr.eql.ai109.tontapatt.entity.ShearingOffer;
 import fr.eql.ai109.tontapatt.entity.User;
 import fr.eql.ai109.tontapatt.entity.VegetationComposition;
 import fr.eql.ai109.tontapatt.entity.ZipCodeCity;
@@ -252,10 +254,10 @@ public class FieldManagedBean implements Serializable {
 		return "/fieldParameters.xhtml?faces-redirect=true";
 	}
 
-	public String withdrawField(Field selectedField) {
-		selectedField.setFieldWithdrawalReason(fieldWithdrawalReason);
-		selectedField.setWithdrawalDate(LocalDateTime.now());
-		field = fieldBusiness.update(selectedField);
+	public String withdrawField() {
+		field.setFieldWithdrawalReason(fieldWithdrawalReason);
+		field.setWithdrawalDate(LocalDateTime.now());
+		field = fieldBusiness.update(field);
 		init();
 		return "/fieldParameters.xhtml?faces-redirect=true";
 	}
@@ -280,6 +282,13 @@ public class FieldManagedBean implements Serializable {
 		}
 		return json;
 	}
+	
+	public void selectField(Field selectedField) {
+        field = selectedField;
+       fieldWithdrawalReason = null;
+        PrimeFaces current = PrimeFaces.current();
+        current.executeScript("PF('withdrawField').show();");
+    }
 
 	public Field getField() {
 		return field;
