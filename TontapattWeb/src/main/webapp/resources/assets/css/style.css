@@ -2162,6 +2162,202 @@ header.scrolled nav a {
 	display: none !important;
 }
 
+.contain-box .section {
+	position: relative;
+	height: 100vh;
+}
+
+.contain-box .section .section-center {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	right: 0;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+.contain-box .booking-form h1 {
+	font-size: 35px !important;
+}
+
+.contain-box .booking-form h1 {
+	font-size: 23px;	
+}
+.contain-box #booking {
+	font-family: 'Raleway', sans-serif;
+	background-image: url('https://ericheymans.b-cdn.net/wp-content/uploads/2012/08/dawn-field-grass-164025.jpg');
+	background-size: cover;
+	background-position: center;
+	width: 1200px;
+	bottom: 50px;
+}
+
+.text-description {
+	width: 290px;
+}
+
+.contain-box #booking::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	top: 0;
+	background: rgba(0, 0, 0, 0.7);
+}
+
+#htitre {
+	color: white;
+}
+
+.contain-box .booking-form {
+	background: #1a1b1d;
+	max-width: 768px;
+	width: 100%;
+	margin: auto;
+	padding: 60px;
+}
+
+.contain-box .booking-form .form-group {
+	position: relative;
+	margin-bottom: 20px;
+}
+
+.contain-box .booking-form .form-control {
+	background-color: transparent;
+	height: 65px;
+	padding: 0px 15px;
+	border-radius: 0px;
+	-webkit-transition: 0.2s;
+	transition: 0.2s;
+	color: #fff;
+	border: 0px;
+	font-size: 16px;
+	font-weight: 700;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	border: 2px solid #4d4d4d;
+}
+
+.contain-box .booking-form .form-control::-webkit-input-placeholder {
+	color: rgba(255, 255, 255, 0.3);
+}
+
+.contain-box .booking-form .form-control:-ms-input-placeholder {
+	color: rgba(255, 255, 255, 0.3);
+}
+
+.contain-box .booking-form .form-control::placeholder {
+	color: rgba(255, 255, 255, 0.3);
+}
+
+.contain-box .booking-form .form-group.input-not-empty .form-control {
+	border-color: #fff;
+	padding-bottom: 20px;
+}
+
+.contain-box .booking-form .form-label {
+	color: #000;
+	font-weight: 700;
+	text-transform: uppercase;
+	line-height: 24px;
+	height: 24px;
+	font-size: 14px;
+	position: absolute;
+	left: 0;
+	bottom: 0px;
+	opacity: 0;
+	pointer-events: none;
+	display: block;
+	width: 100%;
+	background: #4d4d4d;
+	padding: 0px 15px;
+	-webkit-transition: 0.2s all;
+	transition: 0.2s all;
+}
+
+.contain-box .booking-form .form-group.input-not-empty .form-label {
+	opacity: 1;
+	bottom: 0px;
+	color: #1a1b1d;
+	background: #fff;
+}
+
+.contain-box .booking-form input[type="date"].form-control,
+.contain-box .booking-form input[type="time"].form-control {
+	padding-bottom: 20px;
+}
+
+.contain-box .booking-form input[type="date"].form-control:invalid,
+.contain-box .booking-form input[type="time"].form-control:invalid {
+	color: rgba(255, 255, 255, 0.3);
+}
+
+.contain-box .booking-form input[type="date"].form-control+.form-label,
+.contain-box .booking-form input[type="time"].form-control+.form-label {
+	color: #1a1b1d;
+	opacity: 1;
+}
+
+.contain-box .booking-form select.form-control {
+	padding-bottom: 20px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+
+.contain-box .booking-form select.form-control option {
+	color: #1a1b1d;
+}
+
+.contain-box .booking-form select.form-control:invalid {
+	color: rgba(255, 255, 255, 0.3);
+}
+
+.contain-box .booking-form select.form-control+.select-arrow {
+	position: absolute;
+	right: 0px;
+	bottom: 26px;
+	width: 32px;
+	line-height: 32px;
+	height: 32px;
+	text-align: center;
+	pointer-events: none;
+	color: rgba(255, 255, 255, 0.3);
+	font-size: 14px;
+}
+
+.contain-box .booking-form select.form-control+.select-arrow:after {
+	content: '\279C';
+	display: block;
+	-webkit-transform: rotate(90deg);
+	transform: rotate(90deg);
+}
+
+.contain-box .booking-form .form-group.input-not-empty select.form-control+.select-arrow {
+	color: #fff;
+}
+
+.contain-box .booking-form select.form-control~.form-label {
+	color: #1a1b1d;
+	opacity: 1;
+}
+
+.contain-box .booking-form .form-btn {
+	margin-top: 10px;
+}
+
+.contain-box .booking-form .submit-btn {
+	font-weight: 700;
+	height: 55px;
+	color: #1a1b1d;
+	background-color: #ffc600;
+	font-size: 18px;
+	border-radius: 0px;
+	width: 100%;
+	border: none;
+}
+
 .scroller {
  
     height: 800px;
