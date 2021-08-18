@@ -14,7 +14,7 @@
 
 	<ui:define name="head">
 		<title>Mes terrains</title>
-
+		<link rel="icon" href="resources/img/favicon.ico" />
 	</ui:define>
 
 	<ui:define name="content">
@@ -32,41 +32,24 @@
 						<div class="nav flex-column nav-pills me-3" id="v-pills-tab"
 							role="tablist" aria-orientation="vertical">
 
+	<ui:fragment rendered="#{mbField.connectedUserFields.isEmpty()}">
+					<div class="box-parameters">
+					<div style="width: 600px;"> 
+						<h1>Crée,et paramètre tes terrains afin de pouvoir expérimenter une expérience Tontapatt dessus ! </h1>
+					</div>
+					</div>
+</ui:fragment>
 							<button class="nav-link active" id="v-pills-map-tab"
 								data-bs-toggle="pill" data-bs-target="#v-pills-map"
 								type="button" role="tab" aria-controls="v-pills-map"
 								aria-selected="true">
 
-								<div class="box-parameters">
-									<div class="carousel-box">
-										<b:carousel class="carousel">
-											<b:carouselItem>
-												<div class="reglage-picture-param">
-													<b:image value="resources/img/carte.jpg" />
-												</div>
-											</b:carouselItem>
-										</b:carousel>
-									</div>
+							
+									
+										<img class="map-logo" src="resources/img/mapLogo.png" />
+								
+								
 
-									<div class="wrap-image">
-
-										<div class="description-box">
-											<div class="title-zone">
-												<div class="icon-parameters-box">
-													<b:iconAwesome name="globe" size="lg" />
-												</div>
-												<h1>Carte</h1>
-											</div>
-
-											<div class="field-description">
-												<p>Tous mes terrains</p>
-											</div>
-										</div>
-
-									</div>
-
-								</div>
-								<hr />
 							</button>
 
 							<c:forEach items="#{mbField.connectedUserFields}" var="field">
@@ -210,19 +193,19 @@
 													</div>
 
 													<div class="form-btn">
-													
+
 														<p:commandButton action="#{mbField.fieldDetails()}"
-												styleClass="rounded-button ui-button-success"
-																class="get-started-btn" value="Modifier">
-												<f:setPropertyActionListener value="#{field}"
-													target="#{mbField.field}" />
-											</p:commandButton>
-											
-											<button type="button" class="supp-field-btn"
-														data-toggle="modal" data-target="#suppmodal">Supprimer
-													</button>
-						
-													
+															styleClass="rounded-button ui-button-success"
+															class="get-started-btn" value="Modifier">
+															<f:setPropertyActionListener value="#{field}"
+																target="#{mbField.field}" />
+														</p:commandButton>
+
+														<p:commandLink action="#{mbField.selectField(field)}"
+															value="Retirer" update="idFieldOffer">
+
+														</p:commandLink>
+
 													</div>
 
 												</div>
@@ -231,61 +214,60 @@
 									</div>
 								</div>
 							</div>
-
-
-							<b:modal id="suppmodal" closable="true" close-on-escape="false"
-								backdrop="false">
-
-								<div class="modal-body">
-									<div class="form-title text-center">
-										<h3>Etes vous sûr de vouloir supprimer ce terrain ? Si
-											oui, veuillez sélectionner une raison dans le menu déroulant
-											ci-dessous :</h3>
-										<br />
-									</div>
-									<div class="d-flex flex-column text-center">
-										<b:form id="suppForm">
-											<div class="rs-select2 js-select-simple select--no-search">
-												<br /> <label for="inpFieldWithdrawalReason">Raison
-													:</label><br />
-												<b:selectOneMenu id="inpFieldWithdrawalReason"
-													value="#{mbField.fieldWithdrawalReason}" required="true"
-													converter="entityConverter"
-													requiredMessage="Veuillez sélectionner une raison">
-													<f:selectItem itemLabel="sélectionnez la raison"
-														itemValue="" />
-													<f:selectItems
-														value="#{mbFieldWithdrawalReason.allFieldWithdrawalReason()}"
-														var="reason" itemLabel="#{reason.withdrawalReason}"
-														itemValue="#{reason}" />
-													<p:ajax update="fieldWithdrawalReasonMessage" />
-												</b:selectOneMenu>
-												<br />
-												<b:message id="fieldWithdrawalReasonMessage"
-													for="inpFieldWithdrawalReason" />
-											</div>
-											<br />
-											<div class="p-t-20">
-												<b:commandButton class="supp-field-btn"
-													value="Confirmer la suppression"
-													action="#{mbField.withdrawField(field)}" />
-											</div>
-
-										</b:form>
-									</div>
-								</div>
-								<f:facet name="footer">
-									<b:button id="closePop" value="Close" dismiss="modal" />
-								</f:facet>
-							</b:modal>
-
-
-
 						</div>
 					</c:forEach>
 				</div>
 			</div>
 		</div>
+
+		<p:dialog header="Offre : #{mbField.field.name}"
+			widgetVar="withdrawField" height="200px" width="700px" modal="true"
+			id="idFieldOffer">
+
+			<div class="modal-body">
+				<div class="form-title text-center">
+					<h3>Etes vous sûr de vouloir supprimer ce terrain ? Si oui,
+						veuillez sélectionner une raison dans le menu déroulant ci-dessous
+						:</h3>
+					<br />
+				</div>
+				<div class="d-flex flex-column text-center">
+					<b:form id="suppForm">
+						<div class="rs-select2 js-select-simple select--no-search">
+							<br /> <label for="inpFieldWithdrawalReason">Raison :</label><br />
+							<b:selectOneMenu id="inpFieldWithdrawalReason"
+								value="#{mbField.fieldWithdrawalReason}" required="true"
+								converter="entityConverter"
+								requiredMessage="Veuillez sélectionner une raison">
+								<f:selectItem itemLabel="Sélectionnez la raison" itemValue="" />
+								<f:selectItems
+									value="#{mbFieldWithdrawalReason.allFieldWithdrawalReason()}"
+									var="reason" itemLabel="#{reason.withdrawalReason}"
+									itemValue="#{reason}" />
+								<p:ajax update="fieldWithdrawalReasonMessage" />
+							</b:selectOneMenu>
+							<br />
+							<b:message id="fieldWithdrawalReasonMessage"
+								for="inpFieldWithdrawalReason" />
+						</div>
+						<br />
+						<div class="p-t-20">
+							<b:commandButton class="supp-field-btn"
+								value="Confirmer la suppression"
+								action="#{mbField.withdrawField()}" />
+						</div>
+
+					</b:form>
+				</div>
+			</div>
+			
+			<f:facet name="footer">
+				<b:button id="closePop" value="Fermer" onclick="PF('withdrawField').hide();" />
+			</f:facet>
+
+		</p:dialog>
+
+
 
 		<script>
 				var fieldMap = L.map('map-box-field').setView([46.2276, 2.2137], 6);

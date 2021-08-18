@@ -2399,8 +2399,33 @@ header.scrolled nav a {
 	padding: 11px 29px !important;
 }
 
-.form-btn .supp-field-btn:hover {
+.map-logo {
+	transform: scale(0.05);
+    top: -6vh;
+    position: absolute;
+    z-index: 9;
+    left: 8vh;
+    filter: invert(90%) sepia(100%) saturate(0%) hue-rotate(91deg) brightness(105%) contrast(103%);
+}
+
+.form-btn .ui-commandlink, .form-btn .ui-link {
+	padding: 13px 25px;
+    background-color: red;
+    color: white;
+    border-radius: 5%;
+    font-size: 15px;
+    margin-left: 30px;
+}
+
+.form-btn .ui-commandlink:hover, .form-btn .ui-link:hover {
+    color: white; 
+    text-decoration: solid;
+    background-color: darkred;
+}
+
+.supp-field-btn:hover {
 	background-color: red;
+	color: white;
 }
 
 .scroller {
