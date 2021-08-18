@@ -202,7 +202,7 @@
 							</div>
 
 							<ui:repeat var="rating"
-								value="#{recoverAllShearingOfferRatings(mbService.offer)}">
+								value="#{mbRating.recoverAllShearingOfferRatings(mbService.offer)}">
 								<div class="row">
 									<label>#{rating.evaluator.firstName}</label>
 									<h2>#{rating.ratingLevel}</h2>
