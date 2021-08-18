@@ -32,23 +32,24 @@
 						<div class="nav flex-column nav-pills me-3" id="v-pills-tab"
 							role="tablist" aria-orientation="vertical">
 
-	<ui:fragment rendered="#{mbField.connectedUserFields.isEmpty()}">
-					<div class="box-parameters">
-					<div style="width: 600px;"> 
-						<h1>Crée,et paramètre tes terrains afin de pouvoir expérimenter une expérience Tontapatt dessus ! </h1>
-					</div>
-					</div>
-</ui:fragment>
+							<ui:fragment rendered="#{mbField.connectedUserFields.isEmpty()}">
+								<div class="box-parameters">
+									<div style="width: 600px;">
+										<h1>Crée et paramètre tes terrains afin de pouvoir
+											expérimenter une expérience Tontapatt dessus !</h1>
+									</div>
+								</div>
+							</ui:fragment>
 							<button class="nav-link active" id="v-pills-map-tab"
 								data-bs-toggle="pill" data-bs-target="#v-pills-map"
 								type="button" role="tab" aria-controls="v-pills-map"
 								aria-selected="true">
 
-							
-									
-										<img class="map-logo" src="resources/img/mapLogo.png" />
-								
-								
+
+
+								<img class="map-logo" src="resources/img/mapLogo.png" />
+
+
 
 							</button>
 
@@ -221,7 +222,7 @@
 		</div>
 
 		<p:dialog header="Offre : #{mbField.field.name}"
-			widgetVar="withdrawField" height="200px" width="700px" modal="true"
+			widgetVar="withdrawField" height="300px" width="700px" modal="true"
 			id="idFieldOffer">
 
 			<div class="modal-body">
@@ -234,7 +235,7 @@
 				<div class="d-flex flex-column text-center">
 					<b:form id="suppForm">
 						<div class="rs-select2 js-select-simple select--no-search">
-							<br /> <label for="inpFieldWithdrawalReason">Raison :</label><br />
+							<br /> <label for="inpFieldWithdrawalReason" style="font-size: 18px;" >Raison :</label><br />
 							<b:selectOneMenu id="inpFieldWithdrawalReason"
 								value="#{mbField.fieldWithdrawalReason}" required="true"
 								converter="entityConverter"
@@ -260,9 +261,10 @@
 					</b:form>
 				</div>
 			</div>
-			
+
 			<f:facet name="footer">
-				<b:button id="closePop" value="Fermer" onclick="PF('withdrawField').hide();" />
+				<b:button id="closePop" value="Fermer"
+					onclick="PF('withdrawField').hide();" />
 			</f:facet>
 
 		</p:dialog>

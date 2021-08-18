@@ -32,12 +32,19 @@
 						<div class="nav flex-column nav-pills me-3" id="v-pills-tab"
 							role="tablist" aria-orientation="vertical">
 
+<ui:fragment rendered="#{mbShearingOffer.connectedUserOffers.isEmpty()}">
+							<div class="box-parameters">
+								<div style="width: 600px;">
+									<h1>Mets en place et paramètre tes offres afin de faire découvrir à tes voisins l'expérience Tontapatt !</h1>
+								</div>
+							</div>
+</ui:fragment>
 							<button class="nav-link active" id="v-pills-map-tab"
 								data-bs-toggle="pill" data-bs-target="#v-pills-map"
 								type="button" role="tab" aria-controls="v-pills-map"
 								aria-selected="true">
 
-						<img class="map-logo" src="resources/img/mapLogo.png" />
+								<img class="map-logo" src="resources/img/mapLogo.png" />
 							</button>
 
 							<c:forEach items="#{mbShearingOffer.connectedUserOffers}"
@@ -219,10 +226,10 @@
 																target="#{mbShearingOffer.shearingOffer}" />
 														</p:commandButton>
 
-														<p:commandLink action="#{mbShearingOffer.selectShearingOffer(offer)}"
-																	value="Rerirer"
-																	update="idWithdrawOffer">
-																	
+														<p:commandLink
+															action="#{mbShearingOffer.selectShearingOffer(offer)}"
+															value="Rerirer" update="idWithdrawOffer">
+
 														</p:commandLink>
 
 													</div>
@@ -239,12 +246,12 @@
 			</div>
 		</div>
 
-<p:dialog header="Offre : #{mbShearingOffer.shearingOffer.name}"
-			widgetVar="withdrawOffer" height="200px" width="700px" modal="true" id="idWithdrawOffer"
-			>
-				<div class="modal-body">
+		<p:dialog header="Offre : #{mbShearingOffer.shearingOffer.name}"
+			widgetVar="withdrawOffer" height="300px" width="700px" modal="true"
+			id="idWithdrawOffer">
+			<div class="modal-body">
 				<div class="form-title text-center">
-				<h1>#{mbShearingOffer.shearingOffer.name}</h1>
+					<h1>#{mbShearingOffer.shearingOffer.name}</h1>
 					<h3>Etes vous sûr de vouloir supprimer cette offre ? Si oui,
 						veuillez sélectionner une raison dans le menu déroulant ci-dessous
 						:</h3>
@@ -253,7 +260,7 @@
 				<div class="d-flex flex-column text-center">
 					<b:form id="suppForm">
 						<div class="rs-select2 js-select-simple select--no-search">
-							<br /> <label for="inpFieldWithdrawalReason">Raison :</label><br />
+							<br /> <label for="inpFieldWithdrawalReason" style="font-size: 18px;">Raison :</label><br />
 							<b:selectOneMenu id="inpFieldWithdrawalReason"
 								value="#{mbShearingOffer.offerWithdrawalReason}" required="true"
 								converter="entityConverter"
@@ -261,12 +268,11 @@
 								<f:selectItem itemLabel="Sélectionnez la raison" itemValue="" />
 								<f:selectItems
 									value="#{mbOfferWithdrawalReason.allOfferWithdrawalReason()}"
-									var="reason" itemLabel="#{reason.reason}"
-									itemValue="#{reason}" />
-								
+									var="reason" itemLabel="#{reason.reason}" itemValue="#{reason}" />
+
 							</b:selectOneMenu>
 							<br />
-							
+
 						</div>
 						<br />
 						<div class="p-t-20">
@@ -279,9 +285,10 @@
 				</div>
 			</div>
 			<f:facet name="footer">
-				<b:button id="closePop" value="Fermer" onclick="PF('withdrawOffer').hide();" />
+				<b:button id="closePop" value="Fermer"
+					onclick="PF('withdrawOffer').hide();" />
 			</f:facet>
-</p:dialog>
+		</p:dialog>
 
 		<script>
 				var offerMap = L.map('map-box-offer').setView([46.2276, 2.2137], 6);
