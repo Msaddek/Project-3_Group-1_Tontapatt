@@ -33,4 +33,6 @@ public interface ShearingOfferIBusiness
 	
 	Set<ShearingOffer> getLastThree();
 
+	Set<ShearingOffer> getLastTwenty();
+
 }

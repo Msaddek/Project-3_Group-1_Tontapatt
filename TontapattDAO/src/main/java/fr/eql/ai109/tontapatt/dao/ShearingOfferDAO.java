@@ -219,7 +219,7 @@ public class ShearingOfferDAO extends GenericDAO<ShearingOffer>
 		}
 		return shearingOffers;
 	}
-	
+
 	@Override
 	public Set<ShearingOffer> getLastThreeByUser(User connectedUser) {
 		Set<ShearingOffer> shearingOffers = null;
@@ -260,6 +260,29 @@ public class ShearingOfferDAO extends GenericDAO<ShearingOffer>
 			shearingOffers = new HashSet<ShearingOffer>(
 					em.createQuery(sqlQueryShearingOffers)
 							.setParameter("dateNowParam", now).setMaxResults(3)
+							.getResultList());
+			for (ShearingOffer shearingOffer : shearingOffers) {
+				shearingOffer
+						.setPhotos(new HashSet<>(em.createQuery(sqlQueryPhotos)
+								.setParameter("offerParam", shearingOffer)
+								.getResultList()));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return shearingOffers;
+	}
+
+	@Override
+	public Set<ShearingOffer> getLastTwenty() {
+		Set<ShearingOffer> shearingOffers = null;
+		String sqlQueryShearingOffers = "SELECT s FROM ShearingOffer s ORDER "
+				+ "BY s.id DESC";
+		String sqlQueryPhotos = "SELECT op FROM ShearingOfferPhoto op WHERE "
+				+ "op.shearingOffer=:offerParam";
+		try {
+			shearingOffers = new HashSet<ShearingOffer>(
+					em.createQuery(sqlQueryShearingOffers).setMaxResults(20)
 							.getResultList());
 			for (ShearingOffer shearingOffer : shearingOffers) {
 				shearingOffer

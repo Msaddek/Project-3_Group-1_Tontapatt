@@ -30,4 +30,6 @@ public interface ShearingOfferIDAO extends GenericIDAO<ShearingOffer> {
 
 	Set<ShearingOffer> getLastThree();
 
+	Set<ShearingOffer> getLastTwenty();
+
 }

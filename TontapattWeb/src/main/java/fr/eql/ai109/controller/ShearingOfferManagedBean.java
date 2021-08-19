@@ -11,7 +11,6 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -324,7 +323,7 @@ public class ShearingOfferManagedBean implements Serializable {
 	}
 	
 	public Set<ShearingOffer> allShearingOffersWithPhotos(){
-		return business.getAllWithPhotos();
+		return business.getLastTwenty();
 	}
 
 	public Set<ShearingOffer> lastThreeShearingOffers(){
