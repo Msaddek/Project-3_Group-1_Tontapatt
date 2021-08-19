@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.Set;
 
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,7 +16,7 @@ import fr.eql.ai109.tontapatt.entity.Field;
 import fr.eql.ai109.tontapatt.entity.ShearingOffer;
 
 @ManagedBean(name = "mbHomePage")
-@ViewScoped
+@RequestScoped
 public class HomePageManagedBean implements Serializable {
 
 	/**
