@@ -2217,8 +2217,12 @@ header.scrolled nav a {
 	background-image: url('https://ericheymans.b-cdn.net/wp-content/uploads/2012/08/dawn-field-grass-164025.jpg');
 	background-size: cover;
 	background-position: center;
-	width: 1200px;
+	width: 100%;
 	bottom: 50px;
+}
+
+.nav-box-offer .tab-content {
+	width: calc(100% - 700px);
 }
 
 .text-description {
@@ -2408,7 +2412,7 @@ header.scrolled nav a {
     top: -6vh;
     position: absolute;
     z-index: 9;
-    left: 8vh;
+    left: calc(-62vh + 700px);
     filter: invert(90%) sepia(100%) saturate(0%) hue-rotate(91deg) brightness(105%) contrast(103%);
 }
 
@@ -2446,4 +2450,14 @@ header.scrolled nav a {
 }
 ::-webkit-scrollbar { width: 0px;};
 
+#idSubcriptionCompeted a {
+	visibility: hidden;
+}
 
+#returnHome {
+	transform: scale(0.8);
+    margin: 0px;
+    position: relative;
+    bottom: -89px;
+    left: 32%;
+}
