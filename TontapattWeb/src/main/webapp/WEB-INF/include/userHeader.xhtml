@@ -24,7 +24,7 @@
 				#{mbUser.user.firstName} !</a></li>
 		<li><a href="services.xhtml">Prestations<span
 				class="badge badge-pill badge-danger #{mbService.notificationVisibility()}">
-				#{mbService.newPendingService()}</span></a></li>
+					#{mbService.newPendingService()}</span></a></li>
 		<li><a href="home.xhtml">Nouveautés</a></li>
 
 	</ul>
@@ -61,6 +61,7 @@
 			<h:form>
 				<div class="disconnect-btn">
 					<p:commandButton styleClass="ui-button-danger ui-button-flat"
+						style="background-color: transparent;border-color: transparent; padding-right: 35px; box-shadow: 0px 0px 0px;"
 						value="Déconnexion" action="#{mbUser.disconnect()}" />
 				</div>
 			</h:form>

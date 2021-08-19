@@ -14,7 +14,7 @@
 
 	<ui:insert name="head">
 		<title>Inscription</title>
-		 <link rel="icon" href="resources/img/favicon.ico"/>
+		<link rel="icon" href="resources/img/favicon.ico" />
 	</ui:insert>
 
 	<meta charset="utf-8" />
@@ -41,8 +41,8 @@
 	<div class="container d-flex align-items-center">
 
 		<h1 class="logo me-auto">
-		<a href = "home.xhtml">
-		<img src = "resources/assets/img/logoTontapatt.png"/></a>
+			<a href="home.xhtml"> <img
+				src="resources/assets/img/logoTontapatt.png" /></a>
 		</h1>
 		<!-- Uncomment below if you prefer to use an image logo -->
 		<!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
@@ -316,8 +316,9 @@
 
 
 						<div class="p-t-20">
-							<b:commandButton type="submit" class="btnSubscription" value="Valider"
-								action="#{mbUser.createUser()}" />
+							<b:commandButton type="submit" class="btnSubscription"
+								value="Valider" action="#{mbUser.createUser()}"
+								update="idSubcriptionCompeted" />
 						</div>
 
 					</b:form>
@@ -325,9 +326,20 @@
 			</div>
 		</div>
 	</div>
+	<p:dialog header="Utilisateur créer" widgetVar="dlg1" height="200px"
+		width="400px" modal="true" id="idSubcriptionCompeted">
+		<div>
+			<h3 style="align: center;">Votre compte est bien créé!</h3>
+			<b:form>
+				<b:commandButton class="get-started-btn" id="returnHome"
+					style="transform: transform: scale(0.8); margin: 0px; position: relative; bottom: -89px; left: 37%;"
+					value="Fermer" action="#{mbUser.returnToHome()}" />
+			</b:form>
+		</div>
+	</p:dialog>
 
 	<ui:include src="/WEB-INF/include/footer.xhtml"></ui:include>
-	
+
 </h:body>
 
 </html>

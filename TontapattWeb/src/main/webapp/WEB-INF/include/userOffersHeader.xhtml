@@ -25,7 +25,7 @@
 				#{mbUser.user.firstName} !</a></li>
 		<li><a href="services.xhtml">Prestations<span
 				class="badge badge-pill badge-danger #{mbService.notificationVisibility()}">
-				#{mbService.newPendingService()}</span></a></li>
+					#{mbService.newPendingService()}</span></a></li>
 		<li><a href="home.xhtml">Nouveautés</a></li>
 
 	</ul>
@@ -39,7 +39,8 @@
 			aria-expanded="false">
 
 			<div class="profilPicture">
-				<p:graphicImage class="img-profil" value="resources/img/users/#{mbUser.user.photo}"
+				<p:graphicImage class="img-profil"
+					value="resources/img/users/#{mbUser.user.photo}"
 					alt="No picture set"></p:graphicImage>
 			</div>
 
@@ -61,6 +62,7 @@
 			<h:form>
 				<div class="disconnect-btn">
 					<p:commandButton styleClass="ui-button-danger ui-button-flat"
+						style="background-color: transparent;border-color: transparent; padding-right: 35px; box-shadow: 0px 0px 0px;"
 						value="Déconnexion" action="#{mbUser.disconnect()}" />
 				</div>
 			</h:form>
@@ -83,8 +85,8 @@
 	<font face="Arial" size="20px" color="white">Tableau de bord</font>
 	<div class="bord-elements">
 		<div class="bord-element">
-			<a href="offerCreation.xhtml" class="btn-get-started" data-toggle="modal"
-				data-target="offerCreation.xhtml">
+			<a href="offerCreation.xhtml" class="btn-get-started"
+				data-toggle="modal" data-target="offerCreation.xhtml">
 				<div class="searchBar">
 					<div>Ajouter une offre</div>
 					<div id="iconSearch">
@@ -96,8 +98,8 @@
 
 
 		<div class="bord-element">
-			<a href="offerParameters.xhtml" class="btn-get-started" data-toggle="modal"
-				data-target="offerParameters.xhtml">
+			<a href="offerParameters.xhtml" class="btn-get-started"
+				data-toggle="modal" data-target="offerParameters.xhtml">
 				<div class="searchBar">
 					<div>Paramétrer mes offres</div>
 					<div id="iconSearch">

@@ -15,7 +15,6 @@ import java.util.UUID;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
@@ -76,7 +75,7 @@ public class UserManagedBean implements Serializable {
 	private UnsubscriptionReason unsubscriptionReason;
 
 	private UserCategory category;
-	
+
 	private String dialogMessage;
 
 	public String connect() {
@@ -111,7 +110,7 @@ public class UserManagedBean implements Serializable {
 		return "/home.xhtml?faces-redirect=true";
 	}
 
-	public String createUser() {
+	public void createUser() {
 		String forward = null;
 		confirmPassword = password;
 		User newUser = new User();
@@ -128,19 +127,21 @@ public class UserManagedBean implements Serializable {
 		newUser.setPhoto(photo);
 		newUser.setUserCategory(category);
 		newUser.setZipCodeCity(city);
-
-		forward = verifyIfUserExists(newUser);
-		disconnect();
-		return forward;
+		verifyIfUserExists(newUser);
 	}
 
-	private String verifyIfUserExists(User newUser) {
-		String forward;
+	public String returnToHome() {
+		disconnect();
+		return "/home.xhtml?faces-redirect=true";
+	}
+
+	private void verifyIfUserExists(User newUser) {
 		boolean userExists = business.verifyIfUserExists(email);
 		if (!userExists) {
 			user = business.add(newUser);
-
-			forward = "/subscriptionDone.xhtml?faces-redirect=true";
+			PrimeFaces current = PrimeFaces.current();
+			System.out.println(current.toString());
+			current.executeScript("PF('dlg1').show();");
 
 		} else {
 			String message = "Adresse mail déjà existante, veuillez vous connecter";
@@ -148,9 +149,7 @@ public class UserManagedBean implements Serializable {
 					FacesMessage.SEVERITY_FATAL, message, message);
 			FacesContext.getCurrentInstance()
 					.addMessage("subscriptionForm:inpEmail", facesMessage);
-			forward = "/subscription.xhtml?faces-redirect=false";
 		}
-		return forward;
 	}
 
 	public void verifyIfUserExists() {
@@ -254,7 +253,7 @@ public class UserManagedBean implements Serializable {
 		User newUser = user;
 		newUser.setEmail(email);
 		newUser.setPhoneNumber(phoneNumber);
-		
+
 		verifyEmailExistBeforeUpdate(newUser);
 	}
 
@@ -306,7 +305,7 @@ public class UserManagedBean implements Serializable {
 		user.setUnsubscriptionDate(LocalDateTime.now());
 		user.setUnsubscriptionReason(unsubscriptionReason);
 		user = business.update(user);
-		
+
 		return disconnect();
 	}
 
