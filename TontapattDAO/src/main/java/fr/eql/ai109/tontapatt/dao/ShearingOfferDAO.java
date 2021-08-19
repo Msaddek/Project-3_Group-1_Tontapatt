@@ -214,12 +214,6 @@ public class ShearingOfferDAO extends GenericDAO<ShearingOffer>
 		try {
 			shearingOffers = new HashSet<ShearingOffer>(
 					em.createQuery(sqlQueryShearingOffers).getResultList());
-			for (ShearingOffer shearingOffer : shearingOffers) {
-				shearingOffer
-						.setPhotos(new HashSet<>(em.createQuery(sqlQueryPhotos)
-								.setParameter("offerParam", shearingOffer)
-								.getResultList()));
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
