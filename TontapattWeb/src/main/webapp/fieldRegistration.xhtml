@@ -125,9 +125,9 @@
 						<div class="form-row">
 							<div class="categories-offer">
 								<h2>Description</h2>
-								<div class="category-offer">
+								<div class="category-offer" style="width: 454px;">
 									<b:inputTextarea id="inpDescription"
-										value="#{mbField.description}" rows="5" cols="30"
+										value="#{mbField.description}" rows="5" cols="10"
 										counter="display" maxlength="255"
 										validatorMessage="La description doit comporter au moins 30 charactères"
 										counterTemplate="{0} caractères restants." autoResize="false">
@@ -143,9 +143,9 @@
 								<h2>Hauteur de clôture</h2>
 								<p:selectOneMenu id="inpFenceHeight"
 									value="#{mbField.fenceHeight}" required="true"
-									converter="entityConverter"
+									converter="entityConverter" style="margin-left: 2vw;"
 									requiredMessage="Veuillez indiquer la hauteur de la clôture de votre terrain">
-									<f:selectItem itemLabel="sélectionnez la hauteur" itemValue="" />
+									<f:selectItem itemLabel="Sélectionnez la hauteur" itemValue="" />
 									<f:selectItems value="#{mbFenceHeight.allFenceHeight()}"
 										var="fenceHeight" itemLabel="#{fenceHeight.height}"
 										itemValue="#{fenceHeight}" />
@@ -161,9 +161,9 @@
 								<h2>Pourcentage de plat</h2>
 								<p:selectOneMenu id="inpFlatnessPercentage"
 									value="#{mbField.flatnessPercentage}" required="true"
-									converter="entityConverter"
+									converter="entityConverter" style="width: 230px; margin-left: 2vw;"
 									requiredMessage="Veuillez indiquer le pourcentage de terrain plat">
-									<f:selectItem itemLabel="sélectionnez le pourcentage"
+									<f:selectItem itemLabel="Sélectionnez le pourcentage"
 										itemValue="" />
 									<f:selectItems
 										value="#{mbFlatnessPercentage.allFlatnessPercentage()}"
@@ -186,7 +186,7 @@
 											value="#{mbField.vegetationCompositions}"
 											converter="entityConverter" showCheckbox="true" filter="true"
 											filterMatchMode="contains" var="vegetationComposition"
-											required="false">
+											required="false" style="margin-right: 200px; margin-left: -1vw;">
 											<f:selectItems
 												value="#{mbVegetationType.allVegetationCompositions()}"
 												var="vc" itemLabel="#{vc.vegetationType.vegetation}"
