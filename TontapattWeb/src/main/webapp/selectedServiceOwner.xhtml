@@ -62,7 +62,7 @@
 									<br />
 									<b:iconAwesome class="icon-info" name="info-circle" size="lg" />
 									<div class="icon-info-descr">
-										<h4>Status : #{mbService.serviceState()}</h4>
+										<h4>Statut : #{mbService.serviceState()}</h4>
 									</div>
 								</div>
 
@@ -252,9 +252,11 @@
 										</div>
 									</div>
 									<div class="icon-info-presta">
-										<button value="Accepter la demande" class="get-started-btn"
-											data-target="#cancellationModal" data-toggle="modal"
-											id="btnCancel">Annuler la demande</button>
+										<div class="btn-breeder">
+											<button value="Accepter la demande" class="get-started-btn"
+												data-target="#cancellationModal" data-toggle="modal"
+												id="btnCancel">Annuler la demande</button>
+										</div>
 									</div>
 								</div>
 							</ui:fragment>
@@ -270,9 +272,11 @@
 								<ui:fragment
 									rendered="#{mbService.anomalyCreationButton() eq 'false'}">
 									<div class="icon-info-presta">
-										<button value="Nouvelle anomalie" class="get-started-btn"
-											data-target="#anomalieModal" data-toggle="modal"
-											id="btnAnomaly">Nouvelle anomalie</button>
+										<div class="btn-breeder">
+											<button value="Nouvelle anomalie" class="get-started-btn"
+												data-target="#anomalieModal" data-toggle="modal"
+												id="btnAnomaly">Nouvelle anomalie</button>
+										</div>
 									</div>
 								</ui:fragment>
 
@@ -367,7 +371,7 @@
 
 													<div class="rating-form">
 														<b:label
-															value="#{rating.evaluator eq mbUser.user ? 'Votre note :' : 'Note reçu : '}" />
+															value="#{rating.evaluator eq mbUser.user ? 'Votre évaluation :' : 'Évaluation reçu : '}" />
 													</div>
 													<div class="rating-form">
 														<p:rating value="#{rating.ratingLevel}" readonly="true" />
@@ -460,7 +464,9 @@
 							<b:message id="cancellationReasonMessage"
 								for="inpCancellationReason" />
 						</div>
-						<b:commandButton value="Annuler la demadne"
+						<b:commandButton class="get-started-btn"
+							value="Annuler la demande"
+							style="margin-top: 20px; position: relative; top: 27px;"
 							action="#{mbService.cancelServiceRequest()}" />
 					</b:form>
 				</div>

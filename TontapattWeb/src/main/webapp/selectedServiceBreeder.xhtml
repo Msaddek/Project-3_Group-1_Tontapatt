@@ -61,7 +61,7 @@
 									<br />
 									<b:iconAwesome class="icon-info" name="info-circle" size="lg" />
 									<div class="icon-info-descr">
-										<h4>Status : #{mbService.serviceState()}</h4>
+										<h4>Statut : #{mbService.serviceState()}</h4>
 									</div>
 								</div>
 
@@ -77,7 +77,8 @@
 									<br />
 									<b:iconAwesome class="icon-info" name="info-circle" size="lg" />
 									<div class="icon-info-descr">
-										<h4>Longueur d'herbe: #{mbService.service.grassHeight.height}</h4>
+										<h4>Longueur d'herbe:
+											#{mbService.service.grassHeight.height}</h4>
 									</div>
 								</div>
 
@@ -259,13 +260,15 @@
 										<div class="btn-breeder">
 											<p:commandButton value="Accepter la demande"
 												styleClass="rounded-button ui-button-warning"
+												style="background-color: #5fcf80; border-color: transparent;"
 												action="#{mbService.validateServiceRequest()}"
 												id="btnValidateRequest" />
 										</div>
 										<div class="btn-breeder">
 											<button value="Refuser la demande" class="get-started-btn"
 												data-target="#refuseModal" data-toggle="modal"
-												id="btnRefuseRequest">Refuser la demande</button>
+												style="background-color: red;" id="btnRefuseRequest">Refuser
+												la demande</button>
 										</div>
 									</ui:fragment>
 
@@ -427,7 +430,7 @@
 													value="#{mbRating.allRatingsByService(mbService.service)}">
 													<div class="rating-form">
 														<b:label
-															value="#{rating.evaluator eq mbUser.user ? 'Votre note :' : 'Note reçu : '}" />
+															value="#{rating.evaluator eq mbUser.user ? 'Votre évaluation :' : 'Évaluation reçu : '}" />
 													</div>
 													<div class="rating-form">
 														<p:rating value="#{rating.ratingLevel}" readonly="true" />
@@ -479,7 +482,8 @@
 
 							</b:inputTextarea>
 						</div>
-						<b:commandButton value="Déclarer anomalie"
+						<b:commandButton value="Déclarer" class="get-started-btn"
+							style="position: relative; top: 27px;"
 							action="#{mbAnomaly.declareAnomaly(mbService.service)}" />
 					</b:form>
 				</div>
@@ -515,7 +519,8 @@
 							</b:selectOneMenu>
 							<b:message id="refusalReasonMessage" for="inpRefusalReason" />
 						</div>
-						<b:commandButton value="Refuser la demadne"
+						<b:commandButton value="Confirmer" class="get-started-btn"
+							style="position: relative; top: 27px;"
 							action="#{mbService.refuseServiceRequest()}" />
 					</b:form>
 				</div>
@@ -553,7 +558,8 @@
 							<b:message id="prematureCancellationReasonReasonMessage"
 								for="inpPrematureCancellationReason" />
 						</div>
-						<b:commandButton value="Refuser la demadne"
+						<b:commandButton value="Confirmer" class="get-started-btn"
+							style="position: relative; top: 27px;"
 							action="#{mbService.cancelServicePrematurely()}" />
 					</b:form>
 				</div>
@@ -569,7 +575,7 @@
 				<b:button id="closePrematureCancelModal" value="Fermer"
 					dismiss="modal" />
 			</f:facet>
-		</b:modal>  <p:dialog header="N° #{mbAnomaly.anomaly.anomalyNumber}"
+		</b:modal> <p:dialog header="N° #{mbAnomaly.anomaly.anomalyNumber}"
 			widgetVar="dlg1" height="300px" width="700px" modal="true"
 			id="idAnomaly">
 
@@ -578,9 +584,8 @@
 					disabled="true" />
 			</div>
 			<div class="dialog-element">
-				<p:inputTextarea
-					value="#{mbAnomaly.anomaly.description}" maxlength="255" rows="6"
-					cols="100" disabled="true">
+				<p:inputTextarea value="#{mbAnomaly.anomaly.description}"
+					maxlength="255" rows="6" cols="100" disabled="true">
 				</p:inputTextarea>
 			</div>
 			<ui:fragment
@@ -594,7 +599,7 @@
 					</div>
 				</b:form>
 			</ui:fragment>
-		</p:dialog>  </main>
+		</p:dialog> </main>
 
 
 	</ui:define>
