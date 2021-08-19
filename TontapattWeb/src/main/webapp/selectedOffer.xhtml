@@ -28,13 +28,16 @@
 			<!-- Heading -->
 			<div class="presta-zone">
 				<h1 class="my-5 h1 text-center">#{mbService.offer.name}</h1>
+				<p:rating class="text-center"
+					value="#{mbRating.ratingOfShearingOffer(mbService.offer)}"
+					readonly="true" />
 				<h2 class="my-5 h2 text-center">
 					<div class="profilPicture">
 						<p:graphicImage class="img-profil"
 							value="resources/img/users/#{mbUser.user.photo}"
 							alt="No picture set"></p:graphicImage>
-						#{mbService.offer.breeder.firstName},
-						#{mbRating.ratingOfShearingOffer(mbService.offer)}
+						#{mbService.offer.breeder.firstName}
+
 					</div>
 
 				</h2>
@@ -204,8 +207,16 @@
 							<ui:repeat var="rating"
 								value="#{mbRating.recoverAllShearingOfferRatings(mbService.offer)}">
 								<div class="row">
-									<label>#{rating.evaluator.firstName}</label>
-									<h2>#{rating.ratingLevel}</h2>
+									<label>#{rating.evaluator.lastName}
+										#{rating.evaluator.firstName.toUpperCase().charAt(0)}.</label>
+									<div style="position: relative; left: -300px; top: -26px;">
+										<p:rating class="text-center" value="#{rating.ratingLevel}"
+											readonly="true" />
+									</div>
+									<p:inputTextarea style="position: relative; left: 7px; top: -23px; font-size: 15px;"
+										placeholder="#{rating.feedback eq null ? 'Pas de commentaire' : rating.feedback}"
+										value="#{rating.feedback}" maxlength="255" rows="6" cols="50"
+										disabled="true" />
 								</div>
 							</ui:repeat>
 

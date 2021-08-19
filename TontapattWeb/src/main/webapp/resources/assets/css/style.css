@@ -2461,3 +2461,7 @@ header.scrolled nav a {
     bottom: -89px;
     left: 32%;
 }
+
+body .ui-rating .ui-rating-star-on a {
+	color: gold !important;
+}
