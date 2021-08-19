@@ -97,8 +97,8 @@
 														target="#{mbService.service}" />
 											#{service.invoiceNumber}
 											</p:commandLink></td>
-											<td>#{service.startDate}</td>
-											<td>#{service.endDate}</td>
+											<td>#{mbDate.localDateFormatter(service.startDate)}</td>
+											<td>#{mbDate.localDateFormatter(service.endDate)}</td>
 											<td>#{service.field.name}</td>
 											<td>#{service.shearingOffer.name}</td>
 											<td>#{mbService.formatPrice(service.price)} €</td>
@@ -154,8 +154,8 @@
 														target="#{mbService.service}" />
 											#{service.invoiceNumber}
 											</p:commandLink></td>
-											<td>#{service.startDate}</td>
-											<td>#{service.endDate}</td>
+											<td>#{mbDate.localDateFormatter(service.startDate)}</td>
+											<td>#{mbDate.localDateFormatter(service.endDate)}</td>
 											<td>#{service.field.name}</td>
 											<td>#{service.shearingOffer.name}</td>
 											<td>#{mbService.formatPrice(service.price)} €</td>
@@ -212,8 +212,8 @@
 														target="#{mbService.service}" />
 											#{service.invoiceNumber}
 											</p:commandLink></td>
-											<td>#{service.startDate}</td>
-											<td>#{service.endDate}</td>
+											<td>#{mbDate.localDateFormatter(service.startDate)}</td>
+											<td>#{mbDate.localDateFormatter(service.endDate)}</td>
 											<td>#{service.field.name}</td>
 											<td>#{service.shearingOffer.name}</td>
 											<td>#{mbService.formatPrice(service.price)} €</td>
@@ -267,8 +267,8 @@
 														target="#{mbService.service}" />
 											#{service.invoiceNumber}
 											</p:commandLink></td>
-											<td>#{service.startDate}</td>
-											<td>#{service.endDate}</td>
+											<td>#{mbDate.localDateFormatter(service.startDate)}</td>
+											<td>#{mbDate.localDateFormatter(service.endDate)}</td>
 											<td>#{service.field.name}</td>
 											<td>#{service.shearingOffer.name}</td>
 											<td>#{mbService.formatPrice(service.price)} €</td>

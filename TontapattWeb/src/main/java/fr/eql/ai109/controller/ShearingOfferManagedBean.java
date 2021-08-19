@@ -204,7 +204,6 @@ public class ShearingOfferManagedBean implements Serializable {
 			photo = new ShearingOfferPhoto();
 			photo.setLink(fileName);
 			photos.add(photo);
-			System.out.println("New file created!" + fileName);
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
@@ -240,7 +239,6 @@ public class ShearingOfferManagedBean implements Serializable {
 		startDate = shearingOffer.getStartDate();
 		race = shearingOffer.getRace();
 		city = shearingOffer.getZipCodeCity();
-		System.out.println("cityyyyyyyyyyy " + city.getName());
 		photo = null;
 		photos = new HashSet<>();
 		file = null;
@@ -280,8 +278,6 @@ public class ShearingOfferManagedBean implements Serializable {
 	public String showOffersByFieldLocation(Field selectedField,
 			LocalDate serviceStartDate, LocalDate serviceEndDate,
 			Integer requiredAnimalCount, Species selectedSpecies) {
-		System.out.println("species****************" + selectedSpecies);
-		System.out.println(requiredAnimalCount + "++++++++++++++++++++++++");
 		shearingOfferSearchResult = new HashSet<ShearingOffer>();
 		if (selectedSpecies == null) {
 			shearingOfferSearchResult = business.searchOfferByFieldLocation(
@@ -292,10 +288,6 @@ public class ShearingOfferManagedBean implements Serializable {
 					.searchOfferByFieldLocationAndSpecies(selectedField,
 							serviceStartDate, serviceEndDate,
 							requiredAnimalCount, selectedSpecies);
-		}
-		for (ShearingOffer shearingOffer : shearingOfferSearchResult) {
-			System.out.println(
-					"--------------------------" + shearingOffer.toString());
 		}
 		return "/offerSearchPage.xhtml?faces-redirect=true";
 	}

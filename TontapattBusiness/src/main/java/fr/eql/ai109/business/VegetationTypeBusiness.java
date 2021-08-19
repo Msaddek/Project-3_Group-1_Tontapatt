@@ -42,8 +42,7 @@ public class VegetationTypeBusiness implements VegetationTypeIBusiness {
 	}
 
 	@Override
-	public List<VegetationType> getAll() {
-		
+	public List<VegetationType> getAll() {	
 		return vegetationTypeIDAO.getAll();
 	}
 }

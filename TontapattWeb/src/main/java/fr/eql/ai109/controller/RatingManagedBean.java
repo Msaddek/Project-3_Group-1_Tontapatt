@@ -40,7 +40,7 @@ public class RatingManagedBean implements Serializable {
 
 	public String feedback;
 
-	private LocalDateTime rating_date;
+	private LocalDateTime ratingDate;
 
 	private Integer ratingLevel;
 
@@ -99,7 +99,7 @@ public class RatingManagedBean implements Serializable {
 
 	public String ratingFormVisibility(Service selectedService) {
 		for (Rating r : allRatingsByService(selectedService)) {
-			if(r.getEvaluator().equals(connectedUser)) {
+			if (r.getEvaluator().equals(connectedUser)) {
 				return "true";
 			}
 		}
@@ -146,12 +146,12 @@ public class RatingManagedBean implements Serializable {
 		this.feedback = feedback;
 	}
 
-	public LocalDateTime getRating_date() {
-		return rating_date;
+	public LocalDateTime getRatingDate() {
+		return ratingDate;
 	}
 
-	public void setRating_date(LocalDateTime rating_date) {
-		this.rating_date = rating_date;
+	public void setRatingDate(LocalDateTime ratingDate) {
+		this.ratingDate = ratingDate;
 	}
 
 	public Integer getRatingLevel() {

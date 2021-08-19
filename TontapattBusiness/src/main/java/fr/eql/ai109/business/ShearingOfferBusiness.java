@@ -53,7 +53,6 @@ public class ShearingOfferBusiness implements ShearingOfferIBusiness {
 	public Set<ShearingOffer> searchOfferByFieldLocation(Field field,
 			LocalDate startDate, LocalDate endDate,
 			Integer requiredAnimalCount) {
-		System.out.println("**********************************************");
 		return shearingOfferIDAO.searchOfferByFieldLocation(field, startDate,
 				endDate, requiredAnimalCount);
 	}

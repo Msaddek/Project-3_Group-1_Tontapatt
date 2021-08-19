@@ -47,7 +47,6 @@ public class ZipCodeCityManagedBean implements Serializable {
 	}
 
 	public void initCityOfSelectedOffer() {
-		System.out.println(selectedShearingOffer.getId());
 		city = selectedShearingOffer.getZipCodeCity();
 		zipCode = city.getZipCode();
 	}
@@ -58,7 +57,6 @@ public class ZipCodeCityManagedBean implements Serializable {
 	}
 
 	public void initCityOfSelectedField() {
-		System.out.println(selectedField.getId());
 		city = selectedField.getZipCodeCity();
 		zipCode = city.getZipCode();
 	}
@@ -73,9 +71,6 @@ public class ZipCodeCityManagedBean implements Serializable {
 			cities = business.getAllByZipCode(zipCode);
 		} else {
 			cities = new ArrayList<>();
-		}
-		for (ZipCodeCity zipCodeCity : cities) {
-			System.out.println(zipCodeCity.getName());
 		}
 	}
 

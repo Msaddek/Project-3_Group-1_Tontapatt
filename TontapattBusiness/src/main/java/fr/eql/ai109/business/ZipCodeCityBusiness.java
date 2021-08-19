@@ -51,9 +51,4 @@ public class ZipCodeCityBusiness implements ZipCodeCityIBusiness {
 		return null;
 	}
 
-	/*
-	 * public ZipCodeCity calculateDistance() { return
-	 * zipCodeCityIDAO.calculateDistance(); }
-	 */
-
 }

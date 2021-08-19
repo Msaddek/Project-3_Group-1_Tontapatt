@@ -102,10 +102,6 @@ public class ServiceDAO extends GenericDAO<Service> implements ServiceIDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		for (Service service : services) {
-			System.out.println("----------------------------- en cours " + service.toString());
-		}
 		return services;
 	}
 
@@ -130,9 +126,6 @@ public class ServiceDAO extends GenericDAO<Service> implements ServiceIDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		for (Service service : services) {
-			System.out.println("----------------------------- en attente " + service.toString());
-		}
 		return services;
 	}
 
@@ -152,9 +145,6 @@ public class ServiceDAO extends GenericDAO<Service> implements ServiceIDAO {
 					.setParameter("userParam", connectedUser).getResultList());
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		for (Service service : services) {
-			System.out.println("----------------------------- en attente " + service.toString());
 		}
 		return services;
 	}

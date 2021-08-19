@@ -8,7 +8,7 @@ import fr.eql.ai109.tontapatt.idao.VegetationCompositionIDAO;
 
 @Remote(VegetationCompositionIDAO.class)
 @Stateless
-public class VegetationCompositionDAO extends GenericDAO<VegetationComposition> implements VegetationCompositionIDAO{
+public class VegetationCompositionDAO extends GenericDAO<VegetationComposition>
+		implements VegetationCompositionIDAO {
 
 }
-

@@ -43,6 +43,12 @@ public class DateManagedBean implements Serializable {
         return localDateTime.format(formatter);
     }
 	
+	public String localDateFormatter(LocalDate localDate) {
+		 DateTimeFormatter formatter = DateTimeFormatter
+	                .ofPattern("dd/MM/yyyy");
+	        return localDate.format(formatter);
+	}
+	
 	public String localDateTimeFormatterWithHour(LocalDateTime localDateTime) {
 		DateTimeFormatter formatter = DateTimeFormatter
                 .ofPattern("dd/MM/yyyy HH:mm");

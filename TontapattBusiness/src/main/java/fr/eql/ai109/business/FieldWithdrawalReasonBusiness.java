@@ -43,8 +43,7 @@ public class FieldWithdrawalReasonBusiness
 	}
 
 	@Override
-	public List<FieldWithdrawalReason> getAll() {
-		
+	public List<FieldWithdrawalReason> getAll() {	
 		return fieldWithdrawalReasonIDAO.getAll();
 	}
 }

@@ -35,7 +35,6 @@ import fr.eql.ai109.tontapatt.entity.FieldPhoto;
 import fr.eql.ai109.tontapatt.entity.FieldWithdrawalReason;
 import fr.eql.ai109.tontapatt.entity.FlatnessPercentage;
 import fr.eql.ai109.tontapatt.entity.Service;
-import fr.eql.ai109.tontapatt.entity.ShearingOffer;
 import fr.eql.ai109.tontapatt.entity.User;
 import fr.eql.ai109.tontapatt.entity.VegetationComposition;
 import fr.eql.ai109.tontapatt.entity.ZipCodeCity;
@@ -101,7 +100,6 @@ public class FieldManagedBean implements Serializable {
 				.getFieldsOfConnectedUser(connectedUser);
 		photos = new HashSet<>();
 		vegetationCompositions = new HashSet<>();
-		System.out.println("utilisateur---------------------------" + connectedUser);
 	}
 
 	public String fieldDetails() {
@@ -139,7 +137,6 @@ public class FieldManagedBean implements Serializable {
 		newField.setOwner(connectedUser);
 		newField.setDescription(description);
 		field = fieldBusiness.add(newField);
-		System.out.println(field.getId());
 		for (VegetationComposition vc : vegetationCompositions) {
 			vc.setField(field);
 		}
@@ -204,11 +201,9 @@ public class FieldManagedBean implements Serializable {
 			}
 			in.close();
 			out.flush();
-			System.out.println(fileName);
 			FieldPhoto fp = new FieldPhoto();
 			fp.setLink(fileName);
 			photos.add(fp);
-			System.out.println("New file created!" + fileName);
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}

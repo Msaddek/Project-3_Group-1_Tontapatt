@@ -140,7 +140,6 @@ public class UserManagedBean implements Serializable {
 		if (!userExists) {
 			user = business.add(newUser);
 			PrimeFaces current = PrimeFaces.current();
-			System.out.println(current.toString());
 			current.executeScript("PF('dlg1').show();");
 
 		} else {
@@ -154,7 +153,6 @@ public class UserManagedBean implements Serializable {
 
 	public void verifyIfUserExists() {
 		boolean userExists = business.verifyIfUserExists(email);
-		System.out.println(userExists);
 		if (userExists) {
 			String message = "Adresse mail déjà existante, veuillez vous connecter";
 			FacesMessage facesMessage = new FacesMessage(
@@ -221,7 +219,6 @@ public class UserManagedBean implements Serializable {
 			out.flush();
 			out.close();
 			photo = fileName;
-			System.out.println("New file created!" + fileName);
 			out.close();
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
