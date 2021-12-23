@@ -7,8 +7,11 @@
 		<artifactId>TontapattParent</artifactId>
 		<version>1.0.0</version>
 	</parent>
+	
 	<artifactId>TontapattWeb</artifactId>
 	<packaging>war</packaging>
+ 	<name>Tontapattapp</name>
+  	<description>TontapattWebapp.</description>
 	<dependencies>
 		<dependency>
 			<groupId>javax</groupId>
