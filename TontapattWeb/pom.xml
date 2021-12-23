@@ -12,6 +12,17 @@
 	<packaging>war</packaging>
  	<name>Tontapattapp</name>
   	<description>TontapattWebapp.</description>
+	
+	  <build>
+   		 <finalName>${project.artifactId}</finalName>
+		<plugins>
+     			 <plugin>
+        		 	<groupId>org.mortbay.jetty</groupId>
+       			 	<artifactId>jetty-maven-plugin</artifactId>
+      			</plugin>
+    		</plugins>
+ 	 </build>
+	
 	<dependencies>
 		<dependency>
 			<groupId>javax</groupId>
